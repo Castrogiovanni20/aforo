@@ -25,3 +25,4 @@ de una cámara utilizando algún algoritmo de computer vision, etc)._
 | Sebastián Felice | Analista Funcional y Desarrollador |
 | Pablo H. Aquino | Gestor de Proyecto / Product Owner |
 | Fabian Orue | Desarrollador |
+| Constanza Cirión | Desarrollador |
