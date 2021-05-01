@@ -11,8 +11,4 @@ interface FiwareAPI {
     @Headers("Content-Type: application/json")
     @POST("login")
     fun login(@Body user: User): Call<User>
-
-    @Headers("Content-Type: application/json")
-    @POST("register")
-    fun register(@Body user: User): Call<User>
 }

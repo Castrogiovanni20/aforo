@@ -2,11 +2,26 @@
     <string name="app_name">aforo</string>
 
     <string name="edt_email">Email</string>
+
+    <string name="name">First Name</string>
+    <string name="last_name">Last Name</string>
     <string name="Password">Password (min 8 characters)</string>
     <string name="recov_pass">Olvidé mi password</string>
     <string name="create_account">Crear Cuenta</string>
     <string name="send">Send</string>
     <string name="welcome">Bienvenido</string>
+    <string name="register">Registrarse</string>
+
+    <string name="cel_phone">Cell Phone</string>
+    <string name="contentDescBtn">Este botón tiene una imagen</string>
+    <string name="organizacion">Organización / Razón Social</string>
+
+
+    <string-array name="type_users">
+        <item>Tipo de Usuario</item>
+        <item>Funcionario</item>
+        <item>Supervisor</item>
+    </string-array>
 
 
 </resources>
