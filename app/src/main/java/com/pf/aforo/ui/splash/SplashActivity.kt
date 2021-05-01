@@ -4,24 +4,41 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.pf.aforo.R
+import com.pf.aforo.databinding.ActivitySplashScreenBinding
 import com.pf.aforo.ui.home.HomeActivity
 import com.pf.aforo.ui.login.LoginActivity
 import java.util.*
 
 class SplashActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySplashScreenBinding
+    private lateinit var splashViewModel: SplashViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen);
-        nextScreen();
+        setUI();
+        setObserver();
     }
 
-    private fun nextScreen () {
-        Timer().schedule(object : TimerTask() {
-            override fun run() {
-               startActivity(Intent(this@SplashActivity, HomeActivity::class.java));
-            }
-        }, 2000)
+    private fun setUI () {
+        binding = ActivitySplashScreenBinding.inflate(layoutInflater);
+        setContentView(binding.root);
+        splashViewModel = ViewModelProvider(this).get(SplashViewModel::class.java);
     }
+
+    private fun setObserver () {
+        splashViewModel.startTimer()
+        splashViewModel.flag.observe(this, Observer {
+            if (it) {
+                initLoginScreen()
+            }
+        })
+    }
+
+    private fun initLoginScreen () {
+        startActivity(Intent(this@SplashActivity, LoginActivity::class.java));
+    }
+
 }
