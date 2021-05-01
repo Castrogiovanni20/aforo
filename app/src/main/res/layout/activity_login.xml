@@ -5,7 +5,7 @@
     android:id="@+id/rootLayoutLogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/ic_login"
+    android:background="@mipmap/background_logo"
     android:elevation="8dp"
     android:orientation="vertical"
     >
@@ -26,7 +26,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:contentPadding="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintBottom_toTopOf="@+id/btnSend"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2">
@@ -40,10 +40,10 @@
                 android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:ems="14"
                 android:hint="@string/edt_email"
-                android:inputType="textEmailAddress"
-                android:autofillHints="" />
+                android:inputType="textEmailAddress" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -53,14 +53,14 @@
                 android:id="@+id/edtPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:ems="14"
                 android:hint="@string/Password"
-                android:inputType="numberPassword"
-                android:autofillHints="" />
+                android:inputType="numberPassword" />
 
             <Space
                 android:layout_width="wrap_content"
-                android:layout_height="14dp" />
+                android:layout_height="10dp" />
 
             <TextView
                 android:id="@+id/txtRecPass"
@@ -70,6 +70,10 @@
                 android:textAlignment="textEnd"
                 android:textColor="@color/blue"
                 android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="54dp" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -89,7 +93,7 @@
         app:layout_constraintGuide_percent="0.8" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_account"
@@ -102,7 +106,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:contentDescription="ingresar"
+        android:elevation="20dp"
+        android:text="@string/send"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardLogin" />
 
+    <TextView
+        android:id="@+id/txtWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/welcome"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.575" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootLayoutSplash"
-    android:background="@mipmap/ic_splash_screen"
+    android:background="@mipmap/splash_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>

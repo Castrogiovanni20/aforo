@@ -5,7 +5,8 @@
     <string name="Password">Password (min 8 characters)</string>
     <string name="recov_pass">Olvidé mi password</string>
     <string name="create_account">Crear Cuenta</string>
-
+    <string name="send">Send</string>
+    <string name="welcome">Bienvenido</string>
 
 
 </resources>
