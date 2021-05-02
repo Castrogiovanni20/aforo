@@ -1,32 +1,30 @@
 package com.pf.aforo.data.repository
 
 import com.pf.aforo.data.model.User
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface FiwareAPI {
 
-    @Headers("Content-Type: application/json")
-    @POST("login")
-    fun login(@Body user: User): Call<User>
-}
+    @FormUrlEncoded
+    @POST("users")
+    fun userLogin(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ) : Call<ResponseBody>
 
-class RetrofitClient {
     companion object {
-        private var instance : FiwareAPI? = null
+        private val BASE_URL: String = "https://608dea67fe2e9c00171e20f6.mockapi.io/api/v1/"
 
-        fun getInstance(): FiwareAPI {
-            if (instance == null)
-                instance = Retrofit.Builder()
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("https://yourbaseurl.com")
-                    .build()
-                    .create(FiwareAPI::class.java)
-            return instance as FiwareAPI
+        operator fun invoke(): FiwareAPI {
+            return Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(FiwareAPI::class.java)
         }
     }
 }
