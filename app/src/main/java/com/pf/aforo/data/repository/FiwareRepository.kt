@@ -1,7 +1,6 @@
 package com.pf.aforo.data.repository
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -11,30 +10,30 @@ import retrofit2.Response
 
 class FiwareRepository()
 {
-    fun userLogin(email: String, password: String) : MutableLiveData<String> {
-        val loginResponse = MutableLiveData<String>()
+    var loginResponseLiveData = MutableLiveData<String>()
 
+    fun userLogin(email: String, password: String) {
         FiwareAPI().userLogin(email, password)
             .enqueue(object: Callback<ResponseBody>{
                 override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
                     if (t != null) {
-                        loginResponse.value = t.message
+                        loginResponseLiveData.value = t.message
+                        Log.d("ApiResponse", "Fallo la API" + t.message);
                     }
                 }
 
                 override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>? ){
                     if (response != null) {
                         if (response.isSuccessful) {
-                            loginResponse.value = response.message()
+                            loginResponseLiveData.value = response.message()
+                            Log.d("ApiResponse", "Respondio la API " + response.code());
                         } else {
-                            loginResponse.value = response.errorBody().string()
+                            loginResponseLiveData.value = response.errorBody().string()
                         }
                     }
                 }
 
             })
-
-        return loginResponse
     }
 
 }

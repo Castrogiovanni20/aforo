@@ -34,8 +34,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setObservers () {
         loginViewModel.loginResponseLiveData.observe(this, Observer {
-            Log.d("TEST", "HUBO UN CAMBIO");
-            if (it == "test") {
+            if (it == "Created") {
                 initHomeScreen();
             }
         })
