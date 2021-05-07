@@ -5,7 +5,7 @@
     android:id="@+id/rootLayoutRegister"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/background_logo">
+    android:background="@color/darkblue">
 
     <TextView
         android:id="@+id/txtTitleRegister"
@@ -20,8 +20,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.819" />
+        app:layout_constraintTop_toBottomOf="@+id/imgLogoCreateAccount" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -187,5 +186,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardVReg" />
+
+    <ImageView
+        android:id="@+id/imgLogoCreateAccount"
+        android:layout_width="100dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtTitleRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/logo21024" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
