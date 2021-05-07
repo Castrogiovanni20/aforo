@@ -3,6 +3,98 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootLayoutSplash"
-    android:background="@mipmap/splash_screen"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    android:background="@color/darkblue"
+    android:orientation="vertical">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="421dp"
+        android:layout_height="694dp"
+        android:contentDescription="@string/content_img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@mipmap/fondo" />
+
+    <ImageView
+        android:id="@+id/imgLogo1"
+        android:layout_width="78dp"
+        android:layout_height="82dp"
+        android:layout_marginBottom="4dp"
+        android:contentDescription="@string/content_img"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAforo"
+        app:layout_constraintVertical_bias="0.149"
+        app:srcCompat="@mipmap/logo21024" />
+
+    <TextView
+        android:id="@+id/txtAforo"
+        android:layout_width="287dp"
+        android:layout_height="69dp"
+        android:fontFamily="@font/asset"
+        android:text="@string/aforo_name"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="42sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline7"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imgCity"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:contentDescription="@string/content_img"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/txtCities"
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:layout_constraintVertical_bias="0.671"
+        app:srcCompat="@mipmap/city1024" />
+
+    <TextView
+        android:id="@+id/txtCities"
+        android:layout_width="107dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="108dp"
+        android:elevation="14dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/txtcities"
+        android:textAlignment="viewStart"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imgCity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:layout_constraintVertical_bias="0.671" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

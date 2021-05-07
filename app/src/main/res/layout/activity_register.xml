@@ -17,12 +17,11 @@
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.795" />
+        app:layout_constraintVertical_bias="0.819" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -178,6 +177,8 @@
         android:id="@+id/btnReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/boton_personalizado"
+
         android:elevation="4dp"
         android:hint="@string/register"
         android:textColor="@color/white"
