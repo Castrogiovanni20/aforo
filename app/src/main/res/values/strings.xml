@@ -15,8 +15,10 @@
     <string name="cel_phone">Cell Phone</string>
     <string name="contentDescBtn">Este botón tiene una imagen</string>
     <string name="organizacion">Organización / Razón Social</string>
-
-
+    <string name="content_img">Imagen de splash screen</string>
+    <string name="aforo_name">Aforo</string>
+    <string name="txtcities">Instituto Ciudades del Futuro</string>
+    <string name="descBackg">Imagen fondo login</string>
     <string-array name="type_users">
         <item>Tipo de Usuario</item>
         <item>Funcionario</item>
