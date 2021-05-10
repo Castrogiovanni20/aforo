@@ -1,33 +1,30 @@
 package com.pf.aforo.ui.login
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pf.aforo.R
-import com.pf.aforo.data.model.User
 import com.pf.aforo.databinding.ActivityLoginBinding
 import com.pf.aforo.ui.home.HomeActivity
+import com.pf.aforo.ui.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding;
-    private lateinit var loginViewModel: LoginViewModel;
-    private var user: User?= null;
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        setUI();
-        setObservers();
-        login();
+        setUI()
+        setObservers()
+        setClickListeners()
     }
 
-    private fun setUI (){
+    private fun setUI () {
         binding = ActivityLoginBinding.inflate(layoutInflater);
         setContentView(binding.root);
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java);
@@ -35,59 +32,51 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setObservers () {
-        /*loginViewModel.loginResponseLiveData.observe(this, Observer {
-            if (it == "Created") {
-                initHomeScreen();
-            }
-        })*/
+        loginViewModel.successResponse.observe(this, successObserver)
+        loginViewModel.failureResponse.observe(this, failureObserver)
+    }
+
+    private fun setClickListeners () {
+        binding.btnSend.setOnClickListener{
+            login()
+        }
+
+        binding.txtCreateAccount.setOnClickListener{
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+        }
     }
 
     private fun login () {
-        var email = ""
-        var password = ""
-        val send = binding.btnSend
+        var email = binding.edtEmail.text.toString()
+        var password = binding.edtPass.text.toString()
 
-        binding.run {
+        loginViewModel.loginUser(email, password)
+    }
 
-            binding.edtEmail.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-                if (!hasFocus) {
-                    email =  binding.edtEmail.text.toString()
-                }
-            }
+    private val successObserver = Observer<Any?> { token ->
+        saveToken(token.toString())
+        initHomeScreen()
+    }
 
-            binding.edtPass.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-                if (!hasFocus) {
-                    password = binding.edtPass.text.toString()
-                    hideKeyboard(v);
-
-                }
-            }
+    private val failureObserver = Observer<Any?> { statusCode ->
+        if (statusCode == "500" || statusCode == "401") {
+            Toast.makeText(applicationContext, "Usuario y/o contraseña incorrecto.", Toast.LENGTH_SHORT).show()
+        } else if (statusCode == "404") {
+            Toast.makeText(applicationContext, "Estamos teniendo problema con nuestro servidor. Por favor intenta logearte mas tarde.", Toast.LENGTH_SHORT).show()
+        } else if (statusCode == "400") {
+            Toast.makeText(applicationContext, "Por favor, completa el usuario y/o contraseña.", Toast.LENGTH_SHORT).show()
         }
 
+    }
 
-        send.setOnClickListener {
-           // loginViewModel.login(email, password)
-           // initHomeScreen();
-           validateLogin(email, password)
-        }
-
+    private fun saveToken (token: String) {
+        val sharedPreferences = getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("Token", token)
+        editor.apply()
     }
 
     private fun initHomeScreen () {
         startActivity(Intent(this@LoginActivity, HomeActivity::class.java));
-    }
-
-    private fun validateLogin(email: String, password: String) {
-        if ((email == "admin@test.com") and (password == "1234")){
-            initHomeScreen()
-        } else {
-            Toast.makeText(applicationContext, "Usuario y/o contraseña incorrecto", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    fun hideKeyboard(view: View) {
-        val inputMethodManager: InputMethodManager =
-           getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

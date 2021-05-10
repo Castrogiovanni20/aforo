@@ -2,6 +2,9 @@ package com.pf.aforo.data.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
+import com.pf.aforo.data.model.User
+import com.pf.aforo.data.response.FiwareResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -10,29 +13,61 @@ import retrofit2.Response
 
 class FiwareRepository()
 {
-    var loginResponseLiveData = MutableLiveData<String>()
+    var loginSuccessResponseLiveData = MutableLiveData<String>()
+    var loginFailureResponseLiveData = MutableLiveData<String>()
+    var registerSuccessResponseLiveData = MutableLiveData<String>()
+    var registerFailureResponseLiveData = MutableLiveData<String>()
 
-    fun userLogin(email: String, password: String) {
-        FiwareAPI().userLogin(email, password)
-            .enqueue(object: Callback<ResponseBody>{
-                override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+    fun userLogin(userName: String, password: String) {
+        FiwareAPI().userLogin(userName, password)
+            .enqueue(object: Callback<FiwareResponse>{
+                override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
                     if (t != null) {
-                        loginResponseLiveData.value = t.message
-                        Log.d("ApiResponse", "Fallo la API" + t.message);
+                        loginFailureResponseLiveData.value = "404"
+                        Log.d("ApiLoginResponse", "Fallo el request" + t.message);
                     }
                 }
 
-                override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>? ){
-                    if (response != null) {
-                        if (response.isSuccessful) {
-                            loginResponseLiveData.value = response.message()
-                            Log.d("ApiResponse", "Respondio la API " + response.code());
+                override fun onResponse(call: Call<FiwareResponse>?, fiwareResponse: Response<FiwareResponse>? ){
+                    if (fiwareResponse != null) {
+                        if (fiwareResponse.isSuccessful) {
+                            if (fiwareResponse.body().getData().getToken() != null) {
+                                loginSuccessResponseLiveData.value = fiwareResponse.body().getData().getToken()
+                                Log.d("ApiLoginResponse", "Respondio la API " + fiwareResponse.body().getData().getToken());
+                            }
                         } else {
-                            loginResponseLiveData.value = response.errorBody().string()
+                            loginFailureResponseLiveData.value = fiwareResponse.code().toString()
+                            Log.d("ApiLoginResponse", "Respondio la API " + fiwareResponse.code().toString())
                         }
                     }
                 }
 
+            })
+    }
+
+    fun register(user: User) {
+        FiwareAPI().userRegister(user)
+            .enqueue(object: Callback<FiwareResponse>{
+                override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
+                    if (t != null) {
+                        registerFailureResponseLiveData.value = "404"
+                        Log.d("ApiRegisterResponse", "Fallo el request" + t.message)
+                    }
+                }
+
+                override fun onResponse( call: Call<FiwareResponse>?, fiwareResponse: Response<FiwareResponse>? ) {
+                    if (fiwareResponse != null) {
+                        if (fiwareResponse.isSuccessful) {
+                            if (fiwareResponse.body().getCode() == "SUCCESS") {
+                                registerSuccessResponseLiveData.value = fiwareResponse.code().toString()
+                                Log.d("ApiRegisterResponse", "Respondio la API " + fiwareResponse.code().toString())
+                            }
+                        } else {
+                            registerFailureResponseLiveData.value = fiwareResponse.code().toString()
+                            Log.d("ApiRegisterResponse", "Respondio la API " + fiwareResponse.code().toString())
+                        }
+                    }
+                }
             })
     }
 
