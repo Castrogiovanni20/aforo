@@ -29,8 +29,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun setObservers () {
-        registerViewModel.successResponse.observe(this, successObserver)
-        registerViewModel.failureResponse.observe(this, failureObserver)
+        registerViewModel.successResponse.observe(this, this.successObserver)
+        registerViewModel.failureResponse.observe(this, this.failureObserver)
     }
 
     private fun setClickListeners () {
@@ -42,8 +42,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun register () {
         var fullName = binding.edtName.text.toString() + " " + binding.edtLastName.text.toString()
         var email = binding.edtEmailReg.text.toString()
-        //var phoneNumber = binding.edtPhone.text.toString().toInt()
-        var phoneNumber = 12323
+        var phoneNumber = if (binding.edtPhone.text.toString() != "") (binding.edtPhone.text.toString().toInt()) else (0)
         var organization = binding.edtOrgReg.text.toString()
         var password = binding.edtPassReg.text.toString()
 
@@ -53,18 +52,24 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private val successObserver = Observer<Any?> { statusCode ->
-        Log.d("TEST", "HUBO UN CAMBIO")
-        if (statusCode == "200") {
-            Toast.makeText(applicationContext, "Usuario registrado exitosamente.", Toast.LENGTH_SHORT).show()
+        when (statusCode) {
+            "200" -> {
+                Toast.makeText(applicationContext, "Usuario registrado exitosamente.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     private val failureObserver = Observer<Any?> { statusCode ->
-        Log.d("TEST", "HUBO UN CAMBIO")
-        if (statusCode == "403") {
-            Toast.makeText(applicationContext, "El usuario ya se encuentra registrado.", Toast.LENGTH_SHORT).show()
-        } else if (statusCode == "404") {
-            Toast.makeText(applicationContext, "Estamos teniendo problema con nuestro servidor. Por favor intenta registrarte mas tarde.", Toast.LENGTH_SHORT).show()
+        when (statusCode) {
+            "403" -> {
+                Toast.makeText(applicationContext, "El usuario ya se encuentra registrado.", Toast.LENGTH_SHORT).show()
+            }
+            "500" -> {
+                Toast.makeText(applicationContext, "Por favor, asegurate de completar todos los campos.", Toast.LENGTH_SHORT).show()
+            }
+            "404" -> {
+                Toast.makeText(applicationContext, "Estamos teniendo problema con nuestro servidor. Por favor intenta registrarte mas tarde.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

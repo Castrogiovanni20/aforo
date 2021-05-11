@@ -59,12 +59,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private val failureObserver = Observer<Any?> { statusCode ->
-        if (statusCode == "500" || statusCode == "401") {
-            Toast.makeText(applicationContext, "Usuario y/o contraseña incorrecto.", Toast.LENGTH_SHORT).show()
-        } else if (statusCode == "404") {
-            Toast.makeText(applicationContext, "Estamos teniendo problema con nuestro servidor. Por favor intenta logearte mas tarde.", Toast.LENGTH_SHORT).show()
-        } else if (statusCode == "400") {
-            Toast.makeText(applicationContext, "Por favor, completa el usuario y/o contraseña.", Toast.LENGTH_SHORT).show()
+        when (statusCode) {
+            "500", "401" -> {
+                Toast.makeText(applicationContext, "Usuario y/o contraseña incorrecto.", Toast.LENGTH_SHORT).show()
+            }
+            "404" -> {
+                Toast.makeText(applicationContext, "Estamos teniendo problema con nuestro servidor. Por favor intenta logearte mas tarde.", Toast.LENGTH_SHORT).show()
+            }
+            "400" -> {
+                Toast.makeText(applicationContext, "Por favor, completa el usuario y/o contraseña.", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
