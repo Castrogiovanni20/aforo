@@ -16,12 +16,29 @@ class RegisterViewModel : ViewModel () {
     private var _failureResponse = fiwareRepository.registerFailureResponseLiveData
     val failureResponse: MutableLiveData<String> get() = _failureResponse
 
-   // val failureValidation: MutableLiveData<String> get()
+    var validationError = MutableLiveData<String>()
 
     fun registerUser(user: User){
-        if ((user.getFullName().length < 5) || (user.getFullName().length > 15)) {
-
+        Log.d("PhoneNumber", user.getPhoneNumber().toString())
+        when {
+            user.getFullName().length < 5 || user.getFullName().length > 15 -> {
+                validationError.value = "FullName"
+            }
+            user.getEmail().length < 10 -> {
+                validationError.value = "Email"
+            }
+            user.getPhoneNumber() < 8 -> {
+                validationError.value = "Phone"
+            }
+            user.getOrganization().length < 2 -> {
+                validationError.value = "Organization"
+            }
+            user.getPassword().length < 8 -> {
+                validationError.value = "Password"
+            }
+            else -> {
+                fiwareRepository.register(user)
+            }
         }
-        fiwareRepository.register(user)
     }
 }

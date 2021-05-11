@@ -21,4 +21,6 @@ class User (private var fullName: String, private var email: String, private var
     fun getPassword () : String {
         return password
     }
+
+
 }
