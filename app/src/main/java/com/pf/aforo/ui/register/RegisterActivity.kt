@@ -32,6 +32,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun setObservers () {
         registerViewModel.successResponse.observe(this, this.successObserver)
         registerViewModel.failureResponse.observe(this, this.failureObserver)
+        registerViewModel.validationError.observe(this, this.validationObserver)
     }
 
     private fun setClickListeners () {
@@ -70,6 +71,26 @@ class RegisterActivity : AppCompatActivity() {
             }
             "404" -> {
                 Toast.makeText(applicationContext, "Estamos teniendo problema con nuestro servidor. Por favor intenta registrarte mas tarde.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private val validationObserver = Observer<Any?> { error ->
+        when (error) {
+            "FullName" -> {
+                Toast.makeText(applicationContext, "El nombre completo debe ser mayor a 5 y menor a 15 caracteres.", Toast.LENGTH_SHORT).show()
+            }
+            "Email" -> {
+                Toast.makeText(applicationContext, "El email debe ser mayor o igual a 10 caracteres.", Toast.LENGTH_SHORT).show()
+            }
+            "Phone" -> {
+                Toast.makeText(applicationContext, "El telefono debe ser mayor o igual a 8.", Toast.LENGTH_SHORT).show()
+            }
+            "Organization" -> {
+                Toast.makeText(applicationContext, "La organizacion debe ser mayor o igual a 2 caracteres.", Toast.LENGTH_SHORT).show()
+            }
+            "Password" -> {
+                Toast.makeText(applicationContext, "La contraseña debe ser mayor o igual a 8 caracteres.", Toast.LENGTH_SHORT).show()
             }
         }
     }
