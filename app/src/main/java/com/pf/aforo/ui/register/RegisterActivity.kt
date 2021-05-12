@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pf.aforo.R
 import com.pf.aforo.data.model.User
+
 import com.pf.aforo.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {

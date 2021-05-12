@@ -12,6 +12,8 @@
     <string name="welcome">Bienvenido</string>
     <string name="register">Registrarse</string>
 
+    <string name="dni">Numero DNI</string>
+    <string name="user">User</string>
     <string name="cel_phone">Cell Phone</string>
     <string name="contentDescBtn">Este botón tiene una imagen</string>
     <string name="organizacion">Organización / Razón Social</string>
@@ -19,6 +21,11 @@
     <string name="aforo_name">Aforo</string>
     <string name="txtcities">Instituto Ciudades del Futuro</string>
     <string name="descBackg">Imagen fondo login</string>
+    <string name="description">Desripcion</string>
+    <string name="delete">Eliminar Funcionario</string>
+    <string name="okey">OK</string>
+
+    <string name="confirmarDelete">¿Confirma la eliminación de este Funcionario?</string>
     <string-array name="type_users">
         <item>Tipo de Usuario</item>
         <item>Funcionario</item>

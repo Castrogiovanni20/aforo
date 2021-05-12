@@ -21,18 +21,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.56" />
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="421dp"
-        android:layout_height="694dp"
+        android:layout_width="409dp"
+        android:layout_height="733dp"
         android:contentDescription="@string/content_img"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@mipmap/fondo" />
 
     <ImageView
@@ -69,32 +69,53 @@
     <ImageView
         android:id="@+id/imgCity"
         android:layout_width="83dp"
-        android:layout_height="82dp"
+        android:layout_height="0dp"
         android:contentDescription="@string/content_img"
         android:elevation="10dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/txtCities"
-        app:layout_constraintTop_toTopOf="@+id/guideline8"
-        app:layout_constraintVertical_bias="0.671"
+        app:layout_constraintHorizontal_bias="0.204"
+        app:layout_constraintStart_toEndOf="@+id/txtCities"
+        app:layout_constraintTop_toTopOf="@+id/guideline15"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@mipmap/city1024" />
 
     <TextView
         android:id="@+id/txtCities"
         android:layout_width="107dp"
         android:layout_height="82dp"
-        android:layout_marginStart="108dp"
+        android:layout_marginStart="172dp"
         android:elevation="14dp"
+
         android:fontFamily="sans-serif-black"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
         android:text="@string/txtcities"
         android:textAlignment="viewStart"
         android:textColor="@color/grey"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imgCity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline15"
+        app:layout_constraintVertical_bias="0.523" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="192dp"
+        android:layout_height="107dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline15"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline8"
-        app:layout_constraintVertical_bias="0.671" />
+        app:srcCompat="@drawable/logo_fiware_ihubs" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.77" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

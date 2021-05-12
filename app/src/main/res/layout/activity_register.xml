@@ -57,7 +57,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="8dp" />
+                android:layout_height="12dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,11 +68,13 @@
                     android:id="@+id/edtLastName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
                     android:layout_weight="1"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/last_name"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textAlignment="center" />
 
                 <Space
                     android:id="@+id/space0"
@@ -83,11 +85,13 @@
                     android:id="@+id/edtName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
                     android:layout_weight="1"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/name"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textAlignment="center" />
 
             </LinearLayout>
 
@@ -101,11 +105,13 @@
                 android:id="@+id/edtEmailReg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
                 android:layout_marginEnd="0dp"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/edt_email"
                 android:inputType="textEmailAddress"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -118,10 +124,12 @@
                 android:id="@+id/edtPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/cel_phone"
                 android:inputType="phone"
-                android:autofillHints="" />
+                android:textAlignment="center" />
 
             <Space
                 android:id="@+id/space3"
@@ -132,10 +140,12 @@
                 android:id="@+id/edtOrgReg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/organizacion"
                 android:inputType="textPersonName"
-                android:autofillHints="" />
+                android:textAlignment="center" />
 
             <Space
                 android:id="@+id/space4"
@@ -151,16 +161,22 @@
             <Space
                 android:id="@+id/space5"
                 android:layout_width="match_parent"
-                android:layout_height="10dp" />
+                android:layout_height="14dp" />
 
             <EditText
                 android:id="@+id/edtPassReg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/Password"
                 android:inputType="textPassword"
-                android:autofillHints="" />
+                android:textAlignment="center" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -170,7 +186,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.32" />
 
     <Button
         android:id="@+id/btnReg"
