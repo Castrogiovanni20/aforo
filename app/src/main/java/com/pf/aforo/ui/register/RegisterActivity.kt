@@ -70,7 +70,7 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Por favor, asegurate de completar todos los campos.", Toast.LENGTH_SHORT).show()
             }
             "404" -> {
-                Toast.makeText(applicationContext, "Estamos teniendo problema con nuestro servidor. Por favor intenta registrarte mas tarde.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Estamos teniendo problemas con nuestro servidor. Por favor intentá registrarte más tarde.", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -84,10 +84,10 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "El email debe ser mayor o igual a 10 caracteres.", Toast.LENGTH_SHORT).show()
             }
             "Phone" -> {
-                Toast.makeText(applicationContext, "El telefono debe ser mayor o igual a 8.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "El teléfono debe ser mayor o igual a 8.", Toast.LENGTH_SHORT).show()
             }
             "Organization" -> {
-                Toast.makeText(applicationContext, "La organizacion debe ser mayor o igual a 2 caracteres.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "El nombre de la organización debe ser mayor o igual a 2 caracteres.", Toast.LENGTH_SHORT).show()
             }
             "Password" -> {
                 Toast.makeText(applicationContext, "La contraseña debe ser mayor o igual a 8 caracteres.", Toast.LENGTH_SHORT).show()

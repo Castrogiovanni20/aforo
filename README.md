@@ -23,6 +23,6 @@ de una cámara utilizando algún algoritmo de computer vision, etc)._
 | Ramiro Castrogiovanni| Desarrollador |
 | Judith Cengarle | Analista Funcional y Scrum Master |
 | Sebastián Felice | Analista Funcional y Desarrollador |
-| Pablo H. Aquino | Gestor de Proyecto / Product Owner |
+| Pablo H. Aquino | Gestor de Proyecto y Desarrollador |
 | Fabian Orue | Desarrollador |
 | Constanza Cirión | Desarrollador |

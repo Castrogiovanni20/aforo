@@ -19,9 +19,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        setUI()
-        setObservers()
-        setClickListeners()
+        setUI() //Setear elementos de la vista: databinding y viewmodel
+        setObservers() //Patrón observer: suscripción
+        setClickListeners() //Eventos de botón
     }
 
     private fun setUI () {
@@ -58,16 +58,17 @@ class LoginActivity : AppCompatActivity() {
         initHomeScreen()
     }
 
+    //El viewmodel actualiza la variable observable, cuando hay un cambio, la activity se entera de ese cambio:
     private val failureObserver = Observer<Any?> { statusCode ->
         when (statusCode) {
             "500", "401" -> {
                 Toast.makeText(applicationContext, "Usuario y/o contraseña incorrecto.", Toast.LENGTH_SHORT).show()
             }
             "404" -> {
-                Toast.makeText(applicationContext, "Estamos teniendo problema con nuestro servidor. Por favor intenta logearte mas tarde.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Estamos teniendo problemas con nuestro servidor. Por favor intentá loguearte más tarde.", Toast.LENGTH_SHORT).show()
             }
             "400" -> {
-                Toast.makeText(applicationContext, "Por favor, completa el usuario y/o contraseña.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Por favor, completá el usuario y/o contraseña.", Toast.LENGTH_SHORT).show()
             }
         }
 
