@@ -1,25 +1,23 @@
 package com.pf.aforo.data.repository
 
+import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.data.response.FiwareResponse
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-import com.pf.aforo.data.model.User
+import com.pf.aforo.data.model.UserRegister
 
 interface FiwareAPI {
 
-    @FormUrlEncoded
     @POST("authentication")
-    fun userLogin(
-        @Field("userName") email: String,
-        @Field("password") password: String
+    fun login(
+        @Body user: UserLogin
     ) : Call<FiwareResponse>
 
     @POST("users")
-    fun userRegister(
-        @Body user: User
+    fun register(
+        @Body user: UserRegister
     ) : Call<FiwareResponse>
 
 

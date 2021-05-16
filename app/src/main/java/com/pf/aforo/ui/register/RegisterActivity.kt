@@ -1,15 +1,16 @@
 package com.pf.aforo.ui.register
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pf.aforo.R
-import com.pf.aforo.data.model.User
+import com.pf.aforo.data.model.UserRegister
 
 import com.pf.aforo.databinding.ActivityRegisterBinding
+import com.pf.aforo.ui.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -47,8 +48,9 @@ class RegisterActivity : AppCompatActivity() {
         var phoneNumber = if (binding.edtPhone.text.toString() != "") (binding.edtPhone.text.toString().toInt()) else (0)
         var organization = binding.edtOrgReg.text.toString()
         var password = binding.edtPassReg.text.toString()
+        var passwordConfirm = binding.edtConfirmarPass.text.toString()
 
-        val user = User(fullName, email, phoneNumber, organization, password)
+        val user = UserRegister(fullName, email, phoneNumber, organization, password, passwordConfirm)
 
         registerViewModel.registerUser(user)
     }
@@ -56,7 +58,8 @@ class RegisterActivity : AppCompatActivity() {
     private val successObserver = Observer<Any?> { statusCode ->
         when (statusCode) {
             "200" -> {
-                Toast.makeText(applicationContext, "Usuario registrado exitosamente.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Usuario registrado exitosamente. Por favor, inicie sesion.", Toast.LENGTH_SHORT).show()
+                initLoginActivity()
             }
         }
     }
@@ -76,22 +79,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private val validationObserver = Observer<Any?> { error ->
-        when (error) {
-            "FullName" -> {
-                Toast.makeText(applicationContext, "El nombre completo debe ser mayor a 5 y menor a 15 caracteres.", Toast.LENGTH_SHORT).show()
-            }
-            "Email" -> {
-                Toast.makeText(applicationContext, "El email debe ser mayor o igual a 10 caracteres.", Toast.LENGTH_SHORT).show()
-            }
-            "Phone" -> {
-                Toast.makeText(applicationContext, "El teléfono debe ser mayor o igual a 8.", Toast.LENGTH_SHORT).show()
-            }
-            "Organization" -> {
-                Toast.makeText(applicationContext, "El nombre de la organización debe ser mayor o igual a 2 caracteres.", Toast.LENGTH_SHORT).show()
-            }
-            "Password" -> {
-                Toast.makeText(applicationContext, "La contraseña debe ser mayor o igual a 8 caracteres.", Toast.LENGTH_SHORT).show()
-            }
-        }
+        Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun initLoginActivity () {
+        startActivity(Intent(this@RegisterActivity, LoginActivity::class.java));
     }
 }

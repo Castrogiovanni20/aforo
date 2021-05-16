@@ -74,6 +74,7 @@
                     android:ems="10"
                     android:hint="@string/last_name"
                     android:inputType="textPersonName|text"
+                    android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:textAlignment="center" />
 
                 <Space
@@ -91,6 +92,7 @@
                     android:ems="10"
                     android:hint="@string/name"
                     android:inputType="textPersonName|text"
+                    android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:textAlignment="center" />
 
             </LinearLayout>

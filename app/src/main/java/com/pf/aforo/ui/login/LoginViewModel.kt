@@ -2,6 +2,7 @@ package com.pf.aforo.ui.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.data.repository.FiwareRepository
 
 //Estas son las variables observables + validaciones ac+a para sacar mayor cantidad de código del activitie:
@@ -14,13 +15,22 @@ class LoginViewModel : ViewModel() {
     private var _failureResponse = fiwareRepository.loginFailureResponseLiveData
     val failureResponse: MutableLiveData<String> get() = _failureResponse
 
-    fun loginUser (userName: String, password: String)  {
-        if (userName != "" && password != "") {
-            fiwareRepository.userLogin(userName, password)
-        } else {
-            failureResponse.postValue("400")
-        }
+    var validationError = MutableLiveData<String>()
+    var isUserValid : Boolean = false
+
+    fun loginUser (user: UserLogin)  {
+        validateUser(user)
+        if (isUserValid) fiwareRepository.login(user)
     }
 
-    //Continuar validaciones acá:
+    private fun validateUser(user: UserLogin) {
+        when {
+            !user.isUserNameValid() -> validationError.value = "Debe ingresar su email."
+            !user.isEmailValid() -> validationError.value = "Debe ingresar un formato de email valido."
+            !user.isPasswordValid() -> validationError.value = "Debe ingresar su contraseña."
+            else -> {
+                isUserValid = true
+            }
+        }
+    }
 }

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pf.aforo.R
+import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.databinding.ActivityLoginBinding
 import com.pf.aforo.ui.home.HomeActivity
 import com.pf.aforo.ui.register.RegisterActivity
@@ -34,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
     private fun setObservers () {
         loginViewModel.successResponse.observe(this, successObserver)
         loginViewModel.failureResponse.observe(this, failureObserver)
+        loginViewModel.validationError.observe(this, validationObserver)
     }
 
     private fun setClickListeners () {
@@ -47,10 +49,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login () {
-        var email = binding.edtEmail.text.toString()
+        var userName = binding.edtEmail.text.toString()
         var password = binding.edtPass.text.toString()
+        val userLogin = UserLogin(userName, password)
 
-        loginViewModel.loginUser(email, password)
+        loginViewModel.loginUser(userLogin)
     }
 
     private val successObserver = Observer<Any?> { token ->
@@ -72,6 +75,10 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private val validationObserver = Observer<Any?> { error ->
+        Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
     }
 
     private fun saveToken (token: String) {

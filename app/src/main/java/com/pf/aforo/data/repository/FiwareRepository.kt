@@ -2,10 +2,9 @@ package com.pf.aforo.data.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
-import com.pf.aforo.data.model.User
+import com.pf.aforo.data.model.UserLogin
+import com.pf.aforo.data.model.UserRegister
 import com.pf.aforo.data.response.FiwareResponse
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,8 +17,8 @@ class FiwareRepository()
     var registerSuccessResponseLiveData = MutableLiveData<String>()
     var registerFailureResponseLiveData = MutableLiveData<String>()
 
-    fun userLogin(userName: String, password: String) {
-        FiwareAPI().userLogin(userName, password)
+    fun login(userLogin: UserLogin) {
+        FiwareAPI().login(userLogin)
             .enqueue(object: Callback<FiwareResponse>{
                 override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
                     if (t != null) {
@@ -45,8 +44,8 @@ class FiwareRepository()
             })
     }
 
-    fun register(user: User) {
-        FiwareAPI().userRegister(user)
+    fun register(user: UserRegister) {
+        FiwareAPI().register(user)
             .enqueue(object: Callback<FiwareResponse>{
                 override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
                     if (t != null) {
