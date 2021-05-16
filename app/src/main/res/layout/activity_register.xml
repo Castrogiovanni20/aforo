@@ -74,6 +74,7 @@
                     android:autofillHints=""
                     android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:ems="10"
+                    android:fontFamily="@font/roboto"
                     android:hint="@string/last_name"
                     android:inputType="textPersonName|text"
                     android:textAlignment="textStart" />
@@ -92,6 +93,7 @@
                     android:autofillHints=""
                     android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:ems="10"
+                    android:fontFamily="@font/roboto"
                     android:hint="@string/name"
                     android:inputType="textPersonName|text"
                     android:textAlignment="textStart" />
@@ -112,6 +114,7 @@
                 android:layout_marginEnd="0dp"
                 android:autofillHints=""
                 android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/edt_email"
                 android:inputType="textEmailAddress"
                 android:textAlignment="textStart"
@@ -130,6 +133,7 @@
                 android:layout_marginLeft="4dp"
                 android:autofillHints=""
                 android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/cel_phone"
                 android:inputType="phone"
                 android:textAlignment="textStart" />
@@ -146,6 +150,7 @@
                 android:layout_marginLeft="4dp"
                 android:autofillHints=""
                 android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/organizacion"
                 android:inputType="textPersonName"
                 android:textAlignment="textStart" />
@@ -162,6 +167,7 @@
                 android:layout_marginLeft="4dp"
                 android:autofillHints=""
                 android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/Password"
                 android:inputType="textPassword"
                 android:password="false"
@@ -177,6 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/confirmarPass"
                 android:inputType="textPassword"
                 android:textAlignment="textStart" />
@@ -202,6 +209,7 @@
         android:background="@drawable/boton_personalizado"
 
         android:elevation="4dp"
+        android:fontFamily="@font/roboto"
         android:hint="@string/register"
         android:textColor="@color/white"
         android:textSize="14sp"

@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:ems="14"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/edt_email"
                 android:inputType="textEmailAddress" />
 
@@ -59,10 +60,11 @@
                 android:id="@+id/edtPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:autofillHints=""
                 android:ems="14"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/Password"
                 android:inputType="numberPassword" />
 
@@ -105,6 +107,7 @@
         android:id="@+id/txtCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
         android:text="@string/create_account"
         android:textAlignment="center"
         android:textColor="@color/fucsia"
