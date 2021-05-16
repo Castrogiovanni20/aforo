@@ -72,11 +72,11 @@
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
                     android:autofillHints=""
+                    android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:ems="10"
                     android:hint="@string/last_name"
                     android:inputType="textPersonName|text"
-                    android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
-                    android:textAlignment="center" />
+                    android:textAlignment="textStart" />
 
                 <Space
                     android:id="@+id/space0"
@@ -90,11 +90,11 @@
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
                     android:autofillHints=""
+                    android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:ems="10"
                     android:hint="@string/name"
                     android:inputType="textPersonName|text"
-                    android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
-                    android:textAlignment="center" />
+                    android:textAlignment="textStart" />
 
             </LinearLayout>
 
@@ -114,7 +114,7 @@
                 android:ems="10"
                 android:hint="@string/edt_email"
                 android:inputType="textEmailAddress"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -132,7 +132,7 @@
                 android:ems="10"
                 android:hint="@string/cel_phone"
                 android:inputType="phone"
-                android:textAlignment="center" />
+                android:textAlignment="textStart" />
 
             <Space
                 android:id="@+id/space3"
@@ -148,7 +148,7 @@
                 android:ems="10"
                 android:hint="@string/organizacion"
                 android:inputType="textPersonName"
-                android:textAlignment="center" />
+                android:textAlignment="textStart" />
 
             <Space
                 android:id="@+id/space4"
@@ -165,7 +165,7 @@
                 android:hint="@string/Password"
                 android:inputType="textPassword"
                 android:password="false"
-                android:textAlignment="center" />
+                android:textAlignment="textStart" />
 
             <Space
                 android:id="@+id/space5"
@@ -179,7 +179,7 @@
                 android:ems="10"
                 android:hint="@string/confirmarPass"
                 android:inputType="textPassword"
-                android:textAlignment="center" />
+                android:textAlignment="textStart" />
 
             <Space
                 android:layout_width="match_parent"
