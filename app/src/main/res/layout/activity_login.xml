@@ -5,7 +5,7 @@
     android:id="@+id/rootLayoutLogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkblue"
+    android:background="@drawable/wall"
     android:contentDescription="@string/descBackg"
     android:elevation="8dp"
     android:orientation="vertical"
@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.28" />
+        app:layout_constraintGuide_percent="0.38" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLogin"
@@ -99,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.84" />
 
     <TextView
         android:id="@+id/txtCreateAccount"
@@ -109,12 +109,11 @@
         android:textAlignment="center"
         android:textColor="@color/fucsia"
         android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:layout_constraintVertical_bias="0.564" />
+        app:layout_constraintVertical_bias="0.552" />
 
     <TextView
         android:id="@+id/txtWelcome"
@@ -122,6 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:fontFamily="@font/roboto"
         android:text="@string/welcome"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -142,7 +142,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.575"
-        app:srcCompat="@mipmap/logo21024" />
+        app:srcCompat="@drawable/icono" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnSend"
@@ -151,23 +151,13 @@
         android:clickable="true"
         android:contentDescription="@string/send"
         android:focusable="true"
+        app:backgroundTint="#03A9F4"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.769"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardLogin"
-        app:layout_constraintVertical_bias="0.198"
+        app:layout_constraintVertical_bias="0.543"
         app:srcCompat="@android:drawable/ic_media_play" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="175dp"
-        android:layout_height="66dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toStartOf="@+id/txtCreateAccount"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:layout_constraintVertical_bias="0.47"
-        app:srcCompat="@drawable/logo_fiware_ihubs" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
