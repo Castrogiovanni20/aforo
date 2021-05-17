@@ -2,7 +2,7 @@
     <string name="app_name">Aforo</string>
 
     <string name="edt_email">✉       Correo electrónico</string>
-
+    <string name="nombreUsuario">Nombre de usuario</string>
     <string name="name">✎      Nombre</string>
     <string name="last_name">✎       Apellido</string>
     <string name="Password">✱      Contraseña</string>
@@ -21,13 +21,15 @@
     <string name="aforo_name">Aforo</string>
     <string name="txtcities">Instituto Ciudades del Futuro</string>
     <string name="descBackg">Imagen fondo login</string>
-    <string name="description">Desripcion</string>
+    <string name="description">Descripción</string>
     <string name="delete">Eliminar Funcionario</string>
     <string name="okey">OK</string>
     <string name="confirmarPass">⌨      Confirmar contraseña</string>
 
     <string name="confirmarDelete">¿Confirma la eliminación de este Funcionario?</string>
-
+    <string name="datosIncorrectos">Usuario y/o contraseña incorrectos</string>
+    <string name="nuevoFunc">Nuevo Funcionario</string>
+    <string name="btnAgregarFuncionario">+ Agregar Funcionario</string>
 
 
 </resources>
