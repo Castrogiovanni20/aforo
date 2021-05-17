@@ -30,6 +30,10 @@
     <string name="datosIncorrectos">Usuario y/o contraseña incorrectos</string>
     <string name="nuevoFunc">Nuevo Funcionario</string>
     <string name="btnAgregarFuncionario">+ Agregar Funcionario</string>
+    <string name="confirmMail">Se ha enviado un mail de confirmación de registro a su casilla</string>
+    <string name="reingresePass">Reingresar la contraseña</string>
+    <string name="recuperarContras">Recuperar contraseña</string>
+    <string name="mailPasos">Ha recibido un correo con los pasos para recuperar su contraseña</string>
 
 
 </resources>

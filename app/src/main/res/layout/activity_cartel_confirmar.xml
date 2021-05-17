@@ -26,7 +26,6 @@
             android:layout_height="wrap_content"
             android:text="@string/confirmarDelete"
             android:textAlignment="center"
-            android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold" />
 
