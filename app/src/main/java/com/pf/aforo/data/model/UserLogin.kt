@@ -1,9 +1,9 @@
 package com.pf.aforo.data.model
 
-class UserLogin (private var userName: String, private var password: String) {
+class UserLogin (private var username: String, private var password: String) {
 
-    fun getUserName () : String {
-        return userName
+    fun getUsername () : String {
+        return username
     }
 
     fun getPassword () : String {
@@ -11,11 +11,11 @@ class UserLogin (private var userName: String, private var password: String) {
     }
 
     fun isUserNameValid () : Boolean {
-        return getUserName().isNotEmpty()
+        return getUsername().isNotEmpty()
     }
 
     fun isEmailValid(): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(getUserName()).matches()
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(getUsername()).matches()
     }
 
     fun isPasswordValid () : Boolean {

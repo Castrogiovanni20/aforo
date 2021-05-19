@@ -48,8 +48,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/last_name"
-                android:inputType="textPersonName"
-                android:autofillHints="" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editTNom"
@@ -57,14 +56,12 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/name"
-                android:inputType="textPersonName"
-                android:autofillHints="" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editTextNumberDni"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/dni"
                 android:inputType="number" />
@@ -75,8 +72,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/cel_phone"
-                android:inputType="phone"
-                android:autofillHints="" />
+                android:inputType="phone" />
 
             <EditText
                 android:id="@+id/editTextTextEmail"
@@ -84,8 +80,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/edt_email"
-                android:inputType="textEmailAddress"
-                android:autofillHints="" />
+                android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/editTextAlias"
@@ -93,20 +88,18 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/nombreUsuario"
-                android:inputType="textPersonName"
-                android:autofillHints="" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/NumPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/Password"
                 android:inputType="numberPassword" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/imgBtnSave"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

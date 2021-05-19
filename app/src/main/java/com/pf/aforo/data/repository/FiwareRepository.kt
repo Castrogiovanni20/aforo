@@ -2,8 +2,9 @@ package com.pf.aforo.data.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.data.model.UserLogin
-import com.pf.aforo.data.model.UserRegister
+import com.pf.aforo.data.model.UserSupervisor
 import com.pf.aforo.data.response.FiwareResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,6 +17,8 @@ class FiwareRepository()
     var loginFailureResponseLiveData = MutableLiveData<String>()
     var registerSuccessResponseLiveData = MutableLiveData<String>()
     var registerFailureResponseLiveData = MutableLiveData<String>()
+    var addUserSuccessResponseLiveData = MutableLiveData<String>()
+    var addUserFailureResponseLiveData = MutableLiveData<String>()
 
     fun login(userLogin: UserLogin) {
         FiwareAPI().login(userLogin)
@@ -44,7 +47,7 @@ class FiwareRepository()
             })
     }
 
-    fun register(user: UserRegister) {
+    fun register(user: UserSupervisor) {
         FiwareAPI().register(user)
             .enqueue(object: Callback<FiwareResponse>{
                 override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
@@ -67,6 +70,32 @@ class FiwareRepository()
                         }
                     }
                 }
+            })
+    }
+
+    fun addUser(user: UserFuncionario){
+        FiwareAPI().addUser(user.getToken(), user)
+            .enqueue(object: Callback<FiwareResponse>{
+                override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
+                    if (t != null) {
+                        addUserFailureResponseLiveData.value = "404"
+                        Log.d("ApiNewUser", "Fallo el request" + t.message)
+                    }
+                }
+                override fun onResponse(call: Call<FiwareResponse>?, fiwareResponse: Response<FiwareResponse>?) {
+                    if (fiwareResponse != null) {
+                        if (fiwareResponse.isSuccessful) {
+                            if (fiwareResponse.body().getCode() == "SUCCESS") {
+                                addUserSuccessResponseLiveData.value = fiwareResponse.code().toString()
+                                Log.d("ApiNewUser", "Respondio la API " + fiwareResponse.code().toString())
+                            }
+                        } else {
+                            addUserFailureResponseLiveData.value = fiwareResponse.code().toString()
+                            Log.d("ApiNewUser", "Respondio la API " + fiwareResponse.code().toString())
+                        }
+                    }
+                }
+
             })
     }
 

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pf.aforo.R
-import com.pf.aforo.data.model.UserRegister
+import com.pf.aforo.data.model.UserSupervisor
 
 import com.pf.aforo.databinding.ActivityRegisterBinding
 import com.pf.aforo.ui.login.LoginActivity
@@ -43,14 +43,16 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun register () {
-        var fullName = binding.edtName.text.toString() + " " + binding.edtLastName.text.toString()
+        var firstName = binding.edtName.text.toString()
+        var lastName = binding.edtLastName.text.toString()
         var email = binding.edtEmailReg.text.toString()
-        var phoneNumber = if (binding.edtPhone.text.toString() != "") (binding.edtPhone.text.toString().toInt()) else (0)
-        var organization = binding.edtOrgReg.text.toString()
+        var phoneNumber = binding.edtPhone.text.toString()
+        var refOrganization = binding.edtOrgReg.text.toString()
         var password = binding.edtPassReg.text.toString()
         var passwordConfirm = binding.edtConfirmarPass.text.toString()
+        var role = "SUPERVISOR"
 
-        val user = UserRegister(fullName, email, phoneNumber, organization, password, passwordConfirm)
+        val user = UserSupervisor(firstName, lastName, email, phoneNumber, refOrganization, password, passwordConfirm, role)
 
         registerViewModel.registerUser(user)
     }
@@ -67,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
     private val failureObserver = Observer<Any?> { statusCode ->
         when (statusCode) {
             "403" -> {
-                Toast.makeText(applicationContext, "El usuario ya se encuentra registrado.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "El usuario y/o la organizacion ya se encuentran registrados.", Toast.LENGTH_SHORT).show()
             }
             "500" -> {
                 Toast.makeText(applicationContext, "Por favor, asegurate de completar todos los campos.", Toast.LENGTH_SHORT).show()
