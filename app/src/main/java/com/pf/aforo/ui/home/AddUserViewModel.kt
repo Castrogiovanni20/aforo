@@ -15,6 +15,7 @@ class AddUserViewModel : ViewModel() {
     val failureResponse: MutableLiveData<String> get() = _failureResponse
 
     var validationError = MutableLiveData<String>()
+    var isUserValid : Boolean = false
 
     fun addUser(userFuncionario: UserFuncionario) {
         validateUser(userFuncionario)
@@ -22,7 +23,17 @@ class AddUserViewModel : ViewModel() {
     }
 
     private fun validateUser(user: UserFuncionario) {
-        /* Validaciones
-         validationError.value = "<Mensaje de error>" */
+        when {
+            !user.isFirstNameLengthValid() -> validationError.value = "El nombre debe ser mayor a 2 y menor o igual a 60 caracteres."
+            !user.isFirstNameAlphabetic() -> validationError.value = "El nombre debe contener solamente letras."
+            !user.isLastNameLengthValid() -> validationError.value = "El apellido debe ser mayor a 2 y menor o igual a 60 caracteres."
+            !user.isLastNameAlphabetic() -> validationError.value = "El apellido debe contener solamente letras."
+            !user.isPhoneNumberValid() -> validationError.value = "El teléfono celular debe ser menor o igual a 15 caracteres."
+            !user.isEmailValid() -> validationError.value = "Debe ingresar un formato de email valido."
+            !user.isPasswordValid() -> validationError.value = "La contraseña debe ser mayor o igual a 8 caracteres."
+            else -> {
+                isUserValid = true
+            }
+        }
     }
 }
