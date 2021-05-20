@@ -4,6 +4,7 @@ import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.data.model.UserSupervisor
 import com.pf.aforo.data.response.FiwareResponse
+import com.pf.aforo.data.response.FiwareResponseUser
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -29,6 +30,11 @@ interface FiwareAPI {
         @Header("Authorization") token: String,
         @Body user: UserFuncionario
     ) : Call<FiwareResponse>
+
+    @GET("users/organization")
+    fun getUsers(
+        @Header("Authorization") token: String
+    ) : Call<FiwareResponseUser>
 
     companion object {
         private val BASE_URL: String = "http://192.168.0.16:3000/api/v1/"

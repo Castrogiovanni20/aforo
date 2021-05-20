@@ -7,7 +7,7 @@ class UserFuncionario (private var firstName: String,
                        private var refOrganization: String,
                        private var password: String,
                        private var role: String,
-                       private var token: String) {
+                       private var token: String = "0") {
 
     fun getFirstName () : String {
         return firstName
