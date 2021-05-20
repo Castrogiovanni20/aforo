@@ -40,4 +40,22 @@ class UserFuncionario (private var firstName: String,
     fun getToken () : String {
         return token
     }
+
+    fun isFirstNameLengthValid (): Boolean = (getFirstName().length in 2..60)
+
+    fun isFirstNameAlphabetic (): Boolean = isLetters(getFirstName())
+
+    fun isLastNameLengthValid (): Boolean = (getLastName().length in 2..60)
+
+    fun isLastNameAlphabetic (): Boolean = isLetters(getLastName())
+
+    fun isEmailValid (): Boolean = android.util.Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()
+
+    fun isPasswordValid (): Boolean = (getPassword().length in 8..100)
+
+    fun isPhoneNumberValid (): Boolean = (!getPhoneNumber().isNotEmpty() || getPhoneNumber().length in 1..15)
+
+    fun isLetters(string: String): Boolean {
+        return string.matches("^[a-zA-Z]+(\\s[a-zA-Z]+)?\$".toRegex())
+    }
 }
