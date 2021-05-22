@@ -4,6 +4,7 @@ import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.data.model.UserSupervisor
 import com.pf.aforo.data.response.FiwareResponse
+import com.pf.aforo.data.response.FiwareResponseDelete
 import com.pf.aforo.data.response.FiwareResponseUser
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -31,6 +32,12 @@ interface FiwareAPI {
         @Body user: UserFuncionario
     ) : Call<FiwareResponse>
 
+    @GET("users/{id}")
+    fun getUser(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ) : Call<FiwareResponseUser>
+
     @GET("users/organization")
     fun getUsers(
         @Header("Authorization") token: String
@@ -40,7 +47,15 @@ interface FiwareAPI {
     fun deleteUser(
         @Header("Authorization") token: String,
         @Path("id") id: String
-    ) : Call<FiwareResponse>
+    ) : Call<FiwareResponseDelete>
+
+    @PUT("users/{id}")
+    fun updateUser(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Body user: UserFuncionario
+    ) : Call<FiwareResponseUser>
+
 
     companion object {
         private val BASE_URL: String = "http://192.168.0.16:3000/api/v1/"

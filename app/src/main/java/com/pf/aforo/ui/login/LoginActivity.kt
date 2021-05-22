@@ -3,14 +3,17 @@ package com.pf.aforo.ui.login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pf.aforo.R
+import com.pf.aforo.data.model.DataUser
+import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.databinding.ActivityLoginBinding
-import com.pf.aforo.ui.home.HomeActivity
+import com.pf.aforo.ui.home.supervisor.HomeActivity
 import com.pf.aforo.ui.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -81,6 +84,10 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
     }
 
+    private fun initHomeScreen () {
+        startActivity(Intent(this@LoginActivity, HomeActivity::class.java));
+    }
+
     private fun saveToken (token: String) {
         val sharedPreferences = getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -88,7 +95,4 @@ class LoginActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    private fun initHomeScreen () {
-        startActivity(Intent(this@LoginActivity, HomeActivity::class.java));
-    }
 }

@@ -5,7 +5,7 @@
     android:id="@+id/rootLayoutMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeActivity">
+    tools:context=".ui.home.supervisor.HomeActivity">
 
     <ImageView
         android:id="@+id/imageView2"

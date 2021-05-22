@@ -1,59 +1,31 @@
 package com.pf.aforo.data.model
 
-class UserFuncionario (private var id: String,
-                       private var firstName: String,
-                       private var lastName: String,
-                       private var email: String,
-                       private var phoneNumber: String,
-                       private var password: String,
-                       private var role: String,
-                       private var token: String = "0") {
+import android.text.Editable
+import java.io.Serializable
 
-    fun getId(): String{
-        return id
-    }
+class UserFuncionario(
+    var id: String,
+    var firstName: String,
+    var lastName: String,
+    var email: String,
+    var phoneNumber: String,
+    var password: String,
+    var role: String ) : Serializable {
 
-    fun getFirstName () : String {
-        return firstName
-    }
 
-    fun getLastName () : String {
-        return lastName
-    }
+    fun isFirstNameLengthValid (): Boolean = (firstName.length in 2..60)
 
-    fun getEmail () : String {
-        return email
-    }
+    fun isFirstNameAlphabetic (): Boolean = isLetters(firstName)
 
-    fun getPhoneNumber () : String {
-        return phoneNumber
-    }
+    fun isLastNameLengthValid (): Boolean = (lastName.length in 2..60)
 
-    fun getPassword () : String {
-        return password
-    }
+    fun isLastNameAlphabetic (): Boolean = isLetters(lastName)
 
-    fun getRole () : String {
-        return role
-    }
+    fun isEmailValid (): Boolean = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
-    fun getToken () : String {
-        return token
-    }
+    fun isPasswordValid (): Boolean = (password.length in 8..100)
 
-    fun isFirstNameLengthValid (): Boolean = (getFirstName().length in 2..60)
-
-    fun isFirstNameAlphabetic (): Boolean = isLetters(getFirstName())
-
-    fun isLastNameLengthValid (): Boolean = (getLastName().length in 2..60)
-
-    fun isLastNameAlphabetic (): Boolean = isLetters(getLastName())
-
-    fun isEmailValid (): Boolean = android.util.Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()
-
-    fun isPasswordValid (): Boolean = (getPassword().length in 8..100)
-
-    fun isPhoneNumberValid (): Boolean = (!getPhoneNumber().isNotEmpty() || getPhoneNumber().length in 1..15)
+    fun isPhoneNumberValid (): Boolean = (!phoneNumber.isNotEmpty() || phoneNumber.length in 1..15)
 
     fun isLetters(string: String): Boolean {
         return string.matches("^[a-zA-Z]+(\\s[a-zA-Z]+)?\$".toRegex())

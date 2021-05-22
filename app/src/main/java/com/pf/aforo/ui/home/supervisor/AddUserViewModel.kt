@@ -1,5 +1,6 @@
-package com.pf.aforo.ui.home
+package com.pf.aforo.ui.home.supervisor
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pf.aforo.data.model.UserFuncionario
@@ -17,9 +18,9 @@ class AddUserViewModel : ViewModel() {
     var validationError = MutableLiveData<String>()
     var isUserValid : Boolean = false
 
-    fun addUser(userFuncionario: UserFuncionario) {
+    fun addUser(token: String, userFuncionario: UserFuncionario) {
         validateUser(userFuncionario)
-        if (isUserValid) fiwareRepository.addUser(userFuncionario)
+        if (isUserValid) fiwareRepository.addUser(token, userFuncionario)
     }
 
     private fun validateUser(user: UserFuncionario) {

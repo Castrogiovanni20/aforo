@@ -1,8 +1,8 @@
-package com.pf.aforo.ui.home
+package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -49,23 +49,23 @@ class AddUserActivity : AppCompatActivity() {
         var phoneNumber = binding.editTextTelefono.text.toString()
         var password = binding.NumPassword.text.toString()
         var role = "FUNCIONARIO"
-        var token = "Bearer " + this.getToken()
 
-        val userFuncionario = UserFuncionario(firstName, lastName, email, phoneNumber, password, role, token)
+        val userFuncionario = UserFuncionario("",firstName, lastName, email, phoneNumber, password, role)
 
-        addUserViewModel.addUser(userFuncionario)
+        addUserViewModel.addUser("Bearer " + getToken(), userFuncionario)
     }
 
     private val successObserver = Observer<Any?> { statusCode ->
         when (statusCode) {
             "200" -> {
-                Toast.makeText(applicationContext, "Usuario registrado exitosamente. Por favor, inicie sesion.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Usuario registrado exitosamente.", Toast.LENGTH_SHORT).show()
+                initHomeScreen()
             }
         }
     }
 
     private val failureObserver = Observer<Any?> { statusCode ->
-        Log.d("StatusCode", statusCode.toString())
+        Toast.makeText(applicationContext, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
     private val validationObserver = Observer<Any?> { error ->
@@ -75,5 +75,10 @@ class AddUserActivity : AppCompatActivity() {
     private fun getToken(): String {
         val sharedPref = getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
         return sharedPref.getString("Token", "0").toString()
+    }
+
+    private fun initHomeScreen() {
+        var intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
     }
 }

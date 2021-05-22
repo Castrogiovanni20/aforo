@@ -34,6 +34,8 @@
     <string name="reingresePass">Reingresar la contraseña</string>
     <string name="recuperarContras">Recuperar contraseña</string>
     <string name="mailPasos">Ha recibido un correo con los pasos para recuperar su contraseña</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

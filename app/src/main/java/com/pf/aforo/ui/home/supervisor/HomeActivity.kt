@@ -1,4 +1,4 @@
-package com.pf.aforo.ui.home
+package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
 import android.content.Intent
@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pf.aforo.R
 import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.UserFuncionario
-import com.pf.aforo.databinding.ActivityRecyclerFuncionariosBinding
+import com.pf.aforo.databinding.ActivityHomeSupervisorBinding
 
 class HomeActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityRecyclerFuncionariosBinding
+    private lateinit var binding: ActivityHomeSupervisorBinding
     private lateinit var homeViewModel: HomeViewModel
     private var arrayListFuncionarios = ArrayList<UserFuncionario>()
     private lateinit var recyclerAdapter: RecyclerAdapter
@@ -25,7 +25,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recycler_funcionarios)
+        setContentView(R.layout.activity_home_supervisor)
         setUI()
         setUpRecyclerView()
         getUsers()
@@ -34,14 +34,14 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setUI () {
-        binding = ActivityRecyclerFuncionariosBinding.inflate(layoutInflater)
+        binding = ActivityHomeSupervisorBinding.inflate(layoutInflater)
         setContentView(binding.root)
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
     }
 
     private fun setUpRecyclerView(){
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerAdapter = RecyclerAdapter(arrayListFuncionarios, homeViewModel, getToken())
+        recyclerAdapter = RecyclerAdapter(arrayListFuncionarios)
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
@@ -58,7 +58,7 @@ class HomeActivity : AppCompatActivity() {
         var usersList : Array<DataUser> = users as Array<DataUser>
 
         for (user in usersList) {
-            var userFuncionario = UserFuncionario(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber(), user.getRefOrganization(), user.getPassword(), user.getRole())
+            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)
             arrayListFuncionarios.add(userFuncionario)
             recyclerAdapter.notifyDataSetChanged()
         }
