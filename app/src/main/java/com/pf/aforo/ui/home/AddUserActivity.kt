@@ -48,11 +48,10 @@ class AddUserActivity : AppCompatActivity() {
         var email = binding.editTextTextEmail.text.toString()
         var phoneNumber = binding.editTextTelefono.text.toString()
         var password = binding.NumPassword.text.toString()
-        var refOrganization = "ORT"
         var role = "FUNCIONARIO"
         var token = "Bearer " + this.getToken()
 
-        val userFuncionario = UserFuncionario(firstName, lastName, email, phoneNumber, refOrganization, password, role, token)
+        val userFuncionario = UserFuncionario(firstName, lastName, email, phoneNumber, password, role, token)
 
         addUserViewModel.addUser(userFuncionario)
     }

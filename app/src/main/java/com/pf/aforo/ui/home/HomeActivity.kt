@@ -39,33 +39,32 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
     }
 
-    fun setUpRecyclerView(){
+    private fun setUpRecyclerView(){
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerAdapter = RecyclerAdapter(arrayListFuncionarios)
+        recyclerAdapter = RecyclerAdapter(arrayListFuncionarios, homeViewModel, getToken())
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.adapter = recyclerAdapter
-    }
 
+    }
 
     private fun setObservers () {
-        homeViewModel.usersResponse.observe(this, usersObserver)
-        homeViewModel.failureResponse.observe(this, failureObserver)
+        homeViewModel.getUsersResponse.observe(this, getUsersSuccessObserver)
+        homeViewModel.getUsersFailureResponse.observe(this, getUsersFailureObserver)
     }
 
-
-    private val usersObserver = Observer<Any?> { users ->
+    private val getUsersSuccessObserver = Observer<Any?> { users ->
         var usersList : Array<DataUser> = users as Array<DataUser>
 
         for (user in usersList) {
-            var userFuncionario = UserFuncionario(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber(), user.getRefOrganization(), user.getPassword(), user.getRole())
+            var userFuncionario = UserFuncionario(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber(), user.getRefOrganization(), user.getPassword(), user.getRole())
             arrayListFuncionarios.add(userFuncionario)
             recyclerAdapter.notifyDataSetChanged()
         }
     }
 
-    private val failureObserver = Observer<Any?> { error ->
+    private val getUsersFailureObserver = Observer<Any?> { error ->
         Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
         Log.d("FailureObserver", error.toString())
     }

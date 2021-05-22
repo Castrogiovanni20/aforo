@@ -1,13 +1,17 @@
 package com.pf.aforo.data.model
 
-class UserFuncionario (private var firstName: String,
+class UserFuncionario (private var id: String,
+                       private var firstName: String,
                        private var lastName: String,
                        private var email: String,
                        private var phoneNumber: String,
-                       private var refOrganization: String,
                        private var password: String,
                        private var role: String,
                        private var token: String = "0") {
+
+    fun getId(): String{
+        return id
+    }
 
     fun getFirstName () : String {
         return firstName
@@ -23,10 +27,6 @@ class UserFuncionario (private var firstName: String,
 
     fun getPhoneNumber () : String {
         return phoneNumber
-    }
-
-    fun getRefOrganization () : String {
-        return refOrganization
     }
 
     fun getPassword () : String {

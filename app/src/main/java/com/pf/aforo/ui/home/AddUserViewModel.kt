@@ -19,7 +19,7 @@ class AddUserViewModel : ViewModel() {
 
     fun addUser(userFuncionario: UserFuncionario) {
         validateUser(userFuncionario)
-        fiwareRepository.addUser(userFuncionario)
+        if (isUserValid) fiwareRepository.addUser(userFuncionario)
     }
 
     private fun validateUser(user: UserFuncionario) {

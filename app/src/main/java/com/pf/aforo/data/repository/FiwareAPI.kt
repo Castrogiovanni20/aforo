@@ -36,6 +36,12 @@ interface FiwareAPI {
         @Header("Authorization") token: String
     ) : Call<FiwareResponseUser>
 
+    @DELETE("users/{id}")
+    fun deleteUser(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ) : Call<FiwareResponse>
+
     companion object {
         private val BASE_URL: String = "http://192.168.0.16:3000/api/v1/"
 

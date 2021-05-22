@@ -17,12 +17,19 @@ class FiwareRepository()
 {
     var loginSuccessResponseLiveData = MutableLiveData<String>()
     var loginFailureResponseLiveData = MutableLiveData<String>()
+
     var registerSuccessResponseLiveData = MutableLiveData<String>()
     var registerFailureResponseLiveData = MutableLiveData<String>()
+
     var addUserSuccessResponseLiveData = MutableLiveData<String>()
     var addUserFailureResponseLiveData = MutableLiveData<String>()
+
     var usersResponseLiveData = MutableLiveData<Array<DataUser>>()
     var getUserFailureResponseLiveData = MutableLiveData<String>()
+
+    var deleteUserSuccessResponseLiveData = MutableLiveData<String>()
+    var deleteUserFailureResponseLiveData = MutableLiveData<String>()
+
 
     fun login(userLogin: UserLogin) {
         FiwareAPI().login(userLogin)
@@ -122,6 +129,32 @@ class FiwareRepository()
                             }
                         } else {
                             getUserFailureResponseLiveData.value = fiwareResponse.code().toString()
+                            Log.d("ApiGetUser", "Respondio la API " + fiwareResponse.code().toString())
+                        }
+                    }
+                }
+
+            })
+    }
+
+    fun deleteUser(token: String, id: String){
+        FiwareAPI().deleteUser(token, id)
+            .enqueue(object: Callback<FiwareResponse>{
+                override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
+                    if (t != null) {
+                        deleteUserFailureResponseLiveData.value = "404"
+                        Log.d("ApiGetUser", "Fallo el request" + t.message)
+                    }
+                }
+                override fun onResponse(call: Call<FiwareResponse>?, fiwareResponse: Response<FiwareResponse>?) {
+                    if (fiwareResponse != null) {
+                        if (fiwareResponse.isSuccessful) {
+                            if (fiwareResponse.body().getCode() == "SUCCESS") {
+                                deleteUserSuccessResponseLiveData.value = fiwareResponse.body().getCode()
+                                Log.d("ApiGetUser", "Respondio la API " + fiwareResponse.code().toString())
+                            }
+                        } else {
+                            deleteUserFailureResponseLiveData.value = fiwareResponse.code().toString()
                             Log.d("ApiGetUser", "Respondio la API " + fiwareResponse.code().toString())
                         }
                     }
