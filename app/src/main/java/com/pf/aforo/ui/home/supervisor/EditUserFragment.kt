@@ -1,24 +1,26 @@
 package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.pf.aforo.R
 import com.pf.aforo.data.model.UserFuncionario
-import com.pf.aforo.databinding.ActivityEditFuncBinding
+import com.pf.aforo.databinding.FragmentEditUserBinding
 
-class EditUserActivity: AppCompatActivity() {
-    private lateinit var binding: ActivityEditFuncBinding
+class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
+    private lateinit var binding : FragmentEditUserBinding
     private lateinit var editViewModel: EditUserViewModel
     private lateinit var userFuncionario: UserFuncionario
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_func)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentEditUserBinding.bind(view)
+        editViewModel = ViewModelProvider(this).get(EditUserViewModel::class.java)
         getUserFuncionario()
         setUI()
         setObservers()
@@ -26,10 +28,6 @@ class EditUserActivity: AppCompatActivity() {
     }
 
     private fun setUI() {
-        binding = ActivityEditFuncBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        editViewModel = ViewModelProvider(this).get(EditUserViewModel::class.java)
-
         binding.edtNombre.setText(userFuncionario.firstName)
         binding.edtApellido.setText(userFuncionario.lastName)
         binding.edtTelefono.setText(userFuncionario.phoneNumber)
@@ -38,10 +36,10 @@ class EditUserActivity: AppCompatActivity() {
     }
 
     private fun setObservers() {
-        editViewModel.deleteUserSuccessResponse.observe(this, deleteUserSuccessObserver)
-        editViewModel.deleteUserFailureResponse.observe(this, deleteUserFailureObserver)
-        editViewModel.updateUserSuccessResponse.observe(this, updateUserSuccessObserver)
-        editViewModel.updateUserFailureResponse.observe(this, updateUserFailureObserver)
+        editViewModel.deleteUserSuccessResponse.observe(viewLifecycleOwner, deleteUserSuccessObserver)
+        editViewModel.deleteUserFailureResponse.observe(viewLifecycleOwner, deleteUserFailureObserver)
+        editViewModel.updateUserSuccessResponse.observe(viewLifecycleOwner, updateUserSuccessObserver)
+        editViewModel.updateUserFailureResponse.observe(viewLifecycleOwner, updateUserFailureObserver)
     }
 
     private fun setOnClickListeners() {
@@ -72,36 +70,35 @@ class EditUserActivity: AppCompatActivity() {
     }
 
     private val deleteUserSuccessObserver = Observer<Any?> { statusCode ->
-        Toast.makeText(applicationContext, "Usuario eliminado exitosamente.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Usuario eliminado exitosamente.", Toast.LENGTH_SHORT).show()
         initHomeScreen()
     }
 
     private val deleteUserFailureObserver = Observer<Any> { statusCode ->
-        Toast.makeText(applicationContext, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
     private val updateUserSuccessObserver = Observer<Any?> { statusCode ->
-        Toast.makeText(applicationContext, "Usuario actualizado exitosamente.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Usuario actualizado exitosamente.", Toast.LENGTH_SHORT).show()
         initHomeScreen()
     }
 
     private val updateUserFailureObserver = Observer<Any?> { statusCode ->
-        Toast.makeText(applicationContext, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
-
     private fun getToken(): String {
-        val sharedPref = getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
-        return sharedPref.getString("Token", "0").toString()
+        val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
+        return sharedPref?.getString("Token", "0").toString()
     }
 
     private fun getUserFuncionario() {
-        userFuncionario = intent.extras?.get("UserFuncionario") as UserFuncionario
+        userFuncionario = arguments?.getParcelable<UserFuncionario>("UserFuncionario")!!
     }
 
     private fun initHomeScreen() {
-        var intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
+        findNavController().navigate(R.id.action_editUserFragment_to_homeFragmentSupervisor)
     }
+
 
 }

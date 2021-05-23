@@ -8,8 +8,7 @@
     android:background="@drawable/wall"
     android:contentDescription="@string/descBackg"
     android:elevation="8dp"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

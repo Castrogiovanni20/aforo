@@ -1,11 +1,7 @@
 package com.pf.aforo.ui.splash
 
-import android.content.Intent
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.pf.aforo.ui.login.LoginActivity
 import java.util.*
 
 class SplashViewModel : ViewModel(){

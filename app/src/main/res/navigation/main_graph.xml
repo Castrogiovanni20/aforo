@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.pf.aforo.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.pf.aforo.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.pf.aforo.ui.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragmentSupervisor"
+        android:name="com.pf.aforo.ui.home.supervisor.HomeFragmentSupervisor"
+        android:label="fragment_home_supervisor"
+        tools:layout="@layout/fragment_home_supervisor" >
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_editUserFragment"
+            app:destination="@id/editUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUserFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.AddUserFragment"
+        android:label="fragment_add_user"
+        tools:layout="@layout/fragment_add_user" >
+        <action
+            android:id="@+id/action_addUserFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+    </fragment>
+    <fragment
+        android:id="@+id/editUserFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.EditUserFragment"
+        android:label="fragment_edit_user"
+        tools:layout="@layout/fragment_edit_user" >
+        <action
+            android:id="@+id/action_editUserFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+    </fragment>
+</navigation>

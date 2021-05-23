@@ -5,7 +5,8 @@
     android:id="@+id/rootLayEdit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:elevation="40dp">
+    android:elevation="40dp"
+    tools:context=".ui.home.supervisor.EditUserFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"

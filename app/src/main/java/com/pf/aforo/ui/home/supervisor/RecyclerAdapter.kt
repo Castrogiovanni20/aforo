@@ -1,11 +1,15 @@
 package com.pf.aforo.ui.home.supervisor
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.pf.aforo.R
 import com.pf.aforo.data.model.UserFuncionario
@@ -18,13 +22,16 @@ internal class RecyclerAdapter(private var listFuncionarios: ArrayList<UserFunci
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        var navController: NavController? = null
         val item = listFuncionarios[position]
         holder.title.text = item.firstName
 
-        holder.btnEditar.setOnClickListener {
-            var intent = Intent(holder.itemView.context, EditUserActivity::class.java)
-            intent.putExtra("UserFuncionario", listFuncionarios[position])
-            holder.itemView.context.startActivity(intent)
+        holder.btnEditar.setOnClickListener { view ->
+
+            val bundle = Bundle()
+            bundle.putParcelable("UserFuncionario", listFuncionarios[position])
+
+            view.findNavController().navigate(R.id.action_homeFragmentSupervisor_to_editUserFragment, bundle)
         }
     }
 
