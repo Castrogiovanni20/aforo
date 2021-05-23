@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +28,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
         binding = FragmentHomeSupervisorBinding.bind(view)
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         setUpRecyclerView()
@@ -51,6 +53,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
 
     private val getUsersSuccessObserver = Observer<Any?> { users ->
         var usersList : Array<DataUser> = users as Array<DataUser>
+        arrayListFuncionarios.clear()
 
         for (user in usersList) {
             val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)

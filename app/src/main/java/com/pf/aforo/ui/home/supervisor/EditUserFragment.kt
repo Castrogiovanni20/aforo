@@ -36,8 +36,6 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
     }
 
     private fun setObservers() {
-        editViewModel.deleteUserSuccessResponse.observe(viewLifecycleOwner, deleteUserSuccessObserver)
-        editViewModel.deleteUserFailureResponse.observe(viewLifecycleOwner, deleteUserFailureObserver)
         editViewModel.updateUserSuccessResponse.observe(viewLifecycleOwner, updateUserSuccessObserver)
         editViewModel.updateUserFailureResponse.observe(viewLifecycleOwner, updateUserFailureObserver)
     }
@@ -48,7 +46,7 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
         }
 
         binding.txtVEliminar.setOnClickListener{
-            deleteFuncionario()
+            initConfirmDeleteUserScreen()
         }
     }
 
@@ -63,19 +61,6 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
 
         val userFuncionario = UserFuncionario(id, firstName, lastName, email, phoneNumber, password, role)
         editViewModel.updateUser("Bearer " + getToken(), userFuncionario)
-    }
-
-    private fun deleteFuncionario() {
-        editViewModel.deleteUser("Bearer " + getToken(), userFuncionario.id)
-    }
-
-    private val deleteUserSuccessObserver = Observer<Any?> { statusCode ->
-        Toast.makeText(context, "Usuario eliminado exitosamente.", Toast.LENGTH_SHORT).show()
-        initHomeScreen()
-    }
-
-    private val deleteUserFailureObserver = Observer<Any> { statusCode ->
-        Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
     private val updateUserSuccessObserver = Observer<Any?> { statusCode ->
@@ -94,6 +79,12 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
 
     private fun getUserFuncionario() {
         userFuncionario = arguments?.getParcelable<UserFuncionario>("UserFuncionario")!!
+    }
+
+    private fun initConfirmDeleteUserScreen() {
+        val bundle = Bundle()
+        bundle.putString("idFuncionario", userFuncionario.id)
+        findNavController().navigate(R.id.action_editUserFragment_to_confirmDeleteUserFragment, bundle)
     }
 
     private fun initHomeScreen() {

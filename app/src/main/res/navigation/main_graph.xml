@@ -64,5 +64,17 @@
         <action
             android:id="@+id/action_editUserFragment_to_homeFragmentSupervisor"
             app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_editUserFragment_to_confirmDeleteUserFragment"
+            app:destination="@id/confirmDeleteUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmDeleteUserFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.ConfirmDeleteUserFragment"
+        android:label="fragment_confirm_delete_user"
+        tools:layout="@layout/fragment_confirm_delete_user" >
+        <action
+            android:id="@+id/action_confirmDeleteUserFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
     </fragment>
 </navigation>

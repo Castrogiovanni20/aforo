@@ -1,11 +1,10 @@
 package com.pf.aforo.data.repository
 
+import com.pf.aforo.data.model.BranchOffice
 import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.data.model.UserSupervisor
-import com.pf.aforo.data.response.FiwareResponse
-import com.pf.aforo.data.response.FiwareResponseDelete
-import com.pf.aforo.data.response.FiwareResponseUser
+import com.pf.aforo.data.response.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -47,7 +46,7 @@ interface FiwareAPI {
     fun deleteUser(
         @Header("Authorization") token: String,
         @Path("id") id: String
-    ) : Call<FiwareResponseDelete>
+    ) : Call<FiwareResponseDeleteUser>
 
     @PUT("users/{id}")
     fun updateUser(
@@ -56,6 +55,31 @@ interface FiwareAPI {
         @Body user: UserFuncionario
     ) : Call<FiwareResponseUser>
 
+    @POST("branch-offices")
+    fun newBranchOffice(
+        @Header("Authorization") token: String,
+        @Body branchOffice: BranchOffice
+    ) : Call<FiwareResponseBranchOffice>
+
+    @GET("branch-offices/{refOrganization}")
+    fun getBranchOffice(
+        @Header("Authorization") token: String,
+        @Path("refOrganization") id: String
+    ) : Call<FiwareResponseGetBranchOffice>
+
+    @PUT("branch-offices/{refOrganization}/{entityId}")
+    fun editBranchOffice(
+        @Header("Authorization") token: String,
+        @Path("refOrganization") id: String,
+        @Path("entityId") entityId: String
+    ) : Call<FiwareResponseEditBranchOffice>
+
+    @DELETE("branch-offices/{refOrganization}/{entityId}")
+    fun deleteBranchOffice(
+        @Header("Authorization") token: String,
+        @Path("refOrganization") id: String,
+        @Path("entityId") entityId: String
+    ) : Call<FiwareResponseDeleteBranchOffice>
 
     companion object {
         private val BASE_URL: String = "http://192.168.0.16:3000/api/v1/"
