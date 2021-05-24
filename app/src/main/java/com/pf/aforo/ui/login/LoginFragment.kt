@@ -77,7 +77,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun initHomeScreen () {
-        findNavController().navigate(R.id.action_loginFragment_to_homeFragmentSupervisor)
+        val bundle = Bundle()
+        bundle.putString("Email", binding.edtEmail.text.toString())
+        findNavController().navigate(R.id.action_loginFragment_to_homeFragmentSupervisor, bundle)
     }
 
     private fun saveToken (token: String) {

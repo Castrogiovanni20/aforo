@@ -15,18 +15,17 @@ class EditUserViewModel : ViewModel() {
     private var _deleteUserFailureResponse = fiwareRepository.deleteUserFailureResponseLiveData
     val deleteUserFailureResponse: MutableLiveData<String> get() = _deleteUserFailureResponse
 
-    private var _updateUserSuccessResponse = fiwareRepository.updateUserSuccessResponseLiveData
-    val updateUserSuccessResponse: MutableLiveData<String> get() = _updateUserSuccessResponse
+    private var _updateUserRoleSuccessResponse = fiwareRepository.updateUserRoleSuccessResponseLiveData
+    val updateUserRoleSuccessResponse: MutableLiveData<String> get() = _updateUserRoleSuccessResponse
 
-    private var _updateUserFailureResponse = fiwareRepository.updateUserFailureResponseLiveData
-    val updateUserFailureResponse: MutableLiveData<String> get() = _updateUserFailureResponse
+    private var _updateUserRoleFailureResponse = fiwareRepository.updateUserRoleFailureResponseLiveData
+    val updateUserRoleFailureResponse: MutableLiveData<String> get() = _updateUserRoleFailureResponse
 
     fun deleteUser(token: String, id: String) {
         fiwareRepository.deleteUser(token, id)
     }
 
-    fun updateUser(token: String, userFuncionario: UserFuncionario) {
-        fiwareRepository.updateUser(token, userFuncionario.id, userFuncionario)
+    fun updateUserRole(token: String, id: String, role: String) {
+        fiwareRepository.updateUserRole(token, id, role)
     }
-
 }

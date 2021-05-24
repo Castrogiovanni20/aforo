@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_homeFragmentSupervisor_to_editUserFragment"
             app:destination="@id/editUserFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/addUserFragment"
@@ -75,6 +78,15 @@
         tools:layout="@layout/fragment_confirm_delete_user" >
         <action
             android:id="@+id/action_confirmDeleteUserFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_homeFragmentSupervisor"
             app:destination="@id/homeFragmentSupervisor" />
     </fragment>
 </navigation>

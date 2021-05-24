@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="40dp"
-    tools:context=".ui.home.supervisor.EditUserFragment">
+    tools:context=".ui.home.supervisor.EditProfileFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
@@ -24,6 +24,7 @@
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="40dp"
         app:cardElevation="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtVEliminar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline10">
@@ -52,59 +53,101 @@
                 android:background="@drawable/btn_circle"
                 app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
-            <Space
+            <EditText
+                android:id="@+id/edtApellido"
                 android:layout_width="match_parent"
-                android:layout_height="12dp" />
-
-            <TextView
-                android:id="@+id/fullName"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:text="Fullname"
+                android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="@string/last_name"
+                android:inputType="textPersonName"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
-                android:textAlignment="center"/>
+                android:textAlignment="center" />
 
-            <Spinner
-                android:id="@+id/roles_spinner"
+            <EditText
+                android:id="@+id/edtNombre"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:ems="12"
+                android:hint="@string/name"
+                android:inputType="textPersonName"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/edtDNI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/dni"
+                android:inputType="textPersonName"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/edtTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/cel_phone"
+                android:inputType="textPersonName"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/edtMail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/edt_email"
+                android:inputType="textPersonName"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/edtUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/user"
+                android:inputType="textPersonName"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/edtContrasenia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/Password"
+                android:inputType="textPersonName"
+                android:textAlignment="center" />
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="24dp" />
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/txtVEliminar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/delete"
-        android:textAlignment="center"
-        android:textColor="@color/fucsia"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSiguiente"
-        app:layout_constraintHorizontal_bias="0.453"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardEditar"
-        app:layout_constraintVertical_bias="0.134" />
 
     <ImageButton
         android:id="@+id/btnSiguiente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginEnd="156dp"
         android:background="@drawable/btn_circle"
         android:elevation="30dp"
         android:src="@drawable/outline_arrow_right_alt_white_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardEditar"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintVertical_bias="0.443" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

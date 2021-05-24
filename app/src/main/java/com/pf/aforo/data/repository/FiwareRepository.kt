@@ -6,9 +6,7 @@ import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.data.model.UserSupervisor
-import com.pf.aforo.data.response.FiwareResponse
-import com.pf.aforo.data.response.FiwareResponseDeleteUser
-import com.pf.aforo.data.response.FiwareResponseUser
+import com.pf.aforo.data.response.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,6 +34,9 @@ class FiwareRepository()
 
     var updateUserSuccessResponseLiveData = MutableLiveData<String>()
     var updateUserFailureResponseLiveData = MutableLiveData<String>()
+
+    var updateUserRoleSuccessResponseLiveData = MutableLiveData<String>()
+    var updateUserRoleFailureResponseLiveData = MutableLiveData<String>()
 
 
     fun login(userLogin: UserLogin) {
@@ -198,14 +199,14 @@ class FiwareRepository()
 
     fun updateUser(token: String, id: String, user: UserFuncionario){
         FiwareAPI().updateUser(token, id, user)
-            .enqueue(object: Callback<FiwareResponseUser>{
-                override fun onFailure(call: Call<FiwareResponseUser>?, t: Throwable?) {
+            .enqueue(object: Callback<FiwareResponseUserFuncionario>{
+                override fun onFailure(call: Call<FiwareResponseUserFuncionario>?, t: Throwable?) {
                     if (t != null) {
                         updateUserFailureResponseLiveData.value = "404"
                         Log.d("ApiUpdateUser", "Fallo el request" + t.message)
                     }
                 }
-                override fun onResponse(call: Call<FiwareResponseUser>?, fiwareResponse: Response<FiwareResponseUser>?) {
+                override fun onResponse(call: Call<FiwareResponseUserFuncionario>?, fiwareResponse: Response<FiwareResponseUserFuncionario>?) {
                     if (fiwareResponse != null) {
                         if (fiwareResponse.isSuccessful) {
                             if (fiwareResponse.body().code == "SUCCESS") {
@@ -221,4 +222,31 @@ class FiwareRepository()
 
             })
     }
+
+    fun updateUserRole(token: String, id: String, role: String){
+        FiwareAPI().updateUserRole(token, id, role)
+            .enqueue(object: Callback<FiwareResponseEditUserRole>{
+                override fun onFailure(call: Call<FiwareResponseEditUserRole>?, t: Throwable?) {
+                    if (t != null) {
+                        updateUserRoleFailureResponseLiveData.value = "404"
+                        Log.d("ApiUpdateUserRole", "Fallo el request" + t.message)
+                    }
+                }
+                override fun onResponse(call: Call<FiwareResponseEditUserRole>?, fiwareResponse: Response<FiwareResponseEditUserRole>?) {
+                    if (fiwareResponse != null) {
+                        if (fiwareResponse.isSuccessful) {
+                            if (fiwareResponse.body().code == "SUCCESS") {
+                                updateUserRoleSuccessResponseLiveData.value = fiwareResponse.body().code
+                                Log.d("ApiUpdateUserRole", "Respondio la API " + fiwareResponse.code().toString())
+                            }
+                        } else {
+                            updateUserRoleFailureResponseLiveData.value = fiwareResponse.code().toString()
+                            Log.d("ApiUpdateUserRole", "Respondio la API " + fiwareResponse.code().toString())
+                        }
+                    }
+                }
+            })
+    }
+
+
 }

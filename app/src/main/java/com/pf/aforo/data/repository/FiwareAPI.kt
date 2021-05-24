@@ -53,7 +53,14 @@ interface FiwareAPI {
         @Header("Authorization") token: String,
         @Path("id") id: String,
         @Body user: UserFuncionario
-    ) : Call<FiwareResponseUser>
+    ) : Call<FiwareResponseUserFuncionario>
+
+    @PUT("users/add-role/{entityId}/{role}")
+    fun updateUserRole(
+        @Header("Authorization") token: String,
+        @Path("entityId") entityId: String,
+        @Path("role") role: String
+    ) : Call<FiwareResponseEditUserRole>
 
     @POST("branch-offices")
     fun newBranchOffice(

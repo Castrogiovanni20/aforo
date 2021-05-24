@@ -22,6 +22,8 @@ import com.pf.aforo.databinding.FragmentHomeSupervisorBinding
 class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     private lateinit var binding: FragmentHomeSupervisorBinding
     private lateinit var homeViewModel: HomeViewModel
+    private var currentEmailUser: String = ""
+    private var currentUser: UserFuncionario? = null
     private var arrayListFuncionarios = ArrayList<UserFuncionario>()
     private lateinit var recyclerAdapter: RecyclerAdapter
     private var recyclerView: RecyclerView? = null
@@ -32,6 +34,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         binding = FragmentHomeSupervisorBinding.bind(view)
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         setUpRecyclerView()
+        getEmailUser()
         getUsers()
         setObservers()
         setClickListeners()
@@ -56,9 +59,13 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         arrayListFuncionarios.clear()
 
         for (user in usersList) {
-            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)
-            arrayListFuncionarios.add(userFuncionario)
-            recyclerAdapter.notifyDataSetChanged()
+            if (user.email != currentEmailUser) {
+                val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)
+                arrayListFuncionarios.add(userFuncionario)
+                recyclerAdapter.notifyDataSetChanged()
+            } else {
+                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)
+            }
         }
     }
 
@@ -69,7 +76,11 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
 
     private fun setClickListeners () {
         binding.btnAgregarFuncionario.setOnClickListener {
-            initAddUserActivity()
+            initAddUserFragment()
+        }
+
+        binding.btnPerfil.setOnClickListener {
+            initEditProfileFragment()
         }
     }
 
@@ -78,8 +89,18 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         homeViewModel.getUsers("Bearer: $token")
     }
 
-    private fun initAddUserActivity () {
+    private fun getEmailUser() {
+        currentEmailUser = arguments?.getString("Email").toString()
+    }
+
+    private fun initAddUserFragment () {
         findNavController().navigate(R.id.action_homeFragmentSupervisor_to_addUserFragment)
+    }
+
+    private fun initEditProfileFragment () {
+        val bundle = Bundle()
+        bundle.putParcelable("UserFuncionario", currentUser)
+        findNavController().navigate(R.id.action_homeFragmentSupervisor_to_editProfileFragment, bundle)
     }
 
     private fun getToken(): String {
