@@ -2,6 +2,7 @@ package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
@@ -20,9 +21,26 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddUserBinding.bind(view)
         addUserViewModel = ViewModelProvider(this).get(AddUserViewModel::class.java)
+        setTopBar()
         setObservers()
         setClickListeners()
         getToken()
+    }
+
+    private fun setTopBar() {
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.itemFuncionarios -> {
+                    initHomeScreen()
+                    true
+                }
+                R.id.itemCerrarSesion -> {
+                    findNavController().navigate(R.id.action_addUserFragment_to_loginFragment)
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setObservers() {

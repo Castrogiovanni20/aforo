@@ -53,7 +53,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private val successObserver = Observer<Any?> { token ->
-        saveToken(token.toString())
+        setSharedPreferences(token.toString())
         initHomeScreen()
     }
 
@@ -77,16 +77,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun initHomeScreen () {
-        val bundle = Bundle()
-        bundle.putString("Email", binding.edtEmail.text.toString())
-        findNavController().navigate(R.id.action_loginFragment_to_homeFragmentSupervisor, bundle)
+        findNavController().navigate(R.id.action_loginFragment_to_homeFragmentSupervisor)
     }
 
-    private fun saveToken (token: String) {
-
+    private fun setSharedPreferences(token: String) {
         val sharedPreferences = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
         val editor = sharedPreferences?.edit()
         editor?.putString("Token", token)
+        editor?.putString("Email", binding.edtEmail.text.toString())
         editor?.apply()
     }
 

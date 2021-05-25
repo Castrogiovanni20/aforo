@@ -2,6 +2,7 @@ package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
@@ -22,10 +23,27 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEditProfileBinding.bind(view)
         editProfileViewModel = ViewModelProvider(this).get(EditProfileViewModel::class.java)
-        getUser()
+        setTopBar()
+        getUserFuncionario()
         setUI()
         setObservers()
         setOnClickListeners()
+    }
+
+    private fun setTopBar() {
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.itemFuncionarios -> {
+                    initHomeScreen()
+                    true
+                }
+                R.id.itemCerrarSesion -> {
+                    findNavController().navigate(R.id.action_editProfileFragment_to_loginFragment)
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setUI() {
@@ -74,14 +92,12 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         return sharedPref?.getString("Token", "0").toString()
     }
 
-    private fun getUser() {
-        userFuncionario = arguments?.getParcelable("UserFuncionario")!!
+    private fun getUserFuncionario() {
+        userFuncionario = arguments?.getParcelable<UserFuncionario>("UserFuncionario")!!
     }
 
     private fun initHomeScreen() {
-        val bundle = Bundle()
-        bundle.putString("Email", userFuncionario.email)
-        findNavController().navigate(R.id.action_editProfileFragment_to_homeFragmentSupervisor, bundle)
+        findNavController().navigate(R.id.action_editProfileFragment_to_homeFragmentSupervisor)
     }
 
 

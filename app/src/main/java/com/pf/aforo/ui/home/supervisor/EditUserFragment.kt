@@ -16,7 +16,7 @@ import com.pf.aforo.databinding.FragmentEditUserBinding
 class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
    private lateinit var binding: FragmentEditUserBinding
    private lateinit var editUserViewModel: EditUserViewModel
-    private lateinit var userFuncionario: UserFuncionario
+   private lateinit var userFuncionario: UserFuncionario
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,6 +26,23 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
         setUI()
         setObservers()
         setOnClickListeners()
+        setTopBar()
+    }
+
+    private fun setTopBar() {
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.itemFuncionarios -> {
+                    initHomeScreen()
+                    true
+                }
+                R.id.itemCerrarSesion -> {
+                    findNavController().navigate(R.id.action_editUserFragment_to_loginFragment)
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setUI() {

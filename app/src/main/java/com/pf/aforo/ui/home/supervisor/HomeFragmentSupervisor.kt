@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -22,22 +21,37 @@ import com.pf.aforo.databinding.FragmentHomeSupervisorBinding
 class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     private lateinit var binding: FragmentHomeSupervisorBinding
     private lateinit var homeViewModel: HomeViewModel
-    private var currentEmailUser: String = ""
-    private var currentUser: UserFuncionario? = null
+    private lateinit var currentUser: UserFuncionario
+    private lateinit var currentEmailUser: String
     private var arrayListFuncionarios = ArrayList<UserFuncionario>()
     private lateinit var recyclerAdapter: RecyclerAdapter
     private var recyclerView: RecyclerView? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
         binding = FragmentHomeSupervisorBinding.bind(view)
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        setTopBar()
+        getUsers()
         setUpRecyclerView()
         getEmailUser()
-        getUsers()
         setObservers()
         setClickListeners()
+    }
+
+    private fun setTopBar() {
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.itemFuncionarios -> {
+                    true
+                }
+                R.id.itemCerrarSesion -> {
+                    findNavController().navigate(R.id.action_homeFragmentSupervisor_to_loginFragment)
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setUpRecyclerView(){
@@ -55,6 +69,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     }
 
     private val getUsersSuccessObserver = Observer<Any?> { users ->
+        getCurrentEmailUser()
         var usersList : Array<DataUser> = users as Array<DataUser>
         arrayListFuncionarios.clear()
 
@@ -107,4 +122,10 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
         return sharedPref?.getString("Token", "0").toString()
     }
+
+    private fun getCurrentEmailUser() {
+        val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
+        currentEmailUser = sharedPref?.getString("Email", "0").toString()
+    }
+
 }

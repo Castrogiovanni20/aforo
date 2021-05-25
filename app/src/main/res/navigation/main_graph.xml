@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_homeFragmentSupervisor_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/addUserFragment"
@@ -58,6 +61,9 @@
         <action
             android:id="@+id/action_addUserFragment_to_homeFragmentSupervisor"
             app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_addUserFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/editUserFragment"
@@ -70,6 +76,9 @@
         <action
             android:id="@+id/action_editUserFragment_to_confirmDeleteUserFragment"
             app:destination="@id/confirmDeleteUserFragment" />
+        <action
+            android:id="@+id/action_editUserFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/confirmDeleteUserFragment"
@@ -88,5 +97,8 @@
         <action
             android:id="@+id/action_editProfileFragment_to_homeFragmentSupervisor"
             app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>
