@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -15,16 +16,18 @@ import com.pf.aforo.data.model.UserFuncionario
 internal class RecyclerAdapter(private var listFuncionarios: ArrayList<UserFuncionario>) :
     RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
     internal inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var title: TextView = view.findViewById(R.id.textViewFuncionario)
-        var btnEditar: Button = view.findViewById(R.id.btnEditar)
+        var fullName: TextView = view.findViewById(R.id.textViewFullName)
+        var role: TextView = view.findViewById(R.id.textViewRole)
+        var imgButtonEdit: ImageButton = view.findViewById(R.id.imageButtonEditar)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var navController: NavController? = null
         val item = listFuncionarios[position]
-        holder.title.text = item.firstName
+        holder.fullName.text = item.firstName + " " + item.lastName
+        holder.role.text = item.role.replace("_", " ")
 
-        holder.btnEditar.setOnClickListener { view ->
+        holder.imgButtonEdit.setOnClickListener { view ->
 
             val bundle = Bundle()
             bundle.putParcelable("UserFuncionario", listFuncionarios[position])
