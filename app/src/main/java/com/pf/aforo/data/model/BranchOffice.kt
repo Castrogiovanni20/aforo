@@ -5,6 +5,8 @@ data class BranchOffice(val type: String = "",
                         val refOrganization: String,
                         val name: String,
                         val description: String,
-                        val official: String,
-                        val maxCapacity: String) {
+                        val refUser: String,
+                        val width: Int,
+                        val length: Int,
+                        val maxCapacity: Int) {
 }

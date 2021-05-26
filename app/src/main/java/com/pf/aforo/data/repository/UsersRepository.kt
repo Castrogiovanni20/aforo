@@ -12,14 +12,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class FiwareRepository()
+class UsersRepository()
 {
-    var loginSuccessResponseLiveData = MutableLiveData<String>()
-    var loginFailureResponseLiveData = MutableLiveData<String>()
-
-    var registerSuccessResponseLiveData = MutableLiveData<String>()
-    var registerFailureResponseLiveData = MutableLiveData<String>()
-
     var addUserSuccessResponseLiveData = MutableLiveData<String>()
     var addUserFailureResponseLiveData = MutableLiveData<String>()
 
@@ -39,66 +33,13 @@ class FiwareRepository()
     var updateUserRoleFailureResponseLiveData = MutableLiveData<String>()
 
 
-    fun login(userLogin: UserLogin) {
-        FiwareAPI().login(userLogin)
-            .enqueue(object: Callback<FiwareResponse>{
-                override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
-                    if (t != null) {
-                        loginFailureResponseLiveData.value = "404"
-                        Log.d("ApiLoginResponse", "Fallo el request" + t.message);
-                    }
-                }
-
-                override fun onResponse(call: Call<FiwareResponse>?, fiwareResponse: Response<FiwareResponse>? ){
-                    if (fiwareResponse != null) {
-                        if (fiwareResponse.isSuccessful) {
-                            if (fiwareResponse.body().data.token != null) {
-                                loginSuccessResponseLiveData.value = fiwareResponse.body().data.token
-                                Log.d("ApiLoginResponse", "Respondio la API " + fiwareResponse.body().data.token);
-                            }
-                        } else {
-                            loginFailureResponseLiveData.value = fiwareResponse.code().toString()
-                            Log.d("ApiLoginResponse", "Respondio la API " + fiwareResponse.code().toString())
-                        }
-                    }
-                }
-
-            })
-    }
-
-    fun register(user: UserSupervisor) {
-        FiwareAPI().register(user)
-            .enqueue(object: Callback<FiwareResponse>{
-                override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
-                    if (t != null) {
-                        registerFailureResponseLiveData.value = "404"
-                        Log.d("ApiRegisterResponse", "Fallo el request" + t.message)
-                    }
-                }
-
-                override fun onResponse( call: Call<FiwareResponse>?, fiwareResponse: Response<FiwareResponse>? ) {
-                    if (fiwareResponse != null) {
-                        if (fiwareResponse.isSuccessful) {
-                            if (fiwareResponse.body().code == "SUCCESS") {
-                                registerSuccessResponseLiveData.value = fiwareResponse.code().toString()
-                                Log.d("ApiRegisterResponse", "Respondio la API " + fiwareResponse.code().toString())
-                            }
-                        } else {
-                            registerFailureResponseLiveData.value = fiwareResponse.code().toString()
-                            Log.d("ApiRegisterResponse", "Respondio la API " + fiwareResponse.code().toString())
-                        }
-                    }
-                }
-            })
-    }
-
     fun addUser(token: String, user: UserFuncionario){
         FiwareAPI().addUser(token, user)
             .enqueue(object: Callback<FiwareResponse>{
                 override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
                     if (t != null) {
                         addUserFailureResponseLiveData.value = "404"
-                        Log.d("ApiNewUser", "Fallo el request" + t.message)
+                        Log.d("ApiAddUser", "Fallo el request" + t.message)
                     }
                 }
                 override fun onResponse(call: Call<FiwareResponse>?, fiwareResponse: Response<FiwareResponse>?) {
@@ -106,11 +47,11 @@ class FiwareRepository()
                         if (fiwareResponse.isSuccessful) {
                             if (fiwareResponse.body().code == "SUCCESS") {
                                 addUserSuccessResponseLiveData.value = fiwareResponse.code().toString()
-                                Log.d("ApiNewUser", "Respondio la API " + fiwareResponse.code().toString())
+                                Log.d("ApiAddUser", "API response: " + fiwareResponse.code().toString())
                             }
                         } else {
                             addUserFailureResponseLiveData.value = fiwareResponse.code().toString()
-                            Log.d("ApiNewUser", "Respondio la API " + fiwareResponse.code().toString())
+                            Log.d("ApiAddUser", "API response: " + fiwareResponse.code().toString())
                         }
                     }
                 }
@@ -132,11 +73,11 @@ class FiwareRepository()
                         if (fiwareResponse.isSuccessful) {
                             if (fiwareResponse.body().code == "SUCCESS") {
                                 getUserSuccessResponseLiveData.value = fiwareResponse.body().data[0].role
-                                Log.d("ApiGetUser", "Respondio la API " + fiwareResponse.code().toString())
+                                Log.d("ApiGetUser", "API response: " + fiwareResponse.code().toString())
                             }
                         } else {
                             getUserFailureResponseLiveData.value = fiwareResponse.code().toString()
-                            Log.d("ApiGetUser", "Respondio la API " + fiwareResponse.code().toString())
+                            Log.d("ApiGetUser", "API response: " + fiwareResponse.code().toString())
                         }
                     }
                 }
@@ -159,11 +100,11 @@ class FiwareRepository()
                             if (fiwareResponse.body().code == "SUCCESS") {
                                 var response = fiwareResponse.body().data
                                 getUsersSuccessResponseLiveData.value = response
-                                Log.d("ApiGetUsers", "Respondio la API " + fiwareResponse.code().toString())
+                                Log.d("ApiGetUsers", "API response: " + fiwareResponse.code().toString())
                             }
                         } else {
                             getUsersFailureResponseLiveData.value = fiwareResponse.code().toString()
-                            Log.d("ApiGetUsers", "Respondio la API " + fiwareResponse.code().toString())
+                            Log.d("ApiGetUsers", "API response: " + fiwareResponse.code().toString())
                         }
                     }
                 }
@@ -177,7 +118,7 @@ class FiwareRepository()
                 override fun onFailure(call: Call<FiwareResponseDeleteUser>?, t: Throwable?) {
                     if (t != null) {
                         deleteUserFailureResponseLiveData.value = "404"
-                        Log.d("ApiGetUser", "Fallo el request" + t.message)
+                        Log.d("ApiDeleteUser", "Fallo el request" + t.message)
                     }
                 }
                 override fun onResponse(call: Call<FiwareResponseDeleteUser>?, fiwareResponseUser: Response<FiwareResponseDeleteUser>?) {
@@ -185,11 +126,11 @@ class FiwareRepository()
                         if (fiwareResponseUser.isSuccessful) {
                             if (fiwareResponseUser.body().code == "SUCCESS") {
                                 deleteUserSuccessResponseLiveData.value = fiwareResponseUser.body().code
-                                Log.d("ApiGetUser", "Respondio la API " + fiwareResponseUser.code().toString())
+                                Log.d("ApiDeleteUser", "API response: " + fiwareResponseUser.code().toString())
                             }
                         } else {
                             deleteUserFailureResponseLiveData.value = fiwareResponseUser.code().toString()
-                            Log.d("ApiGetUser", "Respondio la API " + fiwareResponseUser.code().toString())
+                            Log.d("ApiDeleteUser", "API response: " + fiwareResponseUser.code().toString())
                         }
                     }
                 }
@@ -211,11 +152,11 @@ class FiwareRepository()
                         if (fiwareResponse.isSuccessful) {
                             if (fiwareResponse.body().code == "SUCCESS") {
                                 updateUserSuccessResponseLiveData.value = fiwareResponse.body().code
-                                Log.d("ApiUpdateUser", "Respondio la API " + fiwareResponse.code().toString())
+                                Log.d("ApiUpdateUser", "API response: " + fiwareResponse.code().toString())
                             }
                         } else {
                             updateUserFailureResponseLiveData.value = fiwareResponse.code().toString()
-                            Log.d("ApiUpdateUser", "Respondio la API " + fiwareResponse.code().toString())
+                            Log.d("ApiUpdateUser", "API response: " + fiwareResponse.code().toString())
                         }
                     }
                 }
@@ -237,11 +178,11 @@ class FiwareRepository()
                         if (fiwareResponse.isSuccessful) {
                             if (fiwareResponse.body().code == "SUCCESS") {
                                 updateUserRoleSuccessResponseLiveData.value = fiwareResponse.body().code
-                                Log.d("ApiUpdateUserRole", "Respondio la API " + fiwareResponse.code().toString())
+                                Log.d("ApiUpdateUserRole", "API response: " + fiwareResponse.code().toString())
                             }
                         } else {
                             updateUserRoleFailureResponseLiveData.value = fiwareResponse.code().toString()
-                            Log.d("ApiUpdateUserRole", "Respondio la API " + fiwareResponse.code().toString())
+                            Log.d("ApiUpdateUserRole", "API response: " + fiwareResponse.code().toString())
                         }
                     }
                 }

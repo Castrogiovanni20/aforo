@@ -1,18 +1,17 @@
 package com.pf.aforo.ui.home.supervisor
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pf.aforo.data.model.UserFuncionario
-import com.pf.aforo.data.repository.FiwareRepository
+import com.pf.aforo.data.repository.UsersRepository
 
 class AddUserViewModel : ViewModel() {
-    private var fiwareRepository = FiwareRepository()
+    private var usersRepository = UsersRepository()
 
-    private var _successResponse = fiwareRepository.addUserSuccessResponseLiveData
+    private var _successResponse = usersRepository.addUserSuccessResponseLiveData
     val successResponse: MutableLiveData<String> get() = _successResponse
 
-    private var _failureResponse = fiwareRepository.addUserFailureResponseLiveData
+    private var _failureResponse = usersRepository.addUserFailureResponseLiveData
     val failureResponse: MutableLiveData<String> get() = _failureResponse
 
     var validationError = MutableLiveData<String>()
@@ -20,7 +19,7 @@ class AddUserViewModel : ViewModel() {
 
     fun addUser(token: String, userFuncionario: UserFuncionario) {
         validateUser(userFuncionario)
-        if (isUserValid) fiwareRepository.addUser(token, userFuncionario)
+        if (isUserValid) usersRepository.addUser(token, userFuncionario)
     }
 
     private fun validateUser(user: UserFuncionario) {

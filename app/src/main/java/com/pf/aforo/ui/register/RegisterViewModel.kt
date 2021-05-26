@@ -3,15 +3,15 @@ package com.pf.aforo.ui.register
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pf.aforo.data.model.UserSupervisor
-import com.pf.aforo.data.repository.FiwareRepository
+import com.pf.aforo.data.repository.AuthenticationRepository
 
 class RegisterViewModel : ViewModel () {
-    private var fiwareRepository = FiwareRepository()
+    private var authenticationRepository = AuthenticationRepository()
 
-    private var _successResponse = fiwareRepository.registerSuccessResponseLiveData
+    private var _successResponse = authenticationRepository.registerSuccessResponseLiveData
     val successResponse: MutableLiveData<String> get() = _successResponse
 
-    private var _failureResponse = fiwareRepository.registerFailureResponseLiveData
+    private var _failureResponse = authenticationRepository.registerFailureResponseLiveData
     val failureResponse: MutableLiveData<String> get() = _failureResponse
 
     var validationError = MutableLiveData<String>()
@@ -19,7 +19,7 @@ class RegisterViewModel : ViewModel () {
 
     fun registerUser(user: UserSupervisor){
         validateUser(user)
-        if (isUserValid) fiwareRepository.register(user)
+        if (isUserValid) authenticationRepository.register(user)
     }
 
     private fun validateUser (user: UserSupervisor) {

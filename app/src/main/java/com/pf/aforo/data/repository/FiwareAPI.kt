@@ -15,6 +15,9 @@ import java.util.concurrent.TimeUnit
 
 interface FiwareAPI {
 
+    /**
+     * @description Authentication endpoints
+     */
     @POST("authentication/signin")
     fun login(
         @Body user: UserLogin
@@ -25,6 +28,10 @@ interface FiwareAPI {
         @Body user: UserSupervisor
     ) : Call<FiwareResponse>
 
+
+    /**
+     * @description Users endpoints
+     */
     @POST("users")
     fun addUser(
         @Header("Authorization") token: String,
@@ -62,29 +69,30 @@ interface FiwareAPI {
         @Path("role") role: String
     ) : Call<FiwareResponseEditUserRole>
 
+
+    /**
+     * @description Branch Offices endpoints
+     */
     @POST("branch-offices")
-    fun newBranchOffice(
+    fun addBranchOffice(
         @Header("Authorization") token: String,
         @Body branchOffice: BranchOffice
     ) : Call<FiwareResponseBranchOffice>
 
-    @GET("branch-offices/{refOrganization}")
-    fun getBranchOffice(
-        @Header("Authorization") token: String,
-        @Path("refOrganization") id: String
+    @GET("branch-office")
+    fun getBranchOffices(
+        @Header("Authorization") token: String
     ) : Call<FiwareResponseGetBranchOffice>
 
-    @PUT("branch-offices/{refOrganization}/{entityId}")
-    fun editBranchOffice(
+    @PUT("branch-offices/{entityId}")
+    fun updateBranchOffice(
         @Header("Authorization") token: String,
-        @Path("refOrganization") id: String,
         @Path("entityId") entityId: String
     ) : Call<FiwareResponseEditBranchOffice>
 
-    @DELETE("branch-offices/{refOrganization}/{entityId}")
+    @DELETE("branch-offices/{entityId}")
     fun deleteBranchOffice(
         @Header("Authorization") token: String,
-        @Path("refOrganization") id: String,
         @Path("entityId") entityId: String
     ) : Call<FiwareResponseDeleteBranchOffice>
 
