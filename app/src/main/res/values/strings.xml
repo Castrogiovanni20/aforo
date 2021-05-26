@@ -6,7 +6,7 @@
     <string name="name">Nombre</string>
     <string name="last_name">Apellido</string>
     <string name="Password">Contraseña</string>
-    <string name="recov_pass">Olvidé mi contraseña  ⌦</string>
+    <string name="recov_pass">Olvidé mi contraseña </string>
     <string name="create_account">⛑   Crear Cuenta</string>
     <string name="send">Enviar</string>
     <string name="welcome">Bienvenido</string>
@@ -30,10 +30,23 @@
     <string name="datosIncorrectos">Usuario y/o contraseña incorrectos</string>
     <string name="nuevoFunc">Nuevo Funcionario</string>
     <string name="btnAgregarFuncionario">Agregar Funcionario</string>
+    <string name="btnAgregarSucursal">Agregar Sucursal</string>
     <string name="confirmMail">Se ha enviado un mail de confirmación de registro a su casilla</string>
     <string name="reingresePass">Reingresar la contraseña</string>
     <string name="recuperarContras">Recuperar contraseña</string>
     <string name="mailPasos">Ha recibido un correo con los pasos para recuperar su contraseña</string>
+
+    <string name="nombreSucursal">Nombre Sucursal o Establecimiento</string>
+    <string name="domicilio">Dirección - Dpto - Piso</string>
+    <string name="telefono">Tel. Sucursal</string>
+    <string name="mt2ancho">mt2 Ancho</string>
+    <string name="mt2alto">mt2 Alto</string>
+    <string name="funcionarioAsignado">Funcionario Asignado (seleccione)</string>
+    <string name="capacidadActual">CAP. ACTUAL: 28 personas</string>
+
+    <string name="dnu">(*) Calculo de capacidad de aforo sujeto a Decreto DNU 814 / 2020 PODER EJECUTIVO NACIONAL (P.E.N.) 25-10-2020.</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

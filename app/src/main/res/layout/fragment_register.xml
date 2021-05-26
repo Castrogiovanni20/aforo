@@ -19,7 +19,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/create_account"
         android:textColor="@color/white"
-        android:textSize="40sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.26" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -85,7 +85,8 @@
                         android:layout_weight="1"
                         android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                         android:inputType="textPersonName|text"
-                        android:textAlignment="textStart" />
+                        android:textAlignment="textStart"
+                        android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -105,7 +106,8 @@
                         android:layout_weight="1"
                         android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                         android:inputType="textPersonName|text"
-                        android:textAlignment="textStart" />
+                        android:textAlignment="textStart"
+                        android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -132,7 +134,8 @@
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
                     android:inputType="textEmailAddress"
-                    android:textAlignment="textStart" />
+                    android:textAlignment="textStart"
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space
@@ -156,7 +159,8 @@
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
                     android:inputType="phone"
-                    android:textAlignment="textStart" />
+                    android:textAlignment="textStart"
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space
@@ -180,7 +184,8 @@
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
                     android:inputType="text"
-                    android:textAlignment="textStart" />
+                    android:textAlignment="textStart"
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space
@@ -205,7 +210,8 @@
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
                     android:inputType="textPassword"
-                    android:textAlignment="textStart" />
+                    android:textAlignment="textStart"
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space
@@ -230,12 +236,13 @@
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
                     android:inputType="textPassword"
-                    android:textAlignment="textStart" />
+                    android:textAlignment="textStart"
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="16dp" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -245,7 +252,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.32" />
+        app:layout_constraintGuide_percent="0.27" />
 
     <Button
         android:id="@+id/btnReg"
@@ -267,8 +274,8 @@
 
     <ImageView
         android:id="@+id/imgLogoCreateAccount"
-        android:layout_width="100dp"
-        android:layout_height="96dp"
+        android:layout_width="86dp"
+        android:layout_height="75dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/txtTitleRegister"
         app:layout_constraintEnd_toEndOf="parent"

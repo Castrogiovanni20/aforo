@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_marginBottom="5dp"
+    app:cardCornerRadius="12dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardBackgroundColor="@color/lightblue">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImageViewProfile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/sucursal"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.072" />
+
+        <TextView
+            android:id="@+id/textViewNombre"
+            android:layout_width="150dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/nombreSucursal"
+            android:textColor="@color/darkblue"
+            android:textColorHighlight="@color/darkblue"
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewOrganizacion"
+            android:layout_width="108dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="176dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/organizacion"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="15dp"
+            app:layout_constraintRight_toRightOf="@+id/textViewNombre"
+            app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="14dp" />
+
+        <TextView
+            android:id="@+id/textViewMt2ancho"
+            android:layout_width="80dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/mt2ancho"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="15dp"
+            app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
+            app:layout_constraintTop_toBottomOf="@+id/textViewOrganizacion" />
+
+
+        <TextView
+            android:id="@+id/textMt2alto"
+            android:layout_width="150dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="104dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/mt2alto"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toLeftOf="@+id/textViewMt2ancho"
+            app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="45dp" />
+
+        <TextView
+            android:id="@+id/textViewCapacidadActual"
+            android:layout_width="232dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/capacidadActual"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="15dp"
+            app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="73dp" />
+
+        <TextView
+            android:id="@+id/textViewFuncionarioAsignado"
+            android:layout_width="236dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/funcionarioAsignado"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="15dp"
+            app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="99dp" />
+
+        <ImageButton
+            android:id="@+id/imageButtonEditarSucursal"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/ic_baseline_edit_24"
+            android:contentDescription="Editar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

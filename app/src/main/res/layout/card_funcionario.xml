@@ -8,7 +8,7 @@
     android:layout_marginBottom="5dp"
     app:cardCornerRadius="12dp"
     app:cardPreventCornerOverlap="false"
-    app:cardBackgroundColor="@color/darkblue">
+    app:cardBackgroundColor="@color/white">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -35,7 +35,8 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/roboto"
         android:text="Full name"
-        android:textColor="@color/white"
+        android:textColor="@color/darkblue"
+        android:textColorHighlight="@color/darkblue"
         android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +49,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto"
         android:text="Role"
-        android:textColor="@color/white"
+        android:textColor="@color/design_default_color_on_secondary"
         android:textSize="15dp"
         app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
         app:layout_constraintTop_toBottomOf="@+id/textViewFullName" />

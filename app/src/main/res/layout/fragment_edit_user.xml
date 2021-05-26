@@ -19,6 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             app:title="@string/aforo_name"
             app:menu="@menu/burguer_menu"
+            app:navigationIcon="@mipmap/logotrbmp"
             android:background="@android:color/transparent"/>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -103,23 +104,22 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSiguiente"
-        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardEditar"
-        app:layout_constraintVertical_bias="0.134" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSiguiente"
+        app:layout_constraintVertical_bias="0.688" />
 
     <ImageButton
         android:id="@+id/btnSiguiente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="148dp"
         android:background="@drawable/btn_circle"
         android:elevation="30dp"
-        android:src="@drawable/outline_arrow_right_alt_white_24"
+        android:src="@android:drawable/ic_media_play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardEditar"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintVertical_bias="0.361" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

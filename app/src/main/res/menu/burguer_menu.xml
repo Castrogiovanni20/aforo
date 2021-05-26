@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemSucursales"
+        android:icon="@mipmap/trespoints"
+        android:title="✒  Mis Sucursales"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/itemFuncionarios"
-        android:icon="@drawable/outline_menu_black_24dp"
-        android:title="Funcionarios"
+        android:icon="@mipmap/trespoints"
+        android:title="☿    Mis Funcionarios"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/itemCerrarSesion"
-        android:icon="@drawable/outline_menu_black_24dp"
-        android:title="Cerrar sesión"
+        android:icon="@mipmap/trespoints"
+        android:title="⎋   Cerrar sesión"
         app:showAsAction="never" />
 </menu>
