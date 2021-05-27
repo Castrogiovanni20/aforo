@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="40dp"
-    tools:context=".ui.home.supervisor.EditSucursalFragment">
+    tools:context=".ui.home.supervisor.AddSucursalFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

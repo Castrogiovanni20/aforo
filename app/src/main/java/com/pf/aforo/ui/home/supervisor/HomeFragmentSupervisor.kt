@@ -45,6 +45,10 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
                 R.id.itemFuncionarios -> {
                     true
                 }
+                R.id.itemSucursales -> {
+                    findNavController().navigate(R.id.action_homeFragmentSupervisor_to_sucursalesSupervisorFragment)
+                    true
+                }
                 R.id.itemCerrarSesion -> {
                     findNavController().navigate(R.id.action_homeFragmentSupervisor_to_loginFragment)
                     true

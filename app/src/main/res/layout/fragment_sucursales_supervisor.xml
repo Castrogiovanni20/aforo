@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightgray"
-    tools:context=".ui.home.supervisor.HomeFragmentSupervisor">
+    tools:context=".ui.home.supervisor.SucursalesSupervisorFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

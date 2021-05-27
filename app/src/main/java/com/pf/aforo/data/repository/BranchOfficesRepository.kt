@@ -12,7 +12,7 @@ import retrofit2.Response
 
 class BranchOfficesRepository {
 
-    var addBranchOfficeSuccessResponseLiveData = MutableLiveData<String>()
+    var addBranchOfficeSuccessResponseLiveData = MutableLiveData<BranchOffice>()
     var addBranchOfficeFailureResponseLiveData = MutableLiveData<String>()
 
     var getBranchOfficeSuccessResponseLiveData = MutableLiveData<ArrayList<BranchOffice>>()
@@ -37,7 +37,7 @@ class BranchOfficesRepository {
                     if (fiwareResponse != null) {
                         if (fiwareResponse.isSuccessful) {
                             if (fiwareResponse.body().code == "SUCCESS") {
-                                addBranchOfficeSuccessResponseLiveData.value = fiwareResponse.code().toString()
+                                addBranchOfficeSuccessResponseLiveData.value = fiwareResponse.body().data
                                 Log.d("ApiAddBranchOffice", "API response: " + fiwareResponse.code().toString())
                             }
                         } else {
