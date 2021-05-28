@@ -79,7 +79,7 @@ interface FiwareAPI {
         @Body branchOffice: BranchOffice
     ) : Call<FiwareResponseBranchOffice>
 
-    @GET("branch-office")
+    @GET("branch-offices")
     fun getBranchOffices(
         @Header("Authorization") token: String
     ) : Call<FiwareResponseGetBranchOffice>

@@ -33,7 +33,7 @@
             android:layout_width="150dp"
             android:layout_height="25dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="6dp"
             android:fontFamily="@font/roboto"
             android:text="@string/nombreSucursal"
             android:textColor="@color/darkblue"
@@ -44,58 +44,59 @@
 
         <TextView
             android:id="@+id/textViewOrganizacion"
-            android:layout_width="108dp"
-            android:layout_height="23dp"
-            android:layout_marginStart="176dp"
+            android:layout_width="125dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
             android:fontFamily="@font/roboto"
             android:text="@string/organizacion"
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="15dp"
-            app:layout_constraintRight_toRightOf="@+id/textViewNombre"
-            app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="14dp" />
+            app:layout_constraintStart_toEndOf="@+id/textViewNombre"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textViewMt2ancho"
-            android:layout_width="80dp"
+            android:layout_width="100dp"
             android:layout_height="26dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/roboto"
             android:text="@string/mt2ancho"
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="15dp"
             app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
-            app:layout_constraintTop_toBottomOf="@+id/textViewOrganizacion" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewNombre" />
 
 
         <TextView
-            android:id="@+id/textMt2alto"
-            android:layout_width="150dp"
+            android:id="@+id/textViewMt2alto"
+            android:layout_width="100dp"
             android:layout_height="25dp"
-            android:layout_marginStart="104dp"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/roboto"
             android:text="@string/mt2alto"
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="15dp"
-            app:layout_constraintLeft_toLeftOf="@+id/textViewMt2ancho"
-            app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="45dp" />
+            app:layout_constraintStart_toEndOf="@+id/textViewMt2ancho"
+            app:layout_constraintTop_toBottomOf="@+id/textViewOrganizacion"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textViewCapacidadActual"
             android:layout_width="232dp"
             android:layout_height="26dp"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="2dp"
             android:fontFamily="@font/roboto"
             android:text="@string/capacidadActual"
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="15dp"
             app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="73dp" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewMt2ancho"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textViewFuncionarioAsignado"
@@ -107,8 +108,8 @@
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="15dp"
             app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="99dp" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewCapacidadActual"
+            tools:ignore="MissingConstraints" />
 
         <ImageButton
             android:id="@+id/imageButtonEditarSucursal"
