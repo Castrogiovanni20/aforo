@@ -93,6 +93,10 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         binding.btnSiguiente.setOnClickListener {
             editBranchOffice()
         }
+
+        binding.textViewEliminar.setOnClickListener {
+            initConfirmDeleteSucursalScreen(branchOffice.id)
+        }
     }
 
     private fun editBranchOffice() {
@@ -145,5 +149,11 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
 
     private fun initSucursalesSupervisorScreen() {
         findNavController().navigate(R.id.action_editSucursalFragment_to_sucursalesSupervisorFragment)
+    }
+
+    private fun initConfirmDeleteSucursalScreen(idBranchOffice: String) {
+        val bundle = Bundle()
+        bundle.putString("idBranchOffice", idBranchOffice)
+        findNavController().navigate(R.id.action_editSucursalFragment_to_confirmDeleteSucursalFragment, bundle)
     }
 }

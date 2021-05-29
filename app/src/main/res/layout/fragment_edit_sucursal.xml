@@ -141,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:spinnerMode="dropdown"/>
+                android:spinnerMode="dropdown" />
 
             <TextView
                 android:id="@+id/textDNU"
@@ -169,16 +169,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="155dp"
-        android:layout_marginEnd="156dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/btn_circle"
         android:elevation="30dp"
         android:src="@android:drawable/ic_media_play"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardEditarSucursal" />
+
+    <TextView
+        android:id="@+id/textViewEliminar"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="20dp"
+        android:text="Eliminar sucursal"
+        android:textColor="@color/fucsia"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnSiguiente"
         app:layout_constraintTop_toBottomOf="@+id/cardEditarSucursal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
