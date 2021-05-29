@@ -87,7 +87,8 @@ interface FiwareAPI {
     @PUT("branch-offices/{entityId}")
     fun updateBranchOffice(
         @Header("Authorization") token: String,
-        @Path("entityId") entityId: String
+        @Path("entityId") entityId: String,
+        @Body branchOffice: BranchOffice
     ) : Call<FiwareResponseEditBranchOffice>
 
     @DELETE("branch-offices/{entityId}")

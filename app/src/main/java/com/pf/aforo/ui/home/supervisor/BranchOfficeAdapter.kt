@@ -1,11 +1,13 @@
 package com.pf.aforo.ui.home.supervisor
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.pf.aforo.R
 import com.pf.aforo.data.model.BranchOffice
@@ -33,6 +35,12 @@ internal class BranchOfficeAdapter(private var listBranchOffice: ArrayList<Branc
         holder.textViewMt2alto.text = "Alto: " + item.length
         holder.textViewCapacity.text = "Capacidad actual: " + item.maxCapacity.toString()
         holder.textViewFuncionario.text = "Funcionario asignado: no posee"
+
+        holder.imageBtnEdit.setOnClickListener { view ->
+            val bundle = Bundle()
+            bundle.putParcelable("BranchOffice", listBranchOffice[position])
+            view.findNavController().navigate(R.id.action_sucursalesSupervisorFragment_to_editSucursalFragment, bundle)
+        }
 
     }
 

@@ -139,9 +139,9 @@
             <Spinner
                 android:id="@+id/spinnerFuncionario"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:spinnerMode="dropdown" />
+                android:spinnerMode="dropdown"/>
 
             <TextView
                 android:id="@+id/textDNU"

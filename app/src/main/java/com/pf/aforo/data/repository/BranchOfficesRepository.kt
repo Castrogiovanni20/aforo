@@ -76,8 +76,8 @@ class BranchOfficesRepository {
             })
     }
 
-    fun updateBranchOffice(token: String, id: String){
-        FiwareAPI().updateBranchOffice(token, id)
+    fun updateBranchOffice(token: String, id: String, branchOffice: BranchOffice){
+        FiwareAPI().updateBranchOffice(token, id, branchOffice)
             .enqueue(object: retrofit2.Callback<FiwareResponseEditBranchOffice>{
                 override fun onFailure(call: Call<FiwareResponseEditBranchOffice>?, t: Throwable?) {
                     if (t != null) {
