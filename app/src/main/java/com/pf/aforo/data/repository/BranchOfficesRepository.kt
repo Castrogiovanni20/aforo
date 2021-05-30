@@ -3,10 +3,7 @@ package com.pf.aforo.data.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.pf.aforo.data.model.BranchOffice
-import com.pf.aforo.data.response.FiwareResponseBranchOffice
-import com.pf.aforo.data.response.FiwareResponseDeleteBranchOffice
-import com.pf.aforo.data.response.FiwareResponseEditBranchOffice
-import com.pf.aforo.data.response.FiwareResponseGetBranchOffice
+import com.pf.aforo.data.response.*
 import retrofit2.Call
 import retrofit2.Response
 
@@ -23,6 +20,9 @@ class BranchOfficesRepository {
 
     var deleteBranchOfficeSuccessResponseLiveData = MutableLiveData<String>()
     var deleteBranchOfficeFailureResponseLiveData = MutableLiveData<String>()
+
+    var assignCivilServantSuccessResponseLiveData = MutableLiveData<BranchOffice>()
+    var assignCivilServantFailureResponseLiveData = MutableLiveData<String>()
 
     fun addBranchOffice(token: String, branchOffice: BranchOffice) {
         FiwareAPI().addBranchOffice(token, branchOffice)
@@ -121,6 +121,32 @@ class BranchOfficesRepository {
                         } else {
                             deleteBranchOfficeFailureResponseLiveData.value = fiwareResponse.code().toString()
                             Log.d("ApiDeleteBranchOffice", "API response: " + fiwareResponse.code().toString())
+                        }
+                    }
+                }
+
+            })
+    }
+
+    fun assignCivilServant(token: String, entityId: String, refUser: String) {
+        FiwareAPI().assignCivilServantToBranchOffice(token, entityId, refUser)
+            .enqueue(object: retrofit2.Callback<FiwareResponseAssignCivilServantToBranchOffice>{
+                override fun onFailure(call: Call<FiwareResponseAssignCivilServantToBranchOffice>?, t: Throwable?) {
+                    if (t != null) {
+                        assignCivilServantFailureResponseLiveData.value = "404"
+                        Log.d("ApiAssignCivilServant", "Fallo el request: " + t.message)
+                    }
+                }
+                override fun onResponse(call: Call<FiwareResponseAssignCivilServantToBranchOffice>?, fiwareResponse: Response<FiwareResponseAssignCivilServantToBranchOffice>?) {
+                    if (fiwareResponse != null) {
+                        if (fiwareResponse.isSuccessful) {
+                            if (fiwareResponse.body().code == "SUCCESS") {
+                                assignCivilServantSuccessResponseLiveData.value = fiwareResponse.body().data
+                                Log.d("ApiAssignCivilServant", "API response: " + fiwareResponse.code().toString())
+                            }
+                        } else {
+                            assignCivilServantFailureResponseLiveData.value = fiwareResponse.code().toString()
+                            Log.d("ApiAssignCivilServant", "API response: " + fiwareResponse.code().toString())
                         }
                     }
                 }
