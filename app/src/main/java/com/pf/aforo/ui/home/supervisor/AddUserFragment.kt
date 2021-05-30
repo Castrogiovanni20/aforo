@@ -31,7 +31,7 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemFuncionarios -> {
-                    initHomeScreen()
+                    findNavController().navigate(R.id.action_addUserFragment_to_usuariosSupervisorFragment)
                     true
                 }
                 R.id.itemCerrarSesion -> {
@@ -72,7 +72,7 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
         when (statusCode) {
             "200" -> {
                 Toast.makeText(context, "Usuario registrado exitosamente.", Toast.LENGTH_SHORT).show()
-                initHomeScreen()
+                findNavController().navigate(R.id.action_addUserFragment_to_usuariosSupervisorFragment)
             }
         }
     }
@@ -88,10 +88,6 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
     private fun getToken(): String {
         val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
         return sharedPref?.getString("Token", "0").toString()
-    }
-
-    private fun initHomeScreen() {
-        findNavController().navigate(R.id.action_addUserFragment_to_homeFragmentSupervisor)
     }
 
 }

@@ -32,41 +32,5 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.05" />
 
-    <Button
-        android:id="@+id/btnAgregarFuncionario"
-        android:layout_width="256dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/round_person_24"
-        android:text="@string/btnAgregarFuncionario"
-        app:layout_constraintEnd_toStartOf="@+id/btnPerfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnPerfil"
-        android:layout_width="100dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="16dp"
-        android:text="Perfil"
-        app:layout_constraintEnd_toStartOf="@+id/btnAgregarFuncionario"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnAgregarFuncionario"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAgregarFuncionario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

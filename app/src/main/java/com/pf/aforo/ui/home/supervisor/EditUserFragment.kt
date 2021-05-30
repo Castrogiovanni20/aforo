@@ -33,7 +33,7 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemFuncionarios -> {
-                    initHomeScreen()
+                    findNavController().navigate(R.id.action_editUserFragment_to_usuariosSupervisorFragment)
                     true
                 }
                 R.id.itemCerrarSesion -> {
@@ -67,7 +67,7 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
 
     private val successObserver = Observer<Any?> { statusCode ->
         Toast.makeText(context, "Rol actualizado exitosamente.", Toast.LENGTH_SHORT).show()
-        initHomeScreen()
+        findNavController().navigate(R.id.action_editUserFragment_to_usuariosSupervisorFragment)
     }
 
     private val failureObserver = Observer<Any?> { statusCode ->
@@ -99,10 +99,6 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
         val bundle = Bundle()
         bundle.putString("idFuncionario", userFuncionario.id)
         findNavController().navigate(R.id.action_editUserFragment_to_confirmDeleteUserFragment, bundle)
-    }
-
-    private fun initHomeScreen() {
-        findNavController().navigate(R.id.action_editUserFragment_to_homeFragmentSupervisor)
     }
 
     private fun getUserFuncionario() {

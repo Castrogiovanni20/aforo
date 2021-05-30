@@ -37,7 +37,7 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
 
     private val successObserver = Observer<Any> {
         Toast.makeText(context, "Usuario eliminado exitosamente.", Toast.LENGTH_SHORT).show()
-        initHomeScreen()
+        findNavController().navigate(R.id.action_confirmDeleteUserFragment_to_usuariosSupervisorFragment)
     }
 
     private val failureObserver = Observer<Any> { statusCode ->
@@ -57,7 +57,4 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
         return sharedPref?.getString("Token", "0").toString()
     }
 
-    private fun initHomeScreen() {
-        findNavController().navigate(R.id.action_confirmDeleteUserFragment_to_homeFragmentSupervisor)
-    }
 }

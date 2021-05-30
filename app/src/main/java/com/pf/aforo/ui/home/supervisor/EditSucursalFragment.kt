@@ -40,7 +40,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemFuncionarios -> {
-                    initSucursalesSupervisorScreen()
+                    findNavController().navigate(R.id.action_editSucursalFragment_to_sucursalesSupervisorFragment)
                     true
                 }
                 R.id.itemCerrarSesion -> {
@@ -114,7 +114,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
 
     private val successObserver = Observer<Any?> { statusCode ->
         Toast.makeText(context, "Sucursal actualizada exitosamente.", Toast.LENGTH_SHORT).show()
-        initSucursalesSupervisorScreen()
+        findNavController().navigate(R.id.action_editSucursalFragment_to_sucursalesSupervisorFragment)
     }
 
     private val failureObserver = Observer<Any?> {
@@ -145,10 +145,6 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private fun getToken(): String {
         val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
         return sharedPref?.getString("Token", "0").toString()
-    }
-
-    private fun initSucursalesSupervisorScreen() {
-        findNavController().navigate(R.id.action_editSucursalFragment_to_sucursalesSupervisorFragment)
     }
 
     private fun initConfirmDeleteSucursalScreen(idBranchOffice: String) {
