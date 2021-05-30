@@ -27,6 +27,7 @@
     <string name="confirmarPass">Confirmar contraseña</string>
 
     <string name="confirmarDelete">¿Confirma la eliminación de este Funcionario?</string>
+    <string name="confirmarDeleteSucursal">¿Confirma la eliminación de esta Sucursal?</string>
     <string name="datosIncorrectos">Usuario y/o contraseña incorrectos</string>
     <string name="nuevoFunc">Nuevo Funcionario</string>
     <string name="btnAgregarFuncionario">Agregar Funcionario</string>
