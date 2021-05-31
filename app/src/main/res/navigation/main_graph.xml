@@ -41,20 +41,14 @@
         android:label="fragment_home_supervisor"
         tools:layout="@layout/fragment_home_supervisor" >
         <action
-            android:id="@+id/action_homeFragmentSupervisor_to_addUserFragment"
-            app:destination="@id/addUserFragment" />
-        <action
-            android:id="@+id/action_homeFragmentSupervisor_to_editUserFragment"
-            app:destination="@id/editUserFragment" />
-        <action
-            android:id="@+id/action_homeFragmentSupervisor_to_editProfileFragment"
-            app:destination="@id/editProfileFragment" />
-        <action
             android:id="@+id/action_homeFragmentSupervisor_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_homeFragmentSupervisor_to_sucursalesSupervisorFragment"
             app:destination="@id/sucursalesSupervisorFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/addUserFragment"
@@ -67,6 +61,9 @@
         <action
             android:id="@+id/action_addUserFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_addUserFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/editUserFragment"
@@ -82,6 +79,12 @@
         <action
             android:id="@+id/action_editUserFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_editUserFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_editUserFragment_to_sucursalesSupervisorFragment"
+            app:destination="@id/sucursalesSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/confirmDeleteUserFragment"
@@ -89,8 +92,8 @@
         android:label="fragment_confirm_delete_user"
         tools:layout="@layout/fragment_confirm_delete_user" >
         <action
-            android:id="@+id/action_confirmDeleteUserFragment_to_homeFragmentSupervisor"
-            app:destination="@id/homeFragmentSupervisor" />
+            android:id="@+id/action_confirmDeleteUserFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -103,6 +106,9 @@
         <action
             android:id="@+id/action_editProfileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/sucursalesSupervisorFragment"
@@ -121,6 +127,18 @@
         <action
             android:id="@+id/action_sucursalesSupervisorFragment_to_editSucursalFragment"
             app:destination="@id/editSucursalFragment" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_usuariosSupervisorFragment2"
+            app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_addSucursalFragment2"
+            app:destination="@id/addSucursalFragment" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/addSucursalFragment"
@@ -134,8 +152,8 @@
             android:id="@+id/action_addSucursalFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_addSucursalFragment_to_homeFragmentSupervisor"
-            app:destination="@id/homeFragmentSupervisor" />
+            android:id="@+id/action_addSucursalFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/editSucursalFragment"
@@ -151,6 +169,9 @@
         <action
             android:id="@+id/action_editSucursalFragment_to_confirmDeleteSucursalFragment"
             app:destination="@id/confirmDeleteSucursalFragment" />
+        <action
+            android:id="@+id/action_editSucursalFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/confirmDeleteSucursalFragment"
@@ -160,5 +181,29 @@
         <action
             android:id="@+id/action_confirmDeleteSucursalFragment_to_sucursalesSupervisorFragment"
             app:destination="@id/sucursalesSupervisorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/usuariosSupervisorFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.UsuariosSupervisorFragment"
+        android:label="fragment_usuarios_supervisor"
+        tools:layout="@layout/fragment_usuarios_supervisor" >
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_editUserFragment"
+            app:destination="@id/editUserFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_sucursalesSupervisorFragment"
+            app:destination="@id/sucursalesSupervisorFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
 </navigation>

@@ -40,7 +40,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemFuncionarios -> {
-                    initSucursalesSupervisorScreen()
+                    findNavController().navigate(R.id.action_editSucursalFragment_to_sucursalesSupervisorFragment)
                     true
                 }
                 R.id.itemCerrarSesion -> {
@@ -87,8 +87,6 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         editSucursalViewModel.updateBranchOfficeSuccessResponse.observe(viewLifecycleOwner, successObserver)
         editSucursalViewModel.updateBranchOfficeFailureResponse.observe(viewLifecycleOwner, failureObserver)
         editSucursalViewModel.getUsersSuccessResponse.observe(viewLifecycleOwner, usersObserver)
-        editSucursalViewModel.assignCivilServantSuccessResponse.observe(viewLifecycleOwner, this.assignCivilServantSuccessObserver)
-        editSucursalViewModel.assignCivilServantFailureResponse.observe(viewLifecycleOwner, this.assignCivilServantFailureObserver)
     }
 
     private fun setClickListeners() {
@@ -116,7 +114,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
 
     private val successObserver = Observer<Any?> { statusCode ->
         Toast.makeText(context, "Sucursal actualizada exitosamente.", Toast.LENGTH_SHORT).show()
-        editSucursalViewModel.assignCivilServant("Bearer ${getToken()}", branchOffice.id, userIdSelected)
+        initSucursalesSupervisorScreen()
     }
 
     private val failureObserver = Observer<Any?> {
@@ -125,7 +123,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
 
     private val usersObserver = Observer<Array<DataUser>> { dataUser ->
         for (user in dataUser) {
-            if (user.role == "CIVIL_SERVANT" && user.refBranchOffice == null) {
+            if (user.role == "CIVIL_SERVANT") {
                 val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)
                 val fullname = userFuncionario.firstName + " " + userFuncionario.lastName
                 listUserFuncionarios.add(userFuncionario)
@@ -134,15 +132,6 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         }
 
         setSpinner()
-    }
-
-    private val assignCivilServantSuccessObserver = Observer<BranchOffice> { branchOffice ->
-        Toast.makeText(context, "Funcionario asignado a sucursal exitosamente.", Toast.LENGTH_SHORT).show()
-        initSucursalesSupervisorScreen()
-    }
-
-    private val assignCivilServantFailureObserver = Observer<Any> { statusCode ->
-        Toast.makeText(context, "Ocurrio un error al asignar el funcionario a la sucursal, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
     private fun getUsersFuncionarios() {

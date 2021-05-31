@@ -38,7 +38,7 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemFuncionarios -> {
-                    findNavController().navigate(R.id.action_sucursalesSupervisorFragment_to_homeFragmentSupervisor)
+                    findNavController().navigate(R.id.action_sucursalesSupervisorFragment_to_usuariosSupervisorFragment)
                     true
                 }
                 R.id.itemSucursales -> {

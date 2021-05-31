@@ -42,7 +42,7 @@ internal class RecyclerAdapter(private var listFuncionarios: ArrayList<UserFunci
             val bundle = Bundle()
             bundle.putParcelable("UserFuncionario", listFuncionarios[position])
 
-            view.findNavController().navigate(R.id.action_homeFragmentSupervisor_to_editUserFragment, bundle)
+            view.findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_editUserFragment, bundle)
         }
     }
 

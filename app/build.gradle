@@ -28,13 +28,6 @@ android {
         enabled true
     }
 
-//    dataBinding {
-//        enabled true
-//    }
-//
-//    kapt {
-//        generateStubs = true
-//    }
 }
 
 dependencies {
@@ -80,4 +73,9 @@ dependencies {
 
     // Circular Image View
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // Socket.io
+    implementation ('io.socket:socket.io-client:2.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
 }

@@ -37,7 +37,7 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemFuncionarios -> {
-                    findNavController().navigate(R.id.action_addSucursalFragment_to_homeFragmentSupervisor)
+                   findNavController().navigate(R.id.action_addSucursalFragment_to_usuariosSupervisorFragment)
                     true
                 }
                 R.id.itemSucursales -> {

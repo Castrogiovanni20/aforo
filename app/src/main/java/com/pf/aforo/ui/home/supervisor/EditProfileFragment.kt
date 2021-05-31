@@ -34,7 +34,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemFuncionarios -> {
-                    initHomeScreen()
+                    findNavController().navigate(R.id.action_editProfileFragment_to_usuariosSupervisorFragment)
                     true
                 }
                 R.id.itemCerrarSesion -> {
@@ -80,7 +80,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
     private val updateUserSuccessObserver = Observer<Any?> { statusCode ->
         Toast.makeText(context, "Perfil actualizado exitosamente.", Toast.LENGTH_SHORT).show()
-        initHomeScreen()
+        findNavController().navigate(R.id.action_editProfileFragment_to_usuariosSupervisorFragment)
     }
 
     private val updateUserFailureObserver = Observer<Any?> { statusCode ->
@@ -95,10 +95,5 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private fun getUserFuncionario() {
         userFuncionario = arguments?.getParcelable<UserFuncionario>("UserFuncionario")!!
     }
-
-    private fun initHomeScreen() {
-        findNavController().navigate(R.id.action_editProfileFragment_to_homeFragmentSupervisor)
-    }
-
 
 }
