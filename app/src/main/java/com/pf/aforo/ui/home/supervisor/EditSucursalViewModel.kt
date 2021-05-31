@@ -32,12 +32,22 @@ class EditSucursalViewModel : ViewModel() {
     private var _getUsersFailureResponse = usersRepository.getUserFailureResponseLiveData
     val getUsersFailureResponse: MutableLiveData<String> get() = _getUsersFailureResponse
 
+    private var _assignCivilServantSuccessResponse = branchOfficesRepository.assignCivilServantSuccessResponseLiveData
+    val assignCivilServantSuccessResponse: MutableLiveData<BranchOffice> get() = _assignCivilServantSuccessResponse
+
+    private var _assignCivilServantFailureResponse = branchOfficesRepository.assignCivilServantFailureResponseLiveData
+    val assignCivilServantFailureResponse: MutableLiveData<String> get() = _assignCivilServantFailureResponse
+
     fun updateBranchOffice(token: String, id: String, branchOffice: BranchOffice) {
         branchOfficesRepository.updateBranchOffice(token, id, branchOffice)
     }
 
     fun deleteBranchOffice(token: String, id: String) {
         branchOfficesRepository.deleteBranchOffice(token, id)
+    }
+
+    fun assignCivilServant(token: String, entityId: String, refUser: String) {
+        branchOfficesRepository.assignCivilServant(token, entityId, refUser)
     }
 
     fun getUsers(token: String) {

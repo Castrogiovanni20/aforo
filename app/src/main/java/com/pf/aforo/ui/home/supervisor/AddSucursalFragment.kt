@@ -81,7 +81,7 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
         addSucursalViewModel.addBranchOfficeFailureResponse.observe(viewLifecycleOwner, this.failureObserver)
         addSucursalViewModel.getUsersSuccessResponse.observe(viewLifecycleOwner, usersObserver)
         addSucursalViewModel.assignCivilServantSuccessResponse.observe(viewLifecycleOwner, this.assignCivilServantSuccessObserver)
-        addSucursalViewModel.assignCivilServantFailureResponse.observe(viewLifecycleOwner, this.assignCivilServanFailureObserver)
+        addSucursalViewModel.assignCivilServantFailureResponse.observe(viewLifecycleOwner, this.assignCivilServantFailureObserver)
     }
 
     private val successObserver = Observer<BranchOffice> { branchOffice ->
@@ -95,7 +95,7 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
 
     private val usersObserver = Observer<Array<DataUser>> { dataUser ->
         for (user in dataUser) {
-            if (user.role == "CIVIL_SERVANT") {
+            if (user.role == "CIVIL_SERVANT" && user.refBranchOffice == null) {
                 val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)
                 val fullname = userFuncionario.firstName + " " + userFuncionario.lastName
                 listUserFuncionarios.add(userFuncionario)
@@ -111,8 +111,8 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
         initSucursalesFragment()
     }
 
-    private val assignCivilServanFailureObserver = Observer<Any> { statusCode ->
-        Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
+    private val assignCivilServantFailureObserver = Observer<Any> { statusCode ->
+        Toast.makeText(context, "Ocurrio un error al asignar el funcionario a la sucursal, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
     private fun getUsersFuncionarios() {
