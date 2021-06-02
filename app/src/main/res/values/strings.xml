@@ -37,23 +37,43 @@
     <string name="recuperarContras">Recuperar contraseña</string>
     <string name="mailPasos">Ha recibido un correo con los pasos para recuperar su contraseña</string>
 
-    <string name="nombreSucursal">Nombre Sucursal o Establecimiento</string>
-    <string name="domicilio">Dirección - Dpto - Piso</string>
-    <string name="telefono">Tel. Sucursal</string>
-    <string name="mt2ancho">mt2 Ancho</string>
-    <string name="mt2alto">mt2 Alto</string>
-    <string name="funcionarioAsignado">Funcionario Asignado (seleccione)</string>
-    <string name="capacidadActual">CAP. ACTUAL: 28 personas</string>
+    <string name="nombreSucursal">Nombre Sucursal:</string>
+    <string name="domicilio">Dirección:</string>
+    <string name="telefono">Tel. Sucursal:</string>
+    <string name="mt2ancho">mt2 Ancho:</string>
+    <string name="mt2alto">mt2 Alto:</string>
+    <string name="funcionarioAsignado">Funcionario Asignado:</string>
+    <string name="funcionarioNombre">Funcionario:</string>
+    <string name="capacidadActual">CAP. ACTUAL: XX personas</string>
+    <string name="capacidadMaxima">CAP. Máxima: XX personas</string>
 
     <string name="dnu">(*) Calculo de capacidad de aforo sujeto a Decreto DNU 814 / 2020 PODER EJECUTIVO NACIONAL (P.E.N.) 25-10-2020.</string>
 
+    <string name="datos">Datos de la Sucursal</string>
+    <string name="orga">Datos de la Organización</string>
+    <string name="supervisor">Supervisor a cargo:</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ocupTorta">Ocupación: xx personas</string>
+    <string name="dispoTorta">Disponible: xx personas</string>
+    <string name="verde">Nivel de Ocupación BAJO</string>
+    <string name="amarillo">Nivel de Ocupación MEDIO</string>
+    <string name="rojo">Nivel de Ocupación ALTO</string>
+    <string name="mayor">Horarios más concurridos por Hora</string>
+    <string name="apeNom">APELLIDO_NOMBRE</string>
+
+    <string name="menusucu">✒    Mis Sucursales</string>
+    <string name="menufunc">☿     Mis Funcionarios</string>
+    <string name="menunoti">🔔    Ajustar notificaciones</string>
+    <string name="menuchau">⎋    Cerrar sesión</string>
+
+    <string name="notilimit">Notificación-push Nivel de capacidad ALTO</string>
+    <string name="notimax">Notificación-push Máxima capacidad</string>
 
     <string-array name="roles">
         <item>SUPERVISOR</item>
         <item>FUNCIONARIO</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -5,10 +5,14 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="blue">#1F9DF8</color>
+    <color name="celeste">#A0C4DF</color>
     <color name="darkblue">#04072E</color>
     <color name="fucsia">#F61A6A</color>
     <color name="white">#FFFFFF</color>
     <color name="grey">#6C6C6C</color>
+    <color name="verde">#1FDA27</color>
+    <color name="amarillo">#FAD416</color>
+    <color name="rojo">#E4091C</color>
     <color name="lightgray">#EDEDED</color>
     <color name="lightblue">#A8D0F1</color>
 </resources>

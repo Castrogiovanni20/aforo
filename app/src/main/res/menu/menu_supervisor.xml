@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemPerfil"
+        android:icon="@mipmap/icon_user"
+        android:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/itemSucursales"
+        android:icon="@mipmap/trespoints"
+        android:title="@string/menusucu"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/itemFuncionarios"
+        android:icon="@mipmap/trespoints"
+        android:title="@string/menufunc"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/itemNotificaciones"
+        android:icon="@mipmap/trespoints"
+        android:title="@string/menunoti"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/itemCerrarSesion"
+        android:icon="@mipmap/trespoints"
+        android:title="@string/menuchau"
+        app:showAsAction="never" />
+</menu>
