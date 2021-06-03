@@ -2,6 +2,7 @@ package com.pf.aforo.ui.login
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.pf.aforo.R
+import com.pf.aforo.data.model.Data
+import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.databinding.FragmentLoginBinding
+import kotlin.math.log
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
@@ -30,9 +34,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun setObservers () {
-        loginViewModel.successResponse.observe(viewLifecycleOwner, successObserver)
+        loginViewModel.loginDataResponseLiveData.observe(viewLifecycleOwner, loginObserver)
         loginViewModel.failureResponse.observe(viewLifecycleOwner, failureObserver)
         loginViewModel.validationError.observe(viewLifecycleOwner, validationObserver)
+
+        loginViewModel.userResponseLiveData.observe(viewLifecycleOwner, userObserver)
+        loginViewModel.getUserFailureResponse.observe(viewLifecycleOwner, userFailureObserver)
     }
 
     private fun setClickListeners () {
@@ -53,9 +60,23 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         loginViewModel.loginUser(userLogin)
     }
 
-    private val successObserver = Observer<Any?> { token ->
-        setSharedPreferences(token.toString())
-        initHomeScreen()
+    private val loginObserver = Observer<Data> { data ->
+        val userId = data.userId
+        val token = data.token
+
+        loginViewModel.getUser("Bearer $token", userId)
+        setSharedPreferences(token)
+    }
+
+    private val userObserver = Observer<DataUser> { data ->
+        when (data.role) {
+            "SUPERVISOR" -> initFragmentHomeSupervisor()
+            "CIVIL_SERVANT" -> initFragmentHomeFuncionario()
+        }
+    }
+
+    private val userFailureObserver = Observer<String> {
+        Toast.makeText(context, "Algo salio mal", Toast.LENGTH_SHORT).show()
     }
 
     private val failureObserver = Observer<Any?> { statusCode ->
@@ -77,7 +98,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
     }
 
-    private fun initHomeScreen () {
+    private fun initFragmentHomeFuncionario() {
+        findNavController().navigate(R.id.action_loginFragment_to_homeFragmentFuncionario)
+    }
+
+    private fun initFragmentHomeSupervisor() {
         findNavController().navigate(R.id.action_loginFragment_to_homeFragmentSupervisor)
     }
 

@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-
     android:id="@+id/rootLayoutSupervisor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightgray"
     android:fontFamily="@font/roboto"
-    tools:context=".ui.home.supervisor.HomeFragmentSupervisor">
+    tools:context=".ui.home.funcionario.HomeFragmentFuncionario">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -22,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
-            app:menu="@menu/menu_supervisor"
+            app:menu="@menu/menu_funcionario"
             app:navigationIcon="@mipmap/logotrbmp"
             app:title="@string/aforo_name" />
 

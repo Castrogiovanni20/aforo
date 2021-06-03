@@ -4,8 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.UserFuncionario
-import com.pf.aforo.data.model.UserLogin
-import com.pf.aforo.data.model.UserSupervisor
 import com.pf.aforo.data.response.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,7 +15,7 @@ class UsersRepository()
     var addUserSuccessResponseLiveData = MutableLiveData<String>()
     var addUserFailureResponseLiveData = MutableLiveData<String>()
 
-    var getUserSuccessResponseLiveData = MutableLiveData<String>()
+    var getUserResponseLiveData = MutableLiveData<DataUser>()
     var getUserFailureResponseLiveData = MutableLiveData<String>()
 
     var getUsersSuccessResponseLiveData = MutableLiveData<Array<DataUser>>()
@@ -61,18 +59,18 @@ class UsersRepository()
 
     fun getUser(token: String, id: String){
         FiwareAPI().getUser(token, id)
-            .enqueue(object: Callback<FiwareResponseUser>{
-                override fun onFailure(call: Call<FiwareResponseUser>?, t: Throwable?) {
+            .enqueue(object: Callback<FiwareResponseGetUser>{
+                override fun onFailure(call: Call<FiwareResponseGetUser>?, t: Throwable?) {
                     if (t != null) {
                         getUserFailureResponseLiveData.value = "404"
                         Log.d("ApiGetUser", "Fallo el request" + t.message)
                     }
                 }
-                override fun onResponse(call: Call<FiwareResponseUser>?, fiwareResponse: Response<FiwareResponseUser>?) {
+                override fun onResponse(call: Call<FiwareResponseGetUser>?, fiwareResponse: Response<FiwareResponseGetUser>?) {
                     if (fiwareResponse != null) {
                         if (fiwareResponse.isSuccessful) {
                             if (fiwareResponse.body().code == "SUCCESS") {
-                                getUserSuccessResponseLiveData.value = fiwareResponse.body().data[0].role
+                                getUserResponseLiveData.value = fiwareResponse.body().data
                                 Log.d("ApiGetUser", "API response: " + fiwareResponse.code().toString())
                             }
                         } else {
@@ -87,14 +85,14 @@ class UsersRepository()
 
     fun getUsers(token: String){
         FiwareAPI().getUsers(token)
-            .enqueue(object: Callback<FiwareResponseUser>{
-                override fun onFailure(call: Call<FiwareResponseUser>?, t: Throwable?) {
+            .enqueue(object: Callback<FiwareResponseGetUsers>{
+                override fun onFailure(call: Call<FiwareResponseGetUsers>?, t: Throwable?) {
                     if (t != null) {
                         getUsersFailureResponseLiveData.value = "404"
                         Log.d("ApiGetUsers", "Fallo el request" + t.message)
                     }
                 }
-                override fun onResponse(call: Call<FiwareResponseUser>?, fiwareResponse: Response<FiwareResponseUser>?) {
+                override fun onResponse(call: Call<FiwareResponseGetUsers>?, fiwareResponse: Response<FiwareResponseGetUsers>?) {
                     if (fiwareResponse != null) {
                         if (fiwareResponse.isSuccessful) {
                             if (fiwareResponse.body().code == "SUCCESS") {

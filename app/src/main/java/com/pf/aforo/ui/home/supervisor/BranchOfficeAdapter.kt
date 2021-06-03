@@ -34,7 +34,7 @@ internal class BranchOfficeAdapter(private var listBranchOffice: ArrayList<Branc
         holder.textViewMt2ancho.text = "Ancho: " + item.width
         holder.textViewMt2alto.text = "Alto: " + item.length
         holder.textViewCapacity.text = "Capacidad actual: " + item.maxCapacity.toString()
-        holder.textViewFuncionario.text = "Funcionario asignado: no posee"
+        holder.textViewFuncionario.text = "Funcionario asignado: " + item.refUser
 
         holder.imageBtnEdit.setOnClickListener { view ->
             val bundle = Bundle()

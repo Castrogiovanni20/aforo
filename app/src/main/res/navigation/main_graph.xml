@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragmentSupervisor"
             app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragmentFuncionario"
+            app:destination="@id/homeFragmentFuncionario" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -205,5 +208,32 @@
         <action
             android:id="@+id/action_usuariosSupervisorFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragmentFuncionario"
+        android:name="com.pf.aforo.ui.home.funcionario.HomeFragmentFuncionario"
+        android:label="fragment_home_funcionario"
+        tools:layout="@layout/fragment_home_funcionario" >
+        <action
+            android:id="@+id/action_homeFragmentFuncionario_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragmentFuncionario_to_notificacionesFragment"
+            app:destination="@id/notificacionesFragment" />
+        <action
+            android:id="@+id/action_homeFragmentFuncionario_to_loginFragment2"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificacionesFragment"
+        android:name="com.pf.aforo.ui.home.funcionario.NotificacionesFragment"
+        android:label="fragment_notificaciones"
+        tools:layout="@layout/fragment_notificaciones" >
+        <action
+            android:id="@+id/action_notificacionesFragment_to_homeFragmentFuncionario"
+            app:destination="@id/homeFragmentFuncionario" />
+        <action
+            android:id="@+id/action_notificacionesFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>

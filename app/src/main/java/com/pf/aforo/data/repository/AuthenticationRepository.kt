@@ -2,6 +2,7 @@ package com.pf.aforo.data.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.pf.aforo.data.model.Data
 import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.data.model.UserSupervisor
 import com.pf.aforo.data.response.FiwareResponse
@@ -11,7 +12,7 @@ import retrofit2.Response
 
 class AuthenticationRepository() {
 
-    var loginSuccessResponseLiveData = MutableLiveData<String>()
+    var loginDataResponseLiveData = MutableLiveData<Data>()
     var loginFailureResponseLiveData = MutableLiveData<String>()
 
     var registerSuccessResponseLiveData = MutableLiveData<String>()
@@ -30,9 +31,9 @@ class AuthenticationRepository() {
                 override fun onResponse(call: Call<FiwareResponse>?, fiwareResponse: Response<FiwareResponse>? ){
                     if (fiwareResponse != null) {
                         if (fiwareResponse.isSuccessful) {
-                            if (fiwareResponse.body().data.token != null) {
-                                loginSuccessResponseLiveData.value = fiwareResponse.body().data.token
-                                Log.d("ApiLoginResponse", "Respondio la API " + fiwareResponse.body().data.token);
+                            if (fiwareResponse.body().data != null) {
+                                loginDataResponseLiveData.value = fiwareResponse.body().data
+                                Log.d("ApiLoginResponse", "Respondio la API " + fiwareResponse.body().data);
                             }
                         } else {
                             loginFailureResponseLiveData.value = fiwareResponse.code().toString()

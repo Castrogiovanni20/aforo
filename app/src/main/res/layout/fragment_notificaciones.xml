@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightgray"
-    tools:context=".ui.home.supervisor.SucursalesSupervisorFragment">
+    tools:context=".ui.home.funcionario.NotificacionesFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
-            app:menu="@menu/menu_supervisor"
+            app:menu="@menu/menu_funcionario"
             app:navigationIcon="@mipmap/logotrbmp"
             app:title="@string/aforo_name" />
 
