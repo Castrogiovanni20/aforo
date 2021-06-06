@@ -21,7 +21,7 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
     private lateinit var addSucursalViewModel: AddSucursalViewModel
     private var listUserFuncionarios = ArrayList<UserFuncionario>()
     private var fullnameSpinnerArray = ArrayList<String>()
-    private lateinit var userIdSelected: String
+    private var userIdSelected = "null"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,25 +55,36 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
 
     private fun setSpinner() {
         val spinner = binding.spinnerFuncionario
-        val adapter = context?.let { ArrayAdapter(it, android.R.layout.simple_expandable_list_item_1, fullnameSpinnerArray) }
-        spinner.adapter = adapter
 
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                userIdSelected = listUserFuncionarios[position].id
+        if (fullnameSpinnerArray.isNotEmpty()) {
+            val adapter = context?.let {
+                ArrayAdapter(
+                    it,
+                    android.R.layout.simple_expandable_list_item_1,
+                    fullnameSpinnerArray
+                )
             }
+            spinner.adapter = adapter
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    userIdSelected = listUserFuncionarios[position].id
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+
             }
-
+        } else {
+            binding.textFuncionarioAsignado.text = "No hay funcionarios disponibles."
+            binding.spinnerFuncionario.visibility = View.GONE
         }
-
     }
 
     private fun setObservers() {
@@ -86,7 +97,12 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
 
     private val successObserver = Observer<BranchOffice> { branchOffice ->
         Toast.makeText(context, "Sucursal agregada exitosamente.", Toast.LENGTH_SHORT).show()
-        addSucursalViewModel.assignCivilServant("Bearer ${getToken()}", branchOffice.id, userIdSelected)
+
+        if (userIdSelected != "null") {
+            addSucursalViewModel.assignCivilServant("Bearer ${getToken()}", branchOffice.id, userIdSelected)
+        }
+
+        initSucursalesFragment()
     }
 
     private val failureObserver = Observer<Any> { statusCode ->

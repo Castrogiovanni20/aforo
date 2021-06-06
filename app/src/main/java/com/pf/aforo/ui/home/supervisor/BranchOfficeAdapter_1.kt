@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.navigation.findNavController
@@ -13,8 +12,8 @@ import com.pf.aforo.R
 import com.pf.aforo.data.model.BranchOffice
 import de.hdodenhof.circleimageview.CircleImageView
 
-internal class BranchOfficeAdapter(private var listBranchOffice: ArrayList<BranchOffice>) :
-    RecyclerView.Adapter<BranchOfficeAdapter.MyViewHolder>() {
+internal class BranchOfficeAdapter_1(private var listBranchOffice: ArrayList<BranchOffice>) :
+    RecyclerView.Adapter<BranchOfficeAdapter_1.MyViewHolder>() {
     internal inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var imageBranchOffice: CircleImageView = view.findViewById(R.id.circleImageViewProfile)
         var textViewName: TextView = view.findViewById(R.id.textViewNombre)
@@ -24,10 +23,9 @@ internal class BranchOfficeAdapter(private var listBranchOffice: ArrayList<Branc
         var textViewCapacity: TextView = view.findViewById(R.id.textViewCapacidadActual)
         var textViewFuncionario: TextView = view.findViewById(R.id.textViewFuncionarioAsignado)
         var imageBtnEdit: ImageButton = view.findViewById(R.id.imageButtonEditarSucursal)
-
     }
 
-    override fun onBindViewHolder(holder: BranchOfficeAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BranchOfficeAdapter_1.MyViewHolder, position: Int) {
         val item = listBranchOffice[position]
         holder.textViewName.text = item.name
         holder.textViewBranchOffice.text = item.refOrganization
@@ -44,7 +42,7 @@ internal class BranchOfficeAdapter(private var listBranchOffice: ArrayList<Branc
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BranchOfficeAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BranchOfficeAdapter_1.MyViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_sucursal, parent, false)
         return MyViewHolder(itemView)
@@ -53,6 +51,4 @@ internal class BranchOfficeAdapter(private var listBranchOffice: ArrayList<Branc
     override fun getItemCount(): Int {
         return listBranchOffice.size
     }
-
-
 }

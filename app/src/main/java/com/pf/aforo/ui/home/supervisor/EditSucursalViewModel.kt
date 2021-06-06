@@ -8,7 +8,6 @@ import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.data.repository.BranchOfficesRepository
 import com.pf.aforo.data.repository.UsersRepository
-import com.pf.aforo.data.repository.user
 
 class EditSucursalViewModel : ViewModel() {
     private var branchOfficesRepository = BranchOfficesRepository()

@@ -25,12 +25,21 @@ class LoginViewModel : ViewModel() {
     private var _getUserFailureResponse = usersRepository.getUserFailureResponseLiveData
     val getUserFailureResponse: MutableLiveData<String> get() = _getUserFailureResponse
 
+    val isLoading = MutableLiveData<Boolean>()
+
     var validationError = MutableLiveData<String>()
     var isUserValid : Boolean = false
 
+    init {
+        isLoading.value = false
+    }
+
     fun loginUser (user: UserLogin)  {
+        isLoading.value = true
         validateUser(user)
-        if (isUserValid) authenticationRepository.login(user)
+        if (isUserValid) {
+            authenticationRepository.login(user)
+        }
     }
 
     fun getUser(token: String, userId: String) {

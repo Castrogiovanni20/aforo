@@ -45,7 +45,7 @@
     <string name="funcionarioAsignado">Funcionario Asignado:</string>
     <string name="funcionarioNombre">Funcionario:</string>
     <string name="capacidadActual">CAP. ACTUAL: XX personas</string>
-    <string name="capacidadMaxima">CAP. Máxima: XX personas</string>
+    <string name="capacidadMaxima">CAP. Máxima: </string>
 
     <string name="dnu">(*) Calculo de capacidad de aforo sujeto a Decreto DNU 814 / 2020 PODER EJECUTIVO NACIONAL (P.E.N.) 25-10-2020.</string>
 
@@ -53,8 +53,8 @@
     <string name="orga">Datos de la Organización</string>
     <string name="supervisor">Supervisor a cargo:</string>
 
-    <string name="ocupTorta">Ocupación: xx personas</string>
-    <string name="dispoTorta">Disponible: xx personas</string>
+    <string name="ocupTorta">Ocupación:</string>
+    <string name="dispoTorta">Disponible:</string>
     <string name="verde">Nivel de Ocupación BAJO</string>
     <string name="amarillo">Nivel de Ocupación MEDIO</string>
     <string name="rojo">Nivel de Ocupación ALTO</string>

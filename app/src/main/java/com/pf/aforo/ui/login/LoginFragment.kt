@@ -40,6 +40,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         loginViewModel.userResponseLiveData.observe(viewLifecycleOwner, userObserver)
         loginViewModel.getUserFailureResponse.observe(viewLifecycleOwner, userFailureObserver)
+
+        loginViewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
     }
 
     private fun setClickListeners () {
@@ -68,6 +70,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         setSharedPreferences(token)
     }
 
+    private val isLoadingObserver = Observer<Boolean> { flag ->
+        if (flag == true) {
+            binding.loadingSpinner.visibility = View.VISIBLE
+        }
+    }
+
     private val userObserver = Observer<DataUser> { data ->
         when (data.role) {
             "SUPERVISOR" -> initFragmentHomeSupervisor()
@@ -80,6 +88,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private val failureObserver = Observer<Any?> { statusCode ->
+        binding.loadingSpinner.visibility = View.GONE
+
         when (statusCode) {
             "500", "401" -> {
                 Toast.makeText(context, "Usuario y/o contraseña incorrecto.", Toast.LENGTH_SHORT).show()
@@ -95,6 +105,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private val validationObserver = Observer<Any?> { error ->
+        binding.loadingSpinner.visibility = View.GONE
+
         Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
     }
 

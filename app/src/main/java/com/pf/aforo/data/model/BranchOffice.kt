@@ -9,11 +9,11 @@ data class BranchOffice(
     val refOrganization: String,
     val name: String,
     val description: String,
-    val refUser: String,
+    var refUser: String,
     val currentCapacity: Int,
     val width: Int,
     val length: Int,
-    val maxCapacity: Int) : Parcelable {
+    var maxCapacity: Int) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",

@@ -1,7 +1,5 @@
 package com.pf.aforo.data.model
 
-import com.pf.aforo.data.repository.user
-
 class UserLogin (var username: String, var password: String) {
 
     fun isUserNameValid () : Boolean {

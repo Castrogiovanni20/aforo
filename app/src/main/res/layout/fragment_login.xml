@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.38" />
+        app:layout_constraintGuide_begin="278dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLogin"
@@ -37,12 +37,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.google.android.material.progressindicator.LinearProgressIndicator
-                android:id="@+id/progressIndicatorLogin"
-                android:layout_width="match_parent"
+            <ProgressBar
+                android:id="@+id/loadingSpinner"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:visibility="invisible"/>
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="@color/colorPrimaryDark"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
 
             <Space
                 android:layout_width="match_parent"

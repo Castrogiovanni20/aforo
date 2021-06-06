@@ -2,6 +2,7 @@ package com.pf.aforo.ui.home.supervisor
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.data.repository.UsersRepository
 

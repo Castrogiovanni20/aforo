@@ -142,6 +142,9 @@
         <action
             android:id="@+id/action_sucursalesSupervisorFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_homeFragmentSupervisor2"
+            app:destination="@id/homeFragmentSupervisor" />
     </fragment>
     <fragment
         android:id="@+id/addSucursalFragment"

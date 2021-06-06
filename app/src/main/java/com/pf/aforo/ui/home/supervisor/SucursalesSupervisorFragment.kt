@@ -2,7 +2,6 @@ package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -14,20 +13,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pf.aforo.R
 import com.pf.aforo.data.model.BranchOffice
+import com.pf.aforo.data.model.DataUser
+import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.databinding.FragmentSucursalesSupervisorBinding
 
 class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_supervisor) {
     private lateinit var binding: FragmentSucursalesSupervisorBinding
     private lateinit var sucursalesSupervisorViewModel: SucursalesSupervisorViewModel
     private var arrayListSucursales = ArrayList<BranchOffice>()
+    private var arrayListFuncionarios = ArrayList<UserFuncionario>()
     private var recyclerView : RecyclerView ?= null
-    private lateinit var branchOfficeAdapter: BranchOfficeAdapter
+    private lateinit var branchOfficeAdapter1: BranchOfficeAdapter_1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSucursalesSupervisorBinding.bind(view)
         sucursalesSupervisorViewModel = ViewModelProvider(this).get(SucursalesSupervisorViewModel::class.java)
         setTopBar()
+        getUsers()
         getBranchOffices()
         setRecyclerView()
         setObservers()
@@ -53,34 +56,58 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
         }
     }
 
+    private fun getUsers() {
+        sucursalesSupervisorViewModel.getUsers("Bearer ${getToken()}")
+    }
+
     private fun getBranchOffices() {
         sucursalesSupervisorViewModel.getBranchOffices("Bearer ${getToken()}")
     }
 
     private fun setRecyclerView() {
         recyclerView = binding.recyclerViewSucursales
-        branchOfficeAdapter = BranchOfficeAdapter(arrayListSucursales)
+        branchOfficeAdapter1 = BranchOfficeAdapter_1(arrayListSucursales)
         val layoutManager = LinearLayoutManager(context)
         recyclerView?.layoutManager = layoutManager
         recyclerView?.itemAnimator = DefaultItemAnimator()
-        recyclerView?.adapter = branchOfficeAdapter
+        recyclerView?.adapter = branchOfficeAdapter1
     }
 
     private fun setObservers() {
         sucursalesSupervisorViewModel.getBranchOfficesResponse.observe(viewLifecycleOwner, this.getBranchOfficesSuccessObserver)
         sucursalesSupervisorViewModel.getBranchOfficeFailureResponse.observe(viewLifecycleOwner, this.getBranchOfficesFailureObserver)
+        sucursalesSupervisorViewModel.getUsersResponse.observe(viewLifecycleOwner, this.getUsersObserver)
     }
 
     private val getBranchOfficesSuccessObserver = Observer<ArrayList<BranchOffice>> { branchOffices ->
         arrayListSucursales.clear()
         for (branchOffice in branchOffices) {
+            branchOffice.refUser = getFullNameByID(branchOffice.refUser)
             arrayListSucursales.add(branchOffice)
-            branchOfficeAdapter.notifyDataSetChanged()
+            branchOfficeAdapter1.notifyDataSetChanged()
         }
     }
 
     private val getBranchOfficesFailureObserver = Observer<Any?> { error ->
         Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
+    }
+
+    private val getUsersObserver = Observer<Array<DataUser>> { dataUsers ->
+        for (user in dataUsers) {
+            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)
+            arrayListFuncionarios.add(userFuncionario)
+        }
+    }
+
+    private fun getFullNameByID(id: String): String {
+        var fullName = ""
+        for (user in arrayListFuncionarios) {
+            if (user.id == id) {
+                fullName = user.firstName + " " + user.lastName
+            }
+        }
+
+        return fullName
     }
 
     private fun setClickListeners(){

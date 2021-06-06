@@ -100,13 +100,13 @@
 
         <TextView
             android:id="@+id/textViewFuncionarioAsignado"
-            android:layout_width="236dp"
+            android:layout_width="250dp"
             android:layout_height="27dp"
             android:layout_marginStart="12dp"
             android:fontFamily="@font/roboto"
             android:text="@string/funcionarioAsignado"
             android:textColor="@color/design_default_color_on_secondary"
-            android:textSize="15dp"
+            android:textSize="13dp"
             app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
             app:layout_constraintTop_toBottomOf="@+id/textViewCapacidadActual"
             tools:ignore="MissingConstraints" />

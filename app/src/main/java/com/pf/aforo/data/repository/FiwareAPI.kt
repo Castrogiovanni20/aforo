@@ -105,8 +105,7 @@ interface FiwareAPI {
     ) : Call<FiwareResponseAssignCivilServantToBranchOffice>
 
     companion object {
-        //private val BASE_URL: String = "http://192.168.0.222:3000/api/v1/"
-        private val BASE_URL: String = "http://192.168.0.16:3000/api/v1/"
+        private val BASE_URL: String = "http://46.17.108.79:5000/api/v1/"
 
         var okHttpClient = OkHttpClient.Builder()
             .connectTimeout(1, TimeUnit.MINUTES)
@@ -124,8 +123,3 @@ interface FiwareAPI {
         }
     }
 }
-
-object user {
-
-}
-

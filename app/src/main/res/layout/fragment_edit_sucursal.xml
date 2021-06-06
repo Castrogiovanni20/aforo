@@ -169,7 +169,7 @@
         android:layout_width="70dp"
         android:layout_height="68dp"
         android:layout_marginStart="168dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/btn_circle"
         android:elevation="30dp"
 

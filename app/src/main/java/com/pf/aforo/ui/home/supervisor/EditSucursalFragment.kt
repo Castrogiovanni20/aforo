@@ -2,6 +2,7 @@ package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.AdapterView
@@ -20,9 +21,10 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private lateinit var binding: FragmentEditSucursalBinding
     private lateinit var editSucursalViewModel: EditSucursalViewModel
     private lateinit var branchOffice: BranchOffice
+    private lateinit var currentUser: UserFuncionario
     private var listUserFuncionarios = ArrayList<UserFuncionario>()
     private var fullnameSpinnerArray = ArrayList<String>()
-    private lateinit var userIdSelected: String
+    private var userIdSelected = "null"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,8 +33,8 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         setTopBar()
         getUsersFuncionarios()
         getBranchOffice()
-        setUI()
         setObservers()
+        setUI()
         setClickListeners()
     }
 
@@ -58,27 +60,38 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         binding.edtDomicilio.setText(branchOffice.description)
         binding.edtMt2Ancho.setText(branchOffice.width.toString())
         binding.edtMt2Alto.setText(branchOffice.length.toString())
+        binding.textFuncionarioAsignado.text = "Funcionario asignado: " + branchOffice.refUser
     }
 
     private fun setSpinner() {
         val spinner = binding.spinnerFuncionario
-        val adapter = context?.let { ArrayAdapter(it, android.R.layout.simple_expandable_list_item_1, fullnameSpinnerArray) }
-        spinner.adapter = adapter
-
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                userIdSelected = listUserFuncionarios[position].id
+        if (fullnameSpinnerArray.isNotEmpty()) {
+            val adapter = context?.let {
+                ArrayAdapter(
+                    it,
+                    android.R.layout.simple_expandable_list_item_1,
+                    fullnameSpinnerArray
+                )
             }
+            spinner.adapter = adapter
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    userIdSelected = listUserFuncionarios[position].id
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+
             }
-
+        } else {
+            binding.spinnerFuncionario.visibility = View.GONE
         }
 
     }
@@ -123,11 +136,15 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
 
     private val usersObserver = Observer<Array<DataUser>> { dataUser ->
         for (user in dataUser) {
-            if (user.role == "CIVIL_SERVANT") {
+            if (user.role == "CIVIL_SERVANT" && user.refBranchOffice == null) {
                 val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)
                 val fullname = userFuncionario.firstName + " " + userFuncionario.lastName
                 listUserFuncionarios.add(userFuncionario)
                 fullnameSpinnerArray.add(fullname)
+            }
+
+            if (user.id == branchOffice.refUser) {
+                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)
             }
         }
 

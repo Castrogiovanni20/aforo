@@ -14,10 +14,17 @@ class RegisterViewModel : ViewModel () {
     private var _failureResponse = authenticationRepository.registerFailureResponseLiveData
     val failureResponse: MutableLiveData<String> get() = _failureResponse
 
+    val isLoading = MutableLiveData<Boolean>()
+
     var validationError = MutableLiveData<String>()
     var isUserValid : Boolean = false
 
+    init {
+        isLoading.value = false
+    }
+
     fun registerUser(user: UserSupervisor){
+        isLoading.value = true
         validateUser(user)
         if (isUserValid) authenticationRepository.register(user)
     }

@@ -29,6 +29,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         registerViewModel.successResponse.observe(viewLifecycleOwner, this.successObserver)
         registerViewModel.failureResponse.observe(viewLifecycleOwner, this.failureObserver)
         registerViewModel.validationError.observe(viewLifecycleOwner, this.validationObserver)
+        registerViewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
     }
 
     private fun setClickListeners () {
@@ -72,6 +73,12 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             "404" -> {
                 Toast.makeText(context, "Estamos teniendo problemas con nuestro servidor. Por favor intentá registrarte más tarde.", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private val isLoadingObserver = Observer<Boolean> { flag ->
+        if (flag == true) {
+           // binding.loadingSpinner.visibility = View.VISIBLE
         }
     }
 
