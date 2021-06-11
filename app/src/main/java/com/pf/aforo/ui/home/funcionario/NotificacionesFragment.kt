@@ -3,6 +3,7 @@ package com.pf.aforo.ui.home.funcionario
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import com.pf.aforo.R
 import com.pf.aforo.databinding.FragmentNotificacionesBinding
@@ -29,7 +30,7 @@ class NotificacionesFragment : Fragment(R.layout.fragment_notificaciones) {
     }
 
     private fun initLoginFragment() {
+        fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         findNavController().navigate(R.id.action_notificacionesFragment_to_loginFragment)
     }
-
 }

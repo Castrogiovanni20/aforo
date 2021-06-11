@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -159,6 +160,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     }
 
     private fun initLoginFragment() {
+        fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         findNavController().navigate(R.id.action_homeFragmentSupervisor_to_loginFragment)
     }
 

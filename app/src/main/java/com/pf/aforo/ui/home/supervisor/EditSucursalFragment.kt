@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -46,6 +47,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                     findNavController().navigate(R.id.action_editSucursalFragment_to_loginFragment)
                     true
                 }
