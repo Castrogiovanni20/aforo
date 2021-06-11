@@ -27,6 +27,8 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
     private var arrayListFuncionarios = ArrayList<UserFuncionario>()
     private lateinit var recyclerAdapter: RecyclerAdapter
     private var recyclerView: RecyclerView? = null
+    private val CIVIL_SERVANT: String = "CIVIL_SERVANT"
+    private val FUNCIONARIO: String = "FUNCIONARIO"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -91,6 +93,8 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
         arrayListFuncionarios.clear()
 
         for (user in usersList) {
+            if(user.role == CIVIL_SERVANT)
+                user.role = FUNCIONARIO
             if (user.email != currentEmailUser) {
                 val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)
                 arrayListFuncionarios.add(userFuncionario)
