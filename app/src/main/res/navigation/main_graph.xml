@@ -97,6 +97,9 @@
         <action
             android:id="@+id/action_confirmDeleteUserFragment_to_usuariosSupervisorFragment"
             app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_confirmDeleteUserFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -187,6 +190,9 @@
         <action
             android:id="@+id/action_confirmDeleteSucursalFragment_to_sucursalesSupervisorFragment"
             app:destination="@id/sucursalesSupervisorFragment" />
+        <action
+            android:id="@+id/action_confirmDeleteSucursalFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/usuariosSupervisorFragment"
