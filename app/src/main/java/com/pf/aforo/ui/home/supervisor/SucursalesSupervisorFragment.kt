@@ -32,11 +32,15 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
         binding = FragmentSucursalesSupervisorBinding.bind(view)
         sucursalesSupervisorViewModel = ViewModelProvider(this).get(SucursalesSupervisorViewModel::class.java)
         setTopBar()
-        getUsers()
-        getBranchOffices()
         setRecyclerView()
         setObservers()
         setClickListeners()
+    }
+
+    override fun onResume(){
+        super.onResume()
+        getUsers()
+        getBranchOffices()
     }
 
     private fun setTopBar() {
