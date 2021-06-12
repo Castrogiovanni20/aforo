@@ -30,13 +30,14 @@ class UsersRepository()
     var updateUserRoleSuccessResponseLiveData = MutableLiveData<String>()
     var updateUserRoleFailureResponseLiveData = MutableLiveData<String>()
 
+    private val SERVER_ERROR_MSG: String = "Estamos teniendo problemas con el servidor. Intente de nuevo más tarde."
 
     fun addUser(token: String, user: UserFuncionario){
         FiwareAPI().addUser(token, user)
             .enqueue(object: Callback<FiwareResponse>{
                 override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
                     if (t != null) {
-                        addUserFailureResponseLiveData.value = "404"
+                        addUserFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiAddUser", "Fallo el request" + t.message)
                     }
                 }
@@ -62,7 +63,7 @@ class UsersRepository()
             .enqueue(object: Callback<FiwareResponseGetUser>{
                 override fun onFailure(call: Call<FiwareResponseGetUser>?, t: Throwable?) {
                     if (t != null) {
-                        getUserFailureResponseLiveData.value = "404"
+                        getUserFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiGetUser", "Fallo el request" + t.message)
                     }
                 }
@@ -88,7 +89,7 @@ class UsersRepository()
             .enqueue(object: Callback<FiwareResponseGetUsers>{
                 override fun onFailure(call: Call<FiwareResponseGetUsers>?, t: Throwable?) {
                     if (t != null) {
-                        getUsersFailureResponseLiveData.value = "404"
+                        getUsersFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiGetUsers", "Fallo el request" + t.message)
                     }
                 }
@@ -115,7 +116,7 @@ class UsersRepository()
             .enqueue(object: Callback<FiwareResponseDeleteUser>{
                 override fun onFailure(call: Call<FiwareResponseDeleteUser>?, t: Throwable?) {
                     if (t != null) {
-                        deleteUserFailureResponseLiveData.value = "404"
+                        deleteUserFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiDeleteUser", "Fallo el request" + t.message)
                     }
                 }
@@ -141,7 +142,7 @@ class UsersRepository()
             .enqueue(object: Callback<FiwareResponseUserFuncionario>{
                 override fun onFailure(call: Call<FiwareResponseUserFuncionario>?, t: Throwable?) {
                     if (t != null) {
-                        updateUserFailureResponseLiveData.value = "404"
+                        updateUserFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiUpdateUser", "Fallo el request" + t.message)
                     }
                 }
@@ -167,7 +168,7 @@ class UsersRepository()
             .enqueue(object: Callback<FiwareResponseEditUserRole>{
                 override fun onFailure(call: Call<FiwareResponseEditUserRole>?, t: Throwable?) {
                     if (t != null) {
-                        updateUserRoleFailureResponseLiveData.value = "404"
+                        updateUserRoleFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiUpdateUserRole", "Fallo el request" + t.message)
                     }
                 }

@@ -24,12 +24,14 @@ class BranchOfficesRepository {
     var assignCivilServantSuccessResponseLiveData = MutableLiveData<BranchOffice>()
     var assignCivilServantFailureResponseLiveData = MutableLiveData<String>()
 
+    private val SERVER_ERROR_MSG: String = "Estamos teniendo problemas con el servidor. Intente de nuevo más tarde."
+
     fun addBranchOffice(token: String, branchOffice: BranchOffice) {
         FiwareAPI().addBranchOffice(token, branchOffice)
             .enqueue(object: retrofit2.Callback<FiwareResponseBranchOffice>{
                 override fun onFailure(call: Call<FiwareResponseBranchOffice>?, t: Throwable?) {
                     if (t != null) {
-                        addBranchOfficeFailureResponseLiveData.value = "404"
+                        addBranchOfficeFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiAddBranchOffice", "Fallo el request: " + t.message)
                     }
                 }
@@ -55,7 +57,7 @@ class BranchOfficesRepository {
             .enqueue(object: retrofit2.Callback<FiwareResponseGetBranchOffice>{
                 override fun onFailure(call: Call<FiwareResponseGetBranchOffice>?, t: Throwable?) {
                     if (t != null) {
-                        getBranchOfficesFailureResponseLiveData.value = "404"
+                        getBranchOfficesFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiGetBranchOffice", "Fallo el request: " + t.message)
                     }
                 }
@@ -81,7 +83,7 @@ class BranchOfficesRepository {
             .enqueue(object: retrofit2.Callback<FiwareResponseEditBranchOffice>{
                 override fun onFailure(call: Call<FiwareResponseEditBranchOffice>?, t: Throwable?) {
                     if (t != null) {
-                        updateBranchOfficeFailureResponseLiveData.value = "404"
+                        updateBranchOfficeFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiUpdateBranchOffice", "Fallo el request: " + t.message)
                     }
                 }
@@ -107,7 +109,7 @@ class BranchOfficesRepository {
             .enqueue(object: retrofit2.Callback<FiwareResponseDeleteBranchOffice>{
                 override fun onFailure(call: Call<FiwareResponseDeleteBranchOffice>?, t: Throwable?) {
                     if (t != null) {
-                        deleteBranchOfficeFailureResponseLiveData.value = "404"
+                        deleteBranchOfficeFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiDeleteBranchOffice", "Fallo el request: " + t.message)
                     }
                 }
@@ -133,7 +135,7 @@ class BranchOfficesRepository {
             .enqueue(object: retrofit2.Callback<FiwareResponseAssignCivilServantToBranchOffice>{
                 override fun onFailure(call: Call<FiwareResponseAssignCivilServantToBranchOffice>?, t: Throwable?) {
                     if (t != null) {
-                        assignCivilServantFailureResponseLiveData.value = "404"
+                        assignCivilServantFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiAssignCivilServant", "Fallo el request: " + t.message)
                     }
                 }

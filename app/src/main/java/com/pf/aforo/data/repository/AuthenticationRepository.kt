@@ -18,12 +18,14 @@ class AuthenticationRepository() {
     var registerSuccessResponseLiveData = MutableLiveData<String>()
     var registerFailureResponseLiveData = MutableLiveData<String>()
 
+    private val SERVER_ERROR_MSG: String = "Estamos teniendo problemas con el servidor. Intente de nuevo más tarde."
+
     fun login(userLogin: UserLogin) {
         FiwareAPI().login(userLogin)
             .enqueue(object: Callback<FiwareResponse> {
                 override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
                     if (t != null) {
-                        loginFailureResponseLiveData.value = "404"
+                        loginFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiLoginResponse", "Fallo el request" + t.message);
                     }
                 }
@@ -50,7 +52,7 @@ class AuthenticationRepository() {
             .enqueue(object: Callback<FiwareResponse> {
                 override fun onFailure(call: Call<FiwareResponse>?, t: Throwable?) {
                     if (t != null) {
-                        registerFailureResponseLiveData.value = "404"
+                        registerFailureResponseLiveData.value = SERVER_ERROR_MSG
                         Log.d("ApiRegisterResponse", "Fallo el request" + t.message)
                     }
                 }
