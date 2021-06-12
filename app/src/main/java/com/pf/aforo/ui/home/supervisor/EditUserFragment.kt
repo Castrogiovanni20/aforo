@@ -18,6 +18,7 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
    private lateinit var binding: FragmentEditUserBinding
    private lateinit var editUserViewModel: EditUserViewModel
    private lateinit var userFuncionario: UserFuncionario
+    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,8 +39,7 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
-                    fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                    findNavController().navigate(R.id.action_editUserFragment_to_loginFragment)
+                    initLoginFragment()
                     true
                 }
                 else -> false
@@ -73,7 +73,12 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
     }
 
     private val failureObserver = Observer<Any?> { statusCode ->
-        Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
+        if(statusCode == UNAUTHORIZED_CODE){
+            Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
+            initLoginFragment()
+        }
+        else
+            Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
 
@@ -110,5 +115,10 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
     private fun getToken(): String {
         val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
         return sharedPref?.getString("Token", "0").toString()
+    }
+
+    private fun initLoginFragment() {
+        fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        findNavController().navigate(R.id.action_editUserFragment_to_loginFragment)
     }
 }

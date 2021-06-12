@@ -30,6 +30,7 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
     private var recyclerView: RecyclerView? = null
     private val CIVIL_SERVANT: String = "CIVIL_SERVANT"
     private val FUNCIONARIO: String = "FUNCIONARIO"
+    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,8 +55,7 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
                     true
                 }
                 R.id.itemCerrarSesion -> {
-                    fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                    findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_loginFragment)
+                    initLoginFragment()
                     true
                 }
                 else -> false
@@ -108,7 +108,12 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
     }
 
     private val getUsersFailureObserver = Observer<Any?> { error ->
-        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
+        if(error == UNAUTHORIZED_CODE){
+            Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
+            initLoginFragment()
+        }
+        else
+            Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
         Log.d("FailureObserver", error.toString())
     }
 
@@ -129,6 +134,11 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
     private fun getCurrentEmailUser() {
         val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
         currentEmailUser = sharedPref?.getString("Email", "0").toString()
+    }
+
+    private fun initLoginFragment() {
+        fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_loginFragment)
     }
 
 }

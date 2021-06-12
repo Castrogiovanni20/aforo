@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,7 @@ import com.pf.aforo.databinding.FragmentConfirmDeleteSucursalBinding
 class ConfirmDeleteSucursalFragment : Fragment(R.layout.fragment_confirm_delete_sucursal) {
     private lateinit var binding: FragmentConfirmDeleteSucursalBinding
     private lateinit var editSucursalViewModel: EditSucursalViewModel
+    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,7 +42,12 @@ class ConfirmDeleteSucursalFragment : Fragment(R.layout.fragment_confirm_delete_
     }
 
     private val failureObserver = Observer<Any> { statusCode ->
-        Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
+        if(statusCode == UNAUTHORIZED_CODE){
+            Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
+            initLoginFragment()
+        }
+        else
+            Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
     private fun deleteBranchOffice() {
@@ -58,6 +65,11 @@ class ConfirmDeleteSucursalFragment : Fragment(R.layout.fragment_confirm_delete_
 
     private fun initSucursalesScreen() {
         findNavController().navigate(R.id.action_confirmDeleteSucursalFragment_to_sucursalesSupervisorFragment)
+    }
+
+    private fun initLoginFragment() {
+        fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        findNavController().navigate(R.id.action_confirmDeleteSucursalFragment_to_loginFragment)
     }
 
 }

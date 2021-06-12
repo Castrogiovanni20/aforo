@@ -26,6 +26,7 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
     private var recyclerView : RecyclerView ?= null
     private lateinit var branchOfficeAdapter1: BranchOfficeAdapter_1
     private val SUCURSAL_SIN_FUNCIONARIO: String = "Sin asignar"
+    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,8 +55,7 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
                     true
                 }
                 R.id.itemCerrarSesion -> {
-                    fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                    findNavController().navigate(R.id.action_sucursalesSupervisorFragment_to_loginFragment)
+                    initLoginFragment()
                     true
                 }
                 else -> false
@@ -97,7 +97,12 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
     }
 
     private val getBranchOfficesFailureObserver = Observer<Any?> { error ->
-        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
+        if(error == UNAUTHORIZED_CODE){
+            Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
+            initLoginFragment()
+        }
+        else
+            Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
     }
 
     private val getUsersObserver = Observer<Array<DataUser>> { dataUsers ->
@@ -142,5 +147,10 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
     private fun getToken(): String {
         val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
         return sharedPref?.getString("Token", "0").toString()
+    }
+
+    private fun initLoginFragment() {
+        fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        findNavController().navigate(R.id.action_sucursalesSupervisorFragment_to_loginFragment)
     }
 }

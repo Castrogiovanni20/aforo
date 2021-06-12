@@ -26,6 +26,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private var listUserFuncionarios = ArrayList<UserFuncionario>()
     private var fullnameSpinnerArray = ArrayList<String>()
     private var userIdSelected = "null"
+    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,8 +48,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
-                    fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                    findNavController().navigate(R.id.action_editSucursalFragment_to_loginFragment)
+                    initLoginFragment()
                     true
                 }
                 else -> false
@@ -132,8 +132,13 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         initSucursalesSupervisorScreen()
     }
 
-    private val failureObserver = Observer<Any?> {
-        Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
+    private val failureObserver = Observer<Any?> {statusCode ->
+        if(statusCode == UNAUTHORIZED_CODE){
+            Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
+            initLoginFragment()
+        }
+        else
+            Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
     private val usersObserver = Observer<Array<DataUser>> { dataUser ->
@@ -174,5 +179,10 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         val bundle = Bundle()
         bundle.putString("idBranchOffice", idBranchOffice)
         findNavController().navigate(R.id.action_editSucursalFragment_to_confirmDeleteSucursalFragment, bundle)
+    }
+
+    private fun initLoginFragment() {
+        fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        findNavController().navigate(R.id.action_editSucursalFragment_to_loginFragment)
     }
 }

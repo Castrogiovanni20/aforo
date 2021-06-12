@@ -34,6 +34,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     private var recyclerView : RecyclerView?= null
     private lateinit var branchOfficeAdapter2: BranchOfficeAdapter_2
     private val SUCURSAL_SIN_FUNCIONARIO: String = "Sin asignar"
+    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -132,7 +133,12 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     }
 
     private val getBranchOfficesFailureObserver = Observer<Any?> { error ->
-        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
+        if(error == UNAUTHORIZED_CODE){
+            Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
+            initLoginFragment()
+        }
+        else
+            Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
     }
 
     private val getUsersObserver = Observer<Array<DataUser>> { dataUsers ->

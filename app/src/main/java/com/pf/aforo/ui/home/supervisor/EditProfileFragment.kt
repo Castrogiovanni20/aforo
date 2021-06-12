@@ -19,6 +19,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private lateinit var binding : FragmentEditProfileBinding
     private lateinit var editProfileViewModel: EditProfileViewModel
     private lateinit var userFuncionario: UserFuncionario
+    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,8 +40,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
-                    fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                    findNavController().navigate(R.id.action_editProfileFragment_to_loginFragment)
+                    initLoginFragment()
                     true
                 }
                 else -> false
@@ -86,7 +86,12 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private val updateUserFailureObserver = Observer<Any?> { statusCode ->
-        Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
+        if(statusCode == UNAUTHORIZED_CODE){
+            Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
+            initLoginFragment()
+        }
+        else
+            Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
     private fun getToken(): String {
@@ -96,6 +101,11 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
     private fun getUserFuncionario() {
         userFuncionario = arguments?.getParcelable<UserFuncionario>("UserFuncionario")!!
+    }
+
+    private fun initLoginFragment() {
+        fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        findNavController().navigate(R.id.action_editProfileFragment_to_loginFragment)
     }
 
 }

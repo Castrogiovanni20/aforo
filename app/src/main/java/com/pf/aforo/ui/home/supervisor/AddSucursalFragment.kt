@@ -23,6 +23,7 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
     private var listUserFuncionarios = ArrayList<UserFuncionario>()
     private var fullnameSpinnerArray = ArrayList<String>()
     private var userIdSelected = "null"
+    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,8 +47,7 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
-                    fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                    findNavController().navigate(R.id.action_addSucursalFragment_to_loginFragment)
+                    initLoginFragment()
                     true
                 }
                 else -> false
@@ -108,7 +108,7 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
     }
 
     private val failureObserver = Observer<Any> { statusCode ->
-        Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
+        onFailResponse(statusCode, "Ocurrio un error, por favor intentá nuevamente.")
     }
 
     private val usersObserver = Observer<Array<DataUser>> { dataUser ->
@@ -130,7 +130,7 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
     }
 
     private val assignCivilServantFailureObserver = Observer<Any> { statusCode ->
-        Toast.makeText(context, "Ocurrio un error al asignar el funcionario a la sucursal, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
+        onFailResponse(statusCode, "Ocurrio un error al asignar el funcionario a la sucursal, por favor intentá nuevamente.")
     }
 
     private fun getUsersFuncionarios() {
@@ -162,5 +162,19 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
     private fun getToken(): String {
         val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
         return sharedPref?.getString("Token", "0").toString()
+    }
+
+    private fun initLoginFragment() {
+        fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        findNavController().navigate(R.id.action_addSucursalFragment_to_loginFragment)
+    }
+
+    private fun onFailResponse(statusCode: Any, defaultMsg: String) {
+        if(statusCode == UNAUTHORIZED_CODE){
+            Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
+            initLoginFragment()
+        }
+        else
+            Toast.makeText(context, defaultMsg, Toast.LENGTH_SHORT).show()
     }
 }

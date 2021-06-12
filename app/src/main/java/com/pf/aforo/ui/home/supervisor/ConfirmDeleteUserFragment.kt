@@ -2,10 +2,10 @@ package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +15,7 @@ import com.pf.aforo.databinding.FragmentConfirmDeleteUserBinding
 class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user) {
     private lateinit var binding: FragmentConfirmDeleteUserBinding
     private lateinit var editUserViewModel: EditUserViewModel
+    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +42,12 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
     }
 
     private val failureObserver = Observer<Any> { statusCode ->
-        Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
+        if(statusCode == UNAUTHORIZED_CODE){
+            Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
+            initLoginFragment()
+        }
+        else
+            Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
     private fun deleteUser() {
@@ -55,6 +61,11 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
     private fun getToken(): String {
         val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
         return sharedPref?.getString("Token", "0").toString()
+    }
+
+    private fun initLoginFragment() {
+        fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        findNavController().navigate(R.id.action_confirmDeleteUserFragment_to_loginFragment)
     }
 
 }
