@@ -41,7 +41,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         loginViewModel.userResponseLiveData.observe(viewLifecycleOwner, userObserver)
         loginViewModel.getUserFailureResponse.observe(viewLifecycleOwner, userFailureObserver)
 
-        loginViewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
+        loginViewModel.startProgressBar.observe(viewLifecycleOwner, this.startProgressBarObserver)
+        loginViewModel.stopProgressBar.observe(viewLifecycleOwner, this.stopProgressBarObserver)
     }
 
     private fun setClickListeners () {
@@ -59,6 +60,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         var password = binding.edtPass.text.toString()
         val userLogin = UserLogin(userName, password)
 
+        loginViewModel.startProgressBar()
         loginViewModel.loginUser(userLogin)
     }
 
@@ -70,13 +72,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         setSharedPreferences(token)
     }
 
-    private val isLoadingObserver = Observer<Boolean> { flag ->
-        if (flag == true) {
-            binding.loadingSpinner.visibility = View.VISIBLE
-        }
-    }
-
     private val userObserver = Observer<DataUser> { data ->
+        loginViewModel.stopProgressBar()
         when (data.role) {
             "SUPERVISOR" -> initFragmentHomeSupervisor()
             "CIVIL_SERVANT" -> initFragmentHomeFuncionario()
@@ -84,12 +81,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private val userFailureObserver = Observer<String> {
+        loginViewModel.stopProgressBar()
         Toast.makeText(context, "Algo salio mal", Toast.LENGTH_SHORT).show()
     }
 
     private val failureObserver = Observer<Any?> { statusCode ->
-        binding.loadingSpinner.visibility = View.GONE
-
+        loginViewModel.stopProgressBar()
         when (statusCode) {
             "500", "401" -> {
                 Toast.makeText(context, "Usuario y/o contraseña incorrecto.", Toast.LENGTH_SHORT).show()
@@ -105,9 +102,16 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private val validationObserver = Observer<Any?> { error ->
-        binding.loadingSpinner.visibility = View.GONE
-
+        loginViewModel.stopProgressBar()
         Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
+    }
+
+    private val startProgressBarObserver = Observer<Boolean> {
+        binding.loadingSpinner.visibility = View.VISIBLE
+    }
+
+    private val stopProgressBarObserver = Observer<Boolean> {
+        binding.loadingSpinner.visibility = View.GONE
     }
 
     private fun initFragmentHomeFuncionario() {

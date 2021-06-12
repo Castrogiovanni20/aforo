@@ -37,15 +37,15 @@
     <string name="recuperarContras">Recuperar contraseña</string>
     <string name="mailPasos">Ha recibido un correo con los pasos para recuperar su contraseña</string>
 
-    <string name="nombreSucursal">Nombre Sucursal:</string>
-    <string name="domicilio">Dirección:</string>
-    <string name="telefono">Tel. Sucursal:</string>
-    <string name="mt2ancho">mt2 Ancho:</string>
-    <string name="mt2alto">mt2 Alto:</string>
-    <string name="funcionarioAsignado">Funcionario Asignado:</string>
-    <string name="funcionarioNombre">Funcionario:</string>
-    <string name="capacidadActual">CAP. ACTUAL: XX personas</string>
-    <string name="capacidadMaxima">CAP. Máxima: </string>
+    <string name="nombreSucursal">Nombre Sucursal</string>
+    <string name="domicilio">Dirección</string>
+    <string name="telefono">Tel. Sucursal</string>
+    <string name="mt2ancho">mt2 Ancho</string>
+    <string name="mt2alto">mt2 Alto</string>
+    <string name="funcionarioAsignado">Responsable</string>
+    <string name="funcionarioNombre">Funcionario</string>
+    <string name="capacidadActual">CAP. Actual</string>
+    <string name="capacidadMaxima">CAP. Máxima</string>
 
     <string name="dnu">(*) Calculo de capacidad de aforo sujeto a Decreto DNU 814 / 2020 PODER EJECUTIVO NACIONAL (P.E.N.) 25-10-2020.</string>
 

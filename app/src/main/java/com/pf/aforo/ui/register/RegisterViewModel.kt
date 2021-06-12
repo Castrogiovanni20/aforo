@@ -14,17 +14,18 @@ class RegisterViewModel : ViewModel () {
     private var _failureResponse = authenticationRepository.registerFailureResponseLiveData
     val failureResponse: MutableLiveData<String> get() = _failureResponse
 
-    val isLoading = MutableLiveData<Boolean>()
+    val startProgressBar = MutableLiveData<Boolean>()
+    val stopProgressBar = MutableLiveData<Boolean>()
 
     var validationError = MutableLiveData<String>()
     var isUserValid : Boolean = false
 
     init {
-        isLoading.value = false
+        startProgressBar.value = false
+        stopProgressBar.value = false
     }
 
     fun registerUser(user: UserSupervisor){
-        isLoading.value = true
         validateUser(user)
         if (isUserValid) authenticationRepository.register(user)
     }
@@ -43,5 +44,13 @@ class RegisterViewModel : ViewModel () {
                 isUserValid = true
             }
         }
+    }
+
+    fun startProgressBar() {
+        startProgressBar.value = true
+    }
+
+    fun stopProgressBar() {
+        stopProgressBar.value = true
     }
 }
