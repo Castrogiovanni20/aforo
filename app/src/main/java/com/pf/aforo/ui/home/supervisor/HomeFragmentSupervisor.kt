@@ -33,6 +33,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     private var arrayListFuncionarios = ArrayList<UserFuncionario>()
     private var recyclerView : RecyclerView?= null
     private lateinit var branchOfficeAdapter2: BranchOfficeAdapter_2
+    private val SUCURSAL_SIN_FUNCIONARIO: String = "Sin asignar"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -123,10 +124,11 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     private val getBranchOfficesSuccessObserver = Observer<ArrayList<BranchOffice>> { branchOffices ->
         arrayListSucursales.clear()
         for (branchOffice in branchOffices) {
-            branchOffice.refUser = getFullNameByID(branchOffice.refUser)
             arrayListSucursales.add(branchOffice)
             branchOfficeAdapter2.notifyDataSetChanged()
         }
+        if(arrayListFuncionarios.isNotEmpty())
+            updateBranchOfficeRefUser()
     }
 
     private val getBranchOfficesFailureObserver = Observer<Any?> { error ->
@@ -138,16 +140,31 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
             val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)
             arrayListFuncionarios.add(userFuncionario)
         }
+        if(arrayListSucursales.isNotEmpty())
+            updateBranchOfficeRefUser()
     }
 
-    private fun getFullNameByID(id: String): String {
+    private fun updateBranchOfficeRefUser() {
+        val branchOffices = ArrayList(arrayListSucursales)
+        arrayListSucursales.clear()
+        for (branchOffice in branchOffices) {
+            branchOffice.refUser = getFullNameOrDefaultByID(branchOffice.refUser)
+            arrayListSucursales.add(branchOffice)
+            branchOfficeAdapter2.notifyDataSetChanged()
+        }
+    }
+
+    private fun getFullNameOrDefaultByID(id: String): String {
+        if (id.equals("null")) {
+            return SUCURSAL_SIN_FUNCIONARIO
+        }
         var fullName = ""
         for (user in arrayListFuncionarios) {
-            if (user.id == id) {
+            if (user.id == id){
                 fullName = user.firstName + " " + user.lastName
+                break
             }
         }
-
         return fullName
     }
 
