@@ -1,6 +1,8 @@
 package com.pf.aforo.ui.home.supervisor
 
 import android.os.Bundle
+import android.text.Html
+import android.text.Html.fromHtml
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +19,6 @@ internal class BranchOfficeAdapter_1(private var listBranchOffice: ArrayList<Bra
     internal inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var imageBranchOffice: CircleImageView = view.findViewById(R.id.circleImageViewProfile)
         var textViewName: TextView = view.findViewById(R.id.textViewNombre)
-        var textViewBranchOffice: TextView = view.findViewById(R.id.textViewOrganizacion)
         var textViewMt2ancho: TextView = view.findViewById(R.id.textViewMt2ancho)
         var textViewMt2alto: TextView = view.findViewById(R.id.textViewMt2alto)
         var textViewCapacity: TextView = view.findViewById(R.id.textViewCapacidadActual)
@@ -28,11 +29,10 @@ internal class BranchOfficeAdapter_1(private var listBranchOffice: ArrayList<Bra
     override fun onBindViewHolder(holder: BranchOfficeAdapter_1.MyViewHolder, position: Int) {
         val item = listBranchOffice[position]
         holder.textViewName.text = item.name
-        holder.textViewBranchOffice.text = item.refOrganization
-        holder.textViewMt2ancho.text = "Ancho: " + item.width
-        holder.textViewMt2alto.text = "Alto: " + item.length
-        holder.textViewCapacity.text = "Capacidad actual: " + item.maxCapacity.toString()
-        holder.textViewFuncionario.text = "Funcionario asignado: " + item.refUser
+        holder.textViewMt2ancho.text = fromHtml("Ancho: <i>" + item.width + "</i>")
+        holder.textViewMt2alto.text = fromHtml("Largo: <i>" + item.length + "</i>")
+        holder.textViewCapacity.text = fromHtml("Capacidad actual: <i>" + item.maxCapacity.toString() + "</i>")
+        holder.textViewFuncionario.text = fromHtml("Responsable: <i>" + item.refUser + "</i>")
 
         holder.imageBtnEdit.setOnClickListener { view ->
             val bundle = Bundle()

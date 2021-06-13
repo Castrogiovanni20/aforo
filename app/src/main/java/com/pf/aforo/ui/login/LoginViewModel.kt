@@ -27,6 +27,9 @@ class LoginViewModel : ViewModel() {
 
     val isLoading = MutableLiveData<Boolean>()
 
+    val startProgressBar = MutableLiveData<Boolean>()
+    val stopProgressBar = MutableLiveData<Boolean>()
+
     var validationError = MutableLiveData<String>()
     var isUserValid : Boolean = false
 
@@ -55,6 +58,14 @@ class LoginViewModel : ViewModel() {
                 isUserValid = true
             }
         }
+    }
+
+    fun startProgressBar() {
+        startProgressBar.value = true
+    }
+
+    fun stopProgressBar() {
+        stopProgressBar.value = true
     }
 
 }

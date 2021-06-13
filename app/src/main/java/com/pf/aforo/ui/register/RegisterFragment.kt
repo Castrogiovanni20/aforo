@@ -29,7 +29,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         registerViewModel.successResponse.observe(viewLifecycleOwner, this.successObserver)
         registerViewModel.failureResponse.observe(viewLifecycleOwner, this.failureObserver)
         registerViewModel.validationError.observe(viewLifecycleOwner, this.validationObserver)
-        registerViewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
+        registerViewModel.startProgressBar.observe(viewLifecycleOwner, this.startProgressBarObserver)
+        registerViewModel.stopProgressBar.observe(viewLifecycleOwner, this.stopProgressBarObserver)
     }
 
     private fun setClickListeners () {
@@ -50,10 +51,12 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
         val user = UserSupervisor(firstName, lastName, email, phoneNumber, refOrganization, password, passwordConfirm, role)
 
+        registerViewModel.startProgressBar()
         registerViewModel.registerUser(user)
     }
 
     private val successObserver = Observer<Any?> { statusCode ->
+        registerViewModel.stopProgressBar()
         when (statusCode) {
             "200" -> {
                 Toast.makeText(context, "Usuario registrado exitosamente. Por favor, inicie sesion.", Toast.LENGTH_SHORT).show()
@@ -63,6 +66,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private val failureObserver = Observer<Any?> { statusCode ->
+        registerViewModel.stopProgressBar()
         when (statusCode) {
             "403" -> {
                 Toast.makeText(context, "El usuario y/o la organizacion ya se encuentran registrados.", Toast.LENGTH_SHORT).show()
@@ -76,13 +80,16 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
     }
 
-    private val isLoadingObserver = Observer<Boolean> { flag ->
-        if (flag == true) {
-           // binding.loadingSpinner.visibility = View.VISIBLE
-        }
+    private val startProgressBarObserver = Observer<Boolean> {
+        binding.loadingSpinner.visibility = View.VISIBLE
+    }
+
+    private val stopProgressBarObserver = Observer<Boolean> {
+        binding.loadingSpinner.visibility = View.GONE
     }
 
     private val validationObserver = Observer<Any?> { error ->
+        registerViewModel.stopProgressBar()
         Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
     }
 
