@@ -26,7 +26,7 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
     private var recyclerView : RecyclerView ?= null
     private lateinit var branchOfficeAdapter1: BranchOfficeAdapter_1
     private val SUCURSAL_SIN_FUNCIONARIO: String = "Sin asignar"
-    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
+    private val UNAUTHORIZED_CODE: String = "401"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

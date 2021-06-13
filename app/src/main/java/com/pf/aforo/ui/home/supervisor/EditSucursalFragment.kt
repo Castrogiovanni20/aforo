@@ -26,7 +26,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private var listUserFuncionarios = ArrayList<UserFuncionario>()
     private var fullnameSpinnerArray = ArrayList<String>()
     private var userIdSelected = "null"
-    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
+    private val UNAUTHORIZED_CODE: String = "401"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

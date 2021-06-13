@@ -34,7 +34,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     private var recyclerView : RecyclerView?= null
     private lateinit var branchOfficeAdapter2: BranchOfficeAdapter_2
     private val SUCURSAL_SIN_FUNCIONARIO: String = "Sin asignar"
-    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
+    private val UNAUTHORIZED_CODE: String = "401"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -19,7 +19,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private lateinit var binding : FragmentEditProfileBinding
     private lateinit var editProfileViewModel: EditProfileViewModel
     private lateinit var userFuncionario: UserFuncionario
-    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
+    private val UNAUTHORIZED_CODE: String = "401"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

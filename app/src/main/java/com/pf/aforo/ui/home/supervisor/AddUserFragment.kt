@@ -16,7 +16,7 @@ import com.pf.aforo.databinding.FragmentAddUserBinding
 class AddUserFragment : Fragment(R.layout.fragment_add_user) {
     private lateinit var binding: FragmentAddUserBinding
     private lateinit var addUserViewModel: AddUserViewModel
-    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
+    private val UNAUTHORIZED_CODE: String = "401"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
