@@ -26,6 +26,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         binding = FragmentEditProfileBinding.bind(view)
         editProfileViewModel = ViewModelProvider(this).get(EditProfileViewModel::class.java)
         setTopBar()
+        setNavigation()
         getUserFuncionario()
         setUI()
         setObservers()
@@ -35,8 +36,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private fun setTopBar() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.itemFuncionarios -> {
-                    findNavController().navigate(R.id.action_editProfileFragment_to_usuariosSupervisorFragment)
+                R.id.itemNotificaciones -> {
+                    findNavController().navigate(R.id.action_editProfileFragment_to_notificacionesSupervisorFragment)
                     true
                 }
                 R.id.itemCerrarSesion -> {
@@ -46,6 +47,33 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                 else -> false
             }
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun setNavigation(){
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.itemHome -> {
+                    findNavController().navigate(R.id.action_editProfileFragment_to_homeFragmentSupervisor)
+                    true
+                }
+                R.id.itemFuncionarios -> {
+                    findNavController().navigate(R.id.action_editProfileFragment_to_usuariosSupervisorFragment)
+                    true
+                }
+                R.id.itemPerfil -> {
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun onBackPressed() {
+        findNavController().navigate(R.id.action_editProfileFragment_to_usuariosSupervisorFragment)
     }
 
     private fun setUI() {
@@ -53,7 +81,6 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         binding.edtApellido.setText(userFuncionario.lastName)
         binding.edtTelefono.setText(userFuncionario.phoneNumber)
         binding.edtMail.setText(userFuncionario.email)
-        binding.edtContrasenia.setText(userFuncionario.password)
     }
 
     private fun setObservers() {
@@ -73,10 +100,9 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         var lastName = binding.edtApellido.text.toString()
         var email = binding.edtMail.text.toString()
         var phoneNumber = binding.edtTelefono.text.toString()
-        var password = binding.edtContrasenia.text.toString()
         var role = userFuncionario.role
 
-        val userFuncionario = UserFuncionario(id, firstName, lastName, email, phoneNumber, password, role)
+        val userFuncionario = UserFuncionario(id, firstName, lastName, email, phoneNumber, "", role)
         editProfileViewModel.updateUser("Bearer ${getToken()}" , userFuncionario)
     }
 

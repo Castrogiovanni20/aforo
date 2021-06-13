@@ -23,6 +23,31 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
         editUserViewModel = ViewModelProvider(this).get(EditUserViewModel::class.java)
         setClickListeners()
         setObservers()
+        setTopBar()
+    }
+
+    private fun setTopBar() {
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.itemNotificaciones -> {
+                    findNavController().navigate(R.id.action_confirmDeleteUserFragment_to_notificacionesSupervisorFragment)
+                    true
+                }
+                R.id.itemCerrarSesion -> {
+                    initLoginFragment()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun onBackPressed() {
+        findNavController().navigate(R.id.action_confirmDeleteUserFragment_to_usuariosSupervisorFragment)
     }
 
     private fun setClickListeners() {

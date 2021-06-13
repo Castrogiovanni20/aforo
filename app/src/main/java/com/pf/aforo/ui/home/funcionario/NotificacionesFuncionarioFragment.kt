@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.pf.aforo.R
 import com.pf.aforo.databinding.FragmentNotificacionesBinding
 
-class NotificacionesFragment : Fragment(R.layout.fragment_notificaciones) {
+class NotificacionesFuncionarioFragment : Fragment(R.layout.fragment_notificaciones) {
     private lateinit var binding: FragmentNotificacionesBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,6 +26,10 @@ class NotificacionesFragment : Fragment(R.layout.fragment_notificaciones) {
                 }
                 else -> false
             }
+        }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            findNavController().navigate(R.id.action_notificacionesFragment_to_homeFragmentFuncionario)
         }
     }
 

@@ -8,6 +8,7 @@
     tools:context=".ui.home.supervisor.AddUserFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout4"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent">
@@ -16,10 +17,10 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/aforo_name"
+            android:background="@android:color/transparent"
             app:menu="@menu/menu_supervisor"
-            app:navigationIcon="@mipmap/logotrbmp"
-            android:background="@android:color/transparent"/>
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            app:title="@string/aforo_name" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -34,13 +35,10 @@
         android:id="@+id/cardVNuevoFunc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
         android:elevation="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline16">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout4">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,15 +113,20 @@
                 android:ems="10"
                 android:hint="@string/Password"
                 android:inputType="numberPassword" />
-
-            <ImageButton
-                android:id="@+id/imgBtnSave"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/btn_circle_default"
-                android:contentDescription="@string/contentDescBtn"
-                app:srcCompat="@android:drawable/ic_menu_save" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <ImageButton
+        android:id="@+id/imgBtnSave"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/btn_circle"
+        android:contentDescription="@string/contentDescBtn"
+        android:src="@android:drawable/ic_media_play"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardVNuevoFunc" />
 </androidx.constraintlayout.widget.ConstraintLayout>

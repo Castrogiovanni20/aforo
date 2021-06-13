@@ -41,6 +41,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         binding = FragmentHomeSupervisorBinding.bind(view)
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         setTopBar()
+        setNavigation()
         getUsers()
         getBranchOffices()
         setRecyclerView()
@@ -51,6 +52,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         mSocket.on(Socket.EVENT_DISCONNECT, onDisconnect)
         mSocket.on("CONTEXT_CHANGE", onContextChange)
     }
+
 
     private fun connectSocket() : Socket {
         try {
@@ -82,12 +84,8 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     private fun setTopBar() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.itemFuncionarios -> {
-                    initFuncionariosFragments()
-                    true
-                }
-                R.id.itemSucursales -> {
-                    initSucursalesFragment()
+                R.id.itemNotificaciones -> {
+                    findNavController().navigate(R.id.action_homeFragmentSupervisor_to_notificacionesSupervisorFragment)
                     true
                 }
                 R.id.itemCerrarSesion -> {
@@ -97,6 +95,37 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
                 else -> false
             }
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun setNavigation(){
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.itemSucursales -> {
+                    findNavController().navigate(R.id.action_homeFragmentSupervisor_to_sucursalesSupervisorFragment)
+                    true
+                }
+                R.id.itemFuncionarios -> {
+                    findNavController().navigate(R.id.action_homeFragmentSupervisor_to_usuariosSupervisorFragment)
+                    true
+                }
+                R.id.itemPerfil -> {
+                    // TO DO
+                    //val bundle = Bundle()
+                    //bundle.putParcelable("UserFuncionario", currentUser)
+                    //findNavController().navigate(R.id.action_homeFragmentSupervisor_to_editProfileFragment)
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun onBackPressed() {
+        initFuncionariosFragments()
     }
 
     private fun getUsers() {

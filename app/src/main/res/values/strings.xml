@@ -6,8 +6,7 @@
     <string name="name">Nombre</string>
     <string name="last_name">Apellido</string>
     <string name="Password">Contraseña</string>
-    <string name="recov_pass">Olvidé mi contraseña </string>
-    <string name="create_account">⛑   Crear Cuenta</string>
+    <string name="create_account">Crear Cuenta</string>
     <string name="send">Enviar</string>
     <string name="welcome">Bienvenido</string>
     <string name="register">Registrarse</string>
@@ -22,7 +21,7 @@
     <string name="txtcities">Instituto Ciudades del Futuro</string>
     <string name="descBackg">Imagen fondo login</string>
     <string name="description">Descripción</string>
-    <string name="delete">Eliminar Funcionario</string>
+    <string name="delete">Eliminar usuario</string>
     <string name="okey">OK</string>
     <string name="confirmarPass">Confirmar contraseña</string>
 
@@ -30,8 +29,8 @@
     <string name="confirmarDeleteSucursal">¿Confirma la eliminación de esta Sucursal?</string>
     <string name="datosIncorrectos">Usuario y/o contraseña incorrectos</string>
     <string name="nuevoFunc">Nuevo Funcionario</string>
-    <string name="btnAgregarFuncionario">Agregar Funcionario</string>
-    <string name="btnAgregarSucursal">Agregar Sucursal</string>
+    <string name="btnAgregarFuncionario">Funcionario</string>
+    <string name="btnAgregarSucursal">Sucursal</string>
     <string name="confirmMail">Se ha enviado un mail de confirmación de registro a su casilla</string>
     <string name="reingresePass">Reingresar la contraseña</string>
     <string name="recuperarContras">Recuperar contraseña</string>
@@ -41,7 +40,7 @@
     <string name="domicilio">Dirección</string>
     <string name="telefono">Tel. Sucursal</string>
     <string name="mt2ancho">mt2 Ancho</string>
-    <string name="mt2alto">mt2 Alto</string>
+    <string name="mt2largo">mt2 Largo</string>
     <string name="funcionarioAsignado">Responsable</string>
     <string name="funcionarioNombre">Funcionario</string>
     <string name="capacidadActual">CAP. Actual</string>
@@ -61,10 +60,10 @@
     <string name="mayor">Horarios más concurridos por Hora</string>
     <string name="apeNom">APELLIDO_NOMBRE</string>
 
-    <string name="menusucu">✒    Mis Sucursales</string>
-    <string name="menufunc">☿     Mis Funcionarios</string>
-    <string name="menunoti">🔔    Ajustar notificaciones</string>
-    <string name="menuchau">⎋    Cerrar sesión</string>
+    <string name="menusucu">Mis Sucursales</string>
+    <string name="menufunc">Mis Funcionarios</string>
+    <string name="menunoti">Ajustar notificaciones</string>
+    <string name="menuchau">Cerrar sesión</string>
 
     <string name="notilimit">Notificación-push Nivel de capacidad ALTO</string>
     <string name="notimax">Notificación-push Máxima capacidad</string>

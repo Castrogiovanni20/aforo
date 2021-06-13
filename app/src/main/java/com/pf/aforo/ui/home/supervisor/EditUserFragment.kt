@@ -34,8 +34,8 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
     private fun setTopBar() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.itemFuncionarios -> {
-                    findNavController().navigate(R.id.action_editUserFragment_to_usuariosSupervisorFragment)
+                R.id.itemNotificaciones -> {
+                    findNavController().navigate(R.id.action_editUserFragment_to_notificacionesSupervisorFragment)
                     true
                 }
                 R.id.itemCerrarSesion -> {
@@ -45,6 +45,14 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
                 else -> false
             }
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun onBackPressed() {
+        findNavController().navigate(R.id.action_editUserFragment_to_usuariosSupervisorFragment)
     }
 
     private fun setUI() {

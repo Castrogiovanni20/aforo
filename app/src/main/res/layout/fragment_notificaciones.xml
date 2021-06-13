@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightgray"
-    tools:context=".ui.home.funcionario.NotificacionesFragment">
+    tools:context=".ui.home.funcionario.NotificacionesFuncionarioFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
@@ -20,7 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
             app:menu="@menu/menu_funcionario"
-            app:navigationIcon="@mipmap/logotrbmp"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
             app:title="@string/aforo_name" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -36,9 +36,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/notificaciones"
         android:layout_width="400dp"
-        android:layout_height="240dp"
+        android:layout_height="400dp"
         android:layout_gravity="center"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="50dp"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
@@ -72,8 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="300dp"
-            android:layout_marginTop="70dp"
-            />
+            android:layout_marginTop="70dp" />
 
         <TextView
             android:id="@+id/notimax"
@@ -91,21 +90,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="300dp"
-            android:layout_marginTop="130dp"
-            />
+            android:layout_marginTop="130dp" />
 
 
     </androidx.cardview.widget.CardView>
 
     <ImageButton
         android:id="@+id/btnSiguiente"
-        android:layout_width="59dp"
-        android:layout_height="57dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/btn_circle"
         android:elevation="30dp"
         android:src="@android:drawable/ic_media_play"
-        tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="389dp" />
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notificaciones" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

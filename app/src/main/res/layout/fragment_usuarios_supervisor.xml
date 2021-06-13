@@ -9,6 +9,7 @@
     tools:context=".ui.home.supervisor.UsuariosSupervisorFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout5"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,44 +20,23 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
             app:menu="@menu/menu_supervisor"
-            app:navigationIcon="@mipmap/logotrbmp"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
             app:title="@string/aforo_name" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline17"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAgregarFuncionario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <Button
-        android:id="@+id/btnAgregarFuncionario"
-        android:layout_width="256dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/round_person_24"
-        android:text="@string/btnAgregarFuncionario"
-        app:layout_constraintEnd_toStartOf="@+id/btnPerfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnPerfil"
-        android:layout_width="100dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="16dp"
-        android:text="Perfil"
-        app:layout_constraintEnd_toStartOf="@+id/btnAgregarFuncionario"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnAgregarFuncionario"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:backgroundTint="@color/colorPrimary"
+        android:contentDescription="@string/app_name"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_baseline_person_add_24"
+        app:tint="@color/white"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="64dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -68,5 +48,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAgregarFuncionario" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bottom_navigation_background"
+        android:elevation="8dp"
+        app:itemIconTint="@drawable/bottom_navigation_color_selector"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/menu_barra_supervisor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

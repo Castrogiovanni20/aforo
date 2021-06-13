@@ -52,6 +52,15 @@
         <action
             android:id="@+id/action_homeFragmentSupervisor_to_usuariosSupervisorFragment"
             app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_editProfileFragment2"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/addUserFragment"
@@ -67,6 +76,12 @@
         <action
             android:id="@+id/action_addUserFragment_to_usuariosSupervisorFragment"
             app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_addUserFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+        <action
+            android:id="@+id/action_addUserFragment_to_notificacionesSupervisorFragment2"
+            app:destination="@id/notificacionesSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/editUserFragment"
@@ -88,6 +103,9 @@
         <action
             android:id="@+id/action_editUserFragment_to_sucursalesSupervisorFragment"
             app:destination="@id/sucursalesSupervisorFragment" />
+        <action
+            android:id="@+id/action_editUserFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/confirmDeleteUserFragment"
@@ -100,6 +118,12 @@
         <action
             android:id="@+id/action_confirmDeleteUserFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_confirmDeleteUserFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+        <action
+            android:id="@+id/action_confirmDeleteUserFragment_to_notificacionesSupervisorFragment2"
+            app:destination="@id/notificacionesSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -115,6 +139,9 @@
         <action
             android:id="@+id/action_editProfileFragment_to_usuariosSupervisorFragment"
             app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/sucursalesSupervisorFragment"
@@ -148,6 +175,9 @@
         <action
             android:id="@+id/action_sucursalesSupervisorFragment_to_homeFragmentSupervisor2"
             app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/addSucursalFragment"
@@ -163,6 +193,12 @@
         <action
             android:id="@+id/action_addSucursalFragment_to_usuariosSupervisorFragment"
             app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_addSucursalFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+        <action
+            android:id="@+id/action_addSucursalFragment_to_notificacionesSupervisorFragment2"
+            app:destination="@id/notificacionesSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/editSucursalFragment"
@@ -181,6 +217,9 @@
         <action
             android:id="@+id/action_editSucursalFragment_to_usuariosSupervisorFragment"
             app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_editSucursalFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/confirmDeleteSucursalFragment"
@@ -193,6 +232,9 @@
         <action
             android:id="@+id/action_confirmDeleteSucursalFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_confirmDeleteSucursalFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/usuariosSupervisorFragment"
@@ -217,6 +259,15 @@
         <action
             android:id="@+id/action_usuariosSupervisorFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_notificacionesFragment"
+            app:destination="@id/notificacionesFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_notificacionesSupervisorFragment2"
+            app:destination="@id/notificacionesSupervisorFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragmentFuncionario"
@@ -235,7 +286,7 @@
     </fragment>
     <fragment
         android:id="@+id/notificacionesFragment"
-        android:name="com.pf.aforo.ui.home.funcionario.NotificacionesFragment"
+        android:name="com.pf.aforo.ui.home.funcionario.NotificacionesFuncionarioFragment"
         android:label="fragment_notificaciones"
         tools:layout="@layout/fragment_notificaciones" >
         <action
@@ -244,5 +295,13 @@
         <action
             android:id="@+id/action_notificacionesFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificacionesSupervisorFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.NotificacionesSupervisorFragment"
+        android:label="NotificacionesSupervisorFragment" >
+        <action
+            android:id="@+id/action_notificacionesSupervisorFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
     </fragment>
 </navigation>

@@ -43,8 +43,8 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private fun setTopBar() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.itemFuncionarios -> {
-                    findNavController().navigate(R.id.action_editSucursalFragment_to_sucursalesSupervisorFragment)
+                R.id.itemNotificaciones -> {
+                    findNavController().navigate(R.id.action_editSucursalFragment_to_notificacionesSupervisorFragment)
                     true
                 }
                 R.id.itemCerrarSesion -> {
@@ -54,6 +54,14 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
                 else -> false
             }
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun onBackPressed() {
+        findNavController().navigate(R.id.action_editSucursalFragment_to_sucursalesSupervisorFragment)
     }
 
     private fun setUI() {

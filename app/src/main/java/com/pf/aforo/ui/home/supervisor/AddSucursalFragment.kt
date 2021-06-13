@@ -38,12 +38,8 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
     private fun setTopBar() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.itemFuncionarios -> {
-                   findNavController().navigate(R.id.action_addSucursalFragment_to_usuariosSupervisorFragment)
-                    true
-                }
-                R.id.itemSucursales -> {
-                    findNavController().navigate(R.id.action_addSucursalFragment_to_sucursalesSupervisorFragment)
+                R.id.itemNotificaciones -> {
+                    findNavController().navigate(R.id.action_addSucursalFragment_to_notificacionesSupervisorFragment)
                     true
                 }
                 R.id.itemCerrarSesion -> {
@@ -53,7 +49,16 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
                 else -> false
             }
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed();
+        }
     }
+
+    private fun onBackPressed() {
+        findNavController().navigate(R.id.action_addSucursalFragment_to_sucursalesSupervisorFragment)
+    }
+
 
     private fun setSpinner() {
         val spinner = binding.spinnerFuncionario
@@ -144,13 +149,12 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
     }
 
     private fun addBranchOffice() {
-        val refOrganization = binding.edtOrganizacion.text.toString()
         val name = binding.edtNombreSucursal.text.toString()
         val description = binding.edtDomicilio.text.toString()
         val refUser = userIdSelected
         val width =  Integer.parseInt(binding.edtMt2Ancho.text.toString())
-        val length = Integer.parseInt(binding.edtMt2Alto.text.toString())
-        val branchOffice = BranchOffice("", "", refOrganization, name, description, refUser, 0, width, length, 0)
+        val length = Integer.parseInt(binding.edtMt2Largo.text.toString())
+        val branchOffice = BranchOffice("", "", "", name, description, refUser, 0, width, length, 0)
 
         addSucursalViewModel.addBranchOffice("Bearer ${getToken()}", branchOffice)
     }

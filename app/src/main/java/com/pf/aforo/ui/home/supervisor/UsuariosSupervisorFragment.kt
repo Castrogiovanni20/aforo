@@ -47,11 +47,8 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
     private fun setTopBar() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.itemFuncionarios -> {
-                    true
-                }
-                R.id.itemSucursales -> {
-                    findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_sucursalesSupervisorFragment)
+                R.id.itemNotificaciones -> {
+                    findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_notificacionesSupervisorFragment)
                     true
                 }
                 R.id.itemCerrarSesion -> {
@@ -61,14 +58,23 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
                 else -> false
             }
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun onBackPressed() {
+        findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_sucursalesSupervisorFragment)
     }
 
     private fun setOnClickListeners() {
+        /*
         binding.btnPerfil.setOnClickListener {
             val bundle = Bundle()
             bundle.putParcelable("UserFuncionario", currentUser)
             findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_editProfileFragment, bundle)
-        }
+        }*/
 
         binding.btnAgregarFuncionario.setOnClickListener {
             findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_addUserFragment)

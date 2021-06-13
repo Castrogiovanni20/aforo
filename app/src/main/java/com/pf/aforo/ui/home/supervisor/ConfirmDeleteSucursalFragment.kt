@@ -23,6 +23,31 @@ class ConfirmDeleteSucursalFragment : Fragment(R.layout.fragment_confirm_delete_
         editSucursalViewModel = ViewModelProvider(this).get(EditSucursalViewModel::class.java)
         setOnClickListeners()
         setObservers()
+        setTopBar()
+    }
+
+    private fun setTopBar() {
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.itemNotificaciones -> {
+                    findNavController().navigate(R.id.action_confirmDeleteSucursalFragment_to_notificacionesSupervisorFragment)
+                    true
+                }
+                R.id.itemCerrarSesion -> {
+                    initLoginFragment()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed();
+        }
+    }
+
+    private fun onBackPressed() {
+        findNavController().navigate(R.id.action_confirmDeleteSucursalFragment_to_sucursalesSupervisorFragment)
     }
 
     private fun setOnClickListeners() {

@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             app:title="@string/aforo_name"
             app:menu="@menu/menu_supervisor"
-            app:navigationIcon="@mipmap/logotrbmp"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
             android:background="@android:color/transparent"/>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -60,13 +60,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="12dp" />
 
-            <ImageButton
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                app:civ_border_width="2dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/btn_circle"
-                app:srcCompat="@android:mipmap/sym_def_app_icon" />
+                android:background="@drawable/imagen_perfil" />
 
             <Space
                 android:layout_width="match_parent"
@@ -85,7 +85,8 @@
             <Spinner
                 android:id="@+id/roles_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"/>
 
             <Space
                 android:layout_width="match_parent"
@@ -98,29 +99,28 @@
         android:id="@+id/txtVEliminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:text="@string/delete"
         android:textAlignment="center"
         android:textColor="@color/fucsia"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSiguiente"
-        app:layout_constraintVertical_bias="0.688" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSiguiente" />
 
     <ImageButton
         android:id="@+id/btnSiguiente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="148dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/btn_circle"
         android:elevation="30dp"
         android:src="@android:drawable/ic_media_play"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardEditar"
-        app:layout_constraintVertical_bias="0.361" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardEditar" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

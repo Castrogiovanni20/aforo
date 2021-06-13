@@ -31,8 +31,8 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
     private fun setTopBar() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.itemFuncionarios -> {
-                    findNavController().navigate(R.id.action_addUserFragment_to_usuariosSupervisorFragment)
+                R.id.itemNotificaciones -> {
+                    findNavController().navigate(R.id.action_addUserFragment_to_notificacionesSupervisorFragment)
                     true
                 }
                 R.id.itemCerrarSesion -> {
@@ -42,6 +42,14 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
                 else -> false
             }
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed();
+        }
+    }
+
+    private fun onBackPressed() {
+        findNavController().navigate(R.id.action_addUserFragment_to_usuariosSupervisorFragment)
     }
 
     private fun setObservers() {
