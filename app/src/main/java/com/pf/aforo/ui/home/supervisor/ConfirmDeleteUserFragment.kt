@@ -15,7 +15,7 @@ import com.pf.aforo.databinding.FragmentConfirmDeleteUserBinding
 class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user) {
     private lateinit var binding: FragmentConfirmDeleteUserBinding
     private lateinit var editUserViewModel: EditUserViewModel
-    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
+    private val UNAUTHORIZED_CODE: String = "401"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -30,7 +30,7 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
     private var recyclerView: RecyclerView? = null
     private val CIVIL_SERVANT: String = "CIVIL_SERVANT"
     private val FUNCIONARIO: String = "FUNCIONARIO"
-    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
+    private val UNAUTHORIZED_CODE: String = "401"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

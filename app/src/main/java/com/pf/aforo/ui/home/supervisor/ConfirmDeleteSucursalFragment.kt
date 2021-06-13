@@ -15,7 +15,7 @@ import com.pf.aforo.databinding.FragmentConfirmDeleteSucursalBinding
 class ConfirmDeleteSucursalFragment : Fragment(R.layout.fragment_confirm_delete_sucursal) {
     private lateinit var binding: FragmentConfirmDeleteSucursalBinding
     private lateinit var editSucursalViewModel: EditSucursalViewModel
-    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
+    private val UNAUTHORIZED_CODE: String = "401"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
