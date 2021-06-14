@@ -72,20 +72,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="12dp" />
 
-            <TextView
-                android:id="@+id/fullName"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:text="Fullname"
+                android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="@font/roboto"
+                android:hint="@string/full_name"
+                app:errorIconDrawable="@drawable/ic_baseline_error_24"
+                app:startIconDrawable="@drawable/ic_baseline_person_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:layout_weight="1"
+                    android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+                    android:inputType="textPersonName|text"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/textRole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_baseline_assignment_ind_24"
+                android:drawablePadding="17sp"
+                android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:paddingLeft="12dp"
+                android:paddingTop="18sp"
                 android:paddingRight="12dp"
-                android:textAlignment="center"/>
+                android:text="@string/role"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
                 android:id="@+id/roles_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
                 android:layout_marginLeft="15dp"/>
 
             <Space

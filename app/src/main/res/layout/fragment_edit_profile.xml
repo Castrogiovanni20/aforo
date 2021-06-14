@@ -67,60 +67,114 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/imagen_perfil" />
 
-            <EditText
-                android:id="@+id/edtApellido"
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/last_name"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:textAlignment="center" />
+                app:errorIconDrawable="@drawable/ic_baseline_error_24"
+                app:startIconDrawable="@drawable/ic_baseline_person_24">
 
-            <EditText
-                android:id="@+id/edtNombre"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtApellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:layout_weight="1"
+                    android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+                    android:inputType="textPersonName|text"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="12"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/name"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:textAlignment="center" />
+                app:errorIconDrawable="@drawable/ic_baseline_error_24"
+                app:startIconDrawable="@drawable/ic_baseline_person_24">
 
-            <EditText
-                android:id="@+id/edtDNI"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:layout_weight="1"
+                    android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+                    android:inputType="textPersonName|text"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/dni"
-                android:inputType="number"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:textAlignment="center" />
+                app:errorIconDrawable="@drawable/ic_baseline_error_24"
+                app:startIconDrawable="@drawable/ic_baseline_perm_identity_24">
 
-            <EditText
-                android:id="@+id/edtTelefono"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtDNI"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:layout_weight="1"
+                    android:maxLength="8"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/cel_phone"
-                android:inputType="number"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:textAlignment="center" />
+                app:errorIconDrawable="@drawable/ic_baseline_error_24"
+                app:startIconDrawable="@drawable/ic_baseline_phone_android_24">
 
-            <EditText
-                android:id="@+id/edtMail"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtTelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:layout_weight="1"
+                    android:inputType="phone"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/edt_email"
-                android:inputType="textEmailAddress"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:textAlignment="center" />
+                app:errorIconDrawable="@drawable/ic_baseline_error_24"
+                app:startIconDrawable="@drawable/ic_baseline_email_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtMail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:layout_weight="1"
+                    android:inputType="textEmailAddress"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Space
                 android:layout_width="match_parent"

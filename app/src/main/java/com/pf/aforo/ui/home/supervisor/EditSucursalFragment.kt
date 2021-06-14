@@ -27,6 +27,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private var fullnameSpinnerArray = ArrayList<String>()
     private var userIdSelected = "null"
     private val UNAUTHORIZED_CODE: String = "401"
+    private val SUCURSAL_SIN_FUNCIONARIO: String = "Sin asignar"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,11 +67,11 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
 
     private fun setUI() {
         binding.edtNombreSucursal.setText(branchOffice.name)
-        binding.edtOrganizacion.setText(branchOffice.refOrganization)
         binding.edtDomicilio.setText(branchOffice.description)
         binding.edtMt2Ancho.setText(branchOffice.width.toString())
         binding.edtMt2Alto.setText(branchOffice.length.toString())
-        binding.textFuncionarioAsignado.text = "Funcionario asignado: " + branchOffice.refUser
+        val refUser = if (branchOffice.refUser == "null") SUCURSAL_SIN_FUNCIONARIO else branchOffice.refUser
+        binding.textFuncionarioAsignado.text = "Funcionario asignado: " + refUser
     }
 
     private fun setSpinner() {
