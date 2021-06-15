@@ -64,9 +64,6 @@
 
     <string name="ocupTorta">Ocupación:</string>
     <string name="dispoTorta">Disponible:</string>
-    <string name="verde">Nivel de Ocupación BAJO</string>
-    <string name="amarillo">Nivel de Ocupación MEDIO</string>
-    <string name="rojo">Nivel de Ocupación ALTO</string>
     <string name="mayor">Horarios más concurridos por Hora</string>
     <string name="apeNom">APELLIDO_NOMBRE</string>
 

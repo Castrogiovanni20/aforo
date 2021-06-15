@@ -29,25 +29,26 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card1"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="175dp"
         android:layout_gravity="center"
-        android:layout_marginTop="75dp"
+        android:fontFamily="@font/roboto"
+        app:cardBackgroundColor="@color/darkblue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="@color/celeste"
-        app:cardCornerRadius="20dp">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <TextView
             android:id="@+id/datos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/roboto"
             android:text="@string/datos"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold" />
+            android:textColor="@color/colorBar"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
 
         <TextView
             android:id="@+id/titulo"
@@ -56,7 +57,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:text="@string/nombreSucursal"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorBar" />
 
         <TextView
             android:id="@+id/domicilio"
@@ -65,7 +66,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="50dp"
             android:text="@string/domicilio"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorBar" />
 
         <TextView
             android:id="@+id/funcionario"
@@ -74,7 +75,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="70dp"
             android:text="@string/funcionarioAsignado"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorBar" />
 
         <TextView
             android:id="@+id/ancho"
@@ -83,7 +84,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="90dp"
             android:text="@string/mt2ancho"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorBar" />
 
         <TextView
             android:id="@+id/alto"
@@ -92,7 +93,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="110dp"
             android:text="@string/mt2largo"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorBar" />
 
         <TextView
             android:id="@+id/capmax"
@@ -101,28 +102,20 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="130dp"
             android:text="@string/capacidadMaxima"
-            android:textColor="@color/colorPrimaryDark" />
-
-        <ImageView
-            android:id="@+id/fotoFuncionario"
-            android:layout_width="75dp"
-            android:layout_height="61dp"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/fotofunc" />
-
+            android:textColor="@color/colorBar" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card2"
-        android:layout_width="400dp"
-        android:layout_height="230dp"
+        android:layout_width="350dp"
+        android:layout_height="260dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="20dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="8dp"
+        android:fontFamily="@font/roboto"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card1">
 
@@ -140,8 +133,8 @@
             android:id="@+id/torta"
             android:layout_width="151dp"
             android:layout_height="130dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="125dp"
             android:src="@drawable/torta" />
 
         <TextView
@@ -164,72 +157,30 @@
             android:textColor="@color/blue"
             android:textStyle="bold" />
 
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card3"
-        android:layout_width="403dp"
-        android:layout_height="109dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card2">
-
         <ImageView
-            android:id="@+id/lights"
-            android:layout_width="88dp"
-            android:layout_height="85dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/lights" />
-
-        <TextView
-            android:id="@+id/verde"
-            android:layout_width="179dp"
+            android:id="@+id/semaforo"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="175dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/verde"
-            android:textAlignment="center"
-            android:textColor="@color/verde"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/amarillo"
-            android:layout_width="179dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="175dp"
-            android:layout_marginTop="45dp"
-            android:text="@string/amarillo"
-            android:textAlignment="center"
-            android:textColor="@color/amarillo"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/rojo"
-            android:layout_width="179dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="175dp"
-            android:layout_marginTop="65dp"
-            android:text="@string/verde"
-            android:textAlignment="center"
-            android:textColor="@color/rojo"
-            android:textStyle="bold" />
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="220dp"
+            android:src="@mipmap/icon_smgnone" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card4"
-        android:layout_width="403dp"
+        android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="12dp"
-        app:cardCornerRadius="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card3">
+        app:layout_constraintTop_toBottomOf="@+id/card2"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/horas"
@@ -240,12 +191,12 @@
             android:text="@string/mayor"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/barras"
-            android:layout_width="211dp"
+            android:layout_width="171dp"
             android:layout_height="85dp"
             android:layout_marginLeft="170dp"
             android:layout_marginTop="10dp"
