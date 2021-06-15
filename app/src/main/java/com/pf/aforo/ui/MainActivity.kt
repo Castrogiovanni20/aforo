@@ -8,8 +8,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
-        setContentView(R.layout.fragment_home_funcionario_2)
+        setContentView(R.layout.activity_main)
+
     }
 
 }
