@@ -57,10 +57,10 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
 
     private fun setUI() {
         binding.fullName.setText(userFuncionario.firstName + " " + userFuncionario.lastName)
-        setSpinner()
+        setSpinner(userFuncionario.role)
     }
 
-    private fun setSpinner() {
+    private fun setSpinner(role: String) {
         val spinner = binding.rolesSpinner
         context?.let {
             ArrayAdapter.createFromResource(it, R.array.roles, android.R.layout.simple_spinner_item).also { adapter ->
@@ -68,6 +68,10 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
                 spinner.adapter = adapter
             }
         }
+        if(role == "SUPERVISOR")
+            spinner.setSelection(0)
+        else
+            spinner.setSelection(1)
     }
 
     private fun setObservers() {
