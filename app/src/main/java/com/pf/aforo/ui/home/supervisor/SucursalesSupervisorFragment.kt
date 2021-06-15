@@ -66,6 +66,8 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
     }
 
     private fun setNavigation(){
+        binding.bottomNavigation.selectedItemId = R.id.itemSucursales
+
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemHome -> {
@@ -77,10 +79,7 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
                     true
                 }
                 R.id.itemPerfil -> {
-                    // TO DO
-                    //val bundle = Bundle()
-                    //bundle.putParcelable("UserFuncionario", currentUser)
-                    //findNavController().navigate(R.id.action_homeFragmentSupervisor_to_editProfileFragment)
+                    findNavController().navigate(R.id.action_sucursalesSupervisorFragment_to_editProfileFragment)
                     true
                 }
                 else -> false

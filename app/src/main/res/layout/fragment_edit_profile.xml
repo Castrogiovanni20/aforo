@@ -86,7 +86,6 @@
                     android:layout_weight="1"
                     android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:inputType="textPersonName|text"
-                    android:textAlignment="center"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,7 +107,6 @@
                     android:layout_weight="1"
                     android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:inputType="textPersonName|text"
-                    android:textAlignment="center"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,7 +128,6 @@
                     android:layout_weight="1"
                     android:maxLength="8"
                     android:inputType="number"
-                    android:textAlignment="center"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -151,7 +148,6 @@
                     android:paddingRight="12dp"
                     android:layout_weight="1"
                     android:inputType="phone"
-                    android:textAlignment="center"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -172,7 +168,6 @@
                     android:paddingRight="12dp"
                     android:layout_weight="1"
                     android:inputType="textEmailAddress"
-                    android:textAlignment="center"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 

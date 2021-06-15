@@ -21,6 +21,7 @@ class NotificacionesSupervisorFragment : Fragment(R.layout.fragment_notificacion
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemCerrarSesion -> {
+                    findNavController().navigate(R.id.action_notificacionesSupervisorFragment_to_loginFragment)
                     true
                 }
                 else -> false

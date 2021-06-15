@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.pf.aforo.R
 import com.pf.aforo.data.model.Data
 import com.pf.aforo.data.model.DataUser
+import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.databinding.FragmentLoginBinding
 import kotlin.math.log
@@ -21,6 +22,7 @@ import kotlin.math.log
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var userId: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,16 +67,17 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private val loginObserver = Observer<Data> { data ->
-        val userId = data.userId
+        userId = data.userId
         val token = data.token
 
         loginViewModel.getUser("Bearer $token", userId)
         setSharedPreferences(token)
     }
 
-    private val userObserver = Observer<DataUser> { data ->
+    private val userObserver = Observer<DataUser> { user ->
         loginViewModel.stopProgressBar()
-        when (data.role) {
+
+        when (user.role) {
             "SUPERVISOR" -> initFragmentHomeSupervisor()
             "CIVIL_SERVANT" -> initFragmentHomeFuncionario()
         }
@@ -127,6 +130,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val editor = sharedPreferences?.edit()
         editor?.putString("Token", token)
         editor?.putString("Email", binding.edtEmail.text.toString())
+        editor?.putString("UserID", userId)
         editor?.apply()
     }
 

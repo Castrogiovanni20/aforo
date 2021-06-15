@@ -37,6 +37,7 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
         binding = FragmentUsuariosSupervisorBinding.bind(view)
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         setTopBar()
+        setNavigation()
         setOnClickListeners()
         getUsers()
         setUpRecyclerView()
@@ -64,18 +65,33 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
         }
     }
 
+    private fun setNavigation(){
+        binding.bottomNavigation.selectedItemId = R.id.itemFuncionarios
+
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.itemHome -> {
+                    findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_homeFragmentSupervisor)
+                    true
+                }
+                R.id.itemSucursales -> {
+                    findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_sucursalesSupervisorFragment)
+                    true
+                }
+                R.id.itemPerfil -> {
+                    findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_editProfileFragment)
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
     private fun onBackPressed() {
         findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_sucursalesSupervisorFragment)
     }
 
     private fun setOnClickListeners() {
-        /*
-        binding.btnPerfil.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putParcelable("UserFuncionario", currentUser)
-            findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_editProfileFragment, bundle)
-        }*/
-
         binding.btnAgregarFuncionario.setOnClickListener {
             findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_addUserFragment)
         }

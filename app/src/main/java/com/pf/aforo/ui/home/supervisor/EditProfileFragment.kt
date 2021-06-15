@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.pf.aforo.R
+import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.databinding.FragmentEditProfileBinding
 import com.pf.aforo.databinding.FragmentEditUserBinding
@@ -27,8 +28,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         editProfileViewModel = ViewModelProvider(this).get(EditProfileViewModel::class.java)
         setTopBar()
         setNavigation()
-        getUserFuncionario()
-        setUI()
+        getUser()
         setObservers()
         setOnClickListeners()
     }
@@ -54,6 +54,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private fun setNavigation(){
+        binding.bottomNavigation.selectedItemId = R.id.itemPerfil
+
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemHome -> {
@@ -64,7 +66,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                     findNavController().navigate(R.id.action_editProfileFragment_to_usuariosSupervisorFragment)
                     true
                 }
-                R.id.itemPerfil -> {
+                R.id.itemSucursales -> {
+                    findNavController().navigate(R.id.action_editProfileFragment_to_sucursalesSupervisorFragment)
                     true
                 }
                 else -> false
@@ -76,14 +79,15 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         findNavController().navigate(R.id.action_editProfileFragment_to_usuariosSupervisorFragment)
     }
 
-    private fun setUI() {
-        binding.edtNombre.setText(userFuncionario.firstName)
-        binding.edtApellido.setText(userFuncionario.lastName)
-        binding.edtTelefono.setText(userFuncionario.phoneNumber)
-        binding.edtMail.setText(userFuncionario.email)
+    private fun setUI(data: DataUser) {
+        binding.edtNombre.setText(data.firstName)
+        binding.edtApellido.setText(data.lastName)
+        binding.edtTelefono.setText(data.phoneNumber)
+        binding.edtMail.setText(data.email)
     }
 
     private fun setObservers() {
+        editProfileViewModel.getUserSuccessResponse.observe(viewLifecycleOwner, getUserSuccessObserver)
         editProfileViewModel.updateUserSuccessResponse.observe(viewLifecycleOwner, updateUserSuccessObserver)
         editProfileViewModel.updateUserFailureResponse.observe(viewLifecycleOwner, updateUserFailureObserver)
     }
@@ -106,6 +110,10 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         editProfileViewModel.updateUser("Bearer ${getToken()}" , userFuncionario)
     }
 
+    private val getUserSuccessObserver = Observer<DataUser> { data ->
+        setUI(data)
+    }
+
     private val updateUserSuccessObserver = Observer<Any?> { statusCode ->
         Toast.makeText(context, "Perfil actualizado exitosamente.", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.action_editProfileFragment_to_usuariosSupervisorFragment)
@@ -125,8 +133,15 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         return sharedPref?.getString("Token", "0").toString()
     }
 
-    private fun getUserFuncionario() {
-        userFuncionario = arguments?.getParcelable<UserFuncionario>("UserFuncionario")!!
+    private fun getUserId(): String {
+        val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
+        return sharedPref?.getString("UserID", "0").toString()
+    }
+
+    private fun getUser() {
+        val token = getToken()
+        val id = getUserId()
+        editProfileViewModel.getUser("Bearer $token", id)
     }
 
     private fun initLoginFragment() {
