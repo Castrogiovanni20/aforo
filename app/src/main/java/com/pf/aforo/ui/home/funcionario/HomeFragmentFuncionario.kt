@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import com.pf.aforo.R
 import com.pf.aforo.databinding.FragmentHomeFuncionarioBinding
 
-//
 import android.graphics.Color
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
@@ -19,16 +18,25 @@ import com.github.mikephil.charting.data.PieData as PieData
 
 
 class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
-    private lateinit var binding: FragmentHomeFuncionarioBinding
+    // private lateinit var binding: FragmentHomeFuncionarioBinding
+    private lateinit var binding2: FragmentHomeFuncionarioBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentHomeFuncionarioBinding.bind(view)
+       // binding = FragmentHomeFuncionarioBinding.bind(view)
+        binding2 = FragmentHomeFuncionarioBinding.bind(view)
+
+
+        setPieChart()
         setTopBar()
+
+
+
     }
 
     private fun setTopBar() {
-        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+        // binding.topAppBar....
+        binding2.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemNotificaciones -> {
                     initNotificacionesFragments()
@@ -52,78 +60,76 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         findNavController().navigate(R.id.action_homeFragmentFuncionario_to_notificacionesFragment)
     }
 
+    fun setPieChart() {
+
+        lateinit var piechart: PieChart
+        // xvalues
+        val xvalues = ArrayList<String>()
+        xvalues.add("Ocupación")
+        xvalues.add("Disponible")
+
+        // yvalues Estos valores son los que nos devuelve en tiempo real
+        var piechartentry = ArrayList<Entry>()
+        piechartentry.add(Entry(43f, 0))
+        piechartentry.add(Entry(55f, 1))
+
+        //piechartentry.add(Entry(valorRecibidoDeOcupacion, 0))
+        //piechartentry.add(Entry(valorCalculadoDeEspacioDisponible, 1)) EL VALOR EXPRESARLO EN CANTIDAD DE PERSONAS  O PORCENTAJE ?
+
+        // colors los indices se manejan como paralelos
+        val colors = ArrayList<Int>()
+        colors.add(Color.RED)
+        colors.add(Color.GREEN)
+
+        // fill the chart
+        val piedataset = PieDataSet(piechartentry, "Aforo Actual")
+
+//        piedataset.color = resources.getColor(R.color.green) otra opción de dar un solo color
+        piedataset.colors = colors
+
+        piedataset.sliceSpace = 3f
+
+        //prueba de textsize
+        piedataset.valueTextSize = 20f
+
+        val data = PieData(xvalues, piedataset)
+        piechart.data = data
+
+        piechart.holeRadius = 5f
+        //piechart.setBackgroundColor(resources.getColor(R.color.white))
+        piechart.setBackgroundColor(Color.WHITE)
+
+        piechart.setDescription("Energy Consumption in 2020")
+        piechart.animateY(3000)
+
+        val legend: Legend = piechart.legend
+        legend.position = Legend.LegendPosition.LEFT_OF_CHART
+        //legend.textColor = resources.getColor(R.color.white)
+        legend.textColor = Color.CYAN
+        legend.textSize = 18f // OTRA PRUEBA DE TEXT SIZE
+    }
+
 }
 
 // Este es el código para implementar el barchart y piechart
 
-lateinit var piechart: PieChart
-lateinit var barChar: BarChart
 
-override fun onCreate(savedInstanceState: Bundle?) {
+//lateinit var barChar: BarChart
+
+/*override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     piechart = findViewById(R.id.piechart)
     barChar = findViewById(R.id.barChart)
 
-    setBarCharValues()
-    setPieChart()
+    //setBarCharValues()
 
-}
 
-fun setPieChart() {
-
-    // xvalues
-    val xvalues = ArrayList<String>()
-//        xvalues.add("Coal")
-//        xvalues.add("Petrolium")
-//        xvalues.add("Natural Gas")
-    xvalues.add("Ocupación")
-    xvalues.add("Disponible")
+}*/
 
 
 
-    // yvalues Estos valores son los que nos devuelve en tiempo real
-    var piechartentry = ArrayList<Entry>()
-    piechartentry.add(Entry(43.5f, 0))
-    piechartentry.add(Entry(55.5f, 1))
-    //piechartentry.add(Entry(68.5f, 2))
-    //piechartentry.add(Entry(valorRecibidoDeOcupacion, 0))
-    //piechartentry.add(Entry(valorCalculadoDeEspacioDisponible, 1)) EL VALOR EXPRESARLO EN CANTIDAD DE PERSONAS  O PORCENTAJE ?
-
-    // colors los indices se manejan como paralelos
-    val colors = ArrayList<Int>()
-    colors.add(Color.RED)
-    colors.add(Color.GREEN)
-    //colors.add(Color.YELLOW)
-
-
-    // fill the chart
-    val piedataset = PieDataSet(piechartentry, "Aforo Actual")
-
-//        piedataset.color = resources.getColor(R.color.green) otra opción de dar un solo color
-    piedataset.colors = colors
-
-    piedataset.sliceSpace = 3f
-
-    //prueba de textsize
-    piedataset.valueTextSize = 20f
-
-    val data = PieData(xvalues, piedataset)
-    piechart.data = data
-
-    piechart.holeRadius = 5f
-    piechart.setBackgroundColor(resources.getColor(R.color.white))
-
-    piechart.setDescription("Energy Consumption in 2020")
-    piechart.animateY(3000)
-
-    val legend: Legend = piechart.legend
-    legend.position = Legend.LegendPosition.LEFT_OF_CHART
-    legend.textColor = resources.getColor(R.color.white)
-    legend.textSize = 18f // OTRA PRUEBA DE TEXT SIZE
-}
-
-
+/*
 fun setBarCharValues() {
     // x axis values
 
@@ -165,7 +171,7 @@ fun setBarCharValues() {
     for ( i in 0..yaxis.size - 1) {
         barentries.add(BarEntry(yaxis[i], i))
     }
-    /*
+    *//*
     barentries.add(BarEntry(4f, 0))
     barentries.add(BarEntry(3.5f, 1))
     barentries.add(BarEntry(8.2f, 2))
@@ -174,7 +180,7 @@ fun setBarCharValues() {
     barentries.add(BarEntry(6f, 5))
     barentries.add(BarEntry(9f, 6))
 
-     */
+     *//*
 
     // bardata set
     val bardataset = BarDataSet(barentries, "First")
@@ -185,7 +191,7 @@ fun setBarCharValues() {
     barChar.data = data
 
     barChar.setBackgroundColor(resources.getColor(R.color.white))
-    barChar.animateXY(3000,3000)
+    barChar.animateXY(3000,3000)*/
 
 
-}
+// }
