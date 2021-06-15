@@ -55,4 +55,10 @@ data class BranchOffice(
             return arrayOfNulls(size)
         }
     }
+
+    fun isNameLengthValid (): Boolean = (name.length in 1..120)
+
+    fun isWidthValid (): Boolean = width != null && width >= 1
+
+    fun isLengthValid (): Boolean = length != null && length >= 1
 }

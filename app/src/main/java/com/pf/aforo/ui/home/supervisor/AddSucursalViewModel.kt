@@ -29,8 +29,12 @@ class AddSucursalViewModel : ViewModel() {
     private var _assignCivilServantFailureResponse = branchOfficesRepository.assignCivilServantFailureResponseLiveData
     val assignCivilServantFailureResponse: MutableLiveData<String> get() = _assignCivilServantFailureResponse
 
+    var validationError = MutableLiveData<String>()
+    var isBranchOfficeValid : Boolean = false
+
     fun addBranchOffice(token: String, branchOffice: BranchOffice) {
-        branchOfficesRepository.addBranchOffice(token, branchOffice)
+        validateBranchOffice(branchOffice)
+        if (isBranchOfficeValid) branchOfficesRepository.addBranchOffice(token, branchOffice)
     }
 
     fun assignCivilServant(token: String, entityId: String, refUser: String) {
@@ -39,5 +43,20 @@ class AddSucursalViewModel : ViewModel() {
 
     fun getUsers(token: String) {
         usersRepository.getUsers(token)
+    }
+
+    private fun validateBranchOffice(branchOffice: BranchOffice) {
+        when {
+            branchOffice.name.isNullOrEmpty() -> validationError.value = "Debe completar el nombre."
+            !branchOffice.isNameLengthValid() -> validationError.value = "El nombre debe ser menor o igual a 120 caracteres."
+            branchOffice.description.isNullOrEmpty() -> validationError.value = "Debe completar la dirección."
+            branchOffice.width == null -> validationError.value = "Debe completar el ancho."
+            branchOffice.length == null -> validationError.value = "Debe completar el largo."
+            !branchOffice.isWidthValid() -> validationError.value = "El ancho debe ser mayor o igual a 1."
+            !branchOffice.isLengthValid() -> validationError.value = "El largo debe ser mayor o igual a 1."
+            else -> {
+                isBranchOfficeValid = true
+            }
+        }
     }
 }
