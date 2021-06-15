@@ -188,9 +188,4 @@ fun setBarCharValues() {
     barChar.animateXY(3000,3000)
 
 
-
-
-
-
-
 }

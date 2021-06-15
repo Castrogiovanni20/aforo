@@ -47,11 +47,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 
-    // mpandroidchart
-//    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
-
-
     // Material Design
     def material_version = "1.3.0"
     implementation "com.google.android.material:material:$material_version"
@@ -89,4 +84,8 @@ dependencies {
     implementation ('io.socket:socket.io-client:2.0.0') {
         exclude group: 'org.json', module: 'json'
     }
+
+    // mpandroidchart
+    //implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
