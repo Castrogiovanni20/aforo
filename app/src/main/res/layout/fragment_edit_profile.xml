@@ -17,7 +17,7 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/aforo_name"
+            app:title="@string/miPerfil"
             app:menu="@menu/menu_supervisor"
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
             android:background="@android:color/transparent"/>
@@ -35,10 +35,11 @@
         android:id="@+id/cardEditar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
         app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="40dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,11 +63,10 @@
 
             <ImageButton
                 android:id="@+id/imageButton"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/imagen_perfil" />
-
+                android:background="@mipmap/icon_user3" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -79,14 +79,15 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtApellido"
-                    android:layout_width="match_parent"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
                     android:layout_weight="1"
                     android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:inputType="textPersonName|text"
-                    android:textSize="16sp" />
+                    android:layout_marginLeft="20dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -100,14 +101,15 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtNombre"
-                    android:layout_width="match_parent"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
                     android:layout_weight="1"
                     android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:inputType="textPersonName|text"
-                    android:textSize="16sp" />
+                    android:layout_marginLeft="20dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -121,14 +123,15 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtDNI"
-                    android:layout_width="match_parent"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20dp"
+                    android:inputType="number"
+                    android:maxLength="8"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
-                    android:layout_weight="1"
-                    android:maxLength="8"
-                    android:inputType="number"
-                    android:textSize="16sp" />
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -142,13 +145,14 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtTelefono"
-                    android:layout_width="match_parent"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20dp"
+                    android:inputType="phone"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
-                    android:layout_weight="1"
-                    android:inputType="phone"
-                    android:textSize="16sp" />
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -162,13 +166,14 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtMail"
-                    android:layout_width="match_parent"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
                     android:layout_weight="1"
                     android:inputType="textEmailAddress"
-                    android:textSize="16sp" />
+                    android:layout_marginLeft="20dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space
@@ -180,12 +185,12 @@
 
     <ImageButton
         android:id="@+id/btnSiguiente"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/btn_circle"
         android:elevation="30dp"
-        android:src="@android:drawable/ic_media_play"
+        android:src="@drawable/ic_save"
         app:backgroundTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

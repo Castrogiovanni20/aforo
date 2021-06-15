@@ -69,7 +69,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         binding.edtNombreSucursal.setText(branchOffice.name)
         binding.edtDomicilio.setText(branchOffice.description)
         binding.edtMt2Ancho.setText(branchOffice.width.toString())
-        binding.edtMt2Alto.setText(branchOffice.length.toString())
+        binding.edtMt2Largo.setText(branchOffice.length.toString())
         val refUser = if (branchOffice.refUser == "null") SUCURSAL_SIN_FUNCIONARIO else branchOffice.refUser
         binding.textFuncionarioAsignado.text = "Funcionario asignado: " + refUser
     }
@@ -130,7 +130,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         val refOrganization = binding.edtNombreSucursal.text.toString()
         val description = binding.edtDomicilio.text.toString()
         val width = if(binding.edtMt2Ancho.text.toString().isNullOrEmpty()) 0 else Integer.parseInt(binding.edtMt2Ancho.text.toString())
-        val length = if(binding.edtMt2Alto.text.toString().isNullOrEmpty()) 0 else Integer.parseInt(binding.edtMt2Alto.text.toString())
+        val length = if(binding.edtMt2Largo.text.toString().isNullOrEmpty()) 0 else Integer.parseInt(binding.edtMt2Largo.text.toString())
         val refUser = binding.textFuncionarioAsignado.text.toString()
 
         val newBranchOffice = BranchOffice("", id, refOrganization, name, description, refUser, 0, width, length, 0)

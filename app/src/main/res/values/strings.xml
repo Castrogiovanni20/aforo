@@ -30,9 +30,17 @@
     <string name="confirmarDelete">¿Confirma la eliminación de este Funcionario?</string>
     <string name="confirmarDeleteSucursal">¿Confirma la eliminación de esta Sucursal?</string>
     <string name="datosIncorrectos">Usuario y/o contraseña incorrectos</string>
+    <string name="misSucus">Mis Sucursales</string>
+    <string name="newSucu">Nueva Sucursal</string>
+    <string name="editSucu">Edición Sucursal</string>
+    <string name="elimSucu">Eliminar Sucursal</string>
+    <string name="misFuncos">Mis Funcionarios</string>
+    <string name="editFunco">Edición Funcionario</string>
+    <string name="elimFunco">Eliminar Funcionario</string>
     <string name="nuevoFunc">Nuevo Funcionario</string>
     <string name="btnAgregarFuncionario">Funcionario</string>
     <string name="btnAgregarSucursal">Sucursal</string>
+    <string name="miPerfil">Mi Perfil</string>
     <string name="confirmMail">Se ha enviado un mail de confirmación de registro a su casilla</string>
     <string name="reingresePass">Reingresar la contraseña</string>
     <string name="recuperarContras">Recuperar contraseña</string>
@@ -67,8 +75,17 @@
     <string name="menunoti">Ajustar notificaciones</string>
     <string name="menuchau">Cerrar sesión</string>
 
-    <string name="notilimit">Notificación-push Nivel de capacidad ALTO</string>
-    <string name="notimax">Notificación-push Máxima capacidad</string>
+    <string name="notilimit">Alertar nivel de capacidad ALTO</string>
+    <string name="notimax">Alertar máxima capacidad</string>
+
+    <string name="semaforos">Configurar semáforos</string>
+    <string name="hasta">Hasta</string>
+    <string name="configgreen">% verde</string>
+    <string name="configyell">% amarillo</string>
+    <string name="configred">% rojo</string>
+    <string name="p60">60 %</string>
+    <string name="p80">80 %</string>
+    <string name="p100">100 %</string>
 
     <string-array name="roles">
         <item>SUPERVISOR</item>

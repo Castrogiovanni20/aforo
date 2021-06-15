@@ -14,15 +14,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/create_account"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgLogoCreateAccount" />
 
@@ -31,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.17" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -39,15 +40,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.95"
+        app:layout_constraintGuide_percent="0.94"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardVReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@+id/btnReg"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,13 +65,13 @@
                 android:layout_height="12dp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="299dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="170dp"
+                    android:layout_width="149dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
@@ -80,7 +81,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtLastName"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_weight="1"
@@ -91,7 +92,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="170dp"
+                    android:layout_width="153dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
@@ -101,7 +102,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtName"
-                        android:layout_width="match_parent"
+                        android:layout_width="122dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_weight="1"
@@ -120,7 +121,7 @@
                 android:layout_weight="1" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
@@ -130,7 +131,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtEmailReg"
-                    android:layout_width="match_parent"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
@@ -145,7 +146,7 @@
                 android:layout_height="10dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+                android:layout_width="301dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
@@ -155,7 +156,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtPhone"
-                    android:layout_width="match_parent"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
@@ -170,7 +171,7 @@
                 android:layout_height="10dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
@@ -180,7 +181,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtOrgReg"
-                    android:layout_width="match_parent"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
@@ -195,7 +196,7 @@
                 android:layout_height="10dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
@@ -206,7 +207,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtPassReg"
-                    android:layout_width="match_parent"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
@@ -221,8 +222,8 @@
                 android:layout_height="14dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="68dp"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
                 android:hint="@string/confirmarPass"
@@ -232,11 +233,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtConfirmarPass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="270dp"
+                    android:layout_height="44dp"
                     android:layout_marginLeft="4dp"
-                    android:layout_weight="1"
                     android:layout_marginBottom="20dp"
+                    android:layout_weight="1"
                     android:inputType="textPassword"
                     android:textAlignment="textStart"
                     android:textSize="12sp" />
@@ -262,15 +263,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.17" />
 
     <ImageButton
         android:id="@+id/btnReg"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginTop="8dp"
-        android:elevation="4dp"
         android:background="@drawable/btn_circle"
+        android:elevation="4dp"
         android:src="@android:drawable/ic_media_play"
         app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
@@ -281,9 +282,9 @@
 
     <ImageView
         android:id="@+id/imgLogoCreateAccount"
-        android:layout_width="86dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="56dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="3dp"
         app:layout_constraintBottom_toTopOf="@+id/txtTitleRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

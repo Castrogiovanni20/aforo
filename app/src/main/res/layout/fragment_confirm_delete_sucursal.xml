@@ -20,7 +20,7 @@ tools:context=".ui.home.supervisor.ConfirmDeleteSucursalFragment">
             android:background="@android:color/transparent"
             app:menu="@menu/menu_supervisor"
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-            app:title="@string/aforo_name" />
+            app:title="@string/elimSucu" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -44,7 +44,7 @@ tools:context=".ui.home.supervisor.ConfirmDeleteSucursalFragment">
         android:layout_height="wrap_content"
         android:text="@string/confirmarDeleteSucursal"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <Space
@@ -53,32 +53,32 @@ tools:context=".ui.home.supervisor.ConfirmDeleteSucursalFragment">
 
 </LinearLayout>
 
-<ImageButton
-    android:id="@+id/btnOK"
-    android:layout_width="80dp"
-    android:layout_height="80dp"
-    android:background="@drawable/btn_circle"
-    android:src="@android:drawable/ic_media_play"
-    app:backgroundTint="@color/colorPrimary"
-    app:layout_constraintBottom_toTopOf="@+id/guideline11"
-    app:layout_constraintEnd_toStartOf="@+id/guideline13"
-    app:layout_constraintStart_toStartOf="@+id/guideline12"
-    app:layout_constraintTop_toTopOf="@+id/guideline14"
-    app:layout_constraintVertical_bias="0.973" />
+    <ImageButton
+        android:id="@+id/btnOK"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_circle"
+        android:src="@android:drawable/ic_media_play"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintEnd_toStartOf="@+id/guideline13"
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="@+id/guideline14"
+        app:layout_constraintVertical_bias="0.874" />
 
-<androidx.constraintlayout.widget.Guideline
+    <androidx.constraintlayout.widget.Guideline
     android:id="@+id/guideline11"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     app:layout_constraintGuide_percent="0.65" />
 
-<androidx.constraintlayout.widget.Guideline
-    android:id="@+id/guideline12"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:layout_constraintGuide_begin="90dp" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="54dp" />
 
 <androidx.constraintlayout.widget.Guideline
     android:id="@+id/guideline13"

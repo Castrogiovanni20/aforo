@@ -4,9 +4,9 @@
 
     <item
         android:id="@+id/itemNotificaciones"
-        android:icon="@mipmap/trespoints"
+        android:icon="@drawable/ic_bell"
         android:title="@string/menunoti"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/itemCerrarSesion"

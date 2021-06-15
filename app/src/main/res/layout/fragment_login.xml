@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="278dp" />
+        app:layout_constraintGuide_begin="248dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLogin"
@@ -100,13 +100,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="5dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/create_account"
                 android:textAlignment="textEnd"
                 android:textColor="@color/colorPrimary"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                android:layout_marginRight="5dp"/>
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <Space
                 android:layout_width="match_parent"
@@ -128,7 +128,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.84" />
+        app:layout_constraintGuide_percent="0.81" />
 
     <TextView
         android:id="@+id/txtWelcome"
@@ -161,15 +161,18 @@
 
     <ImageButton
         android:id="@+id/btnSend"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/btn_circle"
         android:elevation="30dp"
         android:src="@android:drawable/ic_media_play"
         app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/cardLogin"
+        app:layout_constraintVertical_bias="0.111" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

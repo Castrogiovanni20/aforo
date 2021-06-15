@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:layout_marginBottom="5dp"
-    app:cardCornerRadius="12dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginTop="4dp"
+    app:cardCornerRadius="8dp"
     app:cardPreventCornerOverlap="false"
     app:cardBackgroundColor="@color/white">
 
@@ -16,18 +19,17 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageViewProfile"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="12dp"
-            android:src="@mipmap/sucursal"
-            app:civ_border_width="2dp"
+            android:src="@mipmap/icon_ubic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textViewNombre"
-            android:layout_width="150dp"
+            android:layout_width="250dp"
             android:layout_height="25dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="6dp"
@@ -35,7 +37,7 @@
             android:text="@string/nombreSucursal"
             android:textColor="@color/darkblue"
             android:textColorHighlight="@color/darkblue"
-            android:textSize="18dp"
+            android:textSize="14dp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
             app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +51,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/mt2ancho"
             android:textColor="@color/design_default_color_on_secondary"
-            android:textSize="15dp"
+            android:textSize="12dp"
             app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
             app:layout_constraintTop_toBottomOf="@+id/textViewNombre" />
 
@@ -63,7 +65,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/mt2largo"
             android:textColor="@color/design_default_color_on_secondary"
-            android:textSize="15dp"
+            android:textSize="12dp"
             app:layout_constraintStart_toEndOf="@+id/textViewMt2ancho"
             app:layout_constraintTop_toBottomOf="@+id/textViewNombre"
             tools:ignore="MissingConstraints" />
@@ -77,7 +79,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/capacidadActual"
             android:textColor="@color/design_default_color_on_secondary"
-            android:textSize="15dp"
+            android:textSize="12dp"
             app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
             app:layout_constraintTop_toBottomOf="@+id/textViewMt2ancho"
             tools:ignore="MissingConstraints" />
@@ -91,8 +93,9 @@
             android:layout_marginEnd="6dp"
             android:fontFamily="@font/roboto"
             android:text="@string/funcionarioAsignado"
+            android:textStyle="bold"
             android:textColor="@color/design_default_color_on_secondary"
-            android:textSize="15dp"
+            android:textSize="12dp"
             app:layout_constraintEnd_toStartOf="@+id/imageButtonEditarSucursal"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"

@@ -91,7 +91,7 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
 
 
     private fun setOnClickListeners() {
-        binding.txtVEliminar.setOnClickListener{
+        binding.textVEliminar.setOnClickListener{
             initConfirmDeleteUserScreen()
         }
 

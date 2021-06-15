@@ -17,7 +17,7 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/aforo_name"
+            app:title="@string/editFunco"
             app:menu="@menu/menu_supervisor"
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
             android:background="@android:color/transparent"/>
@@ -35,10 +35,11 @@
         android:id="@+id/cardEditar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
         app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="40dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,13 +61,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="12dp" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageButton"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                app:civ_border_width="2dp"
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/imagen_perfil" />
+                android:background="@mipmap/icon_user"  />
 
             <Space
                 android:layout_width="match_parent"
@@ -83,21 +82,22 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fullName"
-                    android:layout_width="match_parent"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:inputType="textPersonName|text"
                     android:textAlignment="textStart"
-                    android:textSize="16sp" />
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <TextView
                 android:id="@+id/textRole"
-                android:layout_width="match_parent"
+                android:layout_width="290dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_baseline_assignment_ind_24"
@@ -105,10 +105,11 @@
                 android:ems="10"
                 android:fontFamily="@font/roboto"
                 android:paddingLeft="12dp"
-                android:paddingTop="18sp"
+                android:paddingTop="14sp"
+                android:layout_marginLeft="20dp"
                 android:paddingRight="12dp"
                 android:text="@string/role"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/circleImageViewProfile"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -117,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="5dp"
-                android:layout_marginLeft="15dp"/>
+                android:layout_marginLeft="20dp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -126,32 +127,35 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/txtVEliminar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/delete"
-        android:textAlignment="center"
-        android:textColor="@color/fucsia"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSiguiente" />
-
     <ImageButton
         android:id="@+id/btnSiguiente"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/btn_circle"
         android:elevation="30dp"
-        android:src="@android:drawable/ic_media_play"
+        android:src="@drawable/ic_save"
         app:backgroundTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardEditar" />
+
+    <ImageButton
+        android:id="@+id/textVEliminar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/btn_circle"
+        android:elevation="30dp"
+        android:src="@drawable/ic_baseline_delete_forever_24"
+        app:backgroundTint="@color/colorDanger"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSiguiente"
+        app:layout_constraintVertical_bias="0.037" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
