@@ -79,11 +79,11 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         findNavController().navigate(R.id.action_editProfileFragment_to_usuariosSupervisorFragment)
     }
 
-    private fun setUI(data: DataUser) {
-        binding.edtNombre.setText(data.firstName)
-        binding.edtApellido.setText(data.lastName)
-        binding.edtTelefono.setText(data.phoneNumber)
-        binding.edtMail.setText(data.email)
+    private fun setUI() {
+        binding.edtNombre.setText(userFuncionario.firstName)
+        binding.edtApellido.setText(userFuncionario.lastName)
+        binding.edtTelefono.setText(userFuncionario.phoneNumber)
+        binding.edtMail.setText(userFuncionario.email)
     }
 
     private fun setObservers() {
@@ -111,7 +111,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private val getUserSuccessObserver = Observer<DataUser> { data ->
-        setUI(data)
+        userFuncionario = UserFuncionario(data.id, data.firstName, data.lastName, data.email, data.phoneNumber, "", data.role)
+        setUI()
     }
 
     private val updateUserSuccessObserver = Observer<Any?> { statusCode ->
