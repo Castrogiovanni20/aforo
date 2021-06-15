@@ -95,11 +95,16 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
     }
 
     private fun setObservers() {
+        addSucursalViewModel.validationError.observe(viewLifecycleOwner, this.validationObserver)
         addSucursalViewModel.addBranchOfficeSuccessResponse.observe(viewLifecycleOwner, this.successObserver)
         addSucursalViewModel.addBranchOfficeFailureResponse.observe(viewLifecycleOwner, this.failureObserver)
         addSucursalViewModel.getUsersSuccessResponse.observe(viewLifecycleOwner, usersObserver)
         addSucursalViewModel.assignCivilServantSuccessResponse.observe(viewLifecycleOwner, this.assignCivilServantSuccessObserver)
         addSucursalViewModel.assignCivilServantFailureResponse.observe(viewLifecycleOwner, this.assignCivilServantFailureObserver)
+    }
+
+    private val validationObserver = Observer<Any?> { error ->
+        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
     }
 
     private val successObserver = Observer<BranchOffice> { branchOffice ->
@@ -152,8 +157,8 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
         val name = binding.edtNombreSucursal.text.toString()
         val description = binding.edtDomicilio.text.toString()
         val refUser = userIdSelected
-        val width =  Integer.parseInt(binding.edtMt2Ancho.text.toString())
-        val length = Integer.parseInt(binding.edtMt2Largo.text.toString())
+        val width =  if(binding.edtMt2Ancho.text.toString().isNullOrEmpty()) 0 else Integer.parseInt(binding.edtMt2Ancho.text.toString())
+        val length = if(binding.edtMt2Largo.text.toString().isNullOrEmpty()) 0 else Integer.parseInt(binding.edtMt2Largo.text.toString())
         val branchOffice = BranchOffice("", "", "", name, description, refUser, 0, width, length, 0)
 
         addSucursalViewModel.addBranchOffice("Bearer ${getToken()}", branchOffice)

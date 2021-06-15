@@ -108,6 +108,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     }
 
     private fun setObservers() {
+        editSucursalViewModel.validationError.observe(viewLifecycleOwner, this.validationObserver)
         editSucursalViewModel.updateBranchOfficeSuccessResponse.observe(viewLifecycleOwner, successObserver)
         editSucursalViewModel.updateBranchOfficeFailureResponse.observe(viewLifecycleOwner, failureObserver)
         editSucursalViewModel.getUsersSuccessResponse.observe(viewLifecycleOwner, usersObserver)
@@ -128,12 +129,16 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         val name = binding.edtNombreSucursal.text.toString()
         val refOrganization = binding.edtNombreSucursal.text.toString()
         val description = binding.edtDomicilio.text.toString()
-        val width = Integer.parseInt(binding.edtMt2Ancho.text.toString())
-        val length = Integer.parseInt(binding.edtMt2Alto.text.toString())
+        val width = if(binding.edtMt2Ancho.text.toString().isNullOrEmpty()) 0 else Integer.parseInt(binding.edtMt2Ancho.text.toString())
+        val length = if(binding.edtMt2Alto.text.toString().isNullOrEmpty()) 0 else Integer.parseInt(binding.edtMt2Alto.text.toString())
         val refUser = binding.textFuncionarioAsignado.text.toString()
 
         val newBranchOffice = BranchOffice("", id, refOrganization, name, description, refUser, 0, width, length, 0)
         editSucursalViewModel.updateBranchOffice("Bearer ${getToken()}", newBranchOffice.id, newBranchOffice)
+    }
+
+    private val validationObserver = Observer<Any?> { error ->
+        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
     }
 
     private val successObserver = Observer<Any?> { statusCode ->
