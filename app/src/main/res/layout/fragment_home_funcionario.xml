@@ -119,6 +119,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card1">
 
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/piechart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1" />
+
         <TextView
             android:id="@+id/titleTorta"
             android:layout_width="match_parent"
@@ -127,15 +134,8 @@
             android:text="@string/capacidadActual"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/torta"
-            android:layout_width="151dp"
-            android:layout_height="130dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/torta" />
+            android:textStyle="bold"
+            android:textSize="12dp"/>
 
         <TextView
             android:id="@+id/ocupTorta"
@@ -170,7 +170,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card4"
         android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
@@ -184,23 +184,25 @@
 
         <TextView
             android:id="@+id/horas"
-            android:layout_width="140dp"
-            android:layout_height="80dp"
+            android:layout_width="304dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="17dp"
             android:layout_marginTop="10dp"
             android:text="@string/mayor"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="20dp"
+            android:textSize="12dp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/barras"
-            android:layout_width="171dp"
-            android:layout_height="85dp"
-            android:layout_marginLeft="170dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/barra" />
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="30dp"
+            android:elevation="15dp">
+
+        </com.github.mikephil.charting.charts.BarChart>
 
     </androidx.cardview.widget.CardView>
 

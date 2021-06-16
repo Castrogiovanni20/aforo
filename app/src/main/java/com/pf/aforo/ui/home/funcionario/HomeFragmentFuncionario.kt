@@ -12,6 +12,7 @@ import com.pf.aforo.databinding.FragmentHomeFuncionarioBinding
 class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
     private lateinit var binding: FragmentHomeFuncionarioBinding
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeFuncionarioBinding.bind(view)
