@@ -46,6 +46,8 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         //Graficos:
         //piechart = findViewById(R.id.piechart)
         //barChar = findViewById(R.id.barChart)
+        piechart = binding.piechart
+        barChar = binding.barChart
 
         setPieChart()
         setBarCharValues()
@@ -123,9 +125,6 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
 
         // xvalues
         val xvalues = ArrayList<String>()
-//        xvalues.add("Coal")
-//        xvalues.add("Petrolium")
-//        xvalues.add("Natural Gas")
         xvalues.add("Ocupación")
         xvalues.add("Disponible")
 
@@ -144,17 +143,16 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         colors.add(Color.GREEN)
         //colors.add(Color.YELLOW)
 
-
         // fill the chart
-        val piedataset = PieDataSet(piechartentry, "Aforo Actual")
+        val piedataset = PieDataSet(piechartentry, "")
 
-//        piedataset.color = resources.getColor(R.color.green) otra opción de dar un solo color
+      //piedataset.color = resources.getColor(R.color.green) otra opción de dar un solo color
         piedataset.colors = colors
 
         piedataset.sliceSpace = 3f
 
         //prueba de textsize
-        piedataset.valueTextSize = 20f
+        piedataset.valueTextSize = 12f
 
         val data = PieData(xvalues, piedataset)
         piechart.data = data
@@ -162,13 +160,13 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         piechart.holeRadius = 5f
         piechart.setBackgroundColor(resources.getColor(R.color.white))
 
-        piechart.setDescription("Energy Consumption in 2020")
+        piechart.setDescription("")
         piechart.animateY(3000)
 
         val legend: Legend = piechart.legend
         legend.position = Legend.LegendPosition.LEFT_OF_CHART
-        legend.textColor = resources.getColor(R.color.white)
-        legend.textSize = 18f // OTRA PRUEBA DE TEXT SIZE
+        legend.textColor = resources.getColor(R.color.colorPrimaryDark)
+        legend.textSize = 10f // OTRA PRUEBA DE TEXT SIZE
     }
 
     //Codigo para la Barra
@@ -177,30 +175,30 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
 
         val xvalues = ArrayList<String>()
 
-        xvalues.add("01")
-        xvalues.add("02")
-        xvalues.add("03")
-        xvalues.add("04")
-        xvalues.add("05")
-        xvalues.add("06")
-        xvalues.add("07")
-        xvalues.add("08")
-        xvalues.add("09")
-        xvalues.add("10")
-        xvalues.add("11")
-        xvalues.add("12")
-        xvalues.add("13")
-        xvalues.add("14")
-        xvalues.add("15")
-        xvalues.add("16")
-        xvalues.add("17")
-        xvalues.add("18")
-        xvalues.add("19")
-        xvalues.add("20")
-        xvalues.add("21")
-        xvalues.add("22")
-        xvalues.add("23")
-        xvalues.add("24")
+        xvalues.add("1hs")
+        xvalues.add("2hs")
+        xvalues.add("3hs")
+        xvalues.add("4hs")
+        xvalues.add("5hs")
+        xvalues.add("6hs")
+        xvalues.add("7hs")
+        xvalues.add("8hs")
+        xvalues.add("9hs")
+        xvalues.add("10hs")
+        xvalues.add("11hs")
+        xvalues.add("12hs")
+        xvalues.add("13hs")
+        xvalues.add("14hs")
+        xvalues.add("15hs")
+        xvalues.add("16hs")
+        xvalues.add("17hs")
+        xvalues.add("18hs")
+        xvalues.add("19hs")
+        xvalues.add("20hs")
+        xvalues.add("21hs")
+        xvalues.add("22hs")
+        xvalues.add("23hs")
+        xvalues.add("24hs")
 
         // y axis values or bar data
 
@@ -224,14 +222,15 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
          */
 
         // bardata set
-        val bardataset = BarDataSet(barentries, "First")
+        val bardataset = BarDataSet(barentries, "Horarios más concurridos por Hora")
 
         // make a bar data
         val data = BarData(xvalues, bardataset)
 
         barChar.data = data
 
-        barChar.setBackgroundColor(resources.getColor(R.color.white))
+        barChar.setDescription("")
+        //barChar.setBackgroundColor(resources.getColor(R.color.white))
         barChar.animateXY(3000,3000)
     }
 }
