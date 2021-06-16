@@ -65,13 +65,13 @@
                 android:layout_height="12dp" />
 
             <LinearLayout
-                android:layout_width="299dp"
+                android:layout_width="320dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="149dp"
+                    android:layout_width="165dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
@@ -81,7 +81,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtLastName"
-                        android:layout_width="130dp"
+                        android:layout_width="161dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_weight="1"
@@ -92,7 +92,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="153dp"
+                    android:layout_width="169dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
@@ -102,9 +102,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtName"
-                        android:layout_width="122dp"
+                        android:layout_width="143dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_weight="1"
                         android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                         android:inputType="textPersonName|text"
@@ -121,7 +121,7 @@
                 android:layout_weight="1" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="300dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
@@ -131,7 +131,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtEmailReg"
-                    android:layout_width="270dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
@@ -146,7 +146,7 @@
                 android:layout_height="10dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="301dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
@@ -156,7 +156,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtPhone"
-                    android:layout_width="270dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
@@ -171,7 +171,7 @@
                 android:layout_height="10dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="300dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
@@ -181,7 +181,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtOrgReg"
-                    android:layout_width="270dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
@@ -196,7 +196,7 @@
                 android:layout_height="10dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="300dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
@@ -207,7 +207,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtPassReg"
-                    android:layout_width="270dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
@@ -222,7 +222,7 @@
                 android:layout_height="14dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="300dp"
+                android:layout_width="320dp"
                 android:layout_height="68dp"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
@@ -233,7 +233,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtConfirmarPass"
-                    android:layout_width="270dp"
+                    android:layout_width="320dp"
                     android:layout_height="44dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginBottom="20dp"
