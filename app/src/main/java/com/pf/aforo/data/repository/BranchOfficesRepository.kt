@@ -24,6 +24,9 @@ class BranchOfficesRepository {
     var assignCivilServantSuccessResponseLiveData = MutableLiveData<BranchOffice>()
     var assignCivilServantFailureResponseLiveData = MutableLiveData<String>()
 
+    var getBranchOfficeByIdSuccessResponseLiveData = MutableLiveData<BranchOffice>()
+    var getBranchOfficeByIdFailureResponseLiveData = MutableLiveData<String>()
+
     private val SERVER_ERROR_MSG: String = "Estamos teniendo problemas con el servidor. Intente de nuevo más tarde."
 
     fun addBranchOffice(token: String, branchOffice: BranchOffice) {
@@ -149,6 +152,32 @@ class BranchOfficesRepository {
                         } else {
                             assignCivilServantFailureResponseLiveData.value = fiwareResponse.code().toString()
                             Log.d("ApiAssignCivilServant", "API response: " + fiwareResponse.code().toString())
+                        }
+                    }
+                }
+
+            })
+    }
+
+    fun getBranchOfficeById(token: String, id: String){
+        FiwareAPI().getBranchOfficeById(token, id)
+            .enqueue(object: retrofit2.Callback<FiwareResponseBranchOffice>{
+                override fun onFailure(call: Call<FiwareResponseBranchOffice>?, t: Throwable?) {
+                    if (t != null) {
+                        getBranchOfficeByIdFailureResponseLiveData.value = SERVER_ERROR_MSG
+                        Log.d("ApiGetBranchOfficeById", "Fallo el request: " + t.message)
+                    }
+                }
+                override fun onResponse(call: Call<FiwareResponseBranchOffice>?, fiwareResponse: Response<FiwareResponseBranchOffice>?) {
+                    if (fiwareResponse != null) {
+                        if (fiwareResponse.isSuccessful) {
+                            if (fiwareResponse.body().code == "SUCCESS") {
+                                getBranchOfficeByIdSuccessResponseLiveData.value = fiwareResponse.body().data
+                                Log.d("ApiGetBranchOfficeById", "API response: " + fiwareResponse.code().toString())
+                            }
+                        } else {
+                            getBranchOfficeByIdFailureResponseLiveData.value = fiwareResponse.code().toString()
+                            Log.d("ApiGetBranchOfficeById", "API response: " + fiwareResponse.code().toString())
                         }
                     }
                 }

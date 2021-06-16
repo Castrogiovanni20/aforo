@@ -2,11 +2,9 @@ package com.pf.aforo.ui.login
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,10 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.pf.aforo.R
 import com.pf.aforo.data.model.Data
 import com.pf.aforo.data.model.DataUser
-import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.databinding.FragmentLoginBinding
-import kotlin.math.log
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
@@ -79,7 +75,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         when (user.role) {
             "SUPERVISOR" -> initFragmentHomeSupervisor()
-            "CIVIL_SERVANT" -> initFragmentHomeFuncionario()
+            "CIVIL_SERVANT" -> initFragmentHomeFuncionario(user)
         }
     }
 
@@ -117,8 +113,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.loadingSpinner.visibility = View.GONE
     }
 
-    private fun initFragmentHomeFuncionario() {
-        findNavController().navigate(R.id.action_loginFragment_to_homeFragmentFuncionario)
+    private fun initFragmentHomeFuncionario(user: DataUser) {
+        val userFullName = user.firstName + " " + user.lastName
+        val refBranchOffice = user.refBranchOffice
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragmentFuncionario(userFullName, refBranchOffice))
     }
 
     private fun initFragmentHomeSupervisor() {

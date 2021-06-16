@@ -286,6 +286,12 @@
         <action
             android:id="@+id/action_homeFragmentFuncionario_to_loginFragment2"
             app:destination="@id/loginFragment" />
+        <argument
+            android:name="userFullName"
+            app:argType="string" />
+        <argument
+            android:name="refBranchOffice"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/notificacionesFragment"
