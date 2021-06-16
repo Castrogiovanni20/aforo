@@ -20,6 +20,7 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
     private lateinit var homeFuncionarioViewModel: HomeFuncionarioViewModel
     private val UNAUTHORIZED_CODE: String = "401"
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeFuncionarioBinding.bind(view)

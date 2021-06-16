@@ -59,5 +59,4 @@ data class UserFuncionario(val id: String, var firstName: String, var lastName: 
             return arrayOfNulls(size)
         }
     }
-
 }
