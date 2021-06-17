@@ -3,6 +3,7 @@ package com.pf.aforo.data.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.pf.aforo.data.model.BranchOffice
+import com.pf.aforo.data.model.DataBranchOfficeHistory
 import com.pf.aforo.data.response.*
 import retrofit2.Call
 import retrofit2.Response
@@ -26,6 +27,9 @@ class BranchOfficesRepository {
 
     var getBranchOfficeByIdSuccessResponseLiveData = MutableLiveData<BranchOffice>()
     var getBranchOfficeByIdFailureResponseLiveData = MutableLiveData<String>()
+
+    var getBranchOfficeHistorySuccessResponseLiveData = MutableLiveData<Array<DataBranchOfficeHistory>>()
+    var getBranchOfficeHistoryFailureResponseLiveData = MutableLiveData<String>()
 
     private val SERVER_ERROR_MSG: String = "Estamos teniendo problemas con el servidor. Intente de nuevo más tarde."
 
@@ -177,6 +181,32 @@ class BranchOfficesRepository {
                             }
                         } else {
                             getBranchOfficeByIdFailureResponseLiveData.value = fiwareResponse.code().toString()
+                            Log.d("ApiGetBranchOfficeById", "API response: " + fiwareResponse.code().toString())
+                        }
+                    }
+                }
+
+            })
+    }
+
+    fun getBranchOfficeHistory(token: String, id: String){
+        FiwareAPI().getBranchOfficeHistory(token, id)
+            .enqueue(object: retrofit2.Callback<FiwareResponseBranchOfficeHistory>{
+                override fun onFailure(call: Call<FiwareResponseBranchOfficeHistory>?, t: Throwable?) {
+                    if (t != null) {
+                        getBranchOfficeHistoryFailureResponseLiveData.value = SERVER_ERROR_MSG
+                        Log.d("ApiGetBranchOfficeById", "Fallo el request: " + t.message)
+                    }
+                }
+                override fun onResponse(call: Call<FiwareResponseBranchOfficeHistory>?, fiwareResponse: Response<FiwareResponseBranchOfficeHistory>?) {
+                    if (fiwareResponse != null) {
+                        if (fiwareResponse.isSuccessful) {
+                            if (fiwareResponse.body().code == "SUCCESS") {
+                                getBranchOfficeHistorySuccessResponseLiveData.value = fiwareResponse.body().data
+                                Log.d("ApiGetBranchOfficeById", "API response: " + fiwareResponse.code().toString())
+                            }
+                        } else {
+                            getBranchOfficeHistoryFailureResponseLiveData.value = fiwareResponse.code().toString()
                             Log.d("ApiGetBranchOfficeById", "API response: " + fiwareResponse.code().toString())
                         }
                     }

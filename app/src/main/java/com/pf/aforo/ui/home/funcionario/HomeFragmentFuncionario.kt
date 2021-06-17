@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.pf.aforo.R
 import com.pf.aforo.data.model.BranchOffice
 import com.pf.aforo.databinding.FragmentHomeFuncionarioBinding
@@ -20,6 +19,7 @@ import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.*
+import com.pf.aforo.data.model.DataBranchOfficeHistory
 import com.github.mikephil.charting.data.PieData as PieData
 
 
@@ -27,43 +27,70 @@ import com.github.mikephil.charting.data.PieData as PieData
 class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
     private lateinit var binding: FragmentHomeFuncionarioBinding
     private lateinit var homeFuncionarioViewModel: HomeFuncionarioViewModel
+    lateinit var branchOfficeId: String
     private val UNAUTHORIZED_CODE: String = "401"
-
-    //GRAFICOS variables:
+    private val OCCUPIED_TXT: String = "Ocupación"
+    private val AVAILABLE_TXT: String = "Disponible"
     lateinit var piechart: PieChart
     lateinit var barChar: BarChart
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        branchOfficeId = arguments?.get("refBranchOffice").toString()
         binding = FragmentHomeFuncionarioBinding.bind(view)
+        piechart = binding.piechart
+        barChar = binding.barChart
         homeFuncionarioViewModel = ViewModelProvider(this).get(HomeFuncionarioViewModel::class.java)
         setTopBar()
         getBranchOfficeById()
         getHistoricData()
         setObservers()
-
-        //Graficos:
-        //piechart = findViewById(R.id.piechart)
-        //barChar = findViewById(R.id.barChart)
-        piechart = binding.piechart
-        barChar = binding.barChart
-
-        setPieChart()
         setBarCharValues()
     }
 
     private fun getHistoricData() {
-        //TODO: Implementar llamada a endpoint de historico. Crear observer que llame a setBarChart()
+        homeFuncionarioViewModel.getBranchOfficeHistory("Bearer ${getToken()}", branchOfficeId)
     }
 
     private fun setObservers() {
+        //Current data observers
         homeFuncionarioViewModel.getBranchOfficeByIdResponse.observe(viewLifecycleOwner, this.getBranchOfficeByIdSuccessObserver)
         homeFuncionarioViewModel.getBranchOfficeByIdFailureResponse.observe(viewLifecycleOwner, this.getBranchOfficeByIdFailureObserver)
+        //Historic data observers
+        homeFuncionarioViewModel.getBranchOfficeHistoryResponse.observe(viewLifecycleOwner, this.getBranchOfficeHistorySuccessObserver)
+        homeFuncionarioViewModel.getBranchOfficeHistoryFailureResponse.observe(viewLifecycleOwner, this.getBranchOfficeHistoryFailureObserver)
     }
 
     private val getBranchOfficeByIdSuccessObserver = Observer<BranchOffice> { branchOffice ->
         setHeaderUI(branchOffice)
+        val occupied = getOccupiedPercentage(branchOffice.maxCapacity, branchOffice.currentCapacity)
+        val available = 100 - occupied
+        setPieChart(occupied, available)
+    }
+
+    private val getBranchOfficeHistorySuccessObserver = Observer<Array<DataBranchOfficeHistory>> { branchOffices ->
+//        setBarCharValues(groupEventsByHour(branchOffices))
+    }
+
+    private fun groupEventsByHour(branchOffices: Array<DataBranchOfficeHistory>?): ArrayList<Int> {
+        return ArrayList<Int>()
+        //Agrupar los DataBranchOfficeHistory por hora del timestamp
+        //Sumarizar los "value" de ese grupo
+        //Agregar a la lista esa suma por cada hora
+    }
+
+    private fun getOccupiedPercentage(maxCapacity: Int, currentCapacity: Int): Int {
+        return currentCapacity * 100 / maxCapacity
+    }
+
+    private fun onError(error: Any?){
+        if(error == UNAUTHORIZED_CODE){
+            Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
+            initLoginFragment()
+        }
+        else
+            Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
     }
 
     private fun setHeaderUI(branchOffice: BranchOffice) {
@@ -75,13 +102,12 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         binding.capmax.setText(branchOffice.maxCapacity.toString())
     }
 
+    private val getBranchOfficeHistoryFailureObserver = Observer<Any?> { error ->
+        onError(error)
+    }
+
     private val getBranchOfficeByIdFailureObserver = Observer<Any?> { error ->
-        if(error == UNAUTHORIZED_CODE){
-            Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
-            initLoginFragment()
-        }
-        else
-            Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
+        onError(error)
     }
 
     private fun setTopBar() {
@@ -110,8 +136,7 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
     }
 
     private fun getBranchOfficeById(){
-        val refBranchOffice = arguments?.get("refBranchOffice").toString()
-        homeFuncionarioViewModel.getBranchOfficeById("Bearer ${getToken()}", refBranchOffice)
+        homeFuncionarioViewModel.getBranchOfficeById("Bearer ${getToken()}", branchOfficeId)
     }
 
     private fun getToken(): String {
@@ -119,47 +144,32 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         return sharedPref?.getString("Token", "0").toString()
     }
 
-    /////GRAFICOS/////////////////////////////////
-    //Codigo para la Torta
-    private fun setPieChart() {
-
-        // xvalues
+    private fun setPieChart(occupied: Int, available: Int) {
         val xvalues = ArrayList<String>()
-        xvalues.add("Ocupación")
-        xvalues.add("Disponible")
-
+        xvalues.add(OCCUPIED_TXT)
+        xvalues.add(AVAILABLE_TXT)
 
         // yvalues Estos valores son los que nos devuelve en tiempo real
         var piechartentry = ArrayList<Entry>()
-        piechartentry.add(Entry(43.5f, 0))
-        piechartentry.add(Entry(55.5f, 1))
-        //piechartentry.add(Entry(68.5f, 2))
-        //piechartentry.add(Entry(valorRecibidoDeOcupacion, 0))
-        //piechartentry.add(Entry(valorCalculadoDeEspacioDisponible, 1)) EL VALOR EXPRESARLO EN CANTIDAD DE PERSONAS  O PORCENTAJE ?
+        piechartentry.add(Entry(occupied.toFloat(), 0))
+        piechartentry.add(Entry(available.toFloat(), 1))
 
         // colors los indices se manejan como paralelos
         val colors = ArrayList<Int>()
         colors.add(Color.RED)
         colors.add(Color.GREEN)
-        //colors.add(Color.YELLOW)
 
         // fill the chart
         val piedataset = PieDataSet(piechartentry, "")
-
-      //piedataset.color = resources.getColor(R.color.green) otra opción de dar un solo color
+        //piedataset.color = resources.getColor(R.color.green) otra opción de dar un solo color
         piedataset.colors = colors
-
         piedataset.sliceSpace = 3f
-
-        //prueba de textsize
         piedataset.valueTextSize = 12f
 
         val data = PieData(xvalues, piedataset)
         piechart.data = data
-
         piechart.holeRadius = 5f
         piechart.setBackgroundColor(resources.getColor(R.color.white))
-
         piechart.setDescription("")
         piechart.animateY(3000)
 
@@ -169,66 +179,30 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         legend.textSize = 10f // OTRA PRUEBA DE TEXT SIZE
     }
 
-    //Codigo para la Barra
-    private fun setBarCharValues() {
+    private fun setBarCharValues(/*values: ArrayList<Int>*/) {
         // x axis values
-
         val xvalues = ArrayList<String>()
 
-        xvalues.add("1hs")
-        xvalues.add("2hs")
-        xvalues.add("3hs")
-        xvalues.add("4hs")
-        xvalues.add("5hs")
-        xvalues.add("6hs")
-        xvalues.add("7hs")
-        xvalues.add("8hs")
-        xvalues.add("9hs")
-        xvalues.add("10hs")
-        xvalues.add("11hs")
-        xvalues.add("12hs")
-        xvalues.add("13hs")
-        xvalues.add("14hs")
-        xvalues.add("15hs")
-        xvalues.add("16hs")
-        xvalues.add("17hs")
-        xvalues.add("18hs")
-        xvalues.add("19hs")
-        xvalues.add("20hs")
-        xvalues.add("21hs")
-        xvalues.add("22hs")
-        xvalues.add("23hs")
-        xvalues.add("24hs")
+        //Agregamos las horas
+        for (i in 1..24) {
+            xvalues.add("$i hs")
+        }
 
         // y axis values or bar data
-
-        val yaxis = arrayOf<Float>(2.0f, 8.2f, 6f, 7.8f, 13.4f, 8f, 5f, 2.0f, 6f, 5.5f, 7.8f, 3.4f, 8f, 5f, 4.7f, 1.5f, 3.5f, 4f, 3.7f, 7.3f, 1.9f, 2.3f, 4.4f, 6f )
+        val yaxis = arrayOf<Float>(2.0f, 8.2f, 6f, 7.8f, 13.4f, 8f, 5f, 2.0f, 6f, 5.5f, 7.8f, 3.4f, 8f, 5f, 4.7f, 1.5f, 3.5f, 4f, 3.7f, 7.3f, 1.9f, 2.3f, 4.4f, 6f) //Array que me llega
 
         // bar entries
         val barentries = ArrayList<BarEntry>()
-
-        for ( i in 0..yaxis.size - 1) {
+        for (i in 0..yaxis.size - 1) {
             barentries.add(BarEntry(yaxis[i], i))
         }
-        /*
-        barentries.add(BarEntry(4f, 0))
-        barentries.add(BarEntry(3.5f, 1))
-        barentries.add(BarEntry(8.2f, 2))
-        barentries.add(BarEntry(5.6f, 3))
-        barentries.add(BarEntry(2f, 4))
-        barentries.add(BarEntry(6f, 5))
-        barentries.add(BarEntry(9f, 6))
-
-         */
 
         // bardata set
         val bardataset = BarDataSet(barentries, "Horarios más concurridos por Hora")
 
         // make a bar data
         val data = BarData(xvalues, bardataset)
-
         barChar.data = data
-
         barChar.setDescription("")
         //barChar.setBackgroundColor(resources.getColor(R.color.white))
         barChar.animateXY(3000,3000)

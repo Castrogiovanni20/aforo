@@ -110,6 +110,13 @@ interface FiwareAPI {
         @Path("entityId") entityId: String
     ) : Call<FiwareResponseBranchOffice>
 
+
+    @GET("branch-offices/{entityId}/history")
+    fun getBranchOfficeHistory(
+        @Header("Authorization") token: String,
+        @Path("entityId") entityId: String
+    ) : Call<FiwareResponseBranchOfficeHistory>
+
     companion object {
         private val BASE_URL: String = "http://46.17.108.79:5000/api/v1/"
 
