@@ -22,8 +22,6 @@ import com.github.mikephil.charting.data.*
 import com.pf.aforo.data.model.DataBranchOfficeHistory
 import com.github.mikephil.charting.data.PieData as PieData
 
-
-
 class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
     private lateinit var binding: FragmentHomeFuncionarioBinding
     private lateinit var homeFuncionarioViewModel: HomeFuncionarioViewModel
@@ -46,7 +44,6 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         getBranchOfficeById()
         getHistoricData()
         setObservers()
-        setBarCharValues()
     }
 
     private fun getHistoricData() {
@@ -69,19 +66,27 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         setPieChart(occupied, available)
     }
 
-    private val getBranchOfficeHistorySuccessObserver = Observer<Array<DataBranchOfficeHistory>> { branchOffices ->
-//        setBarCharValues(groupEventsByHour(branchOffices))
+    private val getBranchOfficeHistorySuccessObserver = Observer<Array<DataBranchOfficeHistory>> { histories ->
+        //TODO: Convertir al timezone local
+        setBarCharValues(groupEventsByHour(histories))
     }
 
-    private fun groupEventsByHour(branchOffices: Array<DataBranchOfficeHistory>?): ArrayList<Int> {
-        return ArrayList<Int>()
-        //Agrupar los DataBranchOfficeHistory por hora del timestamp
-        //Sumarizar los "value" de ese grupo
-        //Agregar a la lista esa suma por cada hora
+    private fun groupEventsByHour(histories: Array<DataBranchOfficeHistory>): ArrayList<Float> {
+        val valuesList = ArrayList<Float>()
+        val groupedByHourEvents = histories.groupBy { bo -> bo.timestamp.hours }
+
+        for(i in 0..23){
+            val eventsOnIHour = groupedByHourEvents.filterValues { it[0].timestamp.hours == i }.flatMap { it.value }
+            if(eventsOnIHour.isEmpty())
+                valuesList.add(0f)
+            else
+                valuesList.add(eventsOnIHour.map { it.value.toFloat() }?.maxOrNull() ?: 0f)
+        }
+        return valuesList
     }
 
-    private fun getOccupiedPercentage(maxCapacity: Int, currentCapacity: Int): Int {
-        return currentCapacity * 100 / maxCapacity
+    private fun getOccupiedPercentage(maxCapacity: Int, currentCapacity: Int): Float {
+        return (currentCapacity.toDouble() * 100 / maxCapacity.toDouble()).toFloat()
     }
 
     private fun onError(error: Any?){
@@ -144,15 +149,15 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         return sharedPref?.getString("Token", "0").toString()
     }
 
-    private fun setPieChart(occupied: Int, available: Int) {
+    private fun setPieChart(occupied: Float, available: Float) {
         val xvalues = ArrayList<String>()
         xvalues.add(OCCUPIED_TXT)
         xvalues.add(AVAILABLE_TXT)
 
         // yvalues Estos valores son los que nos devuelve en tiempo real
         var piechartentry = ArrayList<Entry>()
-        piechartentry.add(Entry(occupied.toFloat(), 0))
-        piechartentry.add(Entry(available.toFloat(), 1))
+        piechartentry.add(Entry(occupied, 0))
+        piechartentry.add(Entry(available, 1))
 
         // colors los indices se manejan como paralelos
         val colors = ArrayList<Int>()
@@ -179,32 +184,27 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         legend.textSize = 10f // OTRA PRUEBA DE TEXT SIZE
     }
 
-    private fun setBarCharValues(/*values: ArrayList<Int>*/) {
+    private fun setBarCharValues(values: ArrayList<Float>) {
         // x axis values
         val xvalues = ArrayList<String>()
-
         //Agregamos las horas
-        for (i in 1..24) {
+        for (i in 0..23) {
             xvalues.add("$i hs")
         }
-
         // y axis values or bar data
-        val yaxis = arrayOf<Float>(2.0f, 8.2f, 6f, 7.8f, 13.4f, 8f, 5f, 2.0f, 6f, 5.5f, 7.8f, 3.4f, 8f, 5f, 4.7f, 1.5f, 3.5f, 4f, 3.7f, 7.3f, 1.9f, 2.3f, 4.4f, 6f) //Array que me llega
+        val yaxis = values
 
         // bar entries
         val barentries = ArrayList<BarEntry>()
         for (i in 0..yaxis.size - 1) {
             barentries.add(BarEntry(yaxis[i], i))
         }
-
         // bardata set
         val bardataset = BarDataSet(barentries, "Horarios más concurridos por Hora")
-
         // make a bar data
         val data = BarData(xvalues, bardataset)
         barChar.data = data
         barChar.setDescription("")
-        //barChar.setBackgroundColor(resources.getColor(R.color.white))
         barChar.animateXY(3000,3000)
     }
 }
