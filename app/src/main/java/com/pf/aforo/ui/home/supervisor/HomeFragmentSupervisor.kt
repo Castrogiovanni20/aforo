@@ -14,10 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pf.aforo.R
-import com.pf.aforo.data.model.BranchOffice
-import com.pf.aforo.data.model.Data
-import com.pf.aforo.data.model.DataUser
-import com.pf.aforo.data.model.UserFuncionario
+import com.pf.aforo.data.model.*
 import com.pf.aforo.databinding.FragmentHomeSupervisorBinding
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -35,6 +32,8 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     private lateinit var branchOfficeAdapter2: BranchOfficeAdapter_2
     private val SUCURSAL_SIN_FUNCIONARIO: String = "Sin asignar"
     private val UNAUTHORIZED_CODE: String = "401"
+    private val URI: String = "http://46.17.108.79:5000"
+    private lateinit var socketId: SocketId
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,17 +45,19 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         getBranchOffices()
         setRecyclerView()
         setObservers()
+        setSocket()
+    }
 
+    private fun setSocket() {
         mSocket = connectSocket()
         mSocket.on(Socket.EVENT_CONNECT, onConnect)
         mSocket.on(Socket.EVENT_DISCONNECT, onDisconnect)
         mSocket.on("CONTEXT_CHANGE", onContextChange)
     }
 
-
     private fun connectSocket() : Socket {
         try {
-            mSocket = IO.socket("http://46.17.108.79:5000");
+            mSocket = IO.socket(URI);
             mSocket.connect()
         } catch (e: URISyntaxException) {
             Log.d("SocketError: ", e.toString())
@@ -66,7 +67,8 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     }
 
     private val onConnect = Emitter.Listener { args ->
-        Log.d("Socket", "El ID es: " + mSocket.id())
+        val socketId = SocketId(mSocket.id())
+        subscribeNotifications(socketId)
     }
 
     private val onDisconnect = Emitter.Listener { args ->
@@ -75,10 +77,6 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
 
     private val onContextChange = Emitter.Listener { args ->
         Log.d("Socket", "Hubo un cambio")
-
-        requireActivity().runOnUiThread(Runnable {
-            Log.d("Socket", "Entro en el evento")
-        })
     }
 
     private fun setTopBar() {
@@ -148,6 +146,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         homeViewModel.getBranchOfficesResponse.observe(viewLifecycleOwner, this.getBranchOfficesSuccessObserver)
         homeViewModel.getBranchOfficesFailureResponse.observe(viewLifecycleOwner, this.getBranchOfficesFailureObserver)
         homeViewModel.getUsersResponse.observe(viewLifecycleOwner, this.getUsersObserver)
+        homeViewModel.subscriptionIdResponse.observe(viewLifecycleOwner, this.getSubscriptionIdObserver)
     }
 
     private val getBranchOfficesSuccessObserver = Observer<ArrayList<BranchOffice>> { branchOffices ->
@@ -171,11 +170,16 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
 
     private val getUsersObserver = Observer<Array<DataUser>> { dataUsers ->
         for (user in dataUsers) {
-            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.phoneNumber, user.password, user.role)
+            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.role)
             arrayListFuncionarios.add(userFuncionario)
         }
         if(arrayListSucursales.isNotEmpty())
             updateBranchOfficeRefUser()
+    }
+
+    private val getSubscriptionIdObserver = Observer<String> { it ->
+        Log.d("SubscriptionID: ", it)
+        saveSubscriptionIdOnSharedPreferences(it)
     }
 
     private fun updateBranchOfficeRefUser() {
@@ -202,6 +206,10 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         return fullName
     }
 
+    private fun subscribeNotifications(socketId: SocketId) {
+        homeViewModel.getSubscriptionId("Bearer ${getToken()}", socketId)
+    }
+
     private fun initFuncionariosFragments() {
         findNavController().navigate(R.id.action_homeFragmentSupervisor_to_usuariosSupervisorFragment)
     }
@@ -218,6 +226,18 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     private fun getToken(): String {
         val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
         return sharedPref?.getString("Token", "0").toString()
+    }
+
+    private fun saveSubscriptionIdOnSharedPreferences(subscriptionId: String) {
+        val sharedPreferences = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
+        val editor = sharedPreferences?.edit()
+        editor?.putString("SubscriptionId", subscriptionId)
+        editor?.apply()
+    }
+
+    private fun getSubscriptionId(): String {
+        val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
+        return sharedPref?.getString("SubscriptionId", "0").toString()
     }
 
 }

@@ -82,6 +82,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private fun setUI() {
         binding.edtNombre.setText(userFuncionario.firstName)
         binding.edtApellido.setText(userFuncionario.lastName)
+        binding.edtDNI.setText(userFuncionario.identificationNumber)
         binding.edtTelefono.setText(userFuncionario.phoneNumber)
         binding.edtMail.setText(userFuncionario.email)
     }
@@ -103,15 +104,16 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         var firstName = binding.edtNombre.text.toString()
         var lastName = binding.edtApellido.text.toString()
         var email = binding.edtMail.text.toString()
+        var identificationNumber = binding.edtDNI.text.toString()
         var phoneNumber = binding.edtTelefono.text.toString()
         var role = userFuncionario.role
 
-        val userFuncionario = UserFuncionario(id, firstName, lastName, email, phoneNumber, "", role)
+        val userFuncionario = UserFuncionario(id, firstName, lastName, email, identificationNumber, phoneNumber, "", role)
         editProfileViewModel.updateUser("Bearer ${getToken()}" , userFuncionario)
     }
 
     private val getUserSuccessObserver = Observer<DataUser> { data ->
-        userFuncionario = UserFuncionario(data.id, data.firstName, data.lastName, data.email, data.phoneNumber, "", data.role)
+        userFuncionario = UserFuncionario(data.id, data.firstName, data.lastName, data.email, data.identificationNumber, data.phoneNumber, "", data.role)
         setUI()
     }
 

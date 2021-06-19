@@ -7,7 +7,8 @@ class UserSupervisor ( var firstName: String,
                        var refOrganization: String,
                        var password: String,
                        var passwordConfirm: String,
-                       var role: String) {
+                       var role: String,
+                       var settings: UserSettings) {
 
     fun isFirstNameLengthValid (): Boolean = (firstName.length in 2..60)
 
