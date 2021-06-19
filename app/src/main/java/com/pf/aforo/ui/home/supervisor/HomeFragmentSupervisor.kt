@@ -55,6 +55,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         mSocket.on("CONTEXT_CHANGE", onContextChange)
     }
 
+
     private fun connectSocket() : Socket {
         try {
             mSocket = IO.socket(URI);
@@ -126,10 +127,12 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     }
 
     private fun getUsers() {
+        if(arrayListFuncionarios.isNotEmpty()) arrayListFuncionarios.clear()
         homeViewModel.getUsers("Bearer ${getToken()}")
     }
 
     private fun getBranchOffices() {
+        if(arrayListSucursales.isNotEmpty()) arrayListSucursales.clear()
         homeViewModel.getBranchOffices("Bearer ${getToken()}")
     }
 
@@ -186,22 +189,21 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         val branchOffices = ArrayList(arrayListSucursales)
         arrayListSucursales.clear()
         for (branchOffice in branchOffices) {
-            branchOffice.refUser = getFullNameOrDefaultByID(branchOffice.refUser)
+            branchOffice.refUser = getFullNameOrDefaultByKey(branchOffice.refUser)
             arrayListSucursales.add(branchOffice)
             branchOfficeAdapter2.notifyDataSetChanged()
         }
     }
 
-    private fun getFullNameOrDefaultByID(id: String): String {
-        if (id.equals("null")) {
+    private fun getFullNameOrDefaultByKey(key: String): String {
+        if (key.equals("null")) {
             return SUCURSAL_SIN_FUNCIONARIO
         }
         var fullName = ""
         for (user in arrayListFuncionarios) {
-            if (user.id == id){
-                fullName = user.firstName + " " + user.lastName
+            fullName = user.firstName + " " + user.lastName
+            if(fullName == key || user.id == key)
                 break
-            }
         }
         return fullName
     }
