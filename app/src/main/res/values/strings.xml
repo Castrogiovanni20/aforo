@@ -29,22 +29,22 @@
 
     <string name="confirmarDelete">¿Confirma la eliminación de este Funcionario?</string>
     <string name="confirmarDeleteSucursal">¿Confirma la eliminación de esta Sucursal?</string>
+    <string name="confirmarCerrar">¿Confirma que desea cerrar sesión?</string>
     <string name="datosIncorrectos">Usuario y/o contraseña incorrectos</string>
     <string name="misSucus">Mis Sucursales</string>
     <string name="newSucu">Nueva Sucursal</string>
     <string name="editSucu">Edición Sucursal</string>
     <string name="elimSucu">Eliminar Sucursal</string>
-    <string name="misFuncos">Mis Funcionarios</string>
+    <string name="misFuncos">Mis Usuarios</string>
     <string name="editFunco">Edición Funcionario</string>
     <string name="elimFunco">Eliminar Funcionario</string>
     <string name="nuevoFunc">Nuevo Funcionario</string>
     <string name="btnAgregarFuncionario">Funcionario</string>
     <string name="btnAgregarSucursal">Sucursal</string>
     <string name="miPerfil">Mi Perfil</string>
-    <string name="confirmMail">Se ha enviado un mail de confirmación de registro a su casilla</string>
     <string name="reingresePass">Reingresar la contraseña</string>
     <string name="recuperarContras">Recuperar contraseña</string>
-    <string name="mailPasos">Ha recibido un correo con los pasos para recuperar su contraseña</string>
+
 
     <string name="nombreSucursal">Nombre Sucursal:</string>
     <string name="domicilio">Dirección:</string>

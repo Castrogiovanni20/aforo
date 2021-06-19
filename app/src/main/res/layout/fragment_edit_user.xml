@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="40dp"
+    android:screenOrientation="portrait"
     tools:context=".ui.home.supervisor.EditUserFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -73,7 +74,7 @@
 
             <TextView
                 android:id="@+id/fullName"
-                android:layout_width="290dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_baseline_person_24"
@@ -92,7 +93,7 @@
 
             <TextView
                 android:id="@+id/textRole"
-                android:layout_width="290dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_baseline_assignment_ind_24"

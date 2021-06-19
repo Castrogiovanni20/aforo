@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="40dp"
+    android:screenOrientation="portrait"
     tools:context=".ui.home.supervisor.AddUserFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -60,11 +61,11 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="12dp" />
+                android:layout_height="10dp" />
 
             <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@mipmap/icon_user" />
 
@@ -79,11 +80,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTApell"
-                    android:layout_width="330dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:inputType="textPersonName|text"
@@ -102,11 +103,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTNom"
-                    android:layout_width="330dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:inputType="textPersonName|text"
@@ -125,11 +126,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextNumberDni"
-                    android:layout_width="330dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:maxLength="8"
                     android:inputType="number"
@@ -148,13 +149,14 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextTelefono"
-                    android:layout_width="330dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:maxLength="15"
                     android:layout_weight="1"
-                    android:inputType="phone"
+                    android:inputType="number"
                     android:textAlignment="textStart"
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -170,11 +172,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextTextEmail"
-                    android:layout_width="330dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:inputType="textEmailAddress"
                     android:textAlignment="textStart"
@@ -189,21 +191,43 @@
                 android:hint="@string/Password"
                 app:endIconMode="password_toggle"
                 app:errorIconDrawable="@drawable/ic_baseline_error_24"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24">>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/NumPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:inputType="textPassword"
+                    android:textAlignment="textStart"
+                    android:maxLength="16"
+                    android:textSize="12sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/roboto"
+                android:hint="@string/confirmarPass"
+                app:endIconMode="password_toggle"
+                app:errorIconDrawable="@drawable/ic_baseline_error_24"
                 app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/NumPassword"
-                    android:layout_width="330dp"
+                    android:id="@+id/RepPassword"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
+                    android:maxLength="16"
                     android:inputType="textPassword"
                     android:textAlignment="textStart"
                     android:textSize="12sp" />
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="23dp" />
+                    android:layout_height="10dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

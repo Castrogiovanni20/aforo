@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/lightgray"
     android:fontFamily="@font/roboto"
+    android:screenOrientation="portrait"
     tools:context=".ui.home.funcionario.HomeFragmentFuncionario">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -190,7 +191,7 @@
 
         <ImageView
             android:id="@+id/semaforo"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="38dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="150dp"
