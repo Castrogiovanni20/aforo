@@ -1,9 +1,6 @@
 package com.pf.aforo.data.repository
 
-import com.pf.aforo.data.model.BranchOffice
-import com.pf.aforo.data.model.UserFuncionario
-import com.pf.aforo.data.model.UserLogin
-import com.pf.aforo.data.model.UserSupervisor
+import com.pf.aforo.data.model.*
 import com.pf.aforo.data.response.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -116,6 +113,21 @@ interface FiwareAPI {
         @Header("Authorization") token: String,
         @Path("entityId") entityId: String
     ) : Call<FiwareResponseBranchOfficeHistory>
+
+    /**
+     * @description Notifications endpoints
+     */
+    @POST("notifications/subscribe")
+    fun subscribe(
+        @Header("Authorization") token: String,
+        @Body socketId: SocketId
+    ) : Call<FiwareResponseSubscribe>
+
+    @POST("notifications/unsubscribe")
+    fun unsubscribe(
+        @Header("Authorization") token: String,
+        @Body subscriptionId: SubscriptionId
+    ) : Call<FiwareResponseUnsubscribe>
 
     companion object {
         private val BASE_URL: String = "http://46.17.108.79:5000/api/v1/"
