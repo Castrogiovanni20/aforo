@@ -1,6 +1,8 @@
 package com.pf.aforo.ui.home.funcionario
 
+//Imports de librerias para los graficos:
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,18 +11,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.pf.aforo.R
-import com.pf.aforo.data.model.BranchOffice
-import com.pf.aforo.databinding.FragmentHomeFuncionarioBinding
-
-//Imports de librerias para los graficos:
-import android.graphics.Color
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.*
+import com.pf.aforo.R
+import com.pf.aforo.data.model.BranchOffice
 import com.pf.aforo.data.model.DataBranchOfficeHistory
-import com.github.mikephil.charting.data.PieData as PieData
+import com.pf.aforo.databinding.FragmentHomeFuncionarioBinding
 
 class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
     private lateinit var binding: FragmentHomeFuncionarioBinding
@@ -41,9 +39,19 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         barChar = binding.barChart
         homeFuncionarioViewModel = ViewModelProvider(this).get(HomeFuncionarioViewModel::class.java)
         setTopBar()
-        getBranchOfficeById()
-        getHistoricData()
-        setObservers()
+//        getBranchOfficeById()
+//        getHistoricData()
+//        setObservers()
+    }
+
+    override fun onResume(){
+        super.onResume()
+        if(branchOfficeId != "null"){
+            setObservers()
+            getBranchOfficeById()
+            getHistoricData()
+        }
+            //else- TODO: limpiar la pantalla, poner algun mensaje de "No tenes una sucursal asignada"
     }
 
     private fun getHistoricData() {
@@ -52,11 +60,23 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
 
     private fun setObservers() {
         //Current data observers
-        homeFuncionarioViewModel.getBranchOfficeByIdResponse.observe(viewLifecycleOwner, this.getBranchOfficeByIdSuccessObserver)
-        homeFuncionarioViewModel.getBranchOfficeByIdFailureResponse.observe(viewLifecycleOwner, this.getBranchOfficeByIdFailureObserver)
+        homeFuncionarioViewModel.getBranchOfficeByIdResponse.observe(
+            viewLifecycleOwner,
+            this.getBranchOfficeByIdSuccessObserver
+        )
+        homeFuncionarioViewModel.getBranchOfficeByIdFailureResponse.observe(
+            viewLifecycleOwner,
+            this.getBranchOfficeByIdFailureObserver
+        )
         //Historic data observers
-        homeFuncionarioViewModel.getBranchOfficeHistoryResponse.observe(viewLifecycleOwner, this.getBranchOfficeHistorySuccessObserver)
-        homeFuncionarioViewModel.getBranchOfficeHistoryFailureResponse.observe(viewLifecycleOwner, this.getBranchOfficeHistoryFailureObserver)
+        homeFuncionarioViewModel.getBranchOfficeHistoryResponse.observe(
+            viewLifecycleOwner,
+            this.getBranchOfficeHistorySuccessObserver
+        )
+        homeFuncionarioViewModel.getBranchOfficeHistoryFailureResponse.observe(
+            viewLifecycleOwner,
+            this.getBranchOfficeHistoryFailureObserver
+        )
     }
 
     private val getBranchOfficeByIdSuccessObserver = Observer<BranchOffice> { branchOffice ->
@@ -205,7 +225,7 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         val data = BarData(xvalues, bardataset)
         barChar.data = data
         barChar.setDescription("")
-        barChar.animateXY(3000,3000)
+        barChar.animateXY(3000, 3000)
     }
 }
 
