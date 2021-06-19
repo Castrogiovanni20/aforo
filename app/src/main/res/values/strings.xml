@@ -84,6 +84,8 @@
     <string name="p80">80 %</string>
     <string name="p100">100 %</string>
 
+    <string name="sinSucursal">No posee ninguna sucursal asignada, comuníquese con su supervisor.</string>
+
     <string-array name="roles">
         <item>SUPERVISOR</item>
         <item>FUNCIONARIO</item>

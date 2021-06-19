@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragmentFuncionario"
             app:destination="@id/homeFragmentFuncionario" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragmentFuncionarioSinSucursal"
+            app:destination="@id/homeFragmentFuncionarioSinSucursal" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -319,5 +322,18 @@
         <action
             android:id="@+id/action_notificacionesSupervisorFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragmentFuncionarioSinSucursal"
+        android:name="com.pf.aforo.ui.home.funcionario.HomeFragmentFuncionarioSinSucursal"
+        android:label="fragment_home_funcionario_sin_sucursal"
+        tools:layout="@layout/fragment_home_funcionario_sin_sucursal">
+        <action
+            android:id="@+id/action_homeFragmentFuncionarioSinSucursal_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragmentFuncionarioSinSucursal_to_notificacionesFragment"
+            app:destination="@id/notificacionesFragment" />
+
     </fragment>
 </navigation>

@@ -114,9 +114,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun initFragmentHomeFuncionario(user: DataUser) {
-        val userFullName = user.firstName + " " + user.lastName
         val refBranchOffice = user.refBranchOffice
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragmentFuncionario(userFullName, refBranchOffice))
+        if(refBranchOffice != null){
+            val userFullName = user.firstName + " " + user.lastName
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragmentFuncionario(userFullName, refBranchOffice))
+        }
+        else
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragmentFuncionarioSinSucursal())
     }
 
     private fun initFragmentHomeSupervisor() {

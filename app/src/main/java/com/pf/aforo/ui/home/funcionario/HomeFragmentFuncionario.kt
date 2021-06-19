@@ -39,19 +39,9 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         barChar = binding.barChart
         homeFuncionarioViewModel = ViewModelProvider(this).get(HomeFuncionarioViewModel::class.java)
         setTopBar()
-//        getBranchOfficeById()
-//        getHistoricData()
-//        setObservers()
-    }
-
-    override fun onResume(){
-        super.onResume()
-        if(branchOfficeId != "null"){
-            setObservers()
-            getBranchOfficeById()
-            getHistoricData()
-        }
-            //else- TODO: limpiar la pantalla, poner algun mensaje de "No tenes una sucursal asignada"
+        setObservers()
+        getBranchOfficeById()
+        getHistoricData()
     }
 
     private fun getHistoricData() {
