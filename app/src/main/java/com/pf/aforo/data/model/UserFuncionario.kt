@@ -5,10 +5,18 @@ import android.os.Parcelable
 import androidx.versionedparcelable.VersionedParcelize
 
 @VersionedParcelize
-data class UserFuncionario(val id: String, var firstName: String, var lastName: String, var email: String, var phoneNumber: String, var password: String, var role: String) : Parcelable {
+data class UserFuncionario(val id: String,
+                           var firstName: String,
+                           var lastName: String,
+                           var email: String,
+                           var identificationNumber: String?,
+                           var phoneNumber: String,
+                           var password: String,
+                           var role: String) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
+        parcel.readString()?: "",
         parcel.readString()?: "",
         parcel.readString()?: "",
         parcel.readString()?: "",
