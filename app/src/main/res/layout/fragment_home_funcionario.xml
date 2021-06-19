@@ -168,12 +168,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card2"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="190dp"
         android:layout_gravity="center"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="30dp"
         android:fontFamily="@font/roboto"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -192,21 +192,20 @@
         <ImageView
             android:id="@+id/semaforo"
             android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="165dp"
             android:src="@mipmap/icon_smgnone" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card4"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_gravity="center"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="30dp"
         android:fontFamily="@font/roboto"
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
