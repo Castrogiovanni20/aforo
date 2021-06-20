@@ -15,7 +15,8 @@ import com.pf.aforo.databinding.FragmentConfirmDeleteUserBinding
 class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user) {
     private lateinit var binding: FragmentConfirmDeleteUserBinding
     private lateinit var editUserViewModel: EditUserViewModel
-    private val UNAUTHORIZED_CODE: String = "401"
+    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
+    private val PERMISSION_REFUSED_CODE: String = "PERMISSION_REFUSED"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,9 +68,13 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
     }
 
     private val failureObserver = Observer<Any> { statusCode ->
-        if(statusCode == UNAUTHORIZED_CODE){
+        if(statusCode.toString().contains(UNAUTHORIZED_CODE)){
             Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
             initLoginFragment()
+        }
+        else if(statusCode.toString().contains(PERMISSION_REFUSED_CODE)){
+            Toast.makeText(context, "No tiene permisos para realizar esta acción.", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_confirmDeleteUserFragment_to_usuariosSupervisorFragment)
         }
         else
             Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()

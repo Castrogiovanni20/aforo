@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -29,6 +30,7 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
     private val AVAILABLE_TXT: String = "Disponible"
     lateinit var piechart: PieChart
     lateinit var barChar: BarChart
+    lateinit var lightsGraphic: ImageView
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,6 +39,7 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         binding = FragmentHomeFuncionarioBinding.bind(view)
         piechart = binding.piechart
         barChar = binding.barChart
+        lightsGraphic = binding.semaforo
         homeFuncionarioViewModel = ViewModelProvider(this).get(HomeFuncionarioViewModel::class.java)
         setTopBar()
         setObservers()
@@ -73,7 +76,16 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         setHeaderUI(branchOffice)
         val occupied = getOccupiedPercentage(branchOffice.maxCapacity, branchOffice.currentCapacity)
         val available = 100 - occupied
+        setLights(occupied)
         setPieChart(occupied, available)
+    }
+
+    private fun setLights(occupied: Float) {
+        when {
+            occupied <= 60 -> lightsGraphic.setImageResource(R.mipmap.icon_smgreen)
+            occupied > 60 && occupied <= 80 -> lightsGraphic.setImageResource(R.mipmap.icon_smgyell)
+            occupied > 80 -> lightsGraphic.setImageResource(R.mipmap.icon_smfred)
+        }
     }
 
     private val getBranchOfficeHistorySuccessObserver = Observer<Array<DataBranchOfficeHistory>> { histories ->
