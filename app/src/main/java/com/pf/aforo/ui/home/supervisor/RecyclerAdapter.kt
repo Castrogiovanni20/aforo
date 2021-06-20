@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -19,6 +20,7 @@ internal class RecyclerAdapter(private var listFuncionarios: ArrayList<UserFunci
         var fullName: TextView = view.findViewById(R.id.textViewFullName)
         var role: TextView = view.findViewById(R.id.textViewRole)
         var imgButtonEdit: ImageButton = view.findViewById(R.id.imageButtonEditar)
+        var lock: ImageView = view.findViewById(R.id.candado)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -27,11 +29,13 @@ internal class RecyclerAdapter(private var listFuncionarios: ArrayList<UserFunci
         holder.fullName.text = item.firstName + " " + item.lastName
         holder.role.text = item.role.replace("_", " ")
 
-        holder.imgButtonEdit.setOnClickListener { view ->
+        if (listFuncionarios[position].refBranchOffice == null) {
+            holder.lock.visibility = View.INVISIBLE
+        }
 
+        holder.imgButtonEdit.setOnClickListener { view ->
             val bundle = Bundle()
             bundle.putParcelable("UserFuncionario", listFuncionarios[position])
-
             view.findNavController().navigate(R.id.action_usuariosSupervisorFragment_to_editUserFragment, bundle)
         }
     }
