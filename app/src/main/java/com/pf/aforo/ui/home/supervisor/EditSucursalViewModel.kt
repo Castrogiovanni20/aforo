@@ -13,6 +13,9 @@ class EditSucursalViewModel : ViewModel() {
     private var branchOfficesRepository = BranchOfficesRepository()
     private var usersRepository = UsersRepository()
 
+    private var _branchOffice = branchOfficesRepository.getBranchOfficeByIdSuccessResponseLiveData
+    val branchOffice: MutableLiveData<BranchOffice> get() = _branchOffice
+
     private var _updateBranchOfficeSuccessResponse = branchOfficesRepository.updateBranchOfficeSuccessResponseLiveData
     val updateBranchOfficeSuccessResponse: MutableLiveData<String> get() = _updateBranchOfficeSuccessResponse
 
@@ -37,8 +40,18 @@ class EditSucursalViewModel : ViewModel() {
     private var _assignCivilServantFailureResponse = branchOfficesRepository.assignCivilServantFailureResponseLiveData
     val assignCivilServantFailureResponse: MutableLiveData<String> get() = _assignCivilServantFailureResponse
 
+    private var _removeCivilServantSuccessResponse = branchOfficesRepository.assignCivilServantSuccessResponseLiveData
+    val removeCivilServantSuccessResponse: MutableLiveData<BranchOffice> get() = _assignCivilServantSuccessResponse
+
+    private var _removeCivilServantFailureResponse = branchOfficesRepository.removeCivilServantFailureResponseLiveData
+    val removeCivilServantFailureResponse: MutableLiveData<String> get() = _removeCivilServantFailureResponse
+
     var validationError = MutableLiveData<String>()
     var isBranchOfficeValid : Boolean = false
+
+    fun getBranchOffice(token: String, id: String) {
+        branchOfficesRepository.getBranchOfficeById(token, id)
+    }
 
     fun updateBranchOffice(token: String, id: String, branchOffice: BranchOffice) {
         validateBranchOffice(branchOffice)
@@ -49,8 +62,12 @@ class EditSucursalViewModel : ViewModel() {
         branchOfficesRepository.deleteBranchOffice(token, id)
     }
 
-    fun assignCivilServant(token: String, entityId: String, refUser: String) {
+    fun assignCivilServant(token: String, entityId: String, refUser: String?) {
         branchOfficesRepository.assignCivilServant(token, entityId, refUser)
+    }
+
+    fun removeCivilServant(token: String, entityId: String, refUser: String?) {
+        branchOfficesRepository.removeCivilServant(token, entityId, refUser)
     }
 
     fun getUsers(token: String) {

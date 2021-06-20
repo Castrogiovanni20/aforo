@@ -294,7 +294,8 @@
             app:destination="@id/loginFragment" />
         <argument
             android:name="userFullName"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"/>
         <argument
             android:name="refBranchOffice"
             app:argType="string"

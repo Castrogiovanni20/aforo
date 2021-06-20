@@ -189,13 +189,13 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         val branchOffices = ArrayList(arrayListSucursales)
         arrayListSucursales.clear()
         for (branchOffice in branchOffices) {
-            branchOffice.refUser = getFullNameOrDefaultByKey(branchOffice.refUser)
+            branchOffice?.refUser = getFullNameOrDefaultByKey(branchOffice?.refUser)
             arrayListSucursales.add(branchOffice)
             branchOfficeAdapter2.notifyDataSetChanged()
         }
     }
 
-    private fun getFullNameOrDefaultByKey(key: String): String {
+    private fun getFullNameOrDefaultByKey(key: String?): String {
         if (key == null || key.equals("null")) {
             return SUCURSAL_SIN_FUNCIONARIO
         }
