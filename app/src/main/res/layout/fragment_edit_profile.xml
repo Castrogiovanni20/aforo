@@ -113,6 +113,7 @@
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -132,6 +133,7 @@
                     android:maxLength="8"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
+                    android:enabled="false"
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -171,6 +173,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:enabled="false"
                     android:inputType="textEmailAddress"
                     android:layout_marginLeft="10dp"
                     android:paddingLeft="12dp"

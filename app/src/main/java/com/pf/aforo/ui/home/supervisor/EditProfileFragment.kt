@@ -103,8 +103,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         var id = userFuncionario.id
         var firstName = binding.edtNombre.text.toString()
         var lastName = binding.edtApellido.text.toString()
-        var email = binding.edtMail.text.toString()
-        var identificationNumber = binding.edtDNI.text.toString()
+        var email = userFuncionario.email
+        var identificationNumber = userFuncionario.identificationNumber
         var phoneNumber = binding.edtTelefono.text.toString()
         var role = userFuncionario.role
 
