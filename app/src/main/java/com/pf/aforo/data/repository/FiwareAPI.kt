@@ -98,8 +98,15 @@ interface FiwareAPI {
     fun assignCivilServantToBranchOffice(
         @Header("Authorization") token: String,
         @Path("entityId") entityId: String,
-        @Path("userId") refUser: String
+        @Path("userId") refUser: String?
     ) : Call<FiwareResponseAssignCivilServantToBranchOffice>
+
+    @PUT("branch-offices/{entityId}/remove-user/{userId}")
+    fun removeCivilServantFromBranchOffice(
+        @Header("Authorization") token: String,
+        @Path("entityId") entityId: String,
+        @Path("userId") refUser: String?
+    ) : Call<FiwareResponseRemoveCivilServantFromBranchOffice>
 
     @GET("branch-offices/{entityId}")
     fun getBranchOfficeById(

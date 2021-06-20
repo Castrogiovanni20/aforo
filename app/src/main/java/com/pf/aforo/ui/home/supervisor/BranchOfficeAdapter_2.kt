@@ -30,7 +30,7 @@ internal class BranchOfficeAdapter_2(private var listBranchOffice: ArrayList<Bra
         holder.textViewNombreSucursal.text = item.name
         holder.textViewCapacidadMax.text = maxCapacity
         holder.textViewOcupacion.text = currentCapacity
-        holder.textViewNombreFuncionario.text = "Funcionario: " + item.refUser
+        holder.textViewNombreFuncionario.text = "Funcionario: " + item?.refUser
         holder.textViewDisponible.text = "Disponible: " + (item.maxCapacity - item.currentCapacity).toString()
         setLights(holder, item.maxCapacity, item.currentCapacity)
 

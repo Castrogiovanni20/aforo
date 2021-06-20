@@ -36,7 +36,7 @@ internal class BranchOfficeAdapter_1(private var listBranchOffice: ArrayList<Bra
 
         holder.imageBtnEdit.setOnClickListener { view ->
             val bundle = Bundle()
-            bundle.putParcelable("BranchOffice", listBranchOffice[position])
+            bundle.putString("BranchOfficeId", item.id)
             view.findNavController().navigate(R.id.action_sucursalesSupervisorFragment_to_editSucursalFragment, bundle)
         }
 

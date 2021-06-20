@@ -7,6 +7,7 @@ import com.pf.aforo.data.model.DataBranchOfficeHistory
 import com.pf.aforo.data.response.*
 import retrofit2.Call
 import retrofit2.Response
+import java.util.*
 
 class BranchOfficesRepository {
 
@@ -24,6 +25,9 @@ class BranchOfficesRepository {
 
     var assignCivilServantSuccessResponseLiveData = MutableLiveData<BranchOffice>()
     var assignCivilServantFailureResponseLiveData = MutableLiveData<String>()
+
+    var removeCivilServantSuccessResponseLiveData = MutableLiveData<String>()
+    var removeCivilServantFailureResponseLiveData = MutableLiveData<String>()
 
     var getBranchOfficeByIdSuccessResponseLiveData = MutableLiveData<BranchOffice>()
     var getBranchOfficeByIdFailureResponseLiveData = MutableLiveData<String>()
@@ -137,7 +141,7 @@ class BranchOfficesRepository {
             })
     }
 
-    fun assignCivilServant(token: String, entityId: String, refUser: String) {
+    fun assignCivilServant(token: String, entityId: String, refUser: String?) {
         FiwareAPI().assignCivilServantToBranchOffice(token, entityId, refUser)
             .enqueue(object: retrofit2.Callback<FiwareResponseAssignCivilServantToBranchOffice>{
                 override fun onFailure(call: Call<FiwareResponseAssignCivilServantToBranchOffice>?, t: Throwable?) {
@@ -156,6 +160,32 @@ class BranchOfficesRepository {
                         } else {
                             assignCivilServantFailureResponseLiveData.value = fiwareResponse.code().toString()
                             Log.d("ApiAssignCivilServant", "API response: " + fiwareResponse.code().toString())
+                        }
+                    }
+                }
+
+            })
+    }
+
+    fun removeCivilServant(token: String, entityId: String, refUser: String?) {
+        FiwareAPI().removeCivilServantFromBranchOffice(token, entityId, refUser)
+            .enqueue(object: retrofit2.Callback<FiwareResponseRemoveCivilServantFromBranchOffice>{
+                override fun onFailure(call: Call<FiwareResponseRemoveCivilServantFromBranchOffice>?, t: Throwable?) {
+                    if (t != null) {
+                        removeCivilServantFailureResponseLiveData.value = SERVER_ERROR_MSG
+                        Log.d("ApiRemoveCivilServant", "Fallo el request: " + t.message)
+                    }
+                }
+                override fun onResponse(call: Call<FiwareResponseRemoveCivilServantFromBranchOffice>?, fiwareResponse: Response<FiwareResponseRemoveCivilServantFromBranchOffice>?) {
+                    if (fiwareResponse != null) {
+                        if (fiwareResponse.isSuccessful) {
+                            if (fiwareResponse.body().code == "SUCCESS") {
+                                removeCivilServantSuccessResponseLiveData.value = fiwareResponse.body().code
+                                Log.d("ApiRemoveCivilServant", "API response: " + fiwareResponse.code().toString())
+                            }
+                        } else {
+                            removeCivilServantFailureResponseLiveData.value = fiwareResponse.code().toString()
+                            Log.d("ApiRemoveCivilServant", "API response: " + fiwareResponse.code().toString())
                         }
                     }
                 }

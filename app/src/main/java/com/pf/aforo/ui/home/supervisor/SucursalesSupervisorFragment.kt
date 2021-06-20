@@ -146,13 +146,13 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
         val branchOffices = ArrayList(arrayListSucursales)
         arrayListSucursales.clear()
         for (branchOffice in branchOffices) {
-            branchOffice.refUser = getFullNameOrDefaultByID(branchOffice.refUser)
+            branchOffice?.refUser = getFullNameOrDefaultByID(branchOffice?.refUser)
             arrayListSucursales.add(branchOffice)
             branchOfficeAdapter1.notifyDataSetChanged()
         }
     }
 
-    private fun getFullNameOrDefaultByID(id: String): String {
+    private fun getFullNameOrDefaultByID(id: String?): String {
         if (id == null || id.equals("null")) {
             return SUCURSAL_SIN_FUNCIONARIO
         }
