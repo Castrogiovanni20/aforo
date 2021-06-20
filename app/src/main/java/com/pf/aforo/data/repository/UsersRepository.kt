@@ -128,7 +128,7 @@ class UsersRepository()
                                 Log.d("ApiDeleteUser", "API response: " + fiwareResponseUser.code().toString())
                             }
                         } else {
-                            deleteUserFailureResponseLiveData.value = fiwareResponseUser.code().toString()
+                            deleteUserFailureResponseLiveData.value = fiwareResponseUser.errorBody().string()
                             Log.d("ApiDeleteUser", "API response: " + fiwareResponseUser.code().toString())
                         }
                     }
