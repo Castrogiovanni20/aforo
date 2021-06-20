@@ -158,14 +158,14 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private val usersObserver = Observer<Array<DataUser>> { dataUser ->
         for (user in dataUser) {
             if (user.role == "CIVIL_SERVANT" && user.refBranchOffice == null) {
-                val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.role)
+                val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role)
                 val fullname = userFuncionario.firstName + " " + userFuncionario.lastName
                 listUserFuncionarios.add(userFuncionario)
                 fullnameSpinnerArray.add(fullname)
             }
 
             if (user.id == branchOffice.refUser) {
-                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.role)
+                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role)
             }
         }
 

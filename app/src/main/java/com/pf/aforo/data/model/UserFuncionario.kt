@@ -12,10 +12,12 @@ data class UserFuncionario(val id: String,
                            var identificationNumber: String?,
                            var phoneNumber: String,
                            var password: String,
+                           var passwordConfirm: String,
                            var role: String) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
+        parcel.readString()?: "",
         parcel.readString()?: "",
         parcel.readString()?: "",
         parcel.readString()?: "",
@@ -38,7 +40,11 @@ data class UserFuncionario(val id: String,
 
     fun isPasswordValid (): Boolean = (password.length in 8..100)
 
-    fun isPhoneNumberValid (): Boolean = (!phoneNumber.isNotEmpty() || phoneNumber.length in 1..15)
+    fun isPhoneNumberValid (): Boolean = phoneNumber.length in 6..15
+
+    fun isIdentificationNumberValid (): Boolean = identificationNumber?.length == 8
+
+    fun arePasswordsEquals (): Boolean = (password == passwordConfirm)
 
     fun isLetters(string: String): Boolean {
         return string.matches("^[a-zA-Z]+(\\s[a-zA-Z]+)?\$".toRegex())

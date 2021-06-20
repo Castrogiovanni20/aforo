@@ -28,9 +28,13 @@ class AddUserViewModel : ViewModel() {
             !user.isFirstNameAlphabetic() -> validationError.value = "El nombre debe contener solamente letras."
             !user.isLastNameLengthValid() -> validationError.value = "El apellido debe ser mayor a 2 y menor o igual a 60 caracteres."
             !user.isLastNameAlphabetic() -> validationError.value = "El apellido debe contener solamente letras."
-            !user.isPhoneNumberValid() -> validationError.value = "El teléfono celular debe ser menor o igual a 15 caracteres."
+            user.identificationNumber.isNullOrEmpty() -> validationError.value = "Debe ingresar un número DNI."
+            !user.isIdentificationNumberValid() -> validationError.value = "Debe ingresar un número DNI válido."
+            user.phoneNumber.isNullOrEmpty() -> validationError.value = "Debe ingresar un número de teléfono."
+            !user.isPhoneNumberValid() -> validationError.value = "Debe ingresar un número de teléfono válido."
             !user.isEmailValid() -> validationError.value = "Debe ingresar un formato de email valido."
             !user.isPasswordValid() -> validationError.value = "La contraseña debe ser mayor o igual a 8 caracteres."
+            !user.arePasswordsEquals() -> validationError.value = "Las contraseñas no coinciden."
             else -> {
                 isUserValid = true
             }
