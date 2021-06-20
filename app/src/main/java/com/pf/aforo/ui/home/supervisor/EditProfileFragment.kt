@@ -108,12 +108,12 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         var phoneNumber = binding.edtTelefono.text.toString()
         var role = userFuncionario.role
 
-        val userFuncionario = UserFuncionario(id, firstName, lastName, email, identificationNumber, phoneNumber, "", "", role)
+        val userFuncionario = UserFuncionario(id, firstName, lastName, email, identificationNumber, phoneNumber, "", "", role, null)
         editProfileViewModel.updateUser("Bearer ${getToken()}" , userFuncionario)
     }
 
     private val getUserSuccessObserver = Observer<DataUser> { data ->
-        userFuncionario = UserFuncionario(data.id, data.firstName, data.lastName, data.email, data.identificationNumber, data.phoneNumber, "", "", data.role)
+        userFuncionario = UserFuncionario(data.id, data.firstName, data.lastName, data.email, data.identificationNumber, data.phoneNumber, "", "", data.role, null)
         setUI()
     }
 
