@@ -137,7 +137,9 @@
                     android:layout_weight="1"
                     android:inputType="textEmailAddress"
                     android:textAlignment="textStart"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:maxLength="80"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space
