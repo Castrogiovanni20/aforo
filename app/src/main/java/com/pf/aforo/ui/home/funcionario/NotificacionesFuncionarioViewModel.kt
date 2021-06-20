@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.Settings
+import com.pf.aforo.data.model.UserSettings
 import com.pf.aforo.data.repository.UsersRepository
 
 class NotificacionesFuncionarioViewModel: ViewModel() {
@@ -25,7 +26,7 @@ class NotificacionesFuncionarioViewModel: ViewModel() {
         usersRepository.getUser(token, userId)
     }
 
-    fun updateSettings(token: String, userId: String, settings: Settings) {
+    fun updateSettings(token: String, userId: String, settings: UserSettings) {
         usersRepository.updateSettings(token, userId, settings)
     }
 }

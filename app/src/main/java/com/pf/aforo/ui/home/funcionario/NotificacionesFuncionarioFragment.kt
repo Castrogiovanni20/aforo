@@ -12,6 +12,8 @@ import androidx.lifecycle.Observer
 import com.pf.aforo.R
 import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.Settings
+import com.pf.aforo.data.model.UserFuncionario
+import com.pf.aforo.data.model.UserSettings
 import com.pf.aforo.databinding.FragmentNotificacionesBinding
 
 class NotificacionesFuncionarioFragment : Fragment(R.layout.fragment_notificaciones) {
@@ -53,7 +55,8 @@ class NotificacionesFuncionarioFragment : Fragment(R.layout.fragment_notificacio
     }
 
     val getUserSuccessObserver = Observer<DataUser> { it ->
-        setUI(it.settings)
+        val userSettings = UserSettings(it.settings)
+        setUI(userSettings)
     }
 
     val getUserFailureObserver = Observer<String> { error ->
@@ -79,13 +82,13 @@ class NotificacionesFuncionarioFragment : Fragment(R.layout.fragment_notificacio
         val highCapacityLevelAlert = binding.switchCapacidadAlta.isChecked
         val fullCapacityAlert = binding.switchCapacidadMaxima.isChecked
         val settings = Settings(fullCapacityAlert, highCapacityLevelAlert)
-
-        notificacionesFuncionarioViewModel.updateSettings("Bearer ${getToken()}", userId, settings)
+        val userSettings = UserSettings(settings)
+        notificacionesFuncionarioViewModel.updateSettings("Bearer ${getToken()}", userId, userSettings)
     }
 
-    private fun setUI(userSettings: Settings) {
-        binding.switchCapacidadAlta.isChecked = userSettings.highCapacityLevelAlert
-        binding.switchCapacidadMaxima.isChecked = userSettings.fullCapacityAlert
+    private fun setUI(userSettings: UserSettings) {
+        binding.switchCapacidadAlta.isChecked = userSettings.settings.highCapacityLevelAlert
+        binding.switchCapacidadMaxima.isChecked = userSettings.settings.fullCapacityAlert
     }
 
     private fun getUser() {

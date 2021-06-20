@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.data.model.Settings
+import com.pf.aforo.data.model.UserSettings
 import com.pf.aforo.data.response.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -192,8 +193,8 @@ class UsersRepository()
             })
     }
 
-    fun updateSettings(token: String, id: String, settings: Settings){
-        FiwareAPI().updateSettings(token, id, settings)
+    fun updateSettings(token: String, id: String, userSettings: UserSettings){
+        FiwareAPI().updateSettings(token, id, userSettings)
             .enqueue(object: Callback<FiwareResponseUpdateSettings>{
                 override fun onFailure(call: Call<FiwareResponseUpdateSettings>?, t: Throwable?) {
                     if (t != null) {

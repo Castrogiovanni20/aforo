@@ -70,7 +70,7 @@ interface FiwareAPI {
     fun updateSettings(
         @Header("Authorization") token: String,
         @Path("id") id: String,
-        @Body settings: Settings
+        @Body settings: UserSettings
     ) : Call<FiwareResponseUpdateSettings>
 
 
