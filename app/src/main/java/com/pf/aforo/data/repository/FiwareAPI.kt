@@ -66,6 +66,13 @@ interface FiwareAPI {
         @Path("role") role: String
     ) : Call<FiwareResponseEditUserRole>
 
+    @PUT("users/{id}")
+    fun updateSettings(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Body settings: Settings
+    ) : Call<FiwareResponseUpdateSettings>
+
 
     /**
      * @description Branch Offices endpoints

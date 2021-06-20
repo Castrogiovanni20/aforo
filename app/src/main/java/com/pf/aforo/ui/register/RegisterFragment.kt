@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.pf.aforo.R
-import com.pf.aforo.data.model.UserSettings
+import com.pf.aforo.data.model.Settings
 import com.pf.aforo.data.model.UserSupervisor
 import com.pf.aforo.databinding.FragmentRegisterBinding
 
@@ -49,7 +49,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         var password = binding.edtPassReg.text.toString()
         var passwordConfirm = binding.edtConfirmarPass.text.toString()
         var role = "SUPERVISOR"
-        var userSettings = UserSettings(false, false)
+        var userSettings = Settings(false, false)
 
         val user = UserSupervisor(firstName, lastName, email, phoneNumber, refOrganization, password, passwordConfirm, role, userSettings)
 

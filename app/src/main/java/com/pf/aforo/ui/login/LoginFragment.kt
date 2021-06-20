@@ -114,6 +114,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun initFragmentHomeFuncionario(user: DataUser) {
+        userId = user.id
         val refBranchOffice = user.refBranchOffice
         if(refBranchOffice != null && !refBranchOffice.equals("null")){
             val userFullName = user.firstName + " " + user.lastName
