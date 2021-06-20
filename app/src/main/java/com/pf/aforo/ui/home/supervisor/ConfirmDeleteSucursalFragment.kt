@@ -72,6 +72,10 @@ class ConfirmDeleteSucursalFragment : Fragment(R.layout.fragment_confirm_delete_
         binding.btnOK.setOnClickListener {
             deleteBranchOffice();
         }
+
+        binding.btnNo.setOnClickListener {
+            findNavController().navigate(R.id.action_confirmDeleteSucursalFragment_to_sucursalesSupervisorFragment)
+        }
     }
 
     private fun setObservers(){

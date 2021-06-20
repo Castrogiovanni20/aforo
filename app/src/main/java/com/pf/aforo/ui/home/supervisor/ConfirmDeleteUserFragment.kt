@@ -60,6 +60,10 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
         binding.btnOK.setOnClickListener {
             deleteUser();
         }
+
+        binding.btnNo.setOnClickListener {
+            findNavController().navigate(R.id.action_confirmDeleteUserFragment_to_usuariosSupervisorFragment)
+        }
     }
 
     private fun setObservers(){
