@@ -26,8 +26,8 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
     private lateinit var homeFuncionarioViewModel: HomeFuncionarioViewModel
     lateinit var branchOfficeId: String
     private val UNAUTHORIZED_CODE: String = "401"
-    private val OCCUPIED_TXT: String = "Ocupación"
-    private val AVAILABLE_TXT: String = "Disponible"
+    private val OCCUPIED_TXT: String = "% Ocupación"
+    private val AVAILABLE_TXT: String = "% Disponible"
     lateinit var piechart: PieChart
     lateinit var barChar: BarChart
     lateinit var lightsGraphic: ImageView
@@ -145,12 +145,17 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
                 else -> false
             }
         }
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun initLoginFragment() {

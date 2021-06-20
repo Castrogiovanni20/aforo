@@ -35,6 +35,7 @@ class NotificacionesFuncionarioFragment : Fragment(R.layout.fragment_notificacio
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
@@ -45,6 +46,10 @@ class NotificacionesFuncionarioFragment : Fragment(R.layout.fragment_notificacio
         binding.topAppBar.setNavigationOnClickListener {
             findNavController().navigate(R.id.action_notificacionesFragment_to_homeFragmentFuncionario)
         }
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun setObservers() {

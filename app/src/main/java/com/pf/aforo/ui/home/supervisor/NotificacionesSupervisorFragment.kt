@@ -1,5 +1,6 @@
 package com.pf.aforo.ui.home.supervisor
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ class NotificacionesSupervisorFragment : Fragment(R.layout.fragment_notificacion
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     findNavController().navigate(R.id.action_notificacionesSupervisorFragment_to_loginFragment)
                     true
                 }
@@ -32,6 +34,10 @@ class NotificacionesSupervisorFragment : Fragment(R.layout.fragment_notificacion
             findNavController().navigate(R.id.action_notificacionesSupervisorFragment_to_homeFragmentSupervisor)
         }
 
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
 }

@@ -53,6 +53,7 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
@@ -63,6 +64,10 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun setNavigation(){
