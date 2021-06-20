@@ -124,7 +124,7 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
     private val usersObserver = Observer<Array<DataUser>> { dataUser ->
         for (user in dataUser) {
             if (user.role == "CIVIL_SERVANT" && user.refBranchOffice == null) {
-                val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role)
+                val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user?.refBranchOffice)
                 val fullname = userFuncionario.firstName + " " + userFuncionario.lastName
                 listUserFuncionarios.add(userFuncionario)
                 fullnameSpinnerArray.add(fullname)

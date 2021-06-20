@@ -151,6 +151,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         val refUser: String? = userIdSelected
 
         val newBranchOffice = BranchOffice("", id, refOrganization, name, description, refUser, 0, width, length, 0)
+        editSucursalViewModel.removeCivilServant("Bearer ${getToken()}", newBranchOffice.id, branchOffice.refUser)
         editSucursalViewModel.updateBranchOffice("Bearer ${getToken()}", newBranchOffice.id, newBranchOffice)
         editSucursalViewModel.assignCivilServant("Bearer ${getToken()}", newBranchOffice.id, newBranchOffice?.refUser)
     }
@@ -187,14 +188,14 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private fun setArrayCivilServantsAvailables(arrayUsers: Array<DataUser>) {
         for (user in arrayUsers) {
             if (user.role == "CIVIL_SERVANT" && user.refBranchOffice == null) {
-                val civilServant = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.role)
+                val civilServant = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "",user.role, user.refBranchOffice)
                 val fullname = civilServant.firstName + " " + civilServant.lastName
                 listCivilServantsAvailables.add(civilServant)
                 fullnameSpinnerArray.add(fullname)
             }
 
             if (user.id == branchOffice.refUser) {
-                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role)
+                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, null)
             }
         }
     }
@@ -202,7 +203,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private fun setArrayAllCivilServants(arrayUsers: Array<DataUser>) {
         for (user in arrayUsers) {
             if (user.role == "CIVIL_SERVANT") {
-                val civilServant = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.role)
+                val civilServant = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user.refBranchOffice)
                 val fullname = civilServant.firstName + " " + civilServant.lastName
                 listAllCivilServants.add(civilServant)
             }

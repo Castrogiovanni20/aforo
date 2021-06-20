@@ -13,10 +13,12 @@ data class UserFuncionario(val id: String,
                            var phoneNumber: String,
                            var password: String,
                            var passwordConfirm: String,
-                           var role: String) : Parcelable {
+                           var role: String,
+                           var refBranchOffice: String?) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
+        parcel.readString()?: "",
         parcel.readString()?: "",
         parcel.readString()?: "",
         parcel.readString()?: "",

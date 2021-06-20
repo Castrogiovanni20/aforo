@@ -74,7 +74,7 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
         var passwordConfirm = binding.RepPassword.text.toString()
         var role = "FUNCIONARIO"
 
-        val userFuncionario = UserFuncionario("",firstName, lastName, email, identificationNumber, phoneNumber, password, passwordConfirm, role)
+        val userFuncionario = UserFuncionario("",firstName, lastName, email, identificationNumber, phoneNumber, password, passwordConfirm, role, null)
 
         addUserViewModel.addUser("Bearer " + getToken(), userFuncionario)
     }

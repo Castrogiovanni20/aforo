@@ -82,9 +82,14 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
 
     private fun deleteUser() {
         val bundle = this.arguments
-        val idFuncionario = bundle?.getString("idFuncionario")
-        if (idFuncionario != null) {
-            editUserViewModel.deleteUser("Bearer ${getToken()}", idFuncionario)
+        val civilServantId = bundle?.getString("civilServantId")
+        val refBranchOffice = bundle?.getString("refBranchOffice")
+
+        if (civilServantId != null && refBranchOffice != null) {
+            editUserViewModel.removeCivilServant("Bearer ${getToken()}", refBranchOffice, civilServantId)
+            editUserViewModel.deleteUser("Bearer ${getToken()}", civilServantId)
+        } else if (civilServantId != null ){
+            editUserViewModel.deleteUser("Bearer ${getToken()}", civilServantId)
         }
     }
 

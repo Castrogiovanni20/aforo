@@ -116,7 +116,9 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
 
     private fun initConfirmDeleteUserScreen() {
         val bundle = Bundle()
-        bundle.putString("idFuncionario", userFuncionario.id)
+        bundle.putString("civilServantId", userFuncionario.id)
+        bundle.putString("refBranchOffice", userFuncionario?.refBranchOffice)
+
         findNavController().navigate(R.id.action_editUserFragment_to_confirmDeleteUserFragment, bundle)
     }
 
