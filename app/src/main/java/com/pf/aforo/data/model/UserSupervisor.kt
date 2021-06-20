@@ -26,6 +26,8 @@ class UserSupervisor ( var firstName: String,
 
     fun arePasswordsEquals (): Boolean = (password == passwordConfirm)
 
+    fun isPhoneNumberValid (): Boolean = phoneNumber.length in 6..15
+
     fun isLetters(string: String): Boolean {
         return string.matches("^[a-zA-Z]+(\\s[a-zA-Z]+)?\$".toRegex())
     }

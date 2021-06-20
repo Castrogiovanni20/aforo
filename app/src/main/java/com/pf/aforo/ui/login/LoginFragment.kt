@@ -115,7 +115,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun initFragmentHomeFuncionario(user: DataUser) {
         val refBranchOffice = user.refBranchOffice
-        if(refBranchOffice != null){
+        if(refBranchOffice != null && !refBranchOffice.equals("null")){
             val userFullName = user.firstName + " " + user.lastName
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragmentFuncionario(userFullName, refBranchOffice))
         }

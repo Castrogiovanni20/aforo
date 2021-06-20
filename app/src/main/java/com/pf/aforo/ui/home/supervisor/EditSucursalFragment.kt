@@ -194,7 +194,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
             }
 
             if (user.id == branchOffice.refUser) {
-                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.role)
+                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role)
             }
         }
     }

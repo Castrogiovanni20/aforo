@@ -71,9 +71,10 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
         var identificationNumber = binding.editTextNumberDni.text.toString()
         var phoneNumber = binding.editTextTelefono.text.toString()
         var password = binding.NumPassword.text.toString()
+        var passwordConfirm = binding.RepPassword.text.toString()
         var role = "FUNCIONARIO"
 
-        val userFuncionario = UserFuncionario("",firstName, lastName, email, identificationNumber, phoneNumber, password, role)
+        val userFuncionario = UserFuncionario("",firstName, lastName, email, identificationNumber, phoneNumber, password, passwordConfirm, role)
 
         addUserViewModel.addUser("Bearer " + getToken(), userFuncionario)
     }

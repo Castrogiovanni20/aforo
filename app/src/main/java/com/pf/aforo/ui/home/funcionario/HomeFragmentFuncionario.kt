@@ -105,7 +105,7 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
             initLoginFragment()
         }
         else
-            Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Ha ocurrido un error." + error.toString(), Toast.LENGTH_SHORT).show()
     }
 
     private fun setHeaderUI(branchOffice: BranchOffice) {
