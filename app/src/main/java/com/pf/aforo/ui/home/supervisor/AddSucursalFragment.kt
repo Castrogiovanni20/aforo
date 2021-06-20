@@ -43,6 +43,7 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
@@ -53,6 +54,10 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressed();
         }
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun onBackPressed() {

@@ -39,6 +39,7 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
@@ -49,6 +50,10 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun onBackPressed() {

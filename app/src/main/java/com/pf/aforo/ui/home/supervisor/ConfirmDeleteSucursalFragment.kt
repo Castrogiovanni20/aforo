@@ -38,6 +38,7 @@ class ConfirmDeleteSucursalFragment : Fragment(R.layout.fragment_confirm_delete_
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
@@ -48,6 +49,10 @@ class ConfirmDeleteSucursalFragment : Fragment(R.layout.fragment_confirm_delete_
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressed();
         }
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun getBranchOffice() {

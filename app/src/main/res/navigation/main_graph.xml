@@ -13,6 +13,15 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragmentFuncionario"
+            app:destination="@id/homeFragmentFuncionario" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragmentFuncionarioSinSucursal"
+            app:destination="@id/homeFragmentFuncionarioSinSucursal" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

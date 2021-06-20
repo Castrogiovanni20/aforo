@@ -1,5 +1,6 @@
 package com.pf.aforo.ui.home.funcionario
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -26,12 +27,17 @@ class HomeFragmentFuncionarioSinSucursal : Fragment(R.layout.fragment_home_funci
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
                 else -> false
             }
         }
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun initLoginFragment() {
