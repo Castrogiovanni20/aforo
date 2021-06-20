@@ -89,8 +89,13 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
     private fun setObservers() {
         editProfileViewModel.getUserSuccessResponse.observe(viewLifecycleOwner, getUserSuccessObserver)
+        editProfileViewModel.validationError.observe(viewLifecycleOwner, this.validationObserver)
         editProfileViewModel.updateUserSuccessResponse.observe(viewLifecycleOwner, updateUserSuccessObserver)
         editProfileViewModel.updateUserFailureResponse.observe(viewLifecycleOwner, updateUserFailureObserver)
+    }
+
+    private val validationObserver = Observer<Any?> { error ->
+        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
     }
 
     private fun setOnClickListeners() {
