@@ -196,7 +196,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     }
 
     private fun getFullNameOrDefaultByKey(key: String): String {
-        if (key.equals("null")) {
+        if (key == null || key.equals("null")) {
             return SUCURSAL_SIN_FUNCIONARIO
         }
         var fullName = ""

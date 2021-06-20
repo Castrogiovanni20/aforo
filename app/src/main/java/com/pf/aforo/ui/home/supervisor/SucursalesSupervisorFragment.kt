@@ -153,7 +153,7 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
     }
 
     private fun getFullNameOrDefaultByID(id: String): String {
-        if (id.equals("null")) {
+        if (id == null || id.equals("null")) {
             return SUCURSAL_SIN_FUNCIONARIO
         }
         var fullName = ""
