@@ -54,7 +54,7 @@
     <string name="funcionarioAsignado">Responsable:</string>
     <string name="funcionarioNombre">Funcionario:</string>
     <string name="capacidadActual">CAP. Actual:</string>
-    <string name="capacidadMaxima">CAP. Máxima:</string>
+    <string name="capacidadMaxima">Cap:</string>
 
     <string name="dnu">(*) Calculo de capacidad de aforo sujeto a Decreto DNU 814 / 2020 PODER EJECUTIVO NACIONAL (P.E.N.) 25-10-2020.</string>
 
@@ -62,8 +62,8 @@
     <string name="orga">Datos de la Organización</string>
     <string name="supervisor">Supervisor a cargo:</string>
 
-    <string name="ocupTorta">Ocupación:</string>
-    <string name="dispoTorta">Disponible:</string>
+    <string name="ocupTorta">Ocup:</string>
+    <string name="dispoTorta">Disp:</string>
     <string name="mayor">Horarios más concurridos por Hora</string>
     <string name="apeNom">APELLIDO_NOMBRE</string>
 
@@ -75,7 +75,7 @@
     <string name="notilimit">Alertar nivel de capacidad ALTO</string>
     <string name="notimax">Alertar máxima capacidad</string>
 
-    <string name="semaforos">Configurar semáforos</string>
+    <string name="semaforos">Valores % semáforos</string>
     <string name="hasta">Hasta</string>
     <string name="configgreen">% verde</string>
     <string name="configyell">% amarillo</string>
