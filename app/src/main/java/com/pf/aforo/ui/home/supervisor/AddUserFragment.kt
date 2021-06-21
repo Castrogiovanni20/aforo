@@ -17,6 +17,7 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
     private lateinit var binding: FragmentAddUserBinding
     private lateinit var addUserViewModel: AddUserViewModel
     private val UNAUTHORIZED_CODE: String = "401"
+    private val USER_ALREADY_EXISTS_CODE: String = "403"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -98,8 +99,11 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
             Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
             initLoginFragment()
         }
+        else if(statusCode == USER_ALREADY_EXISTS_CODE){
+            Toast.makeText(context, "Ya existe un usuario con ese email.", Toast.LENGTH_SHORT).show()
+        }
         else
-            Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Ocurrió un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
     private val validationObserver = Observer<Any?> { error ->
