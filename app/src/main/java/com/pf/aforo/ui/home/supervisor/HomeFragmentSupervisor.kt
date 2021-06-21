@@ -95,10 +95,6 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
                 else -> false
             }
         }
-
-        binding.topAppBar.setNavigationOnClickListener {
-            onBackPressed()
-        }
     }
 
     private fun clearSharedPreferences() {
@@ -125,10 +121,6 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
                 else -> false
             }
         }
-    }
-
-    private fun onBackPressed() {
-        initFuncionariosFragments()
     }
 
     private fun getUsers() {
@@ -215,14 +207,6 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
 
     private fun subscribeNotifications(socketId: SocketId) {
         homeViewModel.getSubscriptionId("Bearer ${getToken()}", socketId)
-    }
-
-    private fun initFuncionariosFragments() {
-        findNavController().navigate(R.id.action_homeFragmentSupervisor_to_usuariosSupervisorFragment)
-    }
-
-    private fun initSucursalesFragment () {
-        findNavController().navigate(R.id.action_homeFragmentSupervisor_to_sucursalesSupervisorFragment)
     }
 
     private fun initLoginFragment() {
