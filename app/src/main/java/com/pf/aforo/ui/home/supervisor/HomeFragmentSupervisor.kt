@@ -96,9 +96,9 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
             }
         }
 
-        binding.topAppBar.setNavigationOnClickListener {
-            onBackPressed()
-        }
+        //binding.topAppBar.setNavigationOnClickListener {
+        //    onBackPressed()
+        //}
     }
 
     private fun clearSharedPreferences() {
