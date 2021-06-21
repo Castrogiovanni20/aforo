@@ -2,6 +2,8 @@ package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -70,6 +72,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     private val onConnect = Emitter.Listener { args ->
         val socketId = SocketId(mSocket.id())
         subscribeNotifications(socketId)
+        Log.d("Socket", "SocketId: " + socketId)
     }
 
     private val onDisconnect = Emitter.Listener { args ->
@@ -78,6 +81,9 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
 
     private val onContextChange = Emitter.Listener { args ->
         Log.d("Socket", "Hubo un cambio")
+        Handler(Looper.getMainLooper()).post {
+            getBranchOffices()
+        }
     }
 
     private fun setTopBar() {
