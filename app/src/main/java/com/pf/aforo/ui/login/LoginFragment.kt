@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -28,7 +29,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java);
         setObservers()
         setClickListeners()
-
+        requireActivity().onBackPressedDispatcher.addCallback(this) { requireActivity().moveTaskToBack(true) }
     }
 
     private fun setObservers () {
