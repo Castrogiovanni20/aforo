@@ -5,13 +5,14 @@
     <string name="nombreUsuario">Nombre de usuario</string>
     <string name="name">Nombre</string>
     <string name="last_name">Apellido</string>
+    <string name="full_name">Nombre completo</string>
     <string name="Password">Contraseña</string>
-    <string name="recov_pass">Olvidé mi contraseña  ⌦</string>
-    <string name="create_account">⛑   Crear Cuenta</string>
+    <string name="create_account">Crear Cuenta</string>
     <string name="send">Enviar</string>
     <string name="welcome">Bienvenido</string>
     <string name="register">Registrarse</string>
 
+    <string name="role">Rol</string>
     <string name="dni">Numero DNI</string>
     <string name="user">Usuario</string>
     <string name="cel_phone">Teléfono celular</string>
@@ -22,18 +23,72 @@
     <string name="txtcities">Instituto Ciudades del Futuro</string>
     <string name="descBackg">Imagen fondo login</string>
     <string name="description">Descripción</string>
-    <string name="delete">Eliminar Funcionario</string>
+    <string name="delete">Eliminar usuario</string>
     <string name="okey">OK</string>
     <string name="confirmarPass">Confirmar contraseña</string>
 
     <string name="confirmarDelete">¿Confirma la eliminación de este Funcionario?</string>
+    <string name="confirmarDeleteSucursal">¿Confirma la eliminación de esta Sucursal?</string>
+    <string name="confirmarCerrar">¿Confirma que desea cerrar sesión?</string>
     <string name="datosIncorrectos">Usuario y/o contraseña incorrectos</string>
+    <string name="misSucus">Mis Sucursales</string>
+    <string name="newSucu">Nueva Sucursal</string>
+    <string name="editSucu">Edición Sucursal</string>
+    <string name="elimSucu">Eliminar Sucursal</string>
+    <string name="misFuncos">Mis Usuarios</string>
+    <string name="editFunco">Edición Funcionario</string>
+    <string name="elimFunco">Eliminar Funcionario</string>
     <string name="nuevoFunc">Nuevo Funcionario</string>
-    <string name="btnAgregarFuncionario">+ Agregar Funcionario</string>
-    <string name="confirmMail">Se ha enviado un mail de confirmación de registro a su casilla</string>
+    <string name="btnAgregarFuncionario">Funcionario</string>
+    <string name="btnAgregarSucursal">Sucursal</string>
+    <string name="miPerfil">Mi Perfil</string>
     <string name="reingresePass">Reingresar la contraseña</string>
     <string name="recuperarContras">Recuperar contraseña</string>
-    <string name="mailPasos">Ha recibido un correo con los pasos para recuperar su contraseña</string>
 
+
+    <string name="nombreSucursal">Nombre Sucursal:</string>
+    <string name="domicilio">Dirección:</string>
+    <string name="telefono">Tel. Sucursal:</string>
+    <string name="mt2ancho">mt2 Ancho:</string>
+    <string name="mt2largo">mt2 Largo:</string>
+    <string name="funcionarioAsignado">Responsable:</string>
+    <string name="funcionarioNombre">Funcionario:</string>
+    <string name="capacidadActual">CAP. Actual:</string>
+    <string name="capacidadMaxima">CAP. Máxima:</string>
+
+    <string name="dnu">(*) Calculo de capacidad de aforo sujeto a Decreto DNU 814 / 2020 PODER EJECUTIVO NACIONAL (P.E.N.) 25-10-2020.</string>
+
+    <string name="datos">DATOS DE LA SUCURSAL</string>
+    <string name="orga">Datos de la Organización</string>
+    <string name="supervisor">Supervisor a cargo:</string>
+
+    <string name="ocupTorta">Ocupación:</string>
+    <string name="dispoTorta">Disponible:</string>
+    <string name="mayor">Horarios más concurridos por Hora</string>
+    <string name="apeNom">APELLIDO_NOMBRE</string>
+
+    <string name="menusucu">Mis Sucursales</string>
+    <string name="menufunc">Mis Funcionarios</string>
+    <string name="menunoti">Ajustar notificaciones</string>
+    <string name="menuchau">Cerrar sesión</string>
+
+    <string name="notilimit">Alertar nivel de capacidad ALTO</string>
+    <string name="notimax">Alertar máxima capacidad</string>
+
+    <string name="semaforos">Configurar semáforos</string>
+    <string name="hasta">Hasta</string>
+    <string name="configgreen">% verde</string>
+    <string name="configyell">% amarillo</string>
+    <string name="configred">% rojo</string>
+    <string name="p60">60 %</string>
+    <string name="p80">80 %</string>
+    <string name="p100">100 %</string>
+
+    <string-array name="roles">
+        <item>SUPERVISOR</item>
+        <item>FUNCIONARIO</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

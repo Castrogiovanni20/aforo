@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.pf.aforo.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.pf.aforo.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragmentFuncionario"
+            app:destination="@id/homeFragmentFuncionario" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.pf.aforo.ui.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragmentSupervisor"
+        android:name="com.pf.aforo.ui.home.supervisor.HomeFragmentSupervisor"
+        android:label="fragment_home_supervisor"
+        tools:layout="@layout/fragment_home_supervisor" >
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_sucursalesSupervisorFragment"
+            app:destination="@id/sucursalesSupervisorFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_editProfileFragment2"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_homeFragmentSupervisor_to_homeFragmentFuncionario"
+            app:destination="@id/homeFragmentFuncionario" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUserFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.AddUserFragment"
+        android:label="fragment_add_user"
+        tools:layout="@layout/fragment_add_user" >
+        <action
+            android:id="@+id/action_addUserFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_addUserFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_addUserFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_addUserFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+        <action
+            android:id="@+id/action_addUserFragment_to_notificacionesSupervisorFragment2"
+            app:destination="@id/notificacionesSupervisorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editUserFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.EditUserFragment"
+        android:label="fragment_edit_user"
+        tools:layout="@layout/fragment_edit_user" >
+        <action
+            android:id="@+id/action_editUserFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_editUserFragment_to_confirmDeleteUserFragment"
+            app:destination="@id/confirmDeleteUserFragment" />
+        <action
+            android:id="@+id/action_editUserFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_editUserFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_editUserFragment_to_sucursalesSupervisorFragment"
+            app:destination="@id/sucursalesSupervisorFragment" />
+        <action
+            android:id="@+id/action_editUserFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmDeleteUserFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.ConfirmDeleteUserFragment"
+        android:label="fragment_confirm_delete_user"
+        tools:layout="@layout/fragment_confirm_delete_user" >
+        <action
+            android:id="@+id/action_confirmDeleteUserFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_confirmDeleteUserFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_confirmDeleteUserFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+        <action
+            android:id="@+id/action_confirmDeleteUserFragment_to_notificacionesSupervisorFragment2"
+            app:destination="@id/notificacionesSupervisorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_sucursalesSupervisorFragment"
+            app:destination="@id/sucursalesSupervisorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sucursalesSupervisorFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.SucursalesSupervisorFragment"
+        android:label="fragment_sucursales_supervisor"
+        tools:layout="@layout/fragment_sucursales_supervisor" >
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_addSucursalFragment"
+            app:destination="@id/addSucursalFragment" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_editSucursalFragment"
+            app:destination="@id/editSucursalFragment" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_usuariosSupervisorFragment2"
+            app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_addSucursalFragment2"
+            app:destination="@id/addSucursalFragment" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_homeFragmentSupervisor2"
+            app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_sucursalesSupervisorFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSucursalFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.AddSucursalFragment"
+        android:label="fragment_add_sucursal"
+        tools:layout="@layout/fragment_add_sucursal" >
+        <action
+            android:id="@+id/action_addSucursalFragment_to_sucursalesSupervisorFragment"
+            app:destination="@id/sucursalesSupervisorFragment" />
+        <action
+            android:id="@+id/action_addSucursalFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_addSucursalFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_addSucursalFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+        <action
+            android:id="@+id/action_addSucursalFragment_to_notificacionesSupervisorFragment2"
+            app:destination="@id/notificacionesSupervisorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editSucursalFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.EditSucursalFragment"
+        android:label="fragment_edit_sucursal"
+        tools:layout="@layout/fragment_edit_sucursal" >
+        <action
+            android:id="@+id/action_editSucursalFragment_to_sucursalesSupervisorFragment"
+            app:destination="@id/sucursalesSupervisorFragment" />
+        <action
+            android:id="@+id/action_editSucursalFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_editSucursalFragment_to_confirmDeleteSucursalFragment"
+            app:destination="@id/confirmDeleteSucursalFragment" />
+        <action
+            android:id="@+id/action_editSucursalFragment_to_usuariosSupervisorFragment"
+            app:destination="@id/usuariosSupervisorFragment" />
+        <action
+            android:id="@+id/action_editSucursalFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmDeleteSucursalFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.ConfirmDeleteSucursalFragment"
+        android:label="fragment_confirm_delete_sucursal"
+        tools:layout="@layout/fragment_confirm_delete_sucursal" >
+        <action
+            android:id="@+id/action_confirmDeleteSucursalFragment_to_sucursalesSupervisorFragment"
+            app:destination="@id/sucursalesSupervisorFragment" />
+        <action
+            android:id="@+id/action_confirmDeleteSucursalFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_confirmDeleteSucursalFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/usuariosSupervisorFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.UsuariosSupervisorFragment"
+        android:label="fragment_usuarios_supervisor"
+        tools:layout="@layout/fragment_usuarios_supervisor" >
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_editUserFragment"
+            app:destination="@id/editUserFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_sucursalesSupervisorFragment"
+            app:destination="@id/sucursalesSupervisorFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_notificacionesFragment"
+            app:destination="@id/notificacionesFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_notificacionesSupervisorFragment"
+            app:destination="@id/notificacionesSupervisorFragment" />
+        <action
+            android:id="@+id/action_usuariosSupervisorFragment_to_notificacionesSupervisorFragment2"
+            app:destination="@id/notificacionesSupervisorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragmentFuncionario"
+        android:name="com.pf.aforo.ui.home.funcionario.HomeFragmentFuncionario"
+        android:label="fragment_home_funcionario"
+        tools:layout="@layout/fragment_home_funcionario" >
+        <action
+            android:id="@+id/action_homeFragmentFuncionario_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragmentFuncionario_to_notificacionesFragment"
+            app:destination="@id/notificacionesFragment" />
+        <action
+            android:id="@+id/action_homeFragmentFuncionario_to_loginFragment2"
+            app:destination="@id/loginFragment" />
+        <argument
+            android:name="userFullName"
+            app:argType="string" />
+        <argument
+            android:name="refBranchOffice"
+            app:argType="string"
+            app:nullable="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/notificacionesFragment"
+        android:name="com.pf.aforo.ui.home.funcionario.NotificacionesFuncionarioFragment"
+        android:label="fragment_notificaciones"
+        tools:layout="@layout/fragment_notificaciones" >
+        <action
+            android:id="@+id/action_notificacionesFragment_to_homeFragmentFuncionario"
+            app:destination="@id/homeFragmentFuncionario" />
+        <action
+            android:id="@+id/action_notificacionesFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificacionesSupervisorFragment"
+        android:name="com.pf.aforo.ui.home.supervisor.NotificacionesSupervisorFragment"
+        android:label="NotificacionesSupervisorFragment" >
+        <action
+            android:id="@+id/action_notificacionesSupervisorFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_notificacionesSupervisorFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+</navigation>

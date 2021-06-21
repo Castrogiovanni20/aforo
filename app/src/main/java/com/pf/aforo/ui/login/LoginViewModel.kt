@@ -2,25 +2,51 @@ package com.pf.aforo.ui.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.pf.aforo.data.model.Data
+import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.UserLogin
-import com.pf.aforo.data.repository.FiwareRepository
+import com.pf.aforo.data.repository.AuthenticationRepository
+import com.pf.aforo.data.repository.UsersRepository
 
 //Estas son las variables observables + validaciones ac+a para sacar mayor cantidad de código del activitie:
 class LoginViewModel : ViewModel() {
-    private var fiwareRepository = FiwareRepository() //ver repository, para obtener acceso a login, registro
+    private var authenticationRepository = AuthenticationRepository() //ver repository, para obtener acceso a login, registro
+    private var usersRepository = UsersRepository()
 
-    private var _successResponse = fiwareRepository.loginSuccessResponseLiveData
-    val successResponse: MutableLiveData<String> get() = _successResponse
+    private var _loginDataResponseLiveData = authenticationRepository.loginDataResponseLiveData
+    val loginDataResponseLiveData: MutableLiveData<Data> get() = _loginDataResponseLiveData
 
-    private var _failureResponse = fiwareRepository.loginFailureResponseLiveData
+    private var _failureResponse = authenticationRepository.loginFailureResponseLiveData
     val failureResponse: MutableLiveData<String> get() = _failureResponse
+
+    private var _userResponseLiveData = usersRepository.getUserResponseLiveData
+    val userResponseLiveData: MutableLiveData<DataUser> get() = _userResponseLiveData
+
+    private var _getUserFailureResponse = usersRepository.getUserFailureResponseLiveData
+    val getUserFailureResponse: MutableLiveData<String> get() = _getUserFailureResponse
+
+    val isLoading = MutableLiveData<Boolean>()
+
+    val startProgressBar = MutableLiveData<Boolean>()
+    val stopProgressBar = MutableLiveData<Boolean>()
 
     var validationError = MutableLiveData<String>()
     var isUserValid : Boolean = false
 
+    init {
+        isLoading.value = false
+    }
+
     fun loginUser (user: UserLogin)  {
+        isLoading.value = true
         validateUser(user)
-        if (isUserValid) fiwareRepository.login(user)
+        if (isUserValid) {
+            authenticationRepository.login(user)
+        }
+    }
+
+    fun getUser(token: String, userId: String) {
+        usersRepository.getUser(token, userId)
     }
 
     private fun validateUser(user: UserLogin) {
@@ -33,4 +59,13 @@ class LoginViewModel : ViewModel() {
             }
         }
     }
+
+    fun startProgressBar() {
+        startProgressBar.value = true
+    }
+
+    fun stopProgressBar() {
+        stopProgressBar.value = true
+    }
+
 }

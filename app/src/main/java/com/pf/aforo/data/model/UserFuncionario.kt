@@ -1,61 +1,70 @@
 package com.pf.aforo.data.model
 
-class UserFuncionario (private var id: String,
-                       private var firstName: String,
-                       private var lastName: String,
-                       private var email: String,
-                       private var phoneNumber: String,
-                       private var password: String,
-                       private var role: String,
-                       private var token: String = "0") {
+import android.os.Parcel
+import android.os.Parcelable
+import androidx.versionedparcelable.VersionedParcelize
 
-    fun getId(): String{
-        return id
+@VersionedParcelize
+data class UserFuncionario(val id: String,
+                           var firstName: String,
+                           var lastName: String,
+                           var email: String,
+                           var identificationNumber: String?,
+                           var phoneNumber: String,
+                           var password: String,
+                           var role: String) : Parcelable {
+
+    constructor(parcel: Parcel) : this(
+        parcel.readString() ?: "",
+        parcel.readString()?: "",
+        parcel.readString()?: "",
+        parcel.readString()?: "",
+        parcel.readString()?: "",
+        parcel.readString()?: "",
+        parcel.readString()?: "",
+        parcel.readString()?: ""
+    ) {
     }
 
-    fun getFirstName () : String {
-        return firstName
-    }
+    fun isFirstNameLengthValid (): Boolean = (firstName.length in 2..60)
 
-    fun getLastName () : String {
-        return lastName
-    }
+    fun isFirstNameAlphabetic (): Boolean = isLetters(firstName)
 
-    fun getEmail () : String {
-        return email
-    }
+    fun isLastNameLengthValid (): Boolean = (lastName.length in 2..60)
 
-    fun getPhoneNumber () : String {
-        return phoneNumber
-    }
+    fun isLastNameAlphabetic (): Boolean = isLetters(lastName)
 
-    fun getPassword () : String {
-        return password
-    }
+    fun isEmailValid (): Boolean = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
-    fun getRole () : String {
-        return role
-    }
+    fun isPasswordValid (): Boolean = (password.length in 8..100)
 
-    fun getToken () : String {
-        return token
-    }
-
-    fun isFirstNameLengthValid (): Boolean = (getFirstName().length in 2..60)
-
-    fun isFirstNameAlphabetic (): Boolean = isLetters(getFirstName())
-
-    fun isLastNameLengthValid (): Boolean = (getLastName().length in 2..60)
-
-    fun isLastNameAlphabetic (): Boolean = isLetters(getLastName())
-
-    fun isEmailValid (): Boolean = android.util.Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()
-
-    fun isPasswordValid (): Boolean = (getPassword().length in 8..100)
-
-    fun isPhoneNumberValid (): Boolean = (!getPhoneNumber().isNotEmpty() || getPhoneNumber().length in 1..15)
+    fun isPhoneNumberValid (): Boolean = (!phoneNumber.isNotEmpty() || phoneNumber.length in 1..15)
 
     fun isLetters(string: String): Boolean {
         return string.matches("^[a-zA-Z]+(\\s[a-zA-Z]+)?\$".toRegex())
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
+        parcel.writeString(firstName)
+        parcel.writeString(lastName)
+        parcel.writeString(email)
+        parcel.writeString(phoneNumber)
+        parcel.writeString(password)
+        parcel.writeString(role)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<UserFuncionario> {
+        override fun createFromParcel(parcel: Parcel): UserFuncionario {
+            return UserFuncionario(parcel)
+        }
+
+        override fun newArray(size: Int): Array<UserFuncionario?> {
+            return arrayOfNulls(size)
+        }
     }
 }

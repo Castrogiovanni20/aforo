@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayoutSupervisor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightgray"
+    android:fontFamily="@font/roboto"
+    android:screenOrientation="portrait"
+    tools:context=".ui.home.funcionario.HomeFragmentFuncionario">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:menu="@menu/menu_funcionario"
+            app:navigationIcon="@mipmap/logotrbmp"
+            app:title="@string/aforo_name" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card1"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/roboto"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+        <TextView
+            android:id="@+id/datos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/datos"
+            android:textAlignment="center"
+            android:textColor="@color/colorBar"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/lblTitulo"
+            android:layout_width="156dp"
+            android:layout_height="31dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/nombreSucursal"
+            android:textColor="@color/colorBar" />
+
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="156dp"
+            android:layout_height="31dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/nombreSucursal"
+            android:textColor="@color/colorBar"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/lblDomicilio"
+            android:layout_width="197dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/domicilio"
+            android:textColor="@color/colorBar" />
+
+        <TextView
+            android:id="@+id/domicilio"
+            android:layout_width="156dp"
+            android:layout_height="31dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/domicilio"
+            android:textColor="@color/colorBar"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/lblFuncionario"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="70dp"
+            android:text="@string/funcionarioAsignado"
+            android:textColor="@color/colorBar" />
+
+        <TextView
+            android:id="@+id/funcionario"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="70dp"
+            android:text="@string/funcionarioAsignado"
+            android:textColor="@color/colorBar"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/lblAncho"
+            android:layout_width="131dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="90dp"
+            android:text="@string/mt2ancho"
+            android:textColor="@color/colorBar" />
+
+        <TextView
+            android:id="@+id/ancho"
+            android:layout_width="131dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="90dp"
+            android:text="@string/mt2ancho"
+            android:textColor="@color/colorBar"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/lblAlto"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="110dp"
+            android:text="@string/mt2largo"
+            android:textColor="@color/colorBar" />
+
+        <TextView
+            android:id="@+id/alto"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="110dp"
+            android:text="@string/mt2largo"
+            android:textColor="@color/colorBar"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblCapmax"
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="130dp"
+            android:text="@string/capacidadMaxima"
+            android:textColor="@color/colorBar" />
+
+        <TextView
+            android:id="@+id/capmax"
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="130dp"
+            android:text="@string/capacidadMaxima"
+            android:textColor="@color/colorBar"
+            android:textStyle="bold"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card2"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/roboto"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card1">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/piechart"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/semaforo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="165dp"
+            android:src="@mipmap/icon_smgnone" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card4"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/roboto"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card2"
+        app:layout_constraintVertical_bias="0.0">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:elevation="15dp">
+
+        </com.github.mikephil.charting.charts.BarChart>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

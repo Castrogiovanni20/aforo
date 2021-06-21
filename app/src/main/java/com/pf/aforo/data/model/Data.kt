@@ -1,8 +1,5 @@
 package com.pf.aforo.data.model
 
-class Data (private var token: String) {
+class Data (var token: String, val userId: String) {
 
-    fun getToken () : String {
-        return token
-    }
 }
