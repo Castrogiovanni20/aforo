@@ -80,9 +80,9 @@
     <string name="configgreen">% verde</string>
     <string name="configyell">% amarillo</string>
     <string name="configred">% rojo</string>
-    <string name="p60">60 %</string>
-    <string name="p80">80 %</string>
-    <string name="p100">100 %</string>
+    <string name="p60">60</string>
+    <string name="p80">80</string>
+    <string name="p100">100</string>
 
     <string name="sinSucursal">No posee ninguna sucursal asignada, comuníquese con su supervisor.</string>
 

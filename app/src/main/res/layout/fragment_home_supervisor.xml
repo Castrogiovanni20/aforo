@@ -36,8 +36,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSucursales"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="480dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout3"
