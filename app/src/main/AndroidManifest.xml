@@ -23,6 +23,16 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+        <service
+            android:name=".data.model.MyFirebaseMessaging"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" /> <!-- Propone este -->
+                <action android:name="com.google.firebase.MESSAGING_EVENT" /> <!-- El tutorial sugiere este-->
+            </intent-filter>
+        </service>
+
+
     </application>
 
 </manifest>
