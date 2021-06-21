@@ -2,12 +2,12 @@ package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
+import android.view.MotionEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +17,7 @@ import com.pf.aforo.data.model.BranchOffice
 import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.databinding.FragmentEditSucursalBinding
+
 
 class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private lateinit var binding: FragmentEditSucursalBinding
@@ -95,6 +96,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private fun setSpinner() {
         val spinner = binding.spinnerFuncionario
 
+
         if (listCivilServantsAvailables.isNotEmpty()) {
             val adapter = context?.let {
                 ArrayAdapter(
@@ -105,6 +107,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
             }
             spinner.adapter = adapter
 
+            spinner.setSelection(0,false)
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -113,6 +116,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
                     id: Long
                 ) {
                     userIdSelected = listCivilServantsAvailables[position].id
+                    binding.textFuncionarioAsignado.text = "Funcionario asignado: " + listCivilServantsAvailables[position].firstName + " " + listCivilServantsAvailables[position].lastName
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -153,7 +157,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         val description = binding.edtDomicilio.text.toString()
         val width = if(binding.edtMt2Ancho.text.toString().isNullOrEmpty()) 0 else Integer.parseInt(binding.edtMt2Ancho.text.toString())
         val length = if(binding.edtMt2Largo.text.toString().isNullOrEmpty()) 0 else Integer.parseInt(binding.edtMt2Largo.text.toString())
-        val refUser: String? = userIdSelected
+        val refUser = userIdSelected
 
         val newBranchOffice = BranchOffice("", id, refOrganization, name, description, refUser, 0, width, length, 0)
         editSucursalViewModel.removeCivilServant("Bearer ${getToken()}", newBranchOffice.id, branchOffice.refUser)
