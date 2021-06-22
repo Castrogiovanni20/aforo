@@ -87,7 +87,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private fun setUI() {
         binding.edtNombre.setText(userFuncionario.firstName)
         binding.edtApellido.setText(userFuncionario.lastName)
-        binding.edtDNI.setText(userFuncionario.identificationNumber)
+        binding.edtOrgReg.setText(userFuncionario.refOrganization)
         binding.edtTelefono.setText(userFuncionario.phoneNumber)
         binding.edtMail.setText(userFuncionario.email)
     }
@@ -118,13 +118,14 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         var phoneNumber = binding.edtTelefono.text.toString()
         var role = userFuncionario.role
         var userDeviceToken = userFuncionario.userDeviceToken
+        var refOrganization = userFuncionario.refOrganization
 
-        val userFuncionario = UserFuncionario(id, firstName, lastName, email, identificationNumber, phoneNumber, "", "", role, null, userDeviceToken)
+        val userFuncionario = UserFuncionario(id, firstName, lastName, email, identificationNumber, phoneNumber, "", "", role, null, userDeviceToken, refOrganization)
         editProfileViewModel.updateUser("Bearer ${getToken()}" , userFuncionario)
     }
 
     private val getUserSuccessObserver = Observer<DataUser> { data ->
-        userFuncionario = UserFuncionario(data.id, data.firstName, data.lastName, data.email, data.identificationNumber, data.phoneNumber, "", "", data.role, null, data.userDeviceToken)
+        userFuncionario = UserFuncionario(data.id, data.firstName, data.lastName, data.email, data.identificationNumber, data.phoneNumber, "", "", data.role, null, data.userDeviceToken, data.refOrganization)
         setUI()
     }
 

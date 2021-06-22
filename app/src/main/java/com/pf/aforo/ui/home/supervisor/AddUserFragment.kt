@@ -81,7 +81,7 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
         var role = "FUNCIONARIO"
 
 
-        val userFuncionario = UserFuncionario("",firstName, lastName, email, identificationNumber, phoneNumber, password, passwordConfirm, role, null, null)
+        val userFuncionario = UserFuncionario("",firstName, lastName, email, identificationNumber, phoneNumber, password, passwordConfirm, role, null, null, null)
 
         addUserViewModel.addUser("Bearer " + getToken(), userFuncionario)
     }

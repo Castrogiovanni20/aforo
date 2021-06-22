@@ -131,6 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:enabled="false"
                     android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:inputType="textPersonName|text"
                     android:layout_marginLeft="10dp"
@@ -139,30 +140,6 @@
                     android:textSize="12sp"
                     android:maxLength="60"
                     />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="@font/roboto"
-                android:hint="@string/dni"
-                app:errorIconDrawable="@drawable/ic_baseline_error_24"
-                app:startIconDrawable="@drawable/ic_baseline_perm_identity_24">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtDNI"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:inputType="number"
-                    android:maxLength="8"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:enabled="false"
-                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

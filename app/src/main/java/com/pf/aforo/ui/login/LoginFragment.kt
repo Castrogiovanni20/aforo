@@ -73,13 +73,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun updateUser(user: DataUser) {
-
         var firebaseMess = MyFirebaseMessaging()
         var tokenMessage = firebaseMess.getToken()
 
-        var userF = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.password, user.role, null, tokenMessage)
-
-
+        var userF = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.password, user.role, user.refBranchOffice, tokenMessage, user.refOrganization)
     }
 
     private val userObserver = Observer<DataUser> { user ->

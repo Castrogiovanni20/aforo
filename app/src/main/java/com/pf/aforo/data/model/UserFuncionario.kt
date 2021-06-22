@@ -15,10 +15,12 @@ data class UserFuncionario(val id: String,
                            var passwordConfirm: String,
                            var role: String,
                            var refBranchOffice: String?,
-                           var userDeviceToken: String?) : Parcelable {
+                           var userDeviceToken: String?,
+                           var refOrganization: String?) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
+        parcel.readString()?: "",
         parcel.readString()?: "",
         parcel.readString()?: "",
         parcel.readString()?: "",

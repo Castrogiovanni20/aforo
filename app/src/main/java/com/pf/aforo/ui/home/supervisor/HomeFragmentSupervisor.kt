@@ -176,7 +176,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
 
     private val getUsersObserver = Observer<Array<DataUser>> { dataUsers ->
         for (user in dataUsers) {
-            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user.refBranchOffice, user.userDeviceToken)
+            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user.refBranchOffice, user.userDeviceToken, user.refOrganization)
             arrayListFuncionarios.add(userFuncionario)
         }
         if(arrayListSucursales.isNotEmpty())
