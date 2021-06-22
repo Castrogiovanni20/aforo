@@ -4,12 +4,9 @@ package com.pf.aforo.data.model
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.util.Log
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.FirebaseApp
-import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.RemoteMessage
 import com.pf.aforo.R
 import com.pf.aforo.ui.MainActivity
@@ -18,31 +15,24 @@ import com.google.firebase.messaging.FirebaseMessagingService as FirebaseMessagi
 
 
 class MyFirebaseMessaging: FirebaseMessagingService1() {
-
-
-
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.d(TAG, "onNewToken: " + token)
-
     }
 
 
     fun getToken(): String {
-
-        //FirebaseApp.initializeApp(this)
-
+//        FirebaseApp.initializeApp(Context)
         lateinit var token: String
-
-        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w("MainActivity", "error al obtener el token", task.exception)
-                return@OnCompleteListener
-            }
-            token = task.result!!.token
-            Log.d("MainActivity", token)
-
-        })
+//        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener(OnCompleteListener { task ->
+//            if (!task.isSuccessful) {
+//                Log.w("MainActivity", "error al obtener el token", task.exception)
+//                return@OnCompleteListener
+//            }
+//            token = task.result!!.token
+//            Log.d("MainActivity", token)
+//
+//        })
         return token
     }
 

@@ -77,7 +77,6 @@ class LoginViewModel : ViewModel() {
     }
 
     fun updateUser(token: String, id_user: String, user_funcionario: UserFuncionario) {
-
         usersRepository.updateUser(token, id_user, user_funcionario)
     }
 
