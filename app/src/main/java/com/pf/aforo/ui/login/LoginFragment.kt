@@ -99,8 +99,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         var firebaseMess = MyFirebaseMessaging()
 //        var tokenMessage = firebaseMess.getToken()
         val sharedPreferences = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
-        val token = sharedPreferences?.getString("DeviceToken", null)
-        var tokenMessage = token
+        var tokenMessage = sharedPreferences?.getString("DeviceToken", null)
 
         var userF = UserFuncionario(
             user.id,
