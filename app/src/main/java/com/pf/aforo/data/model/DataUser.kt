@@ -12,5 +12,6 @@ class DataUser (var type: String,
                 var role: String,
                 var organizationOwner: Boolean,
                 var refBranchOffice: String?,
-                var settings: Settings) {
+                var settings: Settings,
+                var userDeviceToken: String?) {
 }

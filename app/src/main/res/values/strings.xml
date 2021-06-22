@@ -86,7 +86,7 @@
 
     <string name="sinSucursal">No posee ninguna sucursal asignada, comuníquese con su supervisor.</string>
 
-    <string name="notification_channel_group_general">--</string> <!-- TODO: darle un valor -->
+    <string name="notification_channel_group_general">General</string> <!-- TODO: darle un valor -->
 
     <string-array name="roles">
         <item>SUPERVISOR</item>

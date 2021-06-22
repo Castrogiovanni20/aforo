@@ -14,10 +14,12 @@ data class UserFuncionario(val id: String,
                            var password: String,
                            var passwordConfirm: String,
                            var role: String,
-                           var refBranchOffice: String?) : Parcelable {
+                           var refBranchOffice: String?,
+                           var userDeviceToken: String?) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
+        parcel.readString()?: "",
         parcel.readString()?: "",
         parcel.readString()?: "",
         parcel.readString()?: "",
@@ -60,6 +62,7 @@ data class UserFuncionario(val id: String,
         parcel.writeString(phoneNumber)
         parcel.writeString(password)
         parcel.writeString(role)
+        parcel.writeString(userDeviceToken)
     }
 
     override fun describeContents(): Int {

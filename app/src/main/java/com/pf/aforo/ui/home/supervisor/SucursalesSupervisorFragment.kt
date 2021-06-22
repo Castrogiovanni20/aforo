@@ -140,7 +140,7 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
 
     private val getUsersObserver = Observer<Array<DataUser>> { dataUsers ->
         for (user in dataUsers) {
-            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user.refBranchOffice)
+            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user.refBranchOffice, user.userDeviceToken)
             arrayListFuncionarios.add(userFuncionario)
         }
         if(arrayListSucursales.isNotEmpty())

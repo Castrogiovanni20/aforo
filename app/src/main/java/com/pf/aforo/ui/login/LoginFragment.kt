@@ -11,15 +11,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.pf.aforo.R
-import com.pf.aforo.data.model.Data
-import com.pf.aforo.data.model.DataUser
-import com.pf.aforo.data.model.UserLogin
+import com.pf.aforo.data.model.*
 import com.pf.aforo.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var userId: String
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -69,10 +69,23 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         loginViewModel.getUser("Bearer $token", userId)
         setSharedPreferences(token)
+
+    }
+
+    private fun updateUser(user: DataUser) {
+
+        var firebaseMess = MyFirebaseMessaging()
+        var tokenMessage = firebaseMess.getToken()
+
+        var userF = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.password, user.role, null, tokenMessage)
+
+
     }
 
     private val userObserver = Observer<DataUser> { user ->
         loginViewModel.stopProgressBar()
+
+       // updateUser(user)
 
         when (user.role) {
             "SUPERVISOR" -> initFragmentHomeSupervisor()

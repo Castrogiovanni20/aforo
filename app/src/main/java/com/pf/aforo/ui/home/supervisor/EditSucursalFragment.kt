@@ -197,14 +197,14 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private fun setArrayCivilServantsAvailables(arrayUsers: Array<DataUser>) {
         for (user in arrayUsers) {
             if (user.role == "CIVIL_SERVANT" && user.refBranchOffice == null) {
-                val civilServant = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "",user.role, user.refBranchOffice)
+                val civilServant = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "",user.role, user.refBranchOffice, user.userDeviceToken)
                 val fullname = civilServant.firstName + " " + civilServant.lastName
                 listCivilServantsAvailables.add(civilServant)
                 fullnameSpinnerArray.add(fullname)
             }
 
             if (user.id == branchOffice.refUser) {
-                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, null)
+                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, null, user.userDeviceToken)
             }
         }
     }
@@ -212,7 +212,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private fun setArrayAllCivilServants(arrayUsers: Array<DataUser>) {
         for (user in arrayUsers) {
             if (user.role == "CIVIL_SERVANT") {
-                val civilServant = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user.refBranchOffice)
+                val civilServant = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user.refBranchOffice, user.userDeviceToken)
                 val fullname = civilServant.firstName + " " + civilServant.lastName
                 listAllCivilServants.add(civilServant)
             }
