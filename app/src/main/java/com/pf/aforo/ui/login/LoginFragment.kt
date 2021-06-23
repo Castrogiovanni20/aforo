@@ -16,6 +16,8 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.pf.aforo.R
 import com.pf.aforo.data.model.*
 import com.pf.aforo.databinding.FragmentLoginBinding
+import com.google.firebase.messaging.FirebaseMessaging
+
 
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -33,10 +35,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java);
         setObservers()
         setClickListeners()
-        requireActivity().onBackPressedDispatcher.addCallback(this) { requireActivity().moveTaskToBack(
-            true
-        ) }
+        requireActivity().onBackPressedDispatcher.addCallback(this) { requireActivity().moveTaskToBack(true) }
         getToken()
+
+        FirebaseMessaging.getInstance().subscribeToTopic("Subscriptions")
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val deviceToken = instanceIdResult.token
+            Log.d("Token", "Refreshed token: $deviceToken")
+        }
     }
 
     override fun onResume() {

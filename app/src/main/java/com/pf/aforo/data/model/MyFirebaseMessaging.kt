@@ -9,31 +9,15 @@ import android.content.Intent
 import android.util.Log
 import com.google.firebase.messaging.RemoteMessage
 import com.pf.aforo.R
-import com.pf.aforo.ui.MainActivity
+import com.pf.aforo.ui.login.LoginFragment
 import com.pf.aforo.ui.home.supervisor.AddSucursalViewModel
-import com.google.firebase.messaging.FirebaseMessagingService as FirebaseMessagingService1
+import com.google.firebase.messaging.FirebaseMessagingService
 
 
-class MyFirebaseMessaging: FirebaseMessagingService1() {
+class MyFirebaseMessaging: FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.d(TAG, "onNewToken: " + token)
-    }
-
-
-    fun getToken(): String {
-//        FirebaseApp.initializeApp(Context)
-        lateinit var token: String
-//        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener(OnCompleteListener { task ->
-//            if (!task.isSuccessful) {
-//                Log.w("MainActivity", "error al obtener el token", task.exception)
-//                return@OnCompleteListener
-//            }
-//            token = task.result!!.token
-//            Log.d("MainActivity", token)
-//
-//        })
-        return token
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -54,7 +38,7 @@ class MyFirebaseMessaging: FirebaseMessagingService1() {
     }
 
     private fun sendNotification(title: String, msg: String) {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, LoginFragment::class.java)
         val pendingIntent = PendingIntent.getActivity(
             this,
             MyNotification.NOTIFICATION_ID,
