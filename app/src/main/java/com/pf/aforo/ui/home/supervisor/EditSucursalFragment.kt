@@ -2,7 +2,6 @@ package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -28,6 +27,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private var listCivilServantsAvailables = ArrayList<UserFuncionario>()
     private var fullnameSpinnerArray = ArrayList<String>()
     private var userIdSelected: String? = ""
+    private var userIdSelectedPos: Int? = null
     private val UNAUTHORIZED_CODE: String = "401"
     private val SUCURSAL_SIN_FUNCIONARIO: String = "Sin asignar"
 
@@ -75,17 +75,19 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         binding.edtDomicilio.setText(branchOffice.description)
         binding.edtMt2Ancho.setText(branchOffice.width.toString())
         binding.edtMt2Largo.setText(branchOffice.length.toString())
-        setCivilServantFullName()
+        setSelectedCivilServant()
         setSpinner()
     }
 
-    private fun setCivilServantFullName() {
+    private fun setSelectedCivilServant() {
         var refUser: String = SUCURSAL_SIN_FUNCIONARIO
 
         if (branchOffice.refUser != null) {
             for (user in listAllCivilServants) {
                 if (user.id == branchOffice.refUser){
                     refUser = user.firstName + " " + user.lastName
+                    userIdSelected = user.id
+                    break
                 }
             }
         }
@@ -96,7 +98,6 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private fun setSpinner() {
         val spinner = binding.spinnerFuncionario
 
-
         if (listCivilServantsAvailables.isNotEmpty()) {
             val adapter = context?.let {
                 ArrayAdapter(
@@ -105,11 +106,9 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
                     fullnameSpinnerArray
                 )
             }
-
             spinner.adapter = adapter
-            spinner.setSelection(0,false)
+            if(userIdSelectedPos != null) spinner.setSelection(userIdSelectedPos!!.toInt(), false)
 
-            spinner.setSelection(0,false)
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -117,10 +116,8 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
                     position: Int,
                     id: Long
                 ) {
-                    if (position != 0) {
-                        userIdSelected = listCivilServantsAvailables[position-1].id
-                        binding.textFuncionarioAsignado.text = "Funcionario asignado: " + listCivilServantsAvailables[position-1].firstName + " " + listCivilServantsAvailables[position-1].lastName
-                    }
+                    userIdSelected = listCivilServantsAvailables[position].id
+                    binding.textFuncionarioAsignado.text = "Funcionario asignado: " + listCivilServantsAvailables[position].firstName + " " + listCivilServantsAvailables[position].lastName
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -199,18 +196,20 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     }
 
     private fun setArrayCivilServantsAvailables(arrayUsers: Array<DataUser>) {
-        fullnameSpinnerArray.add("Seleccione un funcionario")
-
+        var pos = 0
         for (user in arrayUsers) {
-            if (user.role == "CIVIL_SERVANT" && user.refBranchOffice == null) {
-                val civilServant = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "",user.role, user.refBranchOffice, user.userDeviceToken, user.refOrganization)
+            if ((user.role == "CIVIL_SERVANT" && user.refBranchOffice == null) || user.id == branchOffice.refUser) {
+                val civilServant = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber,
+                    user.password, "",user.role, user.refBranchOffice, user.userDeviceToken, user.refOrganization)
                 val fullname = civilServant.firstName + " " + civilServant.lastName
                 listCivilServantsAvailables.add(civilServant)
                 fullnameSpinnerArray.add(fullname)
-            }
 
-            if (user.id == branchOffice.refUser) {
-                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, null, user.userDeviceToken, user.refOrganization)
+                if (user.id == branchOffice.refUser) {
+                    currentUser = civilServant
+                    userIdSelectedPos = pos
+                }
+                pos++
             }
         }
     }
