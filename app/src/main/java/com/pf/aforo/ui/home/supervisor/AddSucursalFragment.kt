@@ -77,6 +77,7 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
                 )
             }
             spinner.adapter = adapter
+            userIdSelected = listUserFuncionarios[spinner.selectedItemPosition].id
 
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
