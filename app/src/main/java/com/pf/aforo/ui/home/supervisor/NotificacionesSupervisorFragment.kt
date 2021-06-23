@@ -43,7 +43,7 @@ class NotificacionesSupervisorFragment : Fragment(R.layout.fragment_notificacion
         }
 
         binding.topAppBar.setNavigationOnClickListener {
-            findNavController().navigate(R.id.action_notificacionesSupervisorFragment_to_homeFragmentSupervisor)
+            activity?.onBackPressed()
         }
 
     }

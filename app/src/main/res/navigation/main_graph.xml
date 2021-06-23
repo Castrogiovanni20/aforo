@@ -320,9 +320,6 @@
         android:label="fragment_notificaciones"
         tools:layout="@layout/fragment_notificaciones" >
         <action
-            android:id="@+id/action_notificacionesFragment_to_homeFragmentFuncionario"
-            app:destination="@id/homeFragmentFuncionario" />
-        <action
             android:id="@+id/action_notificacionesFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
@@ -330,9 +327,6 @@
         android:id="@+id/notificacionesSupervisorFragment"
         android:name="com.pf.aforo.ui.home.supervisor.NotificacionesSupervisorFragment"
         android:label="NotificacionesSupervisorFragment" >
-        <action
-            android:id="@+id/action_notificacionesSupervisorFragment_to_homeFragmentSupervisor"
-            app:destination="@id/homeFragmentSupervisor" />
         <action
             android:id="@+id/action_notificacionesSupervisorFragment_to_loginFragment"
             app:destination="@id/loginFragment" />

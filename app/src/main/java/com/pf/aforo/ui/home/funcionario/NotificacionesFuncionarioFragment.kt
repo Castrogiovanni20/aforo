@@ -44,9 +44,10 @@ class NotificacionesFuncionarioFragment : Fragment(R.layout.fragment_notificacio
         }
 
         binding.topAppBar.setNavigationOnClickListener {
-            findNavController().navigate(R.id.action_notificacionesFragment_to_homeFragmentFuncionario)
+            activity?.onBackPressed()
         }
     }
+
 
     private fun clearSharedPreferences() {
         context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
