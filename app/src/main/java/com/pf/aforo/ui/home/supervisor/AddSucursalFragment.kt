@@ -76,7 +76,9 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
                     fullnameSpinnerArray
                 )
             }
+
             spinner.adapter = adapter
+            spinner.setSelection(0,false)
 
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -85,7 +87,10 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
                     position: Int,
                     id: Long
                 ) {
-                    userIdSelected = listUserFuncionarios[position].id
+                    if (position != 0) {
+                        userIdSelected = listUserFuncionarios[position-1].id
+                        binding.textFuncionarioAsignado.text = "Funcionario asignado: " + listUserFuncionarios[position-1].firstName + " " + listUserFuncionarios[position-1].lastName
+                    }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -127,6 +132,8 @@ class AddSucursalFragment : Fragment(R.layout.fragment_add_sucursal) {
     }
 
     private val usersObserver = Observer<Array<DataUser>> { dataUser ->
+        fullnameSpinnerArray.add("Seleccione un funcionario")
+
         for (user in dataUser) {
             if (user.role == "CIVIL_SERVANT" && user.refBranchOffice == null) {
                 val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user?.refBranchOffice, user?.userDeviceToken, user.refOrganization)
