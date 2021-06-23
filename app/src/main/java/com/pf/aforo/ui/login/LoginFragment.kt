@@ -39,6 +39,16 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         getToken()
     }
 
+    override fun onResume() {
+        super.onResume()
+        clearUI()
+    }
+
+    private fun clearUI() {
+        binding.edtEmail.text?.clear()
+        binding.edtEmail.text?.clear()
+    }
+
     private fun getToken() {
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
