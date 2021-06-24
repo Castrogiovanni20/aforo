@@ -27,7 +27,8 @@
     <string name="okey">OK</string>
     <string name="confirmarPass">Confirmar contraseña</string>
 
-    <string name="confirmarDelete">¿Confirma la eliminación de este Funcionario?</string>
+    <string name="confirmarDeleteFun">¿Confirma la eliminación de este Funcionario?</string>
+    <string name="confirmarDeleteSup">¿Confirma la eliminación de este Supervisor?</string>
     <string name="confirmarDeleteSucursal">¿Confirma la eliminación de esta Sucursal?</string>
     <string name="confirmarCerrar">¿Confirma que desea cerrar sesión?</string>
     <string name="datosIncorrectos">Usuario y/o contraseña incorrectos</string>

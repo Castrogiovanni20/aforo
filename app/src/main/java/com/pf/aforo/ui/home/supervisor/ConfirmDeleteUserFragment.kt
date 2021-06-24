@@ -27,6 +27,17 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
         setTopBar()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setConfirmMessage()
+    }
+
+    private fun setConfirmMessage() {
+        val role = this.arguments?.getString("role")
+        val text = if(role == "funcionario") R.string.confirmarDeleteFun else R.string.confirmarDeleteSup
+        binding.txtVAviso.setText(text)
+    }
+
     private fun setTopBar() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {

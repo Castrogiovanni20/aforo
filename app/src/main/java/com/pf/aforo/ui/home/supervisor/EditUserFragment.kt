@@ -123,6 +123,7 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
         val bundle = Bundle()
         bundle.putString("civilServantId", userFuncionario.id)
         bundle.putString("refBranchOffice", userFuncionario?.refBranchOffice)
+        bundle.putString("role", userFuncionario.role.toLowerCase())
 
         findNavController().navigate(R.id.action_editUserFragment_to_confirmDeleteUserFragment, bundle)
     }
