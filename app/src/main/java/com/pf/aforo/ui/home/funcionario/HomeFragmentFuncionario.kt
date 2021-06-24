@@ -4,6 +4,9 @@ package com.pf.aforo.ui.home.funcionario
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -19,15 +22,22 @@ import com.github.mikephil.charting.data.*
 import com.pf.aforo.R
 import com.pf.aforo.data.model.BranchOffice
 import com.pf.aforo.data.model.DataBranchOfficeHistory
+import com.pf.aforo.data.model.SocketId
 import com.pf.aforo.databinding.FragmentHomeFuncionarioBinding
+import io.socket.client.IO
+import io.socket.client.Socket
+import io.socket.emitter.Emitter
+import java.net.URISyntaxException
 
 class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
+    private lateinit var mSocket: Socket
     private lateinit var binding: FragmentHomeFuncionarioBinding
     private lateinit var homeFuncionarioViewModel: HomeFuncionarioViewModel
     lateinit var branchOfficeId: String
     private val UNAUTHORIZED_CODE: String = "401"
     private val OCCUPIED_TXT: String = "% Ocupación"
     private val AVAILABLE_TXT: String = "% Disponible"
+    private val URI: String = "http://46.17.108.79:5000"
     lateinit var piechart: PieChart
     lateinit var barChar: BarChart
     lateinit var lightsGraphic: ImageView
@@ -45,6 +55,65 @@ class HomeFragmentFuncionario : Fragment(R.layout.fragment_home_funcionario) {
         setObservers()
         getBranchOfficeById()
         getHistoricData()
+        setSocket()
+    }
+
+    private fun setSocket() {
+        mSocket = connectSocket()
+        mSocket.on(Socket.EVENT_CONNECT, onConnect)
+        mSocket.on(Socket.EVENT_DISCONNECT, onDisconnect)
+        mSocket.on("CONTEXT_CHANGE", onContextChange)
+    }
+
+
+    private fun connectSocket() : Socket {
+        try {
+            mSocket = IO.socket(URI);
+            mSocket.connect()
+        } catch (e: URISyntaxException) {
+            Log.d("SocketError: ", e.toString())
+        }
+
+        return mSocket;
+    }
+
+    private val onConnect = Emitter.Listener { args ->
+        val socketId = SocketId(mSocket.id())
+        subscribeNotifications(socketId)
+        Log.d("Socket", "SocketId: " + socketId)
+    }
+
+    private val onDisconnect = Emitter.Listener { args ->
+        Log.d("Socket", "Desconectado")
+    }
+
+    private val onContextChange = Emitter.Listener { args ->
+        Log.d("Socket", "Hubo un cambio")
+        Handler(Looper.getMainLooper()).post {
+            getBranchOfficeById()
+            getHistoricData()
+        }
+    }
+
+    private fun subscribeNotifications(socketId: SocketId) {
+        homeFuncionarioViewModel.getSubscriptionId("Bearer ${getToken()}", socketId)
+    }
+
+    private val getSubscriptionIdObserver = Observer<String> { it ->
+        Log.d("SubscriptionID: ", it)
+        saveSubscriptionIdOnSharedPreferences(it)
+    }
+
+    private fun saveSubscriptionIdOnSharedPreferences(subscriptionId: String) {
+        val sharedPreferences = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
+        val editor = sharedPreferences?.edit()
+        editor?.putString("SubscriptionId", subscriptionId)
+        editor?.apply()
+    }
+
+    private fun getSubscriptionId(): String {
+        val sharedPref = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
+        return sharedPref?.getString("SubscriptionId", "0").toString()
     }
 
     private fun getHistoricData() {
