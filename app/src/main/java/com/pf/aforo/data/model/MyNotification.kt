@@ -36,8 +36,6 @@ class MyNotification(context: Context, channelId: String)  {
 
     public fun createChannelGroup(groupId: String, groupNameId: Int) {
 
-        //this.context = context
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             var groupName: CharSequence = context.getString(groupNameId)
             notificationManager.createNotificationChannelGroup(
@@ -53,21 +51,20 @@ class MyNotification(context: Context, channelId: String)  {
 
     public fun build(imgId: Int, title: String, content: String, pendingIntent: PendingIntent) {
 
-        //this.context = context
-        //this.channelId = channelId!!
-
         notificationBuilder = NotificationCompat.Builder(context, channelId!!)
         notificationManager = (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)!!
-        notificationBuilder.setSmallIcon(imgId)
+        notificationBuilder.setSmallIcon(android.R.drawable.ic_dialog_alert)
             .setColor(context.getResources().getColor(R.color.colorAccent))
             .setContentTitle(title)
             .setContentText(content)
-            .setAutoCancel(true)
-            .setContentIntent(pendingIntent)
+            //.setAutoCancel(true)
+            //.setContentIntent(pendingIntent)
             .setStyle(
                 NotificationCompat.BigTextStyle()
                     .bigText(content)
             )
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setFullScreenIntent(pendingIntent, true)
 
     }
 
