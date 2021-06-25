@@ -18,26 +18,26 @@ class MyNotification(context: Context, channelId: String)  {
         val CHANNEL_ID_NOTIFICATIONS = "channel_id_notifications"
         val CHANNEL_GROUP_GENERAL = "channel_group_general"
         val NOTIFICATION_ID = 1
-
     }
-
 
     lateinit var notificationBuilder: NotificationCompat.Builder
     lateinit var notificationManager: NotificationManager
     lateinit var channel: NotificationChannel
-    lateinit var context: Context
-    lateinit var channelId: String
+    var context = context
+    var channelId = channelId
 
-    open fun MyNotification(context: Context, channelId: String?) {
-        notificationBuilder = NotificationCompat.Builder(context, channelId!!)
-        notificationManager =
-            (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)!!
+
+    /*open fun MyNotification(context: Context, channelId: String?) {
+
         this.context = context
         this.channelId = channelId!!
-    }
+    }*/
 
 
     public fun createChannelGroup(groupId: String, groupNameId: Int) {
+
+        //this.context = context
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             var groupName: CharSequence = context.getString(groupNameId)
             notificationManager.createNotificationChannelGroup(
@@ -52,6 +52,12 @@ class MyNotification(context: Context, channelId: String)  {
 
 
     public fun build(imgId: Int, title: String, content: String, pendingIntent: PendingIntent) {
+
+        //this.context = context
+        //this.channelId = channelId!!
+
+        notificationBuilder = NotificationCompat.Builder(context, channelId!!)
+        notificationManager = (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)!!
         notificationBuilder.setSmallIcon(imgId)
             .setColor(context.getResources().getColor(R.color.colorAccent))
             .setContentTitle(title)
