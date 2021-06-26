@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.UserFuncionario
+import com.pf.aforo.data.model.Settings
+import com.pf.aforo.data.model.UserSettings
 import com.pf.aforo.data.response.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,6 +31,9 @@ class UsersRepository()
 
     var updateUserRoleSuccessResponseLiveData = MutableLiveData<String>()
     var updateUserRoleFailureResponseLiveData = MutableLiveData<String>()
+
+    var updateSettingsSuccessResponseLiveData = MutableLiveData<String>()
+    var updateSettingsFailureResponseLiveData = MutableLiveData<String>()
 
     private val SERVER_ERROR_MSG: String = "Estamos teniendo problemas con el servidor. Intente de nuevo más tarde."
 
@@ -128,7 +133,7 @@ class UsersRepository()
                                 Log.d("ApiDeleteUser", "API response: " + fiwareResponseUser.code().toString())
                             }
                         } else {
-                            deleteUserFailureResponseLiveData.value = fiwareResponseUser.code().toString()
+                            deleteUserFailureResponseLiveData.value = fiwareResponseUser.errorBody().string()
                             Log.d("ApiDeleteUser", "API response: " + fiwareResponseUser.code().toString())
                         }
                     }
@@ -185,6 +190,32 @@ class UsersRepository()
                         }
                     }
                 }
+            })
+    }
+
+    fun updateSettings(token: String, id: String, userSettings: UserSettings){
+        FiwareAPI().updateSettings(token, id, userSettings)
+            .enqueue(object: Callback<FiwareResponseUpdateSettings>{
+                override fun onFailure(call: Call<FiwareResponseUpdateSettings>?, t: Throwable?) {
+                    if (t != null) {
+                        updateSettingsFailureResponseLiveData.value = SERVER_ERROR_MSG
+                        Log.d("ApiUpdateSettings", "Fallo el request" + t.message)
+                    }
+                }
+                override fun onResponse(call: Call<FiwareResponseUpdateSettings>?, fiwareResponse: Response<FiwareResponseUpdateSettings>?) {
+                    if (fiwareResponse != null) {
+                        if (fiwareResponse.isSuccessful) {
+                            if (fiwareResponse.body().code == "SUCCESS") {
+                                updateSettingsSuccessResponseLiveData.value = fiwareResponse.body().code
+                                Log.d("ApiUpdateSettings", "API response: " + fiwareResponse.code().toString())
+                            }
+                        } else {
+                            updateSettingsFailureResponseLiveData.value = fiwareResponse.code().toString()
+                            Log.d("ApiUpdateSettings", "API response: " + fiwareResponse.code().toString())
+                        }
+                    }
+                }
+
             })
     }
 

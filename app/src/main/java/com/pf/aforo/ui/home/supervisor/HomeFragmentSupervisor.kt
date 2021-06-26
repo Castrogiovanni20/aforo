@@ -2,6 +2,8 @@ package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -55,6 +57,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         mSocket.on("CONTEXT_CHANGE", onContextChange)
     }
 
+
     private fun connectSocket() : Socket {
         try {
             mSocket = IO.socket(URI);
@@ -69,6 +72,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
     private val onConnect = Emitter.Listener { args ->
         val socketId = SocketId(mSocket.id())
         subscribeNotifications(socketId)
+        Log.d("Socket", "SocketId: " + socketId)
     }
 
     private val onDisconnect = Emitter.Listener { args ->
@@ -77,6 +81,9 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
 
     private val onContextChange = Emitter.Listener { args ->
         Log.d("Socket", "Hubo un cambio")
+        Handler(Looper.getMainLooper()).post {
+            getBranchOffices()
+        }
     }
 
     private fun setTopBar() {
@@ -87,16 +94,17 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
                 else -> false
             }
         }
+    }
 
-        binding.topAppBar.setNavigationOnClickListener {
-            onBackPressed()
-        }
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun setNavigation(){
@@ -121,15 +129,13 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         }
     }
 
-    private fun onBackPressed() {
-        initFuncionariosFragments()
-    }
-
     private fun getUsers() {
+        if(arrayListFuncionarios.isNotEmpty()) arrayListFuncionarios.clear()
         homeViewModel.getUsers("Bearer ${getToken()}")
     }
 
     private fun getBranchOffices() {
+        if(arrayListSucursales.isNotEmpty()) arrayListSucursales.clear()
         homeViewModel.getBranchOffices("Bearer ${getToken()}")
     }
 
@@ -170,7 +176,7 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
 
     private val getUsersObserver = Observer<Array<DataUser>> { dataUsers ->
         for (user in dataUsers) {
-            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.role)
+            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user.refBranchOffice, user.userDeviceToken, user.refOrganization)
             arrayListFuncionarios.add(userFuncionario)
         }
         if(arrayListSucursales.isNotEmpty())
@@ -186,36 +192,27 @@ class HomeFragmentSupervisor : Fragment(R.layout.fragment_home_supervisor) {
         val branchOffices = ArrayList(arrayListSucursales)
         arrayListSucursales.clear()
         for (branchOffice in branchOffices) {
-            branchOffice.refUser = getFullNameOrDefaultByID(branchOffice.refUser)
+            branchOffice?.refUser = getFullNameOrDefaultByKey(branchOffice?.refUser)
             arrayListSucursales.add(branchOffice)
             branchOfficeAdapter2.notifyDataSetChanged()
         }
     }
 
-    private fun getFullNameOrDefaultByID(id: String): String {
-        if (id.equals("null")) {
+    private fun getFullNameOrDefaultByKey(key: String?): String {
+        if (key == null || key.equals("null")) {
             return SUCURSAL_SIN_FUNCIONARIO
         }
         var fullName = ""
         for (user in arrayListFuncionarios) {
-            if (user.id == id){
-                fullName = user.firstName + " " + user.lastName
+            fullName = user.firstName + " " + user.lastName
+            if(fullName == key || user.id == key)
                 break
-            }
         }
         return fullName
     }
 
     private fun subscribeNotifications(socketId: SocketId) {
         homeViewModel.getSubscriptionId("Bearer ${getToken()}", socketId)
-    }
-
-    private fun initFuncionariosFragments() {
-        findNavController().navigate(R.id.action_homeFragmentSupervisor_to_usuariosSupervisorFragment)
-    }
-
-    private fun initSucursalesFragment () {
-        findNavController().navigate(R.id.action_homeFragmentSupervisor_to_sucursalesSupervisorFragment)
     }
 
     private fun initLoginFragment() {

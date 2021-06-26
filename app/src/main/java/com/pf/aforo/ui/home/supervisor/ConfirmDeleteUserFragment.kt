@@ -15,7 +15,8 @@ import com.pf.aforo.databinding.FragmentConfirmDeleteUserBinding
 class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user) {
     private lateinit var binding: FragmentConfirmDeleteUserBinding
     private lateinit var editUserViewModel: EditUserViewModel
-    private val UNAUTHORIZED_CODE: String = "401"
+    private val UNAUTHORIZED_CODE: String = "UNAUTHORIZED"
+    private val PERMISSION_REFUSED_CODE: String = "PERMISSION_REFUSED"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,6 +27,17 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
         setTopBar()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setConfirmMessage()
+    }
+
+    private fun setConfirmMessage() {
+        val role = this.arguments?.getString("role")
+        val text = if(role == "funcionario") R.string.confirmarDeleteFun else R.string.confirmarDeleteSup
+        binding.txtVAviso.setText(text)
+    }
+
     private fun setTopBar() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -34,6 +46,7 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
@@ -46,6 +59,10 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
         }
     }
 
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
+    }
+
     private fun onBackPressed() {
         findNavController().navigate(R.id.action_confirmDeleteUserFragment_to_usuariosSupervisorFragment)
     }
@@ -53,6 +70,10 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
     private fun setClickListeners() {
         binding.btnOK.setOnClickListener {
             deleteUser();
+        }
+
+        binding.btnNo.setOnClickListener {
+            findNavController().navigate(R.id.action_confirmDeleteUserFragment_to_usuariosSupervisorFragment)
         }
     }
 
@@ -67,9 +88,13 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
     }
 
     private val failureObserver = Observer<Any> { statusCode ->
-        if(statusCode == UNAUTHORIZED_CODE){
+        if(statusCode.toString().contains(UNAUTHORIZED_CODE)){
             Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
             initLoginFragment()
+        }
+        else if(statusCode.toString().contains(PERMISSION_REFUSED_CODE)){
+            Toast.makeText(context, "No tiene permisos para realizar esta acción.", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_confirmDeleteUserFragment_to_usuariosSupervisorFragment)
         }
         else
             Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
@@ -77,9 +102,14 @@ class ConfirmDeleteUserFragment : Fragment(R.layout.fragment_confirm_delete_user
 
     private fun deleteUser() {
         val bundle = this.arguments
-        val idFuncionario = bundle?.getString("idFuncionario")
-        if (idFuncionario != null) {
-            editUserViewModel.deleteUser("Bearer ${getToken()}", idFuncionario)
+        val civilServantId = bundle?.getString("civilServantId")
+        val refBranchOffice = bundle?.getString("refBranchOffice")
+
+        if (civilServantId != null && refBranchOffice != null) {
+            editUserViewModel.removeCivilServant("Bearer ${getToken()}", refBranchOffice, civilServantId)
+            editUserViewModel.deleteUser("Bearer ${getToken()}", civilServantId)
+        } else if (civilServantId != null ){
+            editUserViewModel.deleteUser("Bearer ${getToken()}", civilServantId)
         }
     }
 

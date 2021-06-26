@@ -2,12 +2,11 @@ package com.pf.aforo.ui.home.supervisor
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,14 +17,17 @@ import com.pf.aforo.data.model.DataUser
 import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.databinding.FragmentEditSucursalBinding
 
+
 class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
     private lateinit var binding: FragmentEditSucursalBinding
     private lateinit var editSucursalViewModel: EditSucursalViewModel
     private lateinit var branchOffice: BranchOffice
     private lateinit var currentUser: UserFuncionario
-    private var listUserFuncionarios = ArrayList<UserFuncionario>()
+    private var listAllCivilServants = ArrayList<UserFuncionario>()
+    private var listCivilServantsAvailables = ArrayList<UserFuncionario>()
     private var fullnameSpinnerArray = ArrayList<String>()
-    private var userIdSelected = "null"
+    private var userIdSelected: String? = ""
+    private var userIdSelectedPos: Int? = null
     private val UNAUTHORIZED_CODE: String = "401"
     private val SUCURSAL_SIN_FUNCIONARIO: String = "Sin asignar"
 
@@ -34,10 +36,8 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         binding = FragmentEditSucursalBinding.bind(view)
         editSucursalViewModel = ViewModelProvider(this).get(EditSucursalViewModel::class.java)
         setTopBar()
-        getUsersFuncionarios()
         getBranchOffice()
         setObservers()
-        setUI()
         setClickListeners()
     }
 
@@ -49,6 +49,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
@@ -61,6 +62,10 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         }
     }
 
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
+    }
+
     private fun onBackPressed() {
         findNavController().navigate(R.id.action_editSucursalFragment_to_sucursalesSupervisorFragment)
     }
@@ -70,13 +75,30 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         binding.edtDomicilio.setText(branchOffice.description)
         binding.edtMt2Ancho.setText(branchOffice.width.toString())
         binding.edtMt2Largo.setText(branchOffice.length.toString())
-        val refUser = if (branchOffice.refUser == "null") SUCURSAL_SIN_FUNCIONARIO else branchOffice.refUser
+        setSelectedCivilServant()
+        setSpinner()
+    }
+
+    private fun setSelectedCivilServant() {
+        var refUser: String = SUCURSAL_SIN_FUNCIONARIO
+
+        if (branchOffice.refUser != null) {
+            for (user in listAllCivilServants) {
+                if (user.id == branchOffice.refUser){
+                    refUser = user.firstName + " " + user.lastName
+                    userIdSelected = user.id
+                    break
+                }
+            }
+        }
+
         binding.textFuncionarioAsignado.text = "Funcionario asignado: " + refUser
     }
 
     private fun setSpinner() {
         val spinner = binding.spinnerFuncionario
-        if (fullnameSpinnerArray.isNotEmpty()) {
+
+        if (listCivilServantsAvailables.isNotEmpty()) {
             val adapter = context?.let {
                 ArrayAdapter(
                     it,
@@ -85,6 +107,7 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
                 )
             }
             spinner.adapter = adapter
+            if(userIdSelectedPos != null) spinner.setSelection(userIdSelectedPos!!.toInt(), false)
 
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -93,7 +116,8 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
                     position: Int,
                     id: Long
                 ) {
-                    userIdSelected = listUserFuncionarios[position].id
+                    userIdSelected = listCivilServantsAvailables[position].id
+                    binding.textFuncionarioAsignado.text = "Funcionario asignado: " + listCivilServantsAvailables[position].firstName + " " + listCivilServantsAvailables[position].lastName
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -103,11 +127,13 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
             }
         } else {
             binding.spinnerFuncionario.visibility = View.GONE
+            userIdSelected = null
         }
 
     }
 
     private fun setObservers() {
+        editSucursalViewModel.branchOffice.observe(viewLifecycleOwner, branchOfficeObserver)
         editSucursalViewModel.validationError.observe(viewLifecycleOwner, this.validationObserver)
         editSucursalViewModel.updateBranchOfficeSuccessResponse.observe(viewLifecycleOwner, successObserver)
         editSucursalViewModel.updateBranchOfficeFailureResponse.observe(viewLifecycleOwner, failureObserver)
@@ -120,7 +146,8 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         }
 
         binding.textViewEliminar.setOnClickListener {
-            initConfirmDeleteSucursalScreen(branchOffice.id)
+            val refUser = branchOffice?.refUser
+            initConfirmDeleteSucursalScreen(branchOffice.id, refUser)
         }
     }
 
@@ -131,10 +158,17 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         val description = binding.edtDomicilio.text.toString()
         val width = if(binding.edtMt2Ancho.text.toString().isNullOrEmpty()) 0 else Integer.parseInt(binding.edtMt2Ancho.text.toString())
         val length = if(binding.edtMt2Largo.text.toString().isNullOrEmpty()) 0 else Integer.parseInt(binding.edtMt2Largo.text.toString())
-        val refUser = binding.textFuncionarioAsignado.text.toString()
+        val refUser = userIdSelected
 
         val newBranchOffice = BranchOffice("", id, refOrganization, name, description, refUser, 0, width, length, 0)
+        editSucursalViewModel.removeCivilServant("Bearer ${getToken()}", newBranchOffice.id, branchOffice.refUser)
         editSucursalViewModel.updateBranchOffice("Bearer ${getToken()}", newBranchOffice.id, newBranchOffice)
+        editSucursalViewModel.assignCivilServant("Bearer ${getToken()}", newBranchOffice.id, newBranchOffice?.refUser)
+    }
+
+    private val branchOfficeObserver = Observer<BranchOffice> { it ->
+        branchOffice = it
+        getUsersFuncionarios()
     }
 
     private val validationObserver = Observer<Any?> { error ->
@@ -155,29 +189,51 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
             Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
-    private val usersObserver = Observer<Array<DataUser>> { dataUser ->
-        for (user in dataUser) {
-            if (user.role == "CIVIL_SERVANT" && user.refBranchOffice == null) {
-                val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.role)
-                val fullname = userFuncionario.firstName + " " + userFuncionario.lastName
-                listUserFuncionarios.add(userFuncionario)
-                fullnameSpinnerArray.add(fullname)
-            }
+    private val usersObserver = Observer<Array<DataUser>> { arrayUsers ->
+        setArrayAllCivilServants(arrayUsers)
+        setArrayCivilServantsAvailables(arrayUsers)
+        setUI()
+    }
 
-            if (user.id == branchOffice.refUser) {
-                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.role)
+    private fun setArrayCivilServantsAvailables(arrayUsers: Array<DataUser>) {
+        var pos = 0
+        for (user in arrayUsers) {
+            if ((user.role == "CIVIL_SERVANT" && user.refBranchOffice == null) || user.id == branchOffice.refUser) {
+                val civilServant = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber,
+                    user.password, "",user.role, user.refBranchOffice, user.userDeviceToken, user.refOrganization)
+                val fullname = civilServant.firstName + " " + civilServant.lastName
+                listCivilServantsAvailables.add(civilServant)
+                fullnameSpinnerArray.add(fullname)
+
+                if (user.id == branchOffice.refUser) {
+                    currentUser = civilServant
+                    userIdSelectedPos = pos
+                }
+                pos++
             }
         }
-
-        setSpinner()
     }
+
+    private fun setArrayAllCivilServants(arrayUsers: Array<DataUser>) {
+        for (user in arrayUsers) {
+            if (user.role == "CIVIL_SERVANT") {
+                val civilServant = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user.refBranchOffice, user.userDeviceToken, user.refOrganization)
+                val fullname = civilServant.firstName + " " + civilServant.lastName
+                listAllCivilServants.add(civilServant)
+            }
+        }
+    }
+
 
     private fun getUsersFuncionarios() {
         editSucursalViewModel.getUsers("Bearer ${getToken()}")
     }
 
     private fun getBranchOffice() {
-       branchOffice = arguments?.getParcelable<BranchOffice>("BranchOffice")!!
+        val branchOfficeId = arguments?.getString("BranchOfficeId")!!
+        if (branchOfficeId != null) {
+            editSucursalViewModel.getBranchOffice("Bearer ${getToken()}", branchOfficeId)
+        }
     }
 
     private fun getToken(): String {
@@ -189,9 +245,9 @@ class EditSucursalFragment : Fragment(R.layout.fragment_edit_sucursal) {
         findNavController().navigate(R.id.action_editSucursalFragment_to_sucursalesSupervisorFragment)
     }
 
-    private fun initConfirmDeleteSucursalScreen(idBranchOffice: String) {
+    private fun initConfirmDeleteSucursalScreen(entityId: String, refUser: String?) {
         val bundle = Bundle()
-        bundle.putString("idBranchOffice", idBranchOffice)
+        bundle.putString("entityId", branchOffice.id)
         findNavController().navigate(R.id.action_editSucursalFragment_to_confirmDeleteSucursalFragment, bundle)
     }
 

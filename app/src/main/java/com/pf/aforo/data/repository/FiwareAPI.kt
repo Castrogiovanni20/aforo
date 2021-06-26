@@ -66,6 +66,13 @@ interface FiwareAPI {
         @Path("role") role: String
     ) : Call<FiwareResponseEditUserRole>
 
+    @PUT("users/{id}")
+    fun updateSettings(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Body settings: UserSettings
+    ) : Call<FiwareResponseUpdateSettings>
+
 
     /**
      * @description Branch Offices endpoints
@@ -98,8 +105,15 @@ interface FiwareAPI {
     fun assignCivilServantToBranchOffice(
         @Header("Authorization") token: String,
         @Path("entityId") entityId: String,
-        @Path("userId") refUser: String
+        @Path("userId") refUser: String?
     ) : Call<FiwareResponseAssignCivilServantToBranchOffice>
+
+    @PUT("branch-offices/{entityId}/remove-user/{userId}")
+    fun removeCivilServantFromBranchOffice(
+        @Header("Authorization") token: String,
+        @Path("entityId") entityId: String,
+        @Path("userId") refUser: String?
+    ) : Call<FiwareResponseRemoveCivilServantFromBranchOffice>
 
     @GET("branch-offices/{entityId}")
     fun getBranchOfficeById(

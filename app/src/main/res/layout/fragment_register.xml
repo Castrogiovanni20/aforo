@@ -103,7 +103,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtName"
-                        android:layout_width="125dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
@@ -137,7 +137,9 @@
                     android:layout_weight="1"
                     android:inputType="textEmailAddress"
                     android:textAlignment="textStart"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:maxLength="80"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space

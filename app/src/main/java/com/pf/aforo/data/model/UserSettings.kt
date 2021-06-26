@@ -1,4 +1,4 @@
 package com.pf.aforo.data.model
 
-data class UserSettings(val fullCapacityAlert: Boolean, var highCapacityLevelAlert: Boolean) {
+class UserSettings(var settings: Settings) {
 }

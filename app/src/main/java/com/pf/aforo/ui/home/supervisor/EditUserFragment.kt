@@ -39,6 +39,7 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
@@ -49,6 +50,10 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun onBackPressed() {
@@ -116,7 +121,10 @@ class EditUserFragment : Fragment(R.layout.fragment_edit_user) {
 
     private fun initConfirmDeleteUserScreen() {
         val bundle = Bundle()
-        bundle.putString("idFuncionario", userFuncionario.id)
+        bundle.putString("civilServantId", userFuncionario.id)
+        bundle.putString("refBranchOffice", userFuncionario?.refBranchOffice)
+        bundle.putString("role", userFuncionario.role.toLowerCase())
+
         findNavController().navigate(R.id.action_editUserFragment_to_confirmDeleteUserFragment, bundle)
     }
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pf.aforo.data.model.Data
 import com.pf.aforo.data.model.DataUser
+import com.pf.aforo.data.model.UserFuncionario
 import com.pf.aforo.data.model.UserLogin
 import com.pf.aforo.data.repository.AuthenticationRepository
 import com.pf.aforo.data.repository.UsersRepository
@@ -32,6 +33,13 @@ class LoginViewModel : ViewModel() {
 
     var validationError = MutableLiveData<String>()
     var isUserValid : Boolean = false
+
+    private var _updateUserSuccessResponseLiveData = usersRepository.updateUserSuccessResponseLiveData
+    val  updateUserSuccessResponseLiveData: MutableLiveData<String> get() = _updateUserSuccessResponseLiveData
+
+    private var _updateUserFailureResponseLiveData = usersRepository.updateUserFailureResponseLiveData
+    val updateUserFailureResponseLiveData: MutableLiveData<String> get() = _updateUserFailureResponseLiveData
+
 
     init {
         isLoading.value = false
@@ -66,6 +74,10 @@ class LoginViewModel : ViewModel() {
 
     fun stopProgressBar() {
         stopProgressBar.value = true
+    }
+
+    fun updateUser(token: String, id_user: String, user_funcionario: UserFuncionario) {
+        usersRepository.updateUser(token, id_user, user_funcionario)
     }
 
 }

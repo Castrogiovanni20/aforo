@@ -43,7 +43,7 @@
             android:id="@+id/txtVAviso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/confirmarDelete"
+            android:text="@string/confirmarDeleteFun"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold" />

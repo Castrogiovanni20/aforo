@@ -37,6 +37,8 @@ class RegisterViewModel : ViewModel () {
             !user.isLastNameLengthValid() -> validationError.value = "El apellido debe ser mayor a 2 y menor o igual a 60 caracteres."
             !user.isLastNameAlphabetic() -> validationError.value = "El apellido debe contener solamente letras."
             !user.isEmailValid() -> validationError.value = "Debe ingresar un formato de email valido."
+            user.phoneNumber.isNullOrEmpty() -> validationError.value = "Debe ingresar un número de teléfono."
+            !user.isPhoneNumberValid() -> validationError.value = "Debe ingresar un número de teléfono válido."
             !user.isrefOrganizationValid() -> validationError.value = "El nombre de la organización debe ser mayor a 3 y menor a 41 caracteres."
             !user.isPasswordValid() -> validationError.value = "La contraseña debe ser mayor o igual a 8 caracteres."
             !user.arePasswordsEquals() -> validationError.value = "Las contraseñas no coinciden."

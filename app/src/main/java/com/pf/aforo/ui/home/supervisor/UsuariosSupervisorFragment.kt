@@ -53,6 +53,7 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
@@ -63,6 +64,10 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun setNavigation(){
@@ -120,11 +125,11 @@ class UsuariosSupervisorFragment : Fragment(R.layout.fragment_usuarios_superviso
             if(user.role == CIVIL_SERVANT)
                 user.role = FUNCIONARIO
             if (user.email != currentEmailUser) {
-                val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.role)
+                val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user.refBranchOffice, user.userDeviceToken, user.refOrganization)
                 arrayListFuncionarios.add(userFuncionario)
                 recyclerAdapter.notifyDataSetChanged()
             } else {
-                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.role)
+                currentUser = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user.refBranchOffice, user.userDeviceToken, user.refOrganization)
             }
         }
     }

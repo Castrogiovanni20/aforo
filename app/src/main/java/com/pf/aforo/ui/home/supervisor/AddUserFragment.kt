@@ -17,6 +17,7 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
     private lateinit var binding: FragmentAddUserBinding
     private lateinit var addUserViewModel: AddUserViewModel
     private val UNAUTHORIZED_CODE: String = "401"
+    private val USER_ALREADY_EXISTS_CODE: String = "403"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,6 +37,7 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
@@ -46,6 +48,10 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressed();
         }
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun onBackPressed() {
@@ -71,9 +77,11 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
         var identificationNumber = binding.editTextNumberDni.text.toString()
         var phoneNumber = binding.editTextTelefono.text.toString()
         var password = binding.NumPassword.text.toString()
+        var passwordConfirm = binding.RepPassword.text.toString()
         var role = "FUNCIONARIO"
 
-        val userFuncionario = UserFuncionario("",firstName, lastName, email, identificationNumber, phoneNumber, password, role)
+
+        val userFuncionario = UserFuncionario("",firstName, lastName, email, identificationNumber, phoneNumber, password, passwordConfirm, role, null, null, null)
 
         addUserViewModel.addUser("Bearer " + getToken(), userFuncionario)
     }
@@ -92,8 +100,11 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
             Toast.makeText(context, "La sesión ha expirado.", Toast.LENGTH_SHORT).show()
             initLoginFragment()
         }
+        else if(statusCode == USER_ALREADY_EXISTS_CODE){
+            Toast.makeText(context, "Ya existe un usuario con ese email.", Toast.LENGTH_SHORT).show()
+        }
         else
-            Toast.makeText(context, "Ocurrio un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Ocurrió un error, por favor intentá nuevamente.", Toast.LENGTH_SHORT).show()
     }
 
     private val validationObserver = Observer<Any?> { error ->

@@ -53,6 +53,7 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
@@ -63,6 +64,10 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressed();
         }
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun setNavigation(){
@@ -135,7 +140,7 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
 
     private val getUsersObserver = Observer<Array<DataUser>> { dataUsers ->
         for (user in dataUsers) {
-            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, user.role)
+            val userFuncionario = UserFuncionario(user.id, user.firstName, user.lastName, user.email, user.identificationNumber, user.phoneNumber, user.password, "", user.role, user.refBranchOffice, user.userDeviceToken, user.refOrganization)
             arrayListFuncionarios.add(userFuncionario)
         }
         if(arrayListSucursales.isNotEmpty())
@@ -146,14 +151,14 @@ class SucursalesSupervisorFragment : Fragment(R.layout.fragment_sucursales_super
         val branchOffices = ArrayList(arrayListSucursales)
         arrayListSucursales.clear()
         for (branchOffice in branchOffices) {
-            branchOffice.refUser = getFullNameOrDefaultByID(branchOffice.refUser)
+            branchOffice?.refUser = getFullNameOrDefaultByID(branchOffice?.refUser)
             arrayListSucursales.add(branchOffice)
             branchOfficeAdapter1.notifyDataSetChanged()
         }
     }
 
-    private fun getFullNameOrDefaultByID(id: String): String {
-        if (id.equals("null")) {
+    private fun getFullNameOrDefaultByID(id: String?): String {
+        if (id == null || id.equals("null")) {
             return SUCURSAL_SIN_FUNCIONARIO
         }
         var fullName = ""

@@ -27,7 +27,8 @@
     <string name="okey">OK</string>
     <string name="confirmarPass">Confirmar contraseña</string>
 
-    <string name="confirmarDelete">¿Confirma la eliminación de este Funcionario?</string>
+    <string name="confirmarDeleteFun">¿Confirma la eliminación de este Funcionario?</string>
+    <string name="confirmarDeleteSup">¿Confirma la eliminación de este Supervisor?</string>
     <string name="confirmarDeleteSucursal">¿Confirma la eliminación de esta Sucursal?</string>
     <string name="confirmarCerrar">¿Confirma que desea cerrar sesión?</string>
     <string name="datosIncorrectos">Usuario y/o contraseña incorrectos</string>
@@ -54,7 +55,7 @@
     <string name="funcionarioAsignado">Responsable:</string>
     <string name="funcionarioNombre">Funcionario:</string>
     <string name="capacidadActual">CAP. Actual:</string>
-    <string name="capacidadMaxima">CAP. Máxima:</string>
+    <string name="capacidadMaxima">Cap:</string>
 
     <string name="dnu">(*) Calculo de capacidad de aforo sujeto a Decreto DNU 814 / 2020 PODER EJECUTIVO NACIONAL (P.E.N.) 25-10-2020.</string>
 
@@ -62,8 +63,8 @@
     <string name="orga">Datos de la Organización</string>
     <string name="supervisor">Supervisor a cargo:</string>
 
-    <string name="ocupTorta">Ocupación:</string>
-    <string name="dispoTorta">Disponible:</string>
+    <string name="ocupTorta">Ocup:</string>
+    <string name="dispoTorta">Disp:</string>
     <string name="mayor">Horarios más concurridos por Hora</string>
     <string name="apeNom">APELLIDO_NOMBRE</string>
 
@@ -75,14 +76,18 @@
     <string name="notilimit">Alertar nivel de capacidad ALTO</string>
     <string name="notimax">Alertar máxima capacidad</string>
 
-    <string name="semaforos">Configurar semáforos</string>
+    <string name="semaforos">Valores % semáforos</string>
     <string name="hasta">Hasta</string>
     <string name="configgreen">% verde</string>
     <string name="configyell">% amarillo</string>
     <string name="configred">% rojo</string>
-    <string name="p60">60 %</string>
-    <string name="p80">80 %</string>
-    <string name="p100">100 %</string>
+    <string name="p60">60</string>
+    <string name="p80">80</string>
+    <string name="p100">100</string>
+
+    <string name="sinSucursal">No posee ninguna sucursal asignada, comuníquese con su supervisor.</string>
+
+    <string name="notification_channel_group_general">General</string> <!-- TODO: darle un valor -->
 
     <string-array name="roles">
         <item>SUPERVISOR</item>

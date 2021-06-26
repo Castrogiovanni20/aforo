@@ -9,7 +9,7 @@ data class BranchOffice(
     val refOrganization: String,
     val name: String,
     val description: String,
-    var refUser: String,
+    var refUser: String?,
     val currentCapacity: Int,
     val width: Int,
     val length: Int,

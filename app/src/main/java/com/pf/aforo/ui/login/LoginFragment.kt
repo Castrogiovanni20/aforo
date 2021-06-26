@@ -2,23 +2,30 @@ package com.pf.aforo.ui.login
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.pf.aforo.R
-import com.pf.aforo.data.model.Data
-import com.pf.aforo.data.model.DataUser
-import com.pf.aforo.data.model.UserLogin
+import com.pf.aforo.data.model.*
 import com.pf.aforo.databinding.FragmentLoginBinding
+import com.google.firebase.messaging.FirebaseMessaging
+
+
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var userId: String
+    private lateinit var token: String
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,7 +35,40 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java);
         setObservers()
         setClickListeners()
+        requireActivity().onBackPressedDispatcher.addCallback(this) { requireActivity().moveTaskToBack(true) }
+        getToken()
 
+        FirebaseMessaging.getInstance().subscribeToTopic("Subscriptions")
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val deviceToken = instanceIdResult.token
+            Log.d("Token", "Refreshed token: $deviceToken")
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        clearUI()
+    }
+
+    private fun clearUI() {
+        binding.edtEmail.text?.clear()
+        binding.edtEmail.text?.clear()
+    }
+
+    private fun getToken() {
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("MainActivity", "error al obtener el token", task.exception)
+                return@OnCompleteListener
+            }
+            token = task.result!!.token
+            Log.d("MainActivity", token)
+
+            val sharedPreferences = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
+            val editor = sharedPreferences?.edit()
+            editor?.putString("DeviceToken", token)
+            editor?.apply()
+        })
     }
 
     private fun setObservers () {
@@ -64,14 +104,39 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private val loginObserver = Observer<Data> { data ->
         userId = data.userId
-        val token = data.token
+        token = data.token
 
         loginViewModel.getUser("Bearer $token", userId)
         setSharedPreferences(token)
+
+    }
+
+    private fun updateUser(user: DataUser) {
+        var firebaseMess = MyFirebaseMessaging()
+//        var tokenMessage = firebaseMess.getToken()
+        val sharedPreferences = context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)
+        var tokenMessage = sharedPreferences?.getString("DeviceToken", null)
+
+        var userF = UserFuncionario(
+            user.id,
+            user.firstName,
+            user.lastName,
+            user.email,
+            user.identificationNumber,
+            user.phoneNumber,
+            user.password,
+            user.password,
+            user.role,
+            user.refBranchOffice,
+            tokenMessage,
+            user.refOrganization
+        )
+        loginViewModel.updateUser("Bearer $token", userF.id, userF)
     }
 
     private val userObserver = Observer<DataUser> { user ->
         loginViewModel.stopProgressBar()
+        updateUser(user)
 
         when (user.role) {
             "SUPERVISOR" -> initFragmentHomeSupervisor()
@@ -88,13 +153,22 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         loginViewModel.stopProgressBar()
         when (statusCode) {
             "500", "401" -> {
-                Toast.makeText(context, "Usuario y/o contraseña incorrecto.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Usuario y/o contraseña incorrecto.", Toast.LENGTH_SHORT)
+                    .show()
             }
             "404" -> {
-                Toast.makeText(context, "Estamos teniendo problemas con nuestro servidor. Por favor intentá loguearte más tarde.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Estamos teniendo problemas con nuestro servidor. Por favor intentá loguearte más tarde.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             "400" -> {
-                Toast.makeText(context, "Por favor, completá el usuario y/o contraseña.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Por favor, completá el usuario y/o contraseña.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -114,9 +188,19 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun initFragmentHomeFuncionario(user: DataUser) {
-        val userFullName = user.firstName + " " + user.lastName
+        userId = user.id
         val refBranchOffice = user.refBranchOffice
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragmentFuncionario(userFullName, refBranchOffice))
+        if(refBranchOffice != null && !refBranchOffice.equals("null")){
+            val userFullName = user.firstName + " " + user.lastName
+            findNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToHomeFragmentFuncionario(
+                    userFullName,
+                    refBranchOffice
+                )
+            )
+        }
+        else
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragmentFuncionarioSinSucursal())
     }
 
     private fun initFragmentHomeSupervisor() {

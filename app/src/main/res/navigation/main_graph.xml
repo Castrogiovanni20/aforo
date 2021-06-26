@@ -13,6 +13,15 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragmentSupervisor"
+            app:destination="@id/homeFragmentSupervisor" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragmentFuncionario"
+            app:destination="@id/homeFragmentFuncionario" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragmentFuncionarioSinSucursal"
+            app:destination="@id/homeFragmentFuncionarioSinSucursal" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -27,6 +36,12 @@
             app:destination="@id/homeFragmentSupervisor" />
         <action
             android:id="@+id/action_loginFragment_to_homeFragmentFuncionario"
+            app:destination="@id/homeFragmentFuncionario" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragmentFuncionarioSinSucursal"
+            app:destination="@id/homeFragmentFuncionarioSinSucursal" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragmentFuncionario2"
             app:destination="@id/homeFragmentFuncionario" />
     </fragment>
     <fragment
@@ -291,20 +306,19 @@
             app:destination="@id/loginFragment" />
         <argument
             android:name="userFullName"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"/>
         <argument
             android:name="refBranchOffice"
             app:argType="string"
             app:nullable="true"/>
+
     </fragment>
     <fragment
         android:id="@+id/notificacionesFragment"
         android:name="com.pf.aforo.ui.home.funcionario.NotificacionesFuncionarioFragment"
         android:label="fragment_notificaciones"
         tools:layout="@layout/fragment_notificaciones" >
-        <action
-            android:id="@+id/action_notificacionesFragment_to_homeFragmentFuncionario"
-            app:destination="@id/homeFragmentFuncionario" />
         <action
             android:id="@+id/action_notificacionesFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -314,10 +328,20 @@
         android:name="com.pf.aforo.ui.home.supervisor.NotificacionesSupervisorFragment"
         android:label="NotificacionesSupervisorFragment" >
         <action
-            android:id="@+id/action_notificacionesSupervisorFragment_to_homeFragmentSupervisor"
-            app:destination="@id/homeFragmentSupervisor" />
-        <action
             android:id="@+id/action_notificacionesSupervisorFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragmentFuncionarioSinSucursal"
+        android:name="com.pf.aforo.ui.home.funcionario.HomeFragmentFuncionarioSinSucursal"
+        android:label="fragment_home_funcionario_sin_sucursal"
+        tools:layout="@layout/fragment_home_funcionario_sin_sucursal">
+        <action
+            android:id="@+id/action_homeFragmentFuncionarioSinSucursal_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragmentFuncionarioSinSucursal_to_notificacionesFragment"
+            app:destination="@id/notificacionesFragment" />
+
     </fragment>
 </navigation>

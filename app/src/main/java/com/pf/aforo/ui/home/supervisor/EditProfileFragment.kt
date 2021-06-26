@@ -41,6 +41,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                     true
                 }
                 R.id.itemCerrarSesion -> {
+                    clearSharedPreferences()
                     initLoginFragment()
                     true
                 }
@@ -51,6 +52,10 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun clearSharedPreferences() {
+        context?.getSharedPreferences("SP_INFO", Context.MODE_PRIVATE)?.edit()?.clear()?.commit()
     }
 
     private fun setNavigation(){
@@ -82,15 +87,20 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private fun setUI() {
         binding.edtNombre.setText(userFuncionario.firstName)
         binding.edtApellido.setText(userFuncionario.lastName)
-        binding.edtDNI.setText(userFuncionario.identificationNumber)
+        binding.edtOrgReg.setText(userFuncionario.refOrganization)
         binding.edtTelefono.setText(userFuncionario.phoneNumber)
         binding.edtMail.setText(userFuncionario.email)
     }
 
     private fun setObservers() {
         editProfileViewModel.getUserSuccessResponse.observe(viewLifecycleOwner, getUserSuccessObserver)
+        editProfileViewModel.validationError.observe(viewLifecycleOwner, this.validationObserver)
         editProfileViewModel.updateUserSuccessResponse.observe(viewLifecycleOwner, updateUserSuccessObserver)
         editProfileViewModel.updateUserFailureResponse.observe(viewLifecycleOwner, updateUserFailureObserver)
+    }
+
+    private val validationObserver = Observer<Any?> { error ->
+        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
     }
 
     private fun setOnClickListeners() {
@@ -103,17 +113,19 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         var id = userFuncionario.id
         var firstName = binding.edtNombre.text.toString()
         var lastName = binding.edtApellido.text.toString()
-        var email = binding.edtMail.text.toString()
-        var identificationNumber = binding.edtDNI.text.toString()
+        var email = userFuncionario.email
+        var identificationNumber = userFuncionario.identificationNumber
         var phoneNumber = binding.edtTelefono.text.toString()
         var role = userFuncionario.role
+        var userDeviceToken = userFuncionario.userDeviceToken
+        var refOrganization = userFuncionario.refOrganization
 
-        val userFuncionario = UserFuncionario(id, firstName, lastName, email, identificationNumber, phoneNumber, "", role)
+        val userFuncionario = UserFuncionario(id, firstName, lastName, email, identificationNumber, phoneNumber, "", "", role, null, userDeviceToken, refOrganization)
         editProfileViewModel.updateUser("Bearer ${getToken()}" , userFuncionario)
     }
 
     private val getUserSuccessObserver = Observer<DataUser> { data ->
-        userFuncionario = UserFuncionario(data.id, data.firstName, data.lastName, data.email, data.identificationNumber, data.phoneNumber, "", data.role)
+        userFuncionario = UserFuncionario(data.id, data.firstName, data.lastName, data.email, data.identificationNumber, data.phoneNumber, "", "", data.role, null, data.userDeviceToken, data.refOrganization)
         setUI()
     }
 
