@@ -63,7 +63,7 @@ class MyNotification(context: Context, channelId: String)  {
                 NotificationCompat.BigTextStyle()
                     .bigText(content)
             )
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
             .setFullScreenIntent(pendingIntent, true)
 
     }

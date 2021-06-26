@@ -47,7 +47,7 @@ class MyFirebaseMessaging: FirebaseMessagingService() {
         )
         val notification = MyNotification(this, MyNotification.CHANNEL_ID_NOTIFICATIONS)
         notification.build(R.drawable.ic_launcher_foreground, title, msg, pendingIntent)
-        notification.addChannel("Notificaciones", NotificationManager.IMPORTANCE_DEFAULT)
+        notification.addChannel("Notificaciones", NotificationManager.IMPORTANCE_HIGH)
         notification.createChannelGroup(
             MyNotification.CHANNEL_GROUP_GENERAL,
             R.string.notification_channel_group_general
